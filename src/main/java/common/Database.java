@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-public class Database { 
+public class Database {
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String url = "jdbc:mysql://localhost:3306/vote?useUnicode=true&characterEncoding=UTF-8";
 	private static final String user = "root";
@@ -23,7 +23,7 @@ public class Database {
 		}
 		// 连接数据库
 		try {
-      conn = DriverManager.getConnection(url, user, pwd);
+			conn = DriverManager.getConnection(url, user, pwd);
 		} catch (SQLException e) {
 			System.out.println("Exception: get mysql connection Exception");
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class Database {
 		try {
 			pre = conn.prepareStatement(sql);
 			result = pre.executeQuery();
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Exception: executeQuery ==> " + sql);
 			e.printStackTrace();
 		}
@@ -51,25 +51,25 @@ public class Database {
 		try {
 			pre = conn.prepareStatement(sql);
 			result = pre.executeUpdate();
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Exception: executeUpdate ==> " + sql);
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
 	// 释放资源
-	public static void free(ResultSet result,Connection connection){
+	public static void free(ResultSet result, Connection connection) {
 		try {
-			if(result!=null){  // 关闭结果集
+			if (result != null) { // 关闭结果集
 				result.close();
 			}
 		} catch (SQLException e) {
 			System.out.println("Exception: free result error");
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
-				if(connection!=null){
+				if (connection != null) {
 					connection.close(); // 关闭连接
 				}
 			} catch (SQLException e) {
