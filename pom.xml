@@ -71,6 +71,7 @@
                   <filtering>true</filtering>
                   <includes>
                     <include>*.jsp</include>
+                    <include>components/*</include>
                   </includes>
                 </resource>
             </resources>
