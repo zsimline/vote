@@ -1,0 +1,14 @@
+<hibernate-mapping>
+  <class name="org.vote.beans.Stock" table="stock" catalog="mkyong">
+    <id name="stockId" type="java.lang.Integer">
+      <column name="STOCK_ID" />
+      <generator class="identity" />
+    </id>
+    <property name="stockCode" type="string">
+      <column name="STOCK_CODE" length="10" not-null="true" unique="true" />
+    </property>
+    <property name="stockName" type="string">
+      <column name="STOCK_NAME" length="20" not-null="true" unique="true" />
+    </property>
+  </class>
+</hibernate-mapping>
