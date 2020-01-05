@@ -1,2 +1,3 @@
-/home/mxsyx/desktop/vote/src/main/java/common/Database.java
-/home/mxsyx/desktop/vote/src/main/java/HelloServlet.java
+/home/mxsyx/desktop/vote/src/main/java/org/vote/common/HibernateUtil.java
+/home/mxsyx/desktop/vote/src/main/java/org/vote/beans/Stock.java
+/home/mxsyx/desktop/vote/src/main/java/org/vote/processor/HelloServlet.java

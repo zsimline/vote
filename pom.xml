@@ -96,6 +96,10 @@
                   <directory>src/main/resources</directory>
                   <filtering>true</filtering>
                 </resource>
+                <resource> 
+                  <directory>src/main/java/orms</directory>
+                  <filtering>true</filtering>
+                </resource>
                 <resource>
                   <directory>src/main/webapp</directory>
                   <filtering>true</filtering>

@@ -1,2 +1,3 @@
-HelloServlet.class
-common/Database.class
+org/vote/common/HibernateUtil.class
+org/vote/beans/Stock.class
+org/vote/processor/HelloServlet.class
