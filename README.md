@@ -44,3 +44,21 @@
 
 - 结果分析 https://luming.com/vote/analysis?aid=activitieId
 
+
+
+## 微信网页授权
+
+### 测试账号
+appID wx009793a980bbfa74
+appsecret 96e410410d32e25d25a687dea7ec0afd
+
+### OAuth认证
+
+1. 获取认证码
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx009793a980bbfa74&redirect_uri=http://vote.zizaixian.top&response_type=code&scope=snsapi_userinfo&state=lumingremotevotesystem#wechat_redirect
+
+2. 通过认证码获取访问令牌与OpenID
+https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx009793a980bbfa74&secret=96e410410d32e25d25a687dea7ec0afd&code=${code}&grant_type=authorization_code
+
+3. 通过访问令牌与OpenID获取用户信息
+https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}
