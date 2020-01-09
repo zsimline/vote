@@ -30,7 +30,7 @@ CREATE TABLE `activitie`
   `link` VARCHAR(50) NOT NULL,                  -- 活动链接
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
+--
 CREATE TABLE `contestant`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 选手ID
@@ -39,4 +39,3 @@ CREATE TABLE `contestant`
   `acquisition` INT DEFAULT 0,          -- 取得投票数
   `img_addr` CHAR(40) DEFAULT NULL,     -- 图片地址
 )
-
