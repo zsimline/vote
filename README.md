@@ -46,7 +46,7 @@
 
 
 
-## 微信网页授权
+## 微信网页授权 
 
 ### 测试账号
 appID wx009793a980bbfa74
@@ -62,3 +62,9 @@ https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx009793a980bbfa74&secre
 
 3. 通过访问令牌与OpenID获取用户信息
 https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}
+
+### 通用access_token获取
+https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009793a980bbfa74&secret=96e410410d32e25d25a687dea7ec0afd
+
+### 创建自定义菜单
+**POST** https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${access_token}
