@@ -16,7 +16,7 @@ CREATE TABLE `user`
 )ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8mb4;
 
 -- 活动信息表
-CREATE TABLE `activitie`
+CREATE TABLE `activity`
 (
   `id` CHAR(32) NOT NULL,                       -- 活动ID
   `title` VARCHAR(40) NOT NULL,                 -- 活动标题
@@ -40,7 +40,7 @@ CREATE TABLE `entry`
   `aid` CHAR(32) NOT NULL,              -- 活动ID
   `title` VARCHAR(15) NOT NULL,         -- 条目标题
   `description` VARCHAR(3000) NOT NULL, -- 条目描述
-  `acquisition` INT DEFAULT 0,          -- 取得投票数
+  `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
   `img_addr` CHAR(40) DEFAULT NULL,     -- 条目图片地址
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
