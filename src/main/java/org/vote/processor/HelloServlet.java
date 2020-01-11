@@ -1,7 +1,6 @@
 package org.vote.processor;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.vote.common.HibernateUtil;
 
-import org.vote.beans.Entry;
+import org.vote.beans.SignUp;
 
 @WebServlet("/main")
 public class HelloServlet extends HttpServlet {
@@ -27,16 +26,29 @@ public class HelloServlet extends HttpServlet {
     
     response.setContentType("text/html;charset=UTF-8");
 
+    SignUp signup = new SignUp();
 
-    Entry entry = new Entry();
+    signup.setAid("4028aa496f93b54f016f93b918780002");
+    signup.setTitle("张艳泽");
+    signup.setDescription("真帅呀");
+    signup.setImgAddr("https://img.baidu.com/1.jpg");
     
-
-    
+    signup.setSex(true);
+    signup.setAge(23);
+    signup.setWechat("zyz97532");
+    signup.setName("张艳泽");
+    signup.setEmail("zsimline@163.com");
+    signup.setClassdesc("数学与信息技术学院网络工程本科1班");
+    signup.setCompany("小米科技");
+    signup.setAddress("河北省沧州市南皮县寨子镇方庄村");
+    signup.setSchool("邢台学院");
+    signup.setTelephone("19931926703");
+     
     Session session = HibernateUtil.getSessionFactory().openSession();    
     Transaction transaction = session.beginTransaction();
     
     transaction.begin();
-    session.save();
+    session.save(signup);
     transaction.commit();
     session.close();
     

@@ -103,3 +103,9 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
     activity.setMaxium(5);
     activity.setImgAddr("https://img.baidu.com/1.jpg");
     activity.setOptions("0,1,2,34,5");
+
+      Entry entry = new Entry();
+    entry.setAid("4028aa496f93b54f016f93b918780002");
+    entry.setTitle("张艳泽");
+    entry.setDescription("真帅啊");
+    entry.setImgAddr("https://img.baidu.com/1.jpg");

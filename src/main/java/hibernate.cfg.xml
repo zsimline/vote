@@ -18,5 +18,7 @@
     <!-- List of ORM mappings -->
     <mapping resource="orms/User.hbm.xml"></mapping>
     <mapping resource="orms/Activity.hbm.xml"></mapping>
+    <mapping resource="orms/Entry.hbm.xml"></mapping>
+    <mapping resource="orms/SignUp.hbm.xml"></mapping>
   </session-factory>
 </hibernate-configuration>

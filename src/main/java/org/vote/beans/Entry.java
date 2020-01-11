@@ -8,7 +8,7 @@ public class Entry {
   private long id;
 
   // 活动ID
-  private long aid;
+  private String aid;
 
   // 条目标题
   private String title;
@@ -21,6 +21,10 @@ public class Entry {
 
   // 图片地址
   private String imgAddr;
+
+  public Entry() {
+    this.acquisition = 0;
+  }
 
   /**
    * @return id
@@ -39,14 +43,14 @@ public class Entry {
   /**
    * @return aid
    */
-  public long getAid() {
+  public String getAid() {
     return aid;
   }
 
   /**
    * @param aid 要设置的 aid
    */
-  public void setAid(long aid) {
+  public void setAid(String aid) {
     this.aid = aid;
   }
 

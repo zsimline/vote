@@ -54,7 +54,7 @@ CREATE TABLE `signup`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,      -- 报名ID
   `aid` CHAR(32) NOT NULL,               -- 活动ID
-  `reviewed` TINYINT(1) DEFAULT 0,       -- 是否通过审核
+  `reviewed` TINYINT(1) NOT NULL,        -- 是否通过审核
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
   `description` VARCHAR(3000) NOT NULL,  -- 报名描述（富文本）
   `img_addr` CHAR(40) DEFAULT NULL,      -- 图片地址
@@ -64,7 +64,7 @@ CREATE TABLE `signup`
   `telephone` CHAR(11) DEFAULT NULL,     -- 手机号码
   `email` VARCHAR(255) DEFAULT NULL,     -- 电子邮件
   `wechat` VARCHAR(44) DEFAULT NULL,     -- 微信号
-  `school` VARCHAR(10) DEFAULT NULL,     -- 学校名
+  `school` VARCHAR(16) DEFAULT NULL,     -- 学校名
   `classdesc` VARCHAR(30) DEFAULT NULL,  -- 院系[,专业[,班级]描述
   `company` VARCHAR(26) DEFAULT NULL,    -- 公司名称
   `address` VARCHAR(40) DEFAULT NULL,    -- 收货地址

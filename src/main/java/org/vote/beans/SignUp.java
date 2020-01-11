@@ -5,7 +5,7 @@ package org.vote.beans;
  */
 public class SignUp {
   // 报名ID
-  private String id;
+  private long id;
   
   // 活动ID
   private String aid;
@@ -52,17 +52,22 @@ public class SignUp {
   // 收货地址
   private String address;
 
+  public SignUp() {
+    this.reviewed = false;
+  }
+
+
   /**
    * @return id
    */
-  public String getId() {
+  public long getId() {
     return id;
   }
 
   /**
    * @param id 要设置的 id
    */
-  public void setId(String id) {
+  public void setId(long id) {
     this.id = id;
   }
 
