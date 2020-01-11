@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.vote.beans">
+  <class name="Ticket" table="ticket">
+    <id name="id" column="id" type="java.lang.Long">
+      <generator class="native"/>
+    </id>
+    <property name="openid" column="openid" type="java.lang.String" length="28"/>
+    <property name="whom" column="whom" type="java.lang.Long" not-null="true"/>
+    <property name="nickname" column="nickname" type="java.lang.String" length="32"/>
+    <property name="sex" column="sex" type="java.lang.Boolean"/>
+    <property name="country" column="country" type="java.lang.String" length="12"/>
+    <property name="province" column="province" type="java.lang.String" length="10"/>
+    <property name="city" column="city" type="java.lang.String" length="8"/>
+    <property name="headimgurl" column="headimgurl" type="java.lang.String" length="255"/>
+    <property name="timestamp" column="timestamp" type="java.util.Date"/>
+    <property name="ipaddr" column="ipaddr" type="java.lang.String" length="15"/>
+  </class>
+</hibernate-mapping>

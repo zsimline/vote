@@ -109,3 +109,22 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
     entry.setTitle("张艳泽");
     entry.setDescription("真帅啊");
     entry.setImgAddr("https://img.baidu.com/1.jpg");
+
+
+     SignUp signup = new SignUp();
+
+    signup.setAid("4028aa496f93b54f016f93b918780002");
+    signup.setTitle("张艳泽");
+    signup.setDescription("真帅呀");
+    signup.setImgAddr("https://img.baidu.com/1.jpg");
+    
+    signup.setSex(true);
+    signup.setAge(23);
+    signup.setWechat("zyz97532");
+    signup.setName("张艳泽");
+    signup.setEmail("zsimline@163.com");
+    signup.setClassdesc("数学与信息技术学院网络工程本科1班");
+    signup.setCompany("小米科技");
+    signup.setAddress("河北省沧州市南皮县寨子镇方庄村");
+    signup.setSchool("邢台学院");
+    signup.setTelephone("19931926703");

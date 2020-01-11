@@ -1,5 +1,7 @@
 package org.vote.beans;
 
+import java.util.Date;
+
 /**
  * 投票信息表模型
  */
@@ -9,6 +11,9 @@ public class Ticket {
 
   // 投票者OpenID
   private String openid;
+
+  // 投向条目的ID
+  private long whom;
 
   // 投票者昵称
   private String nickname;
@@ -29,7 +34,10 @@ public class Ticket {
   private String headimgurl;
 
   // 投票时间
-  private long timestamp;
+  private Date timestamp;
+
+  // IP地址
+  private String ipaddr;
 
   /**
    * @return id
@@ -60,6 +68,20 @@ public class Ticket {
   }
 
   /**
+   * @return whom
+   */
+  public long getWhom() {
+    return whom;
+  }
+
+  /**
+   * @param whom 要设置的 whom
+   */
+  public void setWhom(long whom) {
+    this.whom = whom;
+  }
+
+  /**
    * @return nickname
    */
   public String getNickname() {
@@ -76,7 +98,7 @@ public class Ticket {
   /**
    * @return sex
    */
-  public boolean isSex() {
+  public boolean getSex() {
     return sex;
   }
 
@@ -146,14 +168,28 @@ public class Ticket {
   /**
    * @return timestamp
    */
-  public long getTimestamp() {
+  public Date getTimestamp() {
     return timestamp;
   }
 
   /**
    * @param timestamp 要设置的 timestamp
    */
-  public void setTimestamp(long timestamp) {
+  public void setTimestamp(Date timestamp) {
     this.timestamp = timestamp;
+  }
+
+  /**
+   * @return ipaddr
+   */
+  public String getIpaddr() {
+    return ipaddr;
+  }
+
+  /**
+   * @param ipaddr 要设置的 ipaddr
+   */
+  public void setIpaddr(String ipaddr) {
+    this.ipaddr = ipaddr;
   }
 }
