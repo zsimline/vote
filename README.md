@@ -70,3 +70,36 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 创建自定义菜单
 **POST** https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${access_token}
+
+
+
+
+
+
+
+
+
+
+
+
+### 临时
+
+
+    User user = new User();
+    user.setEmail("zsimline@163.com");
+    user.setOrgannization("邢台学院");
+    user.setPassword("76c6560484e449f590010d6fc9ce3055");
+
+        Activity activity = new Activity();
+    activity.setTitle("21世纪帅哥评选");
+    activity.setPublisher(1000001);
+    activity.setSuffix("人");
+    activity.setDescription("描述");
+
+    activity.setVoteTimeStart(new Date());
+    activity.setVoteTimeEnd(new Date());
+    activity.setSignUpTimeStart(new Date());
+    activity.setSignUpTimeEnd(new Date());
+    activity.setMaxium(5);
+    activity.setImgAddr("https://img.baidu.com/1.jpg");
+    activity.setOptions("0,1,2,34,5");

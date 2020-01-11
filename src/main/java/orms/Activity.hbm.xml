@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.vote.beans">
+  <class name="Activity" table="activity">
+    <id name="id" column="id" type="java.lang.String">
+      <generator class="uuid"/>
+    </id>
+    <property name="title" column="title" type="java.lang.String" length="32" not-null="true"/>
+    <property name="publisher" column="publisher" type="java.lang.Long" not-null="true"/>
+    <property name="suffix" column="suffix" type="java.lang.String" length="3" not-null="true"/>
+    <property name="description" column="description" type="java.lang.String" length="3000" not-null="true"/>
+    <property name="voteTimeStart" column="vote_time_start" type="java.util.Date" not-null="true"/>
+    <property name="voteTimeEnd" column="vote_time_end" type="java.util.Date" not-null="true"/>
+    <property name="signUpTimeStart" column="signup_time_start" type="java.util.Date" not-null="true"/>
+    <property name="signUpTimeEnd" column="signup_time_end" type="java.util.Date" not-null="true"/>
+    <property name="maxium" column="maxium" type="java.lang.Integer" not-null="true"/>
+    <property name="sumEntry" column="sum_entry" type="java.lang.Integer" not-null="true"/>
+    <property name="sumVoted" column="sum_voted" type="java.lang.Long" not-null="true"/>
+    <property name="sumVisited" column="sum_visited" type="java.lang.Long" not-null="true"/>
+    <property name="imgAddr" column="img_addr" type="java.lang.String" length="40"/>
+    <property name="options" column="options" type="java.lang.String" length="300" not-null="true"/>
+    <property name="destroyed" column="destroyed" type="java.lang.Boolean" not-null="true"/> 
+  </class>
+</hibernate-mapping>

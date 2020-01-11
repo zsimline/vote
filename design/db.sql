@@ -1,7 +1,7 @@
 -- Luming Vote System
 
-CREATE DATABASE `vote`
-USE `vote`
+CREATE DATABASE `vote`;
+USE vote;
 
 -- 用户信息表
 CREATE TABLE `user`
@@ -16,31 +16,33 @@ CREATE TABLE `user`
 )ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8mb4;
 
 -- 活动信息表
-CREATE TABLE `activity`
-(
-  `id` CHAR(32) NOT NULL,                       -- 活动ID
-  `title` VARCHAR(40) NOT NULL,                 -- 活动标题
-  `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
-  `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
-  `description` VARCHAR(3000) NOT NULL,         -- 活动描述（富文本）
-  `time_start` TIMESTAMP NOT NULL,              -- 开始时间（时间戳）
-  `time_end` TIMESTAMP NOT NULL,                -- 截止时间（时间戳）
-  `maxium` SMALLINT UNSIGNED NOT NULL,          -- 最多选择
-  `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,     -- 条目总数
-  `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
-  `sum_visited` INT UNSIGNED NOT NULL,          -- 访问总数
-  `img_addr` CHAR(40) NOT NULL,                 -- 宣传图片地址
-  `options` VARCHAR(300) NOT NULL,              -- 其它必填项
-  `destroyed` TINYINT(1) DEFAULT 0,             -- 是否销毁
-  PRIMARY KEY(`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CREATE TABLE `activity`
+  (
+    `id` CHAR(32) NOT NULL,                       -- 活动ID
+    `title` VARCHAR(40) NOT NULL,                 -- 活动标题
+    `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
+    `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
+    `description` VARCHAR(3000) NOT NULL,         -- 活动描述（富文本）
+    `vote_time_start` DATETIME NOT NULL,          -- 投票开始时间
+    `vote_time_end` DATETIME NOT NULL,            -- 投票截止时间
+    `signup_time_start` DATETIME NOT NULL,        -- 报名开始时间
+    `signup_time_end` DATETIME NOT NULL,          -- 报名截止时间
+    `maxium` SMALLINT UNSIGNED NOT NULL,          -- 最多选择
+    `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,     -- 条目总数
+    `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
+    `sum_visited` INT UNSIGNED DEFAULT 0,         -- 访问总数
+    `img_addr` CHAR(40) DEFAULT NULL,             -- 宣传图片地址
+    `options` VARCHAR(300) NOT NULL,              -- 其它必填项
+    `destroyed` TINYINT(1) DEFAULT 0,             -- 是否销毁
+    PRIMARY KEY(`id`)
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 条目信息表
 CREATE TABLE `entry`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 条目ID
   `aid` CHAR(32) NOT NULL,              -- 活动ID
-  `title` VARCHAR(15) NOT NULL,         -- 条目标题
+  `title` VARCHAR(25) NOT NULL,         -- 条目标题
   `description` VARCHAR(3000) NOT NULL, -- 条目描述
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
   `img_addr` CHAR(40) DEFAULT NULL,     -- 条目图片地址
@@ -80,6 +82,6 @@ CREATE TABLE `uuid`
   `province` VARCHAR(10) DEFAULT NULL,    -- 投票者所属省份
   `city` VARCHAR(8) DEFAULT NULL,         -- 投票者所属城市
   `headimgurl` VARCHAR(255) DEFAULT NULL, -- 投票者头像地址
-  `timestamp` TIMESTAMP NOT NULL,         -- 投票时间（时间戳）
+  `timestamp` DATETIME NOT NULL,          -- 投票时间
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

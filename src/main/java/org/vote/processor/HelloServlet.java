@@ -1,6 +1,8 @@
 package org.vote.processor;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.vote.common.HibernateUtil;
 
-import org.vote.beans.User;
+import org.vote.beans.Entry;
 
 @WebServlet("/main")
 public class HelloServlet extends HttpServlet {
@@ -25,16 +27,16 @@ public class HelloServlet extends HttpServlet {
     
     response.setContentType("text/html;charset=UTF-8");
 
-    User user = new User();
-    user.setEmail("zsimline@127.com");
-    user.setOrganization("邢台学院");
-    user.setPassword("76c6560484e449f590010d6fc9ce3055");
+
+    Entry entry = new Entry();
+    
+
     
     Session session = HibernateUtil.getSessionFactory().openSession();    
     Transaction transaction = session.beginTransaction();
     
     transaction.begin();
-    session.save(user);
+    session.save();
     transaction.commit();
     session.close();
     

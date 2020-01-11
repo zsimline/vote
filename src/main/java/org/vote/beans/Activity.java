@@ -1,5 +1,8 @@
 package org.vote.beans;
 
+
+import java.util.Date;
+
 /**
  * 活动信息表模型
  */
@@ -10,17 +13,26 @@ public class Activity {
   // 活动标题
   private String title;
 
+  // 发布者ID
+  private long publisher;
+
   // 条目称谓
   private String suffix;
 
   // 活动描述
   private String description;
 
-  // 开始时间
-  private long timeStart;
+  // 投票开始时间
+  private Date voteTimeStart;
 
-  // 截止时间
-  private long timeEnd;
+  // 投票截止时间
+  private Date voteTimeEnd;
+
+  // 报名开始时间
+  private Date signUpTimeStart;
+
+  // 报名截止时间
+  private Date signUpTimeEnd;
 
   // 最多选择的条目数
   private int maxium;
@@ -42,6 +54,13 @@ public class Activity {
 
   // 是否销毁
   private boolean destroyed;
+
+  public Activity() {
+    this.sumEntry = 0;
+    this.sumVoted = 0;
+    this.sumVisited = 0;
+    this.destroyed = false;
+  }
 
   /**
    * @return id
@@ -69,6 +88,20 @@ public class Activity {
    */
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  /**
+   * @return publisher
+   */
+  public long getPublisher() {
+    return publisher;
+  }
+
+  /**
+   * @param title 要设置的 title
+   */
+  public void setPublisher(long publisher) {
+    this.publisher = publisher;
   }
 
   /**
@@ -100,32 +133,61 @@ public class Activity {
   }
 
   /**
-   * @return timeStart
+   * @return voteTimeStart
    */
-  public long getTimeStart() {
-    return timeStart;
+  public Date getVoteTimeStart() {
+    return voteTimeStart;
   }
 
   /**
-   * @param timeStart 要设置的 timeStart
+   * @param voteTimeStart 要设置的 voteTimeStart
    */
-  public void setTimeStart(long timeStart) {
-    this.timeStart = timeStart;
+  public void setVoteTimeStart(Date voteTimeStart) {
+    this.voteTimeStart = voteTimeStart;
   }
 
   /**
-   * @return timeEnd
+   * @return voteTimeEnd
    */
-  public long getTimeEnd() {
-    return timeEnd;
+  public Date getVoteTimeEnd() {
+    return voteTimeEnd;
   }
 
   /**
-   * @param timeEnd 要设置的 timeEnd
+   * @param voteTimeEnd 要设置的 voteTimeEnd
    */
-  public void setTimeEnd(long timeEnd) {
-    this.timeEnd = timeEnd;
+  public void setVoteTimeEnd(Date voteTimeEnd) {
+    this.voteTimeEnd = voteTimeEnd;
   }
+
+  /**
+   * @return signUpTimeEnd
+   */
+  public Date getSignUpTimeEnd() {
+    return signUpTimeEnd;
+  }
+
+  /**
+   * @param signUpTimeEnd 要设置的 signUpTimeEnd
+   */
+  public void setSignUpTimeEnd(Date signUpTimeEnd) {
+    this.signUpTimeEnd = signUpTimeEnd;
+  }
+
+  /**
+   * @return signUpTimeStart
+   */
+  public Date getSignUpTimeStart() {
+    return signUpTimeStart;
+  }
+
+  /**
+   * @param signUpTimeStart 要设置的 signUpTimeStart
+   */
+  public void setSignUpTimeStart(Date signUpTimeStart) {
+    this.signUpTimeStart = signUpTimeStart;
+  }
+
 
   /**
    * @return maxium
