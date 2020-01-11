@@ -11,13 +11,18 @@ public class User {
   private String password;
 
   // 用户所属组织
-  private String organnization;
+  private String organization;
 
   // 是否为管理人员
   private boolean isStaff;
 
   // 该账号是否可用
   private boolean isActive;
+
+  public User() {
+    this.isStaff = false;
+    this.isActive = true;
+  }
 
   /**
    * @return id
@@ -62,17 +67,17 @@ public class User {
   }
 
   /**
-   * @return organnization
+   * @return organization
    */
-  public String getOrgannization() {
-    return organnization;
+  public String getOrganization() {
+    return organization;
   }
 
   /**
-   * @param organnization 要设置的 organnization
+   * @param organization 要设置的 organization
    */
-  public void setOrgannization(String organnization) {
-    this.organnization = organnization;
+  public void setOrganization(String organization) {
+    this.organization = organization;
   }
 
   /**

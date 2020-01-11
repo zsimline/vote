@@ -7,11 +7,11 @@ USE `vote`
 CREATE TABLE `user`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 用户ID
-  `email` VARCHAR(255) NOT NULL,        -- 电子邮件(作账号)
+  `email` VARCHAR(255) UNIQUE NOT NULL, -- 电子邮件(作账号)
   `password` CHAR(32) NOT NULL,         -- 用户密码
   `organization` varchar(45) NOT NULL,  -- 所属组织
   `is_staff` TINYINT(1)  DEFAULT 0,     -- 是否为管理人员
-  `is_active` TINYINT(1) DEFAULT 0,     -- 账号是否可用
+  `is_active` TINYINT(1) DEFAULT 1,     -- 账号是否可用
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8mb4;
 
@@ -20,6 +20,7 @@ CREATE TABLE `activity`
 (
   `id` CHAR(32) NOT NULL,                       -- 活动ID
   `title` VARCHAR(40) NOT NULL,                 -- 活动标题
+  `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
   `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
   `description` VARCHAR(3000) NOT NULL,         -- 活动描述（富文本）
   `time_start` TIMESTAMP NOT NULL,              -- 开始时间（时间戳）

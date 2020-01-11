@@ -7,11 +7,19 @@ public class HibernateUtil {
   private static final SessionFactory sessionFactory = buildSessionFactory();
 
   private static SessionFactory buildSessionFactory() {
-    try {
-      // Create the SessionFactory from hibernate.cfg.xml
-      return new Configuration().configure().buildSessionFactory();
+    try {  
+      // 获取加载配置管理类
+      Configuration configuration = new Configuration();
+ 
+      // 不给参数就默认加载hibernate.cfg.xml文件，
+      configuration.configure();
+
+      // 创建Session工厂对象
+      SessionFactory factory = configuration.buildSessionFactory();
+      
+      return factory;
+      
     } catch (Throwable ex) {
-      // Make sure you log the exception, as it might be swallowed
       System.err.println("Initial SessionFactory creation failed." + ex);
       throw new ExceptionInInitializerError(ex);
     }
@@ -22,7 +30,7 @@ public class HibernateUtil {
   }
 
   public static void shutdown() {
-    // Close caches and connection pools
+    // 清空缓存并关闭连接池
     getSessionFactory().close();
   }
 }
