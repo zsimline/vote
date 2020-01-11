@@ -37,8 +37,11 @@ public class Activity {
   // 宣传图片地址
   private String imgAddr;
 
+  // 其它必填项
+  private String options;
+
   // 是否销毁
-  private byte destroyed;
+  private boolean destroyed;
 
   /**
    * @return id
@@ -195,16 +198,30 @@ public class Activity {
   }
 
   /**
+   * @return options
+   */
+  public String getOptions() {
+    return options;
+  }
+
+  /**
+   * @param options 要设置的 options
+   */
+  public void setOptions(String options) {
+    this.options = options;
+  }
+
+  /**
    * @return destroyed
    */
-  public byte getDestroyed() {
+  public boolean getDestroyed() {
     return destroyed;
   }
 
   /**
    * @param destroyed 要设置的 destroyed
    */
-  public void setDestroyed(byte destroyed) {
+  public void setDestroyed(boolean destroyed) {
     this.destroyed = destroyed;
   }
 }

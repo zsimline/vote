@@ -14,10 +14,10 @@ public class User {
   private String organnization;
 
   // 是否为管理人员
-  private String isStaff;
+  private boolean isStaff;
 
   // 该账号是否可用
-  private String isActive;
+  private boolean isActive;
 
   /**
    * @return id
@@ -78,28 +78,28 @@ public class User {
   /**
    * @return isStaff
    */
-  public String getIsStaff() {
+  public boolean getIsStaff() {
     return isStaff;
   }
 
   /**
    * @param isStaff 要设置的 isStaff
    */
-  public void setIsStaff(String isStaff) {
+  public void setIsStaff(boolean isStaff) {
     this.isStaff = isStaff;
   }
 
   /**
    * @return isActive
    */
-  public String getIsActive() {
+  public boolean getIsActive() {
     return isActive;
   }
 
   /**
    * @param isActive 要设置的 isActive
    */
-  public void setIsActive(String isActive) {
+  public void setIsActive(boolean isActive) {
     this.isActive = isActive;
   }
 }

@@ -4,22 +4,52 @@ package org.vote.beans;
  * 报名信息表模型
  */
 public class SignUp {
+  // 报名ID
   private String id;
+  
+  // 活动ID
   private String aid;
-  private String reviewed;
+  
+  // 是否通过审核
+  private boolean reviewed;
+  
+  // 条目标题
   private String title;
+  
+  // 条目描述
   private String description;
+  
+  // 图片地址
   private String imgAddr;
 
-  private String sex;
-  private String age;
+  // 人物性别
+  private boolean sex;
+  
+  // 人物年龄
+  private int age;
+  
+  // 人物名字
   private String name;
+  
+  // 电话号码
   private String telephone;
+  
+  // 电子邮件
   private String email;
+  
+  // 微信号
   private String wechat;
+  
+  // 学校名
   private String school;
+  
+  // 院系[,专业[,班级]描述
   private String classdesc;
+  
+  // 公司名
   private String company;
+  
+  // 收货地址
   private String address;
 
   /**
@@ -53,14 +83,14 @@ public class SignUp {
   /**
    * @return reviewed
    */
-  public String getReviewed() {
+  public boolean getReviewed() {
     return reviewed;
   }
 
   /**
    * @param reviewed 要设置的 reviewed
    */
-  public void setReviewed(String reviewed) {
+  public void setReviewed(boolean reviewed) {
     this.reviewed = reviewed;
   }
 
@@ -109,28 +139,28 @@ public class SignUp {
   /**
    * @return sex
    */
-  public String getSex() {
+  public boolean getSex() {
     return sex;
   }
 
   /**
    * @param sex 要设置的 sex
    */
-  public void setSex(String sex) {
+  public void setSex(boolean sex) {
     this.sex = sex;
   }
 
   /**
    * @return age
    */
-  public String getAge() {
+  public int getAge() {
     return age;
   }
 
   /**
    * @param age 要设置的 age
    */
-  public void setAge(String age) {
+  public void setAge(int age) {
     this.age = age;
   }
 

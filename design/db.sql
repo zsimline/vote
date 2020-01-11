@@ -29,6 +29,7 @@ CREATE TABLE `activity`
   `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
   `sum_visited` INT UNSIGNED NOT NULL,          -- 访问总数
   `img_addr` CHAR(40) NOT NULL,                 -- 宣传图片地址
+  `options` VARCHAR(300) NOT NULL,              -- 其它必填项
   `destroyed` TINYINT(1) DEFAULT 0,             -- 是否销毁
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -78,6 +79,6 @@ CREATE TABLE `uuid`
   `province` VARCHAR(10) DEFAULT NULL,    -- 投票者所属省份
   `city` VARCHAR(8) DEFAULT NULL,         -- 投票者所属城市
   `headimgurl` VARCHAR(255) DEFAULT NULL, -- 投票者头像地址
-  `timestamp` TIMESTAMP NOT NULL,         -- 投票时间
+  `timestamp` TIMESTAMP NOT NULL,         -- 投票时间（时间戳）
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
