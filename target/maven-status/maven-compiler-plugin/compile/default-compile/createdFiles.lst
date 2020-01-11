@@ -1,3 +1,7 @@
-org/vote/common/HibernateUtil.class
-org/vote/beans/Stock.class
+org/vote/beans/Ticket.class
+org/vote/beans/Entry.class
+org/vote/beans/User.class
 org/vote/processor/HelloServlet.class
+org/vote/common/HibernateUtil.class
+org/vote/beans/SignUp.class
+org/vote/beans/Activity.class

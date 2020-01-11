@@ -105,6 +105,7 @@
                   <filtering>true</filtering>
                   <includes>
                     <include>*.jsp</include>
+                    <include>favicon.ico</include>
                     <include>components/*</include>
                   </includes>
                 </resource>

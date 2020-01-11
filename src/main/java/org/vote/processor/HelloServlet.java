@@ -1,7 +1,6 @@
 package org.vote.processor;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.vote.common.HibernateUtil;
 
-import org.vote.beans.Ticket;
 
 @WebServlet("/main")
 public class HelloServlet extends HttpServlet {
@@ -30,7 +28,7 @@ public class HelloServlet extends HttpServlet {
     Transaction transaction = session.beginTransaction();
     
     transaction.begin();
-    session.save();
+    //session.save();
     transaction.commit();
     session.close();
     
