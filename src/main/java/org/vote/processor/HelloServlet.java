@@ -23,23 +23,14 @@ public class HelloServlet extends HttpServlet {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    request.setCharacterEncoding("utf-8");
-    
+    request.setCharacterEncoding("utf-8");    
     response.setContentType("text/html;charset=UTF-8");
 
-    Ticket ticket = new Ticket();
-    ticket.setOpenid("cascsa_casvas5584");
-    ticket.setNickname("梦醒时夜续");
-    ticket.setSex(true);
-    ticket.setHeadimgurl("headimgurl");
-    ticket.setTimestamp(new Date());
-    ticket.setIpaddr("192.168.43.172");
-     
     Session session = HibernateUtil.getSessionFactory().openSession();    
     Transaction transaction = session.beginTransaction();
     
     transaction.begin();
-    session.save(ticket);
+    session.save();
     transaction.commit();
     session.close();
     
