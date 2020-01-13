@@ -70,3 +70,17 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 创建自定义菜单
 **POST** https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${access_token}
+
+
+**架构：** Linux + Nginx + Mysql + Tomcat
+
+**Linux:** Debian v4.9.144-3.1
+
+**Nginx:** Http Server 负载均衡、反向代理
+
+**Mysql:** MariaDB v15.1 数据存储
+
+**Tomcat** Servlet Container v8.5.37
+
+
+**前端技术：** flat-ui(free v2.1.1) + bootstrap(v3.0.0) + font-awesome(v4.7.0)

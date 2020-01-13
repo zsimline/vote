@@ -94,7 +94,13 @@
               <resources>
                 <resource>
                   <directory>src/main/resources</directory>
-                  <filtering>true</filtering>
+                  <filtering>false</filtering>
+                  <includes>
+                    <include>css/*</include>
+                    <include>js/*</include>
+                    <include>fonts/**</include>
+                    <include>images/**</include>
+                  </includes> 
                 </resource>
                 <resource> 
                   <directory>src/main/java/orms</directory>
