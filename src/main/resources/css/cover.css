@@ -1,5 +1,6 @@
 .navbar {
   border-radius: 0px;
+  margin-bottom: 0px;
 }
 
 .navbar-inverse .nav > li > a {
@@ -20,4 +21,25 @@
 
 .navbar .nav ul {
   width: 150px;
+}
+
+.footer {
+  color: #869fb2;
+  background-color: #1d262d;
+}
+.footer p {
+  text-align: center;
+  font-weight: 600;
+  padding: 4px 0px;
+  margin: 0px;
+  font-size: 14px;
+}
+
+.fa {
+  margin-right: 4px;
+}
+
+.container-fluid {
+  min-height: 100vh;
+  height: 100vh;
 }

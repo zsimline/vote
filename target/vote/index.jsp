@@ -13,4 +13,8 @@
 </head>
 <body>
   <%@ include file="components/header.jsp" %>
+  <div class="container-fluid">
+    <%@ include file="components/aside.jsp" %>
+  </div>
+  <%@ include file="components/footer.jsp" %>
 </body>

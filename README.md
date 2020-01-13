@@ -15,37 +15,36 @@
 
 ### 主页
 
-- 网站主页 https://luming.com
+- 网站主页 https://lumingvote.com
 
-- 管理中心 https://luming.com/action
+- 管理中心 https://lumingvote.com/action
 
 ### 用户
 
-- 登录页 https://luming.com/user/login
+- 登录页 https://lumingvote.com/user/login
 
-- 注册页 https://luming.com/user/register
+- 注册页 https://lumingvote.com/user/register
 
-- 信息页 https://luming.com/user/profile
+- 信息页 https://lumingvote.com/user/profile
 
-- 用户主页 https://luming.com/user/home
+- 用户主页 https://lumingvote.com/user/home
 
 
 ### 投票
 
-- 创建投票 https://luming.com/vote/create
+- 创建投票 https://lumingvote.com/vote/create
 
-- 投票管理 https://luming.com/vote/manage
+- 投票管理 https://lumingvote.com/vote/manage
 
-- 审核报名 https://luming.com/vote/review?aid=activitieId
+- 审核报名 https://lumingvote.com/vote/review?aid=activitieId
 
-- 报名设置 https://luming.com/vote/signupconf?aid=activitieId
+- 报名设置 https://lumingvote.com/vote/signupconf?aid=activitieId
 
-- 礼物设置 https://luming.com/vote/giftconf?aid=activitieId
+- 礼物设置 https://lumingvote.com/vote/giftconf?aid=activitieId
 
-- 活动链接 https://luming.com/vote/link?aid=activitieId
+- 活动链接 https://lumingvote.com/vote/link?aid=activitieId
 
-- 结果分析 https://luming.com/vote/analysis?aid=activitieId
-
+- 结果分析 https://lumingvote.com/vote/analysis?aid=activitieId
 
 
 ## 微信网页授权 
@@ -57,7 +56,7 @@ appsecret 96e410410d32e25d25a687dea7ec0afd
 ### OAuth认证
 
 1. 获取认证码
-https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx009793a980bbfa74&redirect_uri=http://vote.zizaixian.top&response_type=code&scope=snsapi_userinfo&state=lumingremotevotesystem#wechat_redirect
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx009793a980bbfa74&redirect_uri=http://vote.zizaixian.top&response_type=code&scope=snsapi_userinfo&state=lumingvoteremotevotesystem#wechat_redirect
 
 2. 通过认证码获取访问令牌与OpenID
 https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx009793a980bbfa74&secret=96e410410d32e25d25a687dea7ec0afd&code=${code}&grant_type=authorization_code

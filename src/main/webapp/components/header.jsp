@@ -9,7 +9,8 @@
   <div class="navbar-header">
     <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-collapse-02"></button>
     <a class="navbar-brand" href="#">
-      <i class="fa fa-fire"></i>&nbsp;&nbsp;鹿鸣投票
+      <i class="fa fa-fire"></i>
+      <span>鹿鸣投票</span>
     </a>
   </div>
 
@@ -35,20 +36,20 @@
       <li class="user">
         <a href="#">
           <i class="fa fa-user"></i>
-          &nbsp;已登录&nbsp;
+          <span>已登录</span> 
           <i class="fa fa-caret-down"></i>
         </a>
         <ul>
           <li>
             <a href="#">
               <i class="fa fa-user"></i>
-              个人中心
+              <span>个人中心</span>
             </a>
           </li>
           <li>
             <a href="#">
               <i class="fa fa-power-off"></i>
-              退出
+              <span>退出</span>            
             </a>
           </li>
         </ul>
