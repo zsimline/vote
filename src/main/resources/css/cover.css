@@ -39,7 +39,20 @@
   margin-right: 4px;
 }
 
-.container-fluid {
+.container {
   min-height: 100vh;
-  height: 100vh;
+}
+
+/**
+ * 创建投票页
+ */
+.form-control {
+  width: 300px;
+  display: inline-block;
+}
+
+.inputcon {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
 }

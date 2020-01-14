@@ -2124,20 +2124,7 @@ fieldset[disabled] .form-control + .input-icon,
   width: 183px;
   border-radius: 6px;
 }
-.dropdown-menu {
-  background-color: #f3f4f5;
-  border: none;
-  display: block;
-  margin-top: 8px;
-  opacity: 0;
-  padding: 0;
-  visibility: hidden;
-  width: 100%;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: 0.25s;
-  transition: 0.25s;
-}
+
 .dropdown-menu.typeahead {
   display: none;
   opacity: 1;
