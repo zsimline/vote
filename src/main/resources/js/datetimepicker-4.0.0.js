@@ -687,7 +687,7 @@
                     });
                 }
             },
-
+            
             hide = function () {
                 var transitioning = false;
                 if (!widget) {
@@ -1673,14 +1673,14 @@
         disabledDates: false,
         enabledDates: false,
         icons: {
-            time: 'glyphicon glyphicon-time',
-            date: 'glyphicon glyphicon-calendar',
-            up: 'glyphicon glyphicon-chevron-up',
-            down: 'glyphicon glyphicon-chevron-down',
-            previous: 'glyphicon glyphicon-chevron-left',
-            next: 'glyphicon glyphicon-chevron-right',
-            today: 'glyphicon glyphicon-screenshot',
-            clear: 'glyphicon glyphicon-trash'
+            time: 'fa fa-clock-o',
+            date: 'fa fa-calendar',
+            up: 'fa fa-caret-up',
+            down: 'fa fa-caret-down',
+            previous: 'fa fa-caret-left',
+            next: 'fa fa-caret-right',
+            today: 'fa fa-clock-o',
+            clear: 'fa fa-clock-o'
         },
         useStrict: false,
         sideBySide: false,

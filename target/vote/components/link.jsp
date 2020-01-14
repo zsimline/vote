@@ -13,4 +13,3 @@
 
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/bootstrap-3.0.0.min.js"></script>
-
