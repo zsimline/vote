@@ -100,6 +100,7 @@
                     <include>js/*</include>
                     <include>fonts/**</include>
                     <include>images/**</include>
+                    <include>tinymce/**</include>
                   </includes> 
                 </resource>
                 <resource> 

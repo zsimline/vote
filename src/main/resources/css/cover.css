@@ -41,6 +41,7 @@
 
 .container {
   min-height: 100vh;
+  margin-bottom: 25px;
 }
 
 /**
@@ -51,9 +52,17 @@
   display: inline-block;
 }
 
+input[type="file"] {
+  display: inline-block;
+}
+
 .inputcon {
   display: block;
   width: 100%;
-  margin: 10px auto;
+  margin: 20px auto;
   position: relative;
+}
+
+.inputcon label {
+  margin-right: 10px;
 }

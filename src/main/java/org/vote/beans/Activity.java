@@ -1,6 +1,5 @@
 package org.vote.beans;
 
-
 import java.util.Date;
 
 /**
@@ -18,6 +17,9 @@ public class Activity {
 
   // 条目称谓
   private String suffix;
+
+  // 条目量词
+  private String quantifier;
 
   // 活动描述
   private String description;
@@ -116,6 +118,20 @@ public class Activity {
    */
   public void setSuffix(String suffix) {
     this.suffix = suffix;
+  }
+
+  /**
+   * @return quantifier
+   */
+  public String getQuantifier() {
+    return quantifier;
+  }
+
+  /**
+   * @param quantifier 要设置的 quantifier
+   */
+  public void setQuantifier(String quantifier) {
+    this.quantifier = quantifier;
   }
 
   /**
