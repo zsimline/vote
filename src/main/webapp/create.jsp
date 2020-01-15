@@ -121,13 +121,13 @@
     </div>
 
     <hr>
-    
+
     <label class="checkbox" for="lisence">
       <input type="checkbox" id="lisence" data-toggle="checkbox">
       我同意投票<a href="./license.jsp">服务条款</a>
     </label>
 
-    <button class="btn btn-primary">　发布投票　</button>
+    <button class="btn btn-primary" onclick="handleSubmit()">　发布投票　</button>
   </div>
 
   <!-- 时间拾取器配置 -->
@@ -154,6 +154,8 @@
     });
   </script>
 
+  <script src="js/create.js"></script>
+  <%@ include file="components/modal.jsp" %>
   <%@ include file="components/footer.jsp" %>
 </body>
 
