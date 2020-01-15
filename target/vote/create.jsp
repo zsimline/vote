@@ -14,8 +14,8 @@
   <script src="js/moment-with-locales-2.9.0.js"></script>
   <script src="js/datetimepicker-4.0.0.js"></script>
   <script src="tinymce/tinymce-5.1.5.min.js"></script>
-  <script src="js/flatui-checkbox.js"></script>
-  <script src="js/bootstrap-switch.js"></script>
+  <script src="js/flatui-checkbox-0.0.3.js"></script>
+  <script src="js/bootstrap-switch-1.3.js"></script>
   <title>创建投票</title>
 </head>
 

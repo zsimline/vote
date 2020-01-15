@@ -1,3 +1,9 @@
+/*!
+ * 覆盖第三方库样式
+ */
+
+
+/*! 覆盖顶部导航条样式 */
 .navbar {
   border-radius: 0px;
   margin-bottom: 0px;
@@ -15,14 +21,15 @@
   margin: auto 15px auto 25px;
 }
 
-.user {
-  margin-right: 35px !important;
-}
-
 .navbar .nav ul {
   width: 150px;
 }
 
+.user {
+  margin-right: 35px !important;
+}
+
+/*！ 底部栏样式 */
 .footer {
   color: #869fb2;
   background-color: #1d262d;
@@ -35,6 +42,8 @@
   font-size: 14px;
 }
 
+
+/*！ 其它样式 */
 .fa {
   margin-right: 4px;
 }
@@ -44,12 +53,11 @@
   margin-bottom: 25px;
 }
 
-/**
- * 创建投票页
- */
+
+/*！ 创建投票页样式 */
 .form-control {
-  width: 300px;
   display: inline-block;
+  width: 300px;
 }
 
 input[type="file"] {
@@ -60,7 +68,6 @@ input[type="file"] {
   display: block;
   width: 100%;
   margin: 20px auto;
-  position: relative;
 }
 
 .inputcon label {
@@ -84,3 +91,4 @@ input[type="file"] {
 .otheropts .switch {
   margin-left: 6px;
 }
+

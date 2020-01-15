@@ -4,6 +4,7 @@
   pageEncoding="UTF-8"
 %>
 
+<link href="css/aside.css" rel="stylesheet">
 
 <ul class="nav-left-container">
   <li>

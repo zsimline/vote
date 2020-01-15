@@ -1,3 +1,8 @@
+/*!
+ * 管理员页面侧边栏样式表
+ * @芒果芒果芒果
+ */
+
 .nav-left-container {
   background-color: #1c2b36;
   width: 220px;
@@ -23,7 +28,7 @@
   background-color: #131e26;
 }
 
-.nav-left-container .active>a {
+.nav-left-container .active > a {
   color: #ffffff;
 }
 
