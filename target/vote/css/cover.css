@@ -68,6 +68,7 @@ input[type="file"] {
   display: block;
   width: 100%;
   margin: 20px auto;
+  position: relative;
 }
 
 .inputcon label {
@@ -84,11 +85,11 @@ input[type="file"] {
   margin-top: 40px;
 }
 
-.otheropts label {
+#otheropts label {
   vertical-align: bottom;
 }
 
-.otheropts .switch {
+#otheropts .switch {
   margin-left: 6px;
 }
 

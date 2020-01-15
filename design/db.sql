@@ -61,9 +61,9 @@ CREATE TABLE `signup`
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
   `description` VARCHAR(3000) NOT NULL,  -- 报名描述（富文本）
   `img_addr` CHAR(40) DEFAULT NULL,      -- 图片地址
+  `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
   `sex` TINYINT(1) DEFAULT NULL,         -- 人物性别
   `age` TINYINT(3) DEFAULT NULL,         -- 人物年龄
-  `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
   `telephone` CHAR(11) DEFAULT NULL,     -- 手机号码
   `email` VARCHAR(255) DEFAULT NULL,     -- 电子邮件
   `wechat` VARCHAR(44) DEFAULT NULL,     -- 微信号

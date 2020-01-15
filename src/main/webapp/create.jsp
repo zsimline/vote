@@ -27,48 +27,48 @@
     <h5>基本设置</h5>
     <hr>
     <div class="inputcon">
-      <label for="">投票标题</label>
-      <input type="text" class="form-control input-sm" placeholder="请输入投票标题" maxlength="40">
+      <label for="title">投票标题</label>
+      <input type="text" id="title" class="form-control input-sm" placeholder="请输入投票标题" maxlength="40">
       <span class="extra-tip">投票的标题，最多40个字符</span>
     </div>
     <div class="inputcon">
-      <label for="">宣传图片</label>
-      <input type="file" class="form-control input-sm">
+      <label for="img-addr">宣传图片</label>
+      <input type="file" id="img-addr" class="form-control input-sm">
       <span class="extra-tip">投票页顶部图片，文件小于1M</span>
     </div>
     <div class="inputcon">
-      <label for="">条目称谓</label>
-      <input type="text" class="form-control input-sm" placeholder="请输入条目称谓" value="选手" maxlength="3">
+      <label for="suffix">条目称谓</label>
+      <input id="suffix" type="text" class="form-control input-sm" placeholder="请输入条目称谓" value="选手" maxlength="3">
       <span class="extra-tip">投票条目称谓，如选手、作品等，最多三个汉字</span>
     </div>
     <div class="inputcon">
-      <label for="">条目量词</label>
-      <input type="text" class="form-control input-sm" placeholder="请输入条目量词" value="个" maxlength="1">
+      <label for="quantifier">条目量词</label>
+      <input type="text" id="quantifier" class="form-control input-sm" placeholder="请输入条目量词" value="个" maxlength="1">
       <span class="extra-tip">用于描述选项个数，如个、位等，最多一个汉字</span>
     </div>
     <div class="inputcon">
-      <label for="">一次最多选择</label>
-      <input type="number" class="form-control input-sm" value="1" min="1" max="100">
+      <label for="maxium">一次最多选择</label>
+      <input type="number" id="maxium" class="form-control input-sm" value="1" min="1" max="100">
       <span class="extra-tip">每个用户最多可同时向几个条目投票，最小值为1，最大值为100</span>
     </div>
     <div class="inputcon">
-      <label for="">投票开始时间</label>
-      <input type="text" class="form-control input-sm" id="datetimepicker1">
+      <label for="vote-time-start">投票开始时间</label>
+      <input type="text" class="form-control input-sm" id="vote-time-start">
       <span class="extra-tip">开始时间后才能投票</span>
     </div>
     <div class="inputcon">
-      <label for="">投票截止时间</label>
-      <input type="text" class="form-control input-sm" id="datetimepicker2">
+      <label for="vote-time-end">投票截止时间</label>
+      <input type="text" class="form-control input-sm" id="vote-time-end">
       <span class="extra-tip">截止时间后不能继续投票</span>
     </div>
     <div class="inputcon">
-      <label for="">报名开始时间</label>
-      <input type="text" class="form-control input-sm" id="datetimepicker3">
+      <label for="signup-time-start">报名开始时间</label>
+      <input type="text" class="form-control input-sm" id="signup-time-start">
       <span class="extra-tip">开始时间后才能报名</span>
     </div>
     <div class="inputcon">
-      <label for="">报名截止时间</label>
-      <input type="text" class="form-control input-sm" id="datetimepicker4">
+      <label for="signup-time-end">报名截止时间</label>
+      <input type="text" class="form-control input-sm" id="signup-time-end">
       <span class="extra-tip">截止时间后不能继续报名</span>
     </div>
     <h5>活动简介</h5>
@@ -77,67 +77,66 @@
 
     <h5>其它选项</h5>
     <hr>
-    <div class="otheropts">
-      <label for="">人物姓名</label>
+    <div id="otheropts">
+      <label for="name">人物姓名</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="name" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">人物性别</label>
+      <label for="sex">人物性别</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="sex" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">人物年龄</label>
+      <label for="age">人物年龄</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="age" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">手机号码</label>
+      <label for="telephone">手机号码</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="telephone" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">电子邮件</label>
+      <label for="email">电子邮件</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="email" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">微信号码</label>
+      <label for="wechat">微信号码</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="wechat" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">学校名称</label>
+      <label for="school">学校名称</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="school" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">班级描述</label>
+      <label for="classdesc">班级描述</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="classdesc" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">公司名称</label>
+      <label for="company">公司名称</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="company" type="checkbox" data-toggle="switch" />
       </div><br>
-      <label for="">收货地址</label>
+      <label for="address">收货地址</label>
       <div class="switch switch-square">
-        <input type="checkbox" data-toggle="switch" />
+        <input id="address" type="checkbox" data-toggle="switch" />
       </div><br>
     </div>
 
     <hr>
-    <label class="checkbox" for="checkbox1">
-      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+    
+    <label class="checkbox" for="lisence">
+      <input type="checkbox" id="lisence" data-toggle="checkbox">
       我同意投票<a href="./license.jsp">服务条款</a>
     </label>
 
-    <button class="btn btn-primary">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布投票&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </button>
+    <button class="btn btn-primary">　发布投票　</button>
   </div>
 
   <!-- 时间拾取器配置 -->
   <script type="text/javascript">
     $(function () {
-      $('#datetimepicker1').datetimepicker({ locale: 'zh-cn' });
-      $('#datetimepicker2').datetimepicker({ locale: 'zh-cn' });
-      $('#datetimepicker3').datetimepicker({ locale: 'zh-cn' });
-      $('#datetimepicker4').datetimepicker({ locale: 'zh-cn' });
+      $('#vote-time-start').datetimepicker({ locale: 'zh-cn' });
+      $('#vote-time-end').datetimepicker({ locale: 'zh-cn' });
+      $('#signup-time-start').datetimepicker({ locale: 'zh-cn' });
+      $('#signup-time-end').datetimepicker({ locale: 'zh-cn' });
     });
   </script>
 
