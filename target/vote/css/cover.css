@@ -76,3 +76,11 @@ input[type="file"] {
 .container h5 {
   margin-top: 40px;
 }
+
+.otheropts label {
+  vertical-align: bottom;
+}
+
+.otheropts .switch {
+  margin-left: 6px;
+}

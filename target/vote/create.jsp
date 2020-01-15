@@ -15,15 +15,17 @@
   <script src="js/datetimepicker-4.0.0.js"></script>
   <script src="tinymce/tinymce-5.1.5.min.js"></script>
   <script src="js/flatui-checkbox.js"></script>
+  <script src="js/bootstrap-switch.js"></script>
   <title>创建投票</title>
 </head>
 
 <body>
   <%@ include file="components/header.jsp" %>
-  
+
   <!-- 投票配置项 -->
   <div class="container">
-    <h5>基本设置</h5><hr>
+    <h5>基本设置</h5>
+    <hr>
     <div class="inputcon">
       <label for="">投票标题</label>
       <input type="text" class="form-control input-sm" placeholder="请输入投票标题" maxlength="40">
@@ -69,19 +71,66 @@
       <input type="text" class="form-control input-sm" id="datetimepicker4">
       <span class="extra-tip">截止时间后不能继续报名</span>
     </div>
-    <h5>活动简介</h5><hr>
+    <h5>活动简介</h5>
+    <hr>
     <div id="tinymce"></div>
-    
+
+    <h5>其它选项</h5>
+    <hr>
+    <div class="otheropts">
+      <label for="">人物姓名</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">人物性别</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">人物年龄</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">手机号码</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">电子邮件</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">微信号码</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">学校名称</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">班级描述</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">公司名称</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+      <label for="">收货地址</label>
+      <div class="switch switch-square">
+        <input type="checkbox" data-toggle="switch" />
+      </div><br>
+    </div>
+
+    <hr>
     <label class="checkbox" for="checkbox1">
-        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
-        我同意投票<a href="./license.jsp">服务条款</a>
+      <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+      我同意投票<a href="./license.jsp">服务条款</a>
     </label>
 
     <button class="btn btn-primary">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布投票&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </button>
   </div>
-  
+
   <!-- 时间拾取器配置 -->
   <script type="text/javascript">
     $(function () {
@@ -99,6 +148,7 @@
       language: 'zh_CN',
       min_height: 500,
       width: 1200,
+      statusbar: false,
       plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists imagetools textpattern help emoticons autosave autoresize',
       toolbar: 'undo redo | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat',
       fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
