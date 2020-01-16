@@ -17,43 +17,43 @@ function handleSubmit() {
 
   // 校验表单是否为空
   if (title === '') {
-    openModal('<span style="color:red">投票标题不能为空</span>');
+    openModal('error', '投票标题不能为空');
     return ;
   }
   if (imgAddr === '') {
-    openModal('<span style="color:red">请上传宣传图片</span>');
+    openModal('error', '请上传宣传图片');
     return ;
   }
   if (suffix === '') {
-    openModal('<span style="color:red">条目称谓不能为空</span>');
+    openModal('error', '条目称谓不能为空');
     return ;
   }
   if (quantifier === '') {
-    openModal('<span style="color:red">条目量词不能为空</span>');
+    openModal('error', '条目量词不能为空');
     return ;
   }
   if (maxium === '') {
-    openModal('<span style="color:red">请输入一次最多选择</span>');
+    openModal('error', '请输入一次最多选择');
     return ;
   }
   if (voteTimeStart === '') {
-    openModal('<span style="color:red">投票开始时间不能为空</span>');
+    openModal('error', '投票开始时间不能为空');
     return ;
   }
   if (voteTimeEnd === '') {
-    openModal('<span style="color:red">投票截止时间不能为空</span>');
+    openModal('error', '投票截止时间不能为空');
     return ;
   }
   if (signUpTimeStart === '') {
-    openModal('<span style="color:red">报名开始时间不能为空</span>');
+    openModal('error', '报名开始时间不能为空');
     return ;
   }
   if (signUpTimeEnd === '') {
-    openModal('<span style="color:red">报名截止时间不能为空</span>');
+    openModal('error', '报名截止时间不能为空');
     return ;
   }
   if (description === '') {
-    openModal('<span style="color:red">活动描述不能为空</span>');
+    openModal('error', '活动描述不能为空');
     return ;
   }
 
@@ -66,25 +66,25 @@ function handleSubmit() {
   // 校验时间
   // 使时间顺序正常
   if (voteTimeStampStart >= voteTimeStampEnd) {
-    openModal('<span style="color:red">投票截止时间不能早于投票开始时间</span>');
+    openModal('error', '投票截止时间不能早于投票开始时间');
     return ;
   }
   if (signUpTimeStampStart >= signUpTimeStampEnd) {
-    openModal('<span style="color:red">报名截止时间不能早于报名开始时间</span>');
+    openModal('error', '报名截止时间不能早于报名开始时间');
     return ;
   }
   if (signUpTimeStampStart > voteTimeStampStart) {
-    openModal('<span style="color:red">报名开始时间不能晚于投票开始时间</span>');
+    openModal('error', '报名开始时间不能晚于投票开始时间');
     return ;
   }
   if (signUpTimeStampEnd > voteTimeStampEnd) {
-    openModal('<span style="color:red">报名截止时间不能晚于投票截止时间</span>');
+    openModal('error', '报名截止时间不能晚于投票截止时间');
     return ;
   }
 
   // 判断用户是够勾选同意协议
   if (!$('#lisence').is(':checked')) {
-    openModal('<span style="color:red">请勾选`我同意投票服务条款`</span>');
+    openModal('error', '请勾选`我同意投票服务条款`');
     return ;
   }
   
@@ -103,15 +103,27 @@ function handleSubmit() {
   // 向服务器提交数据
   post('v2/create', formData)
     .then(data => {
-      openModal('<span style="color:green">发布投票成功</span>')
+      openModal('success', '发布投票成功')
     })
     .catch(err => {
-      openModal('<span style="color:red">发布投票失败</span>')
+      openModal('error', '发布投票失败')
     });
 }
 
+/**
+ * 根据特定的消息类型显示消息
+ * @param {string} type 消息类型
+ * @param {string} message 消息内容
+ */
+function openModal(type, message) {
+  let messageTyped = null;
 
-function openModal(message) {
-  $('#commonModalBody').html(message);
+  if (type === 'success') {
+    messageTyped = `<span style="color:green">${message}</span>`;
+  } else if (type === 'error') {
+    messageTyped = `<span style="color:red">${message}</span>`;
+  }
+  
+  $('#commonModalBody').html(messageTyped);
   $('#commonModal').modal();
 }
