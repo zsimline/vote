@@ -15,7 +15,6 @@ function handleSubmit() {
   const signUpTimeEnd = $('#signup-time-end').val();
   const description = tinyMCE.activeEditor.getContent();
 
-
   // 校验表单是否为空
   if (title === '') {
     openModal('<span style="color:red">投票标题不能为空</span>');
@@ -89,31 +88,26 @@ function handleSubmit() {
     return ;
   }
   
+  const formData = new FormData()
+  formData.append('title', title);
+  formData.append('imgAddr', $('#img-addr').prop('files')[0]);
+  formData.append('suffix', suffix);
+  formData.append('quantifier', quantifier);
+  formData.append('maxium', maxium);
+  formData.append('voteTimeStart', voteTimeStampStart);
+  formData.append('voteTimeEnd', voteTimeStampEnd);
+  formData.append('signupTimeStart', signUpTimeStampStart);
+  formData.append('signupTimeStart', signUpTimeStampEnd);
+  formData.append('description', description);
+
   // 向服务器提交数据
-  $.ajax({
-    url: 'v2/create',
-    type: 'POST',
-    data: {
-      'title': title,
-      'imgAddr': imgAddr,
-      'suffix': suffix,
-      'quantifier': quantifier,
-      'maxium': maxium,
-      'voteTimeStart': voteTimeStart,
-      'voteTimeEnd': voteTimeEnd,
-      'signUpTimeStart': signUpTimeStart,
-      'signUpTimeEnd': signUpTimeEnd,
-      'description': description,
-    },
-    contentType: 'json',
-    dataType: 'json',
-    success: function(data) {
-      console.log(data);
-    } ,
-    error: function(err) {
-      console.error(err);
-    }
-  });
+  post('v2/create', formData)
+    .then(data => {
+      openModal('<span style="color:green">发布投票成功</span>')
+    })
+    .catch(err => {
+      openModal('<span style="color:red">发布投票失败</span>')
+    });
 }
 
 
