@@ -133,10 +133,11 @@
   <!-- 时间拾取器配置 -->
   <script type="text/javascript">
     $(function () {
-      $('#vote-time-start').datetimepicker({ locale: 'zh-cn' });
-      $('#vote-time-end').datetimepicker({ locale: 'zh-cn' });
-      $('#signup-time-start').datetimepicker({ locale: 'zh-cn' });
-      $('#signup-time-end').datetimepicker({ locale: 'zh-cn' });
+      const options = { locale: 'zh-cn', format:"YYYY-MM-DD hh:mm" };
+      $('#vote-time-start').datetimepicker(options);
+      $('#vote-time-end').datetimepicker(options);
+      $('#signup-time-start').datetimepicker(options);
+      $('#signup-time-end').datetimepicker(options);
     });
   </script>
 
