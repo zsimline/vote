@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="org.vote.beans">
-  <class name="SignUp" table="signup">
+  <class name="Apply" table="apply">
     <id name="id" column="id" type="java.lang.Long">
       <generator class="native"/>
     </id>
@@ -11,7 +11,7 @@
     <property name="reviewed" column="reviewed" type="java.lang.Boolean"/>
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
     <property name="description" column="description" type="java.lang.String" length="3000" not-null="true"/>
-    <property name="imgAddr" column="img_addr" type="java.lang.String" length="40"/>
+    <property name="imgName" column="img_name" type="java.lang.String" length="36"/>
     <property name="sex" column="sex" type="java.lang.Boolean"/>
     <property name="age" column="age" type="java.lang.Integer"/>
     <property name="name" column="name" type="java.lang.String" length="15"/>
