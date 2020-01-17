@@ -5,3 +5,5 @@
 /home/mxsyx/desktop/vote/src/main/java/org/vote/beans/Ticket.java
 /home/mxsyx/desktop/vote/src/main/java/org/vote/processor/HelloServlet.java
 /home/mxsyx/desktop/vote/src/main/java/org/vote/beans/Activity.java
+/home/mxsyx/desktop/vote/src/main/java/org/vote/common/UUIDTool.java
+/home/mxsyx/desktop/vote/src/main/java/org/vote/processor/ticket/CreateVote.java

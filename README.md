@@ -91,3 +91,4 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 - 前端表单一律通过JS异步提交(Ajax), 禁止出现form, POST格式为JSON.
 
+            // new String(.getBytes("ISO-8859-1"), "UTF-8");

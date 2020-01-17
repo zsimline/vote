@@ -96,9 +96,10 @@ function handleSubmit() {
   formData.append('maxium', maxium);
   formData.append('voteTimeStart', voteTimeStampStart);
   formData.append('voteTimeEnd', voteTimeStampEnd);
-  formData.append('signupTimeStart', signUpTimeStampStart);
-  formData.append('signupTimeStart', signUpTimeStampEnd);
+  formData.append('signUpTimeStart', signUpTimeStampStart);
+  formData.append('signUpTimeEnd', signUpTimeStampEnd);
   formData.append('description', description);
+  
 
   // 向服务器提交数据
   post('v2/create', formData)

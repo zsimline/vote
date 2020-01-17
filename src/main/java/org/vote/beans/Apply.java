@@ -3,7 +3,7 @@ package org.vote.beans;
 /**
  * 报名信息表模型
  */
-public class SignUp {
+public class Apply {
   // 报名ID
   private long id;
   
@@ -20,7 +20,7 @@ public class SignUp {
   private String description;
   
   // 图片地址
-  private String imgAddr;
+  private String imgName;
 
   // 人物性别
   private boolean sex;
@@ -52,7 +52,7 @@ public class SignUp {
   // 收货地址
   private String address;
 
-  public SignUp() {
+  public Apply() {
     this.reviewed = false;
   }
 
@@ -128,17 +128,17 @@ public class SignUp {
   }
 
   /**
-   * @return imgAddr
+   * @return imgName
    */
-  public String getImgAddr() {
-    return imgAddr;
+  public String getImgName() {
+    return imgName;
   }
 
   /**
-   * @param imgAddr 要设置的 imgAddr
+   * @param imgName 要设置的 imgName
    */
-  public void setImgAddr(String imgAddr) {
-    this.imgAddr = imgAddr;
+  public void setImgName(String imgName) {
+    this.imgName = imgName;
   }
 
   /**

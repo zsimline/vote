@@ -20,7 +20,7 @@ public class Entry {
   private long acquisition;
 
   // 图片地址
-  private String imgAddr;
+  private String imgName;
 
   public Entry() {
     this.acquisition = 0;
@@ -97,16 +97,16 @@ public class Entry {
   }
 
   /**
-   * @return imgAddr
+   * @return imgName
    */
-  public String getImgAddr() {
-    return imgAddr;
+  public String getImgName() {
+    return imgName;
   }
 
   /**
-   * @param imgAddr 要设置的 imgAddr
+   * @param imgName 要设置的 imgName
    */
-  public void setImgAddr(String imgAddr) {
-    this.imgAddr = imgAddr;
+  public void setImgName(String imgName) {
+    this.imgName = imgName;
   }
 }

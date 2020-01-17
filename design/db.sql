@@ -27,13 +27,13 @@ CREATE TABLE `activity`
   `description` VARCHAR(3000) NOT NULL,         -- 活动描述（富文本）
   `vote_time_start` DATETIME NOT NULL,          -- 投票开始时间
   `vote_time_end` DATETIME NOT NULL,            -- 投票截止时间
-  `signup_time_start` DATETIME NOT NULL,        -- 报名开始时间
-  `signup_time_end` DATETIME NOT NULL,          -- 报名截止时间
-  `maxium` TINYINT UNSIGNED NOT NULL,           -- 最多选择
+  `apply_time_start` DATETIME NOT NULL,         -- 报名开始时间
+  `apply_time_end` DATETIME NOT NULL,           -- 报名截止时间
+  `maxium` TINYINT UNSIGNED NOT NULL,           -- 单次最多选择
   `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,     -- 条目总数
   `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
   `sum_visited` INT UNSIGNED DEFAULT 0,         -- 访问总数
-  `img_addr` CHAR(40) DEFAULT NULL,             -- 宣传图片地址
+  `img_name` CHAR(36) DEFAULT NULL,             -- 宣传图片名
   `options` VARCHAR(300) NOT NULL,              -- 其它必填项
   `destroyed` TINYINT(1) DEFAULT 0,             -- 是否销毁
   PRIMARY KEY(`id`),
@@ -48,19 +48,19 @@ CREATE TABLE `entry`
   `title` VARCHAR(25) NOT NULL,         -- 条目标题
   `description` VARCHAR(3000) NOT NULL, -- 条目描述
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
-  `img_addr` CHAR(40) DEFAULT NULL,     -- 条目图片地址
+  `img_name` CHAR(36) DEFAULT NULL,     -- 宣传图片名
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 报名信息表
-CREATE TABLE `signup` 
+CREATE TABLE `apply` 
 (
   `id` INT UNSIGNED AUTO_INCREMENT,      -- 报名ID
   `aid` CHAR(32) NOT NULL,               -- 活动ID
   `reviewed` TINYINT(1) NOT NULL,        -- 是否通过审核
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
   `description` VARCHAR(3000) NOT NULL,  -- 报名描述（富文本）
-  `img_addr` CHAR(40) DEFAULT NULL,      -- 图片地址
+  `img_name` CHAR(36) DEFAULT NULL,      -- 宣传图片名
   `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
   `sex` TINYINT(1) DEFAULT NULL,         -- 人物性别
   `age` TINYINT(3) DEFAULT NULL,         -- 人物年龄

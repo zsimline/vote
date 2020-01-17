@@ -31,10 +31,10 @@ public class Activity {
   private Date voteTimeEnd;
 
   // 报名开始时间
-  private Date signUpTimeStart;
+  private Date applyTimeStart;
 
   // 报名截止时间
-  private Date signUpTimeEnd;
+  private Date applyTimeEnd;
 
   // 最多选择的条目数
   private int maxium;
@@ -49,7 +49,7 @@ public class Activity {
   private long sumVisited;
 
   // 宣传图片地址
-  private String imgAddr;
+  private String imgName;
 
   // 其它必填项
   private String options;
@@ -177,31 +177,31 @@ public class Activity {
   }
 
   /**
-   * @return signUpTimeEnd
+   * @return applyTimeEnd
    */
-  public Date getSignUpTimeEnd() {
-    return signUpTimeEnd;
+  public Date getApplyTimeEnd() {
+    return applyTimeEnd;
   }
 
   /**
-   * @param signUpTimeEnd 要设置的 signUpTimeEnd
+   * @param applyTimeEnd 要设置的 applyTimeEnd
    */
-  public void setSignUpTimeEnd(Date signUpTimeEnd) {
-    this.signUpTimeEnd = signUpTimeEnd;
+  public void setApplyTimeEnd(Date applyTimeEnd) {
+    this.applyTimeEnd = applyTimeEnd;
   }
 
   /**
-   * @return signUpTimeStart
+   * @return applyTimeStart
    */
-  public Date getSignUpTimeStart() {
-    return signUpTimeStart;
+  public Date getApplyTimeStart() {
+    return applyTimeStart;
   }
 
   /**
-   * @param signUpTimeStart 要设置的 signUpTimeStart
+   * @param applyTimeStart 要设置的 applyTimeStart
    */
-  public void setSignUpTimeStart(Date signUpTimeStart) {
-    this.signUpTimeStart = signUpTimeStart;
+  public void setApplyTimeStart(Date applyTimeStart) {
+    this.applyTimeStart = applyTimeStart;
   }
 
 
@@ -262,17 +262,17 @@ public class Activity {
   }
 
   /**
-   * @return imgAddr
+   * @return imgName
    */
-  public String getImgAddr() {
-    return imgAddr;
+  public String getImgName() {
+    return imgName;
   }
 
   /**
-   * @param imgAddr 要设置的 imgAddr
+   * @param imgName 要设置的 imgName
    */
-  public void setImgAddr(String imgAddr) {
-    this.imgAddr = imgAddr;
+  public void setImgName(String imgName) {
+    this.imgName = imgName;
   }
 
   /**
