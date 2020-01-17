@@ -31,7 +31,6 @@ public class CreateVote extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   public CreateVote() {
-    // TODO
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,9 +73,9 @@ public class CreateVote extends HttpServlet {
             } else if (fieldName.equals("voteTimeEnd")) {
               activity.setVoteTimeEnd(new Date(Long.parseLong(fieldContent)));
             } else if (fieldName.equals("signUpTimeStart")) {
-              activity.setSignUpTimeStart(new Date(Long.parseLong(fieldContent)));
+              activity.setApplyTimeStart(new Date(Long.parseLong(fieldContent)));
             } else if (fieldName.equals("signUpTimeEnd")) {
-              activity.setSignUpTimeEnd(new Date(Long.parseLong(fieldContent)));
+              activity.setApplyTimeEnd(new Date(Long.parseLong(fieldContent)));
             } else if (fieldName.equals("maxium")) {
               activity.setMaxium(Integer.parseInt(fieldContent));
             } 
@@ -94,7 +93,7 @@ public class CreateVote extends HttpServlet {
 
             // 定义本机存储的文件名
             String localFileName = UUIDTool.getUUID() + "." + ext;
-            activity.setImgAddr(localFileName);
+            activity.setImgName(localFileName);
 
             // 设置缓冲区大小
             factory.setSizeThreshold(1024 * 1024 * 2);
