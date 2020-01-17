@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 //import org.hibernate.Transaction;
 //import org.vote.common.HibernateUtil;
 
-
 @WebServlet("/v2/create")
 public class HelloServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
