@@ -22,18 +22,23 @@ import org.vote.common.HibernateUtil;
 
 import org.vote.beans.Activity;
 import org.vote.common.UUIDTool;
+import org.vote.common.Code;
+
+import com.google.gson.Gson;
 
 /**
- * 处理创建投票
+ * 处理创建活动
  */
 @WebServlet("/v2/create")
-public class CreateVote extends HttpServlet {
+public class Create extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  public CreateVote() {
+  public Create() {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    Code code = new Code();
+
     // 只处理 multipart 类型的表单数据
     boolean multipart = ServletFileUpload.isMultipartContent(request);
     if (multipart) {
@@ -48,8 +53,9 @@ public class CreateVote extends HttpServlet {
       try {
         List<FileItem> items = upload.parseRequest(request);
         Iterator<FileItem> iter = items.iterator();
+
         activity.setPublisher(1000001);
-        activity.setOptions("1,2,3");
+
         while (iter.hasNext()) {
           FileItem item = iter.next();
 
@@ -78,6 +84,8 @@ public class CreateVote extends HttpServlet {
               activity.setApplyTimeEnd(new Date(Long.parseLong(fieldContent)));
             } else if (fieldName.equals("maxium")) {
               activity.setMaxium(Integer.parseInt(fieldContent));
+            } else if (fieldName.equals("options")) {
+              activity.setOptions(fieldContent);
             } 
           } else { // 文件数据
             String filename = item.getName();
@@ -85,7 +93,8 @@ public class CreateVote extends HttpServlet {
 
             // 文件后缀名不为 jpg/png
             if (!ext.equals("jpg") && !ext.equals("png")) {
-
+              code.setCode(1002);
+              completed(response, code);
             }
 
             // 定义上传文件路径
@@ -109,14 +118,18 @@ public class CreateVote extends HttpServlet {
             item.write(file);
           }
         }
+        
+        
         // 执行数据存储
         if (dbExcute(activity)) {
-          response.setStatus(200);
+          code.setCode(1000);
         } else {
-          response.setStatus(502);
+          code.setCode(1001);
         }
       } catch (Exception e) {
         e.printStackTrace();
+      } finally {
+        completed(response, code);
       }
     }
   }
@@ -125,6 +138,18 @@ public class CreateVote extends HttpServlet {
     doGet(request, response);
   }
 
+  private void completed(HttpServletResponse response, Code code) throws ServletException, IOException {
+    Gson gson = new Gson();
+    String jsonObject = gson.toJson(code);
+    response.getWriter().write(jsonObject);
+    response.setStatus(200);
+  }
+
+  /**
+   * 执行新建活动的数据库操作
+   * @param activity 活动实例
+   * @return true/false 新建活动成功/失败
+   */
   private boolean dbExcute(Activity activity) {
     Session session = HibernateUtil.getSessionFactory().openSession();
     Transaction transaction = session.beginTransaction();

@@ -5,3 +5,7 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 </web-app>
+
+<listener>
+  <listener-class>org.vote.common.InitContextListener</listener-class>
+</listener>

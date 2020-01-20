@@ -80,43 +80,43 @@
     <div id="otheropts">
       <label for="name">人物姓名</label>
       <div class="switch switch-square">
-        <input id="name" type="checkbox" data-toggle="switch" />
+        <input id="name" type="checkbox" data-index="0" data-toggle="switch" />
       </div><br>
       <label for="sex">人物性别</label>
       <div class="switch switch-square">
-        <input id="sex" type="checkbox" data-toggle="switch" />
+        <input id="sex" type="checkbox" data-index="1" data-toggle="switch" />
       </div><br>
       <label for="age">人物年龄</label>
       <div class="switch switch-square">
-        <input id="age" type="checkbox" data-toggle="switch" />
+        <input id="age" type="checkbox" data-index="2" data-toggle="switch" />
       </div><br>
       <label for="telephone">手机号码</label>
       <div class="switch switch-square">
-        <input id="telephone" type="checkbox" data-toggle="switch" />
+        <input id="telephone" type="checkbox" data-index="3" data-toggle="switch" />
       </div><br>
       <label for="email">电子邮件</label>
       <div class="switch switch-square">
-        <input id="email" type="checkbox" data-toggle="switch" />
+        <input id="email" type="checkbox" data-index="4" data-toggle="switch" />
       </div><br>
       <label for="wechat">微信号码</label>
       <div class="switch switch-square">
-        <input id="wechat" type="checkbox" data-toggle="switch" />
+        <input id="wechat" type="checkbox" data-index="5" data-toggle="switch" />
       </div><br>
       <label for="school">学校名称</label>
       <div class="switch switch-square">
-        <input id="school" type="checkbox" data-toggle="switch" />
+        <input id="school" type="checkbox" data-index="6" data-toggle="switch" />
       </div><br>
       <label for="classdesc">班级描述</label>
       <div class="switch switch-square">
-        <input id="classdesc" type="checkbox" data-toggle="switch" />
+        <input id="classdesc" type="checkbox" data-index="7" data-toggle="switch" />
       </div><br>
       <label for="company">公司名称</label>
       <div class="switch switch-square">
-        <input id="company" type="checkbox" data-toggle="switch" />
+        <input id="company" type="checkbox" data-index="8" data-toggle="switch" />
       </div><br>
       <label for="address">收货地址</label>
       <div class="switch switch-square">
-        <input id="address" type="checkbox" data-toggle="switch" />
+        <input id="address" type="checkbox" data-index="9" data-toggle="switch" />
       </div><br>
     </div>
 

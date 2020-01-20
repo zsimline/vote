@@ -15,6 +15,16 @@ function handleSubmit() {
   const signUpTimeEnd = $('#signup-time-end').val();
   const description = tinyMCE.activeEditor.getContent();
 
+  // 获取已经选中的单选按钮
+  const optCheckboxes = $('input[data-index]');
+  const optCheckboxesLength = optCheckboxes.length;
+  let options = ''
+  for(let i = 0; i < optCheckboxesLength; i++) {
+    if (optCheckboxes[i].checked) {
+      options += optCheckboxes[i].dataset.index + ',';
+    }
+  }
+
   // 校验表单是否为空
   if (title === '') {
     openModal('error', '投票标题不能为空');
@@ -99,7 +109,7 @@ function handleSubmit() {
   formData.append('signUpTimeStart', signUpTimeStampStart);
   formData.append('signUpTimeEnd', signUpTimeStampEnd);
   formData.append('description', description);
-  
+  formData.append('options', options);
 
   // 向服务器提交数据
   post('v2/create', formData)
