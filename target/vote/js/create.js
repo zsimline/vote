@@ -124,21 +124,3 @@ function handleSubmit() {
       openModal('error', '发布投票失败')
     });
 }
-
-/**
- * 根据特定的消息类型显示消息
- * @param {string} type 消息类型
- * @param {string} message 消息内容
- */
-function openModal(type, message) {
-  let messageTyped = null;
-
-  if (type === 'success') {
-    messageTyped = `<span style="color:green">${message}</span>`;
-  } else if (type === 'error') {
-    messageTyped = `<span style="color:red">${message}</span>`;
-  }
-  
-  $('#commonModalBody').html(messageTyped);
-  $('#commonModal').modal();
-}

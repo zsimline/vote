@@ -90,3 +90,24 @@ CREATE TABLE `ticket`
   `ipaddr` CHAR(15) NOT NULL,             -- IP地址
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+
+
+-- 开启实时日志
+DELIMITER $$
+CREATE PROCEDURE open_realtime_log()
+BEGIN
+	SET GLOBAL general_log = 'ON';
+	SET GLOBAL general_log_file = '/var/lib/mysql/general.log';
+END
+$$
+DELIMITER ;
+
+-- 关闭实时日志
+DELIMITER $$
+CREATE PROCEDURE close_realtime_log()
+BEGIN
+	SET GLOBAL general_log = 'OFF';
+END
+$$
+DELIMITER ;

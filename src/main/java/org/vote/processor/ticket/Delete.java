@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.vote.common.HibernateUtil;
 
 import org.vote.common.Code;
+import org.vote.beans.Activity;
 
 import com.google.gson.Gson;
 
 /**
- * 处理创建活动
+ * 处理删除活动
  */
 @WebServlet("/v2/delete")
 public class Delete extends HttpServlet {
@@ -63,15 +63,14 @@ public class Delete extends HttpServlet {
     Session session = HibernateUtil.getSessionFactory().openSession();
     Transaction transaction = session.beginTransaction();
 
-    int result;
     try {
       transaction.begin();
-    
-      String hql = "DELETE FROM Activity WHERE id = :aid";
-      Query query = session.createQuery(hql);
-      query.setParameter("aid", aid);
-      result = query.executeUpdate();
       
+      Activity activity = (Activity) session.get(Activity.class, aid);
+      System.out.println(activity);
+      activity.setDestroyed(true);
+      session.update(activity);
+
       transaction.commit();
       session.close();
     } catch (Exception e) {
@@ -79,6 +78,6 @@ public class Delete extends HttpServlet {
       return 0;
     }
 
-    return result;
+    return 1;
   }
 }

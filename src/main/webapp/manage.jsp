@@ -28,7 +28,7 @@
         <button class="btn btn-warning">批量添加</button>
         <button class="btn btn-info">结果与日志</button>
         <button class="btn btn-inverse">链接与二维码</button>
-        <button class="btn btn-danger" onclick="deleteActivity('4028aa2e6fc839f0016fc839f17f0001')">删除</button>
+        <button class="btn btn-danger" onclick="deleteActivity('4028aa1d6fc88fb7016fc89a097c0001')">删除</button>
       </div>
       <div class="panel-footer">
         <span class="label label-default">投票总数：612568</span>
