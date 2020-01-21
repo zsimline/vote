@@ -21,9 +21,9 @@
 
 ### 用户
 
-- 登录页 https://lumingvote.com/user/login
+- 登录页 https://lumingvote.com/user/login.jsp
 
-- 注册页 https://lumingvote.com/user/register
+- 注册页 https://lumingvote.com/user/register.jsp
 
 - 信息页 https://lumingvote.com/user/profile
 
@@ -32,7 +32,7 @@
 
 ### 投票
 
-- 创建投票 https://lumingvote.com/vote/create
+- 创建投票 https://lumingvote.com/vote/create.jsp
 
 - 投票管理 https://lumingvote.com/vote/manage
 
@@ -45,6 +45,12 @@
 - 活动链接 https://lumingvote.com/vote/link?aid=activitieId
 
 - 结果分析 https://lumingvote.com/vote/analysis?aid=activitieId
+
+
+## 系统接口
+
+- 处理创建投票 https://lumingvote.com/vote/v2/create
+
 
 
 ## 微信网页授权 
@@ -90,5 +96,3 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 **技术规范**
 
 - 前端表单一律通过JS异步提交(Ajax), 禁止出现form, POST格式为JSON.
-
-            // new String(.getBytes("ISO-8859-1"), "UTF-8");
