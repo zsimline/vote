@@ -37,8 +37,6 @@ public class Create extends HttpServlet {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Code code = new Code();
-
     // 只处理 multipart 类型的表单数据
     boolean multipart = ServletFileUpload.isMultipartContent(request);
     if (multipart) {
@@ -46,14 +44,21 @@ public class Create extends HttpServlet {
 
       // 创建磁盘文件工厂
       DiskFileItemFactory factory = new DiskFileItemFactory();
-
+     
+      // 设置缓冲区大小
+      factory.setSizeThreshold(1024 * 1024 * 2);
+      
       // 创建文件上传处理器
       ServletFileUpload upload = new ServletFileUpload(factory);
-
+      
+      // 单个文件大小不超过1M
+      upload.setFileSizeMax(1024 * 1024); 
+      
       try {
         List<FileItem> items = upload.parseRequest(request);
         Iterator<FileItem> iter = items.iterator();
 
+        // TODO 设置发布者
         activity.setPublisher(1000001);
 
         while (iter.hasNext()) {
@@ -64,8 +69,8 @@ public class Create extends HttpServlet {
             String fieldName = item.getFieldName();
 
             // 表单值
-            String fieldContent = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
-
+            String fieldContent = item.getString("UTF-8");
+            
             if (fieldName.equals("title")) {
               activity.setTitle(fieldContent);
             } else if (fieldName.equals("suffix")) {
@@ -93,8 +98,7 @@ public class Create extends HttpServlet {
 
             // 文件后缀名不为 jpg/png
             if (!ext.equals("jpg") && !ext.equals("png")) {
-              code.setCode(1002);
-              completed(response, code);
+              completed(response, 1002);
             }
 
             // 定义上传文件路径
@@ -104,32 +108,21 @@ public class Create extends HttpServlet {
             String localFileName = UUIDTool.getUUID() + "." + ext;
             activity.setImgName(localFileName);
 
-            // 设置缓冲区大小
-            factory.setSizeThreshold(1024 * 1024 * 2);
-
-            // 设置临时目录
-            factory.setRepository(new File("uploadtemp"));
-
-            // 单个文件大小不超过2M
-            upload.setFileSizeMax(1024 * 1024 * 2);
-
             // 存储文件
             File file = new File(path, localFileName);
             item.write(file);
           }
         }
-        
-        
+     
         // 执行数据存储
         if (dbExcute(activity)) {
-          code.setCode(1000);
+          completed(response, 1000);
         } else {
-          code.setCode(1001);
+          completed(response, 1001);
         }
       } catch (Exception e) {
         e.printStackTrace();
-      } finally {
-        completed(response, code);
+        completed(response, 1001);
       }
     }
   }
@@ -138,10 +131,18 @@ public class Create extends HttpServlet {
     doGet(request, response);
   }
 
-  private void completed(HttpServletResponse response, Code code) throws ServletException, IOException {
+  /**
+   * 向用户返回操作执行的结果
+   * @param response Servlet响应对象
+   * @param status 自定义的返回码
+   * @throws ServletException
+   * @throws IOException
+   */
+  private void completed(HttpServletResponse response, int status) throws ServletException, IOException {
+    Code code = new Code(status);
     Gson gson = new Gson();
-    String jsonObject = gson.toJson(code);
-    response.getWriter().write(jsonObject);
+    String jsonObj = gson.toJson(code);
+    response.getWriter().write(jsonObj);
     response.setStatus(200);
   }
 

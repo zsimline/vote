@@ -114,7 +114,11 @@ function handleSubmit() {
   // 向服务器提交数据
   post('v2/create', formData)
     .then(data => {
-      openModal('success', '发布投票成功')
+      if (!data.code % 100) {
+        openModal('success', '发布投票成功')
+      } else {
+        openModal('error', `${data.code} ${data.codeDesc}`);
+      }
     })
     .catch(err => {
       openModal('error', '发布投票失败')

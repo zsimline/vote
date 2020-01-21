@@ -3,9 +3,22 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-</web-app>
+  <display-name>Luming remote voting system</display-name>
 
-<listener>
-  <listener-class>org.vote.common.InitContextListener</listener-class>
-</listener>
+  <listener>
+    <listener-class>org.vote.common.InitContextListener</listener-class>
+  </listener>
+  
+  <filter>
+    <filter-name>encodeFilter</filter-name>
+    <filter-class>org.vote.common.encodeFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name> 
+      <param-value>utf-8</param-value> 
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodeFilter</filter-name>
+    <url-pattern>/vote/v2/*</url-pattern>
+  </filter-mapping>
+</web-app>
