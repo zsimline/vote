@@ -22,6 +22,10 @@ public class Code {
     codes.put(1000, "发布投票成功");
     codes.put(1001, "发布投票失败原因未知");
     codes.put(1002, "图片文件后缀名只能为.jpg/.png");
+
+    // 发布功能返回码
+    codes.put(1900, "删除投票成功");
+    codes.put(1901, "删除投票失败原因未知");
   }
 
   public Code(int code) {

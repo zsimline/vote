@@ -96,3 +96,19 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 **技术规范**
 
 - 前端表单一律通过JS异步提交(Ajax), 禁止出现form, POST格式为JSON.
+
+## TODO
+
+1. 删除投票前的警告
+
+2. 创建投票时建立投票表
+
+3. 删除操作添加删除投票表
+
+4. 链接与二维码页面
+
+5. 报名页面
+
+6. 用户模块
+
+7. ...
