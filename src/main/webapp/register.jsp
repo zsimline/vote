@@ -11,6 +11,7 @@
   <%@ include file="components/meta.jsp" %>
   <%@ include file="components/link.jsp" %>
   <link href="css/login.css" rel="stylesheet" type="text/css">
+  <script src="js/login.js"></script>
   <title>用户登录</title>
 </head>
 
@@ -19,30 +20,31 @@
     <h1 class="lg-title">鹿鸣投票</h1>
     <div class="input-group">
       <i class="fa fa-user" aria-hidden="true"></i>
-      <input type="text" placeholder="设置个昵称"" maxlength="15">
+      <input type="text" id="nickname" placeholder="设置个昵称"" maxlength="15">
     </div>
     <div class="input-group">
       <i class="fa fa-lock" aria-hidden="true"></i>
-      <input type="password" placeholder="设置一个密码吧" regex="^\w+" maxlength="32">
+      <input type="password" id="password" placeholder="设置一个密码吧" regex="^\w+" maxlength="32">
     </div>
     <div class="input-group">
       <i class="fa fa-envelope" aria-hidden="true"></i>
-      <input type="email" placeholder="请输入您常用的电子邮件" maxlength="255">
+      <input type="email" id="email" placeholder="请输入您常用的电子邮件" maxlength="255">
     </div>
     <div class="input-group">
       <i class="fa fa-users" aria-hidden="true"></i>
-      <input type="text" placeholder="所属组织 (公司、学校、个人等)" regex="^\w+" maxlength="45">
+      <input type="text" id="organization" placeholder="所属组织 (公司、学校、个人等)" regex="^\w+" maxlength="45">
     </div>
-    <a href="" class="btn-submit">
+    <a class="btn-submit" onclick="handleRegister()">
       &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
     </a>
     <div class="lg-ref">
-      <a href="">登录账户</a>
+      <a href="login.jsp">登录账户</a>
       &nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="">忘记密码</a>
     </div>
   </div>
+  <%@ include file="components/modal.jsp" %>
 </body>
 
 </html>

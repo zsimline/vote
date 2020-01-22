@@ -1,11 +1,14 @@
 package org.vote.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 活动信息表模型
  */
-public class Activity {
+public class Activity implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   // 活动ID
   private String id;
 

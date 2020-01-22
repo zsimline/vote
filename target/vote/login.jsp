@@ -25,11 +25,11 @@
       <i class="fa fa-lock" aria-hidden="true"></i>
       <input type="password" placeholder="密码" regex="^\w+">
     </div>
-    <a href="" class="btn-submit">
+    <a class="btn-submit">
       &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
     </a>
     <div class="lg-ref">
-      <a href="">注册账户</a>
+      <a href="register.jsp">注册账户</a>
       &nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="">忘记密码</a>

@@ -1,6 +1,13 @@
 package org.vote.beans;
 
-public class User {
+import java.io.Serializable;
+
+/**
+ * 用户信息表模型
+ */
+public class User implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   // 用户ID
   private long id;
 

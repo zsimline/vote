@@ -44,6 +44,29 @@ function post(url, data) {
   });
 }
 
+/**
+ * 向后端提交JSON数据
+ * @param {string} url 提交到的地址
+ * @param {object} data 提交的数据
+ */
+function postJSON(url, data) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: data,
+      contentType: 'json',
+      dataType: 'json',
+      cache: false,
+      success: data => {
+        resolve(data);
+      },
+      error: err => {
+        reject(err);
+      }
+    })
+  });
+}
 
 /**
  * 根据特定的消息类型显示消息

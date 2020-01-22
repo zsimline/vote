@@ -1,9 +1,13 @@
 package org.vote.beans;
 
+import java.io.Serializable;
+
 /**
  * 条目信息表模型
  */
-public class Entry {
+public class Entry implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   // 条目ID
   private long id;
 

@@ -1,11 +1,14 @@
 package org.vote.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 投票信息表模型
  */
-public class Ticket {
+public class Ticket implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   // 投票ID
   private long id;
 

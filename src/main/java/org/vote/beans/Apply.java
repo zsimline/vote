@@ -1,9 +1,13 @@
 package org.vote.beans;
 
+import java.io.Serializable;
+
 /**
  * 报名信息表模型
  */
-public class Apply {
+public class Apply implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   // 报名ID
   private long id;
   
