@@ -25,6 +25,7 @@ import org.vote.common.UUIDTool;
 import org.vote.common.Code;
 
 import com.google.gson.Gson;
+import org.vote.common.TableNameMappingInterceptor;
 
 /**
  * 处理创建活动
