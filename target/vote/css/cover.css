@@ -42,6 +42,9 @@
   font-size: 14px;
 }
 
+h4 {
+  font-size: 14px;
+}
 
 /*！ 其它样式 */
 .fa {
@@ -102,4 +105,18 @@ input[type="file"] {
 .panel-body .btn {
   padding: 6px 12px;
   margin: auto 2px;
+}
+
+/*！ 链接与二维码页样式 */
+.page-qrcode {
+  margin-top: 40px;
+}
+
+.page-qrcode input {
+  width: 55%;
+  color: #000 !important;
+}
+
+.page-qrcode .nav-tabs {
+  font-size: 16px;
 }

@@ -92,11 +92,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 **前端技术：** flat-ui(free v2.1.1) + bootstrap(v3.0.0) + font-awesome(v4.7.0)
 
-
-**技术规范**
-
-- 前端表单一律通过JS异步提交(Ajax), 禁止出现form, POST格式为JSON.
-
 ## TODO
 
 4. 链接与二维码页面

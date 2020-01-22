@@ -121,7 +121,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE drop_ticket_table(IN table_name VARCHAR(32))
 BEGIN
-SET @sql_drop_table = concat("DROP TABLE ", table_name);
+SET @sql_drop_table = concat("DROP TABLE IF EXISTS ", table_name);
 PREPARE sql_drop_table FROM @sql_drop_table;
 EXECUTE sql_drop_table; 
 END
