@@ -34,7 +34,7 @@ function handleRegister() {
   };
 
   // 向服务器提交数据
-  post('v2/register', postData)
+  postJSON('v2/register', JSON.stringify(postData))
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', '注册账户成功')

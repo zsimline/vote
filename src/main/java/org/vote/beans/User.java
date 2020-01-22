@@ -31,7 +31,7 @@ public class User implements Serializable {
 
   public User() {
     this.isStaff = false;
-    this.isActive = true;
+    this.isActive = false;
   }
 
   /**

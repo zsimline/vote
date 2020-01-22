@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -16,6 +17,7 @@ import com.google.gson.Gson;
 import org.vote.beans.User;
 import org.vote.common.Code;
 import org.vote.common.HibernateUtil;
+import org.vote.common.MD5;
 
 /**
  * 处理创建活动
@@ -28,10 +30,29 @@ public class Register extends HttpServlet {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    User user = new User();
+    // 将输入流转换为JSON字符串
+    String postData = IOUtils.toString(request.getInputStream(), "UTF-8");
 
-    
+    if (postData != null) {
+      Gson gson = new Gson();
+      User user = gson.fromJson(postData, User.class);
 
+      // 取用户密码的哈希摘要
+      try {
+        user.setPassword(MD5.md5(user.getPassword()));
+      } catch (Exception e) {
+        e.printStackTrace();
+        completed(response, 1103);
+      }
+      
+      if (dbExcute(user)) {
+        completed(response, 1100);
+      } else {
+        completed(response, 1101);
+      }
+    } else {
+      completed(response, 1102);
+    }
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

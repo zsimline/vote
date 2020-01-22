@@ -11,7 +11,7 @@ import org.vote.common.Code;
 public class InitContextListener implements ServletContextListener {
   @Override
   public void contextInitialized(ServletContextEvent arg0) {
-    Code.initCodes();
+    Code.initialize();
     System.out.println("初始化投票系统上下文成功");
   }
 

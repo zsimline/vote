@@ -15,7 +15,7 @@ public class Code {
   // 返回码映射
   private static HashMap<Integer, String> codes;
 
-  public static void initCodes() {
+  public static void initialize() {
     codes = new HashMap<Integer, String>();
 
     // 发布功能返回码
@@ -26,6 +26,12 @@ public class Code {
     // 发布功能返回码
     codes.put(1900, "删除投票成功");
     codes.put(1901, "删除投票失败原因未知");
+
+    // 用户注册功能返回码
+    codes.put(1100, "注册账户成功");
+    codes.put(1101, "注册账户失败原因未知");
+    codes.put(1102, "提交数据为空");
+    codes.put(1103, "配置用户密码出错");
   }
 
   public Code(int code) {

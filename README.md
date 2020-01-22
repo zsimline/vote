@@ -42,7 +42,7 @@
 
 - 礼物设置 https://lumingvote.com/vote/giftconf?aid=activitieId
 
-- 活动链接 https://lumingvote.com/vote/qrcode?aid=activitieId
+- 活动链接 https://lumingvote.com/vote/qrcode.jsp?aid=activitieId
 
 - 结果分析 https://lumingvote.com/vote/analysis?aid=activitieId
 
