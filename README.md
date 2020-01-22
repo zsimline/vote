@@ -99,8 +99,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ## TODO
 
-1. 删除投票前的警告
-
 2. 创建投票时建立投票表
 
 3. 删除操作添加删除投票表

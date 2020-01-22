@@ -4,7 +4,7 @@
 
 <hibernate-mapping package="org.vote.beans">
   <class name="Activity" table="activity" dynamic-update="true">
-    <id name="id" column="id" type="java.lang.String">
+    <id name="id" column="id" type="java.lang.String" length="32">
       <generator class="uuid"/>
     </id>
     <property name="title" column="title" type="java.lang.String" length="32" not-null="true"/>

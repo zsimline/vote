@@ -10,7 +10,7 @@ public class HibernateUtil {
     try {  
       // 获取加载配置管理类
       Configuration configuration = new Configuration();
- 
+
       // 不给参数就默认加载hibernate.cfg.xml文件，
       configuration.configure();
 
@@ -20,7 +20,7 @@ public class HibernateUtil {
       return factory;
       
     } catch (Throwable ex) {
-      System.err.println("Initial SessionFactory creation failed." + ex);
+      ex.printStackTrace();
       throw new ExceptionInInitializerError(ex);
     }
   }

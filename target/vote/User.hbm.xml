@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping package="org.vote.beans">
-  <class name="User" table="user">
+  <class name="User" table="user" dynamic-update="true">
     <id name="id" column="id" type="java.lang.Long">
       <generator class="native"/>
     </id>
