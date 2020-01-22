@@ -1,10 +1,10 @@
 package org.vote.processor.ticket;
 
-import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,16 +16,16 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.vote.common.HibernateUtil;
-
-import org.vote.beans.Activity;
-import org.vote.common.UUIDTool;
-import org.vote.common.Code;
 
 import com.google.gson.Gson;
-import org.vote.common.TableNameMappingInterceptor;
+
+import org.vote.beans.Activity;
+import org.vote.common.Code;
+import org.vote.common.HibernateUtil;
+import org.vote.common.UUIDTool;
 
 /**
  * 处理创建活动
@@ -114,7 +114,10 @@ public class Create extends HttpServlet {
             item.write(file);
           }
         }
-     
+        
+        // 设置UUID主键
+        activity.setId(UUIDTool.getUUID());
+
         // 执行数据存储
         if (dbExcute(activity)) {
           completed(response, 1000);
@@ -158,7 +161,14 @@ public class Create extends HttpServlet {
 
     try {
       transaction.begin();
+
+      // 创建投票表
+      SQLQuery query = session.createSQLQuery("call create_ticket_table(:uuid)");
+      query.setParameter("uuid", activity.getId());
+      query.executeUpdate();
+      
       session.save(activity);
+      
       transaction.commit();
       session.close();
     } catch (Exception e) {
