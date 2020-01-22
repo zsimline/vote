@@ -99,10 +99,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ## TODO
 
-2. 创建投票时建立投票表
-
-3. 删除操作添加删除投票表
-
 4. 链接与二维码页面
 
 5. 报名页面

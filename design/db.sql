@@ -117,6 +117,17 @@ END
 $$
 DELIMITER ;
 
+-- 删除投票表
+DELIMITER $$
+CREATE PROCEDURE drop_ticket_table(IN table_name VARCHAR(32))
+BEGIN
+SET @sql_drop_table = concat("DROP TABLE ", table_name);
+PREPARE sql_drop_table FROM @sql_drop_table;
+EXECUTE sql_drop_table; 
+END
+$$
+DELIMITER ;
+
 -- 开启实时日志
 DELIMITER $$
 CREATE PROCEDURE open_realtime_log()

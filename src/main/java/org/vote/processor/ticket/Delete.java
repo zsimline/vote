@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.vote.common.HibernateUtil;
@@ -70,6 +71,11 @@ public class Delete extends HttpServlet {
       System.out.println(activity);
       activity.setDestroyed(true);
       session.update(activity);
+
+      // 删除投票表
+      SQLQuery query = session.createSQLQuery("call drop_ticket_table(:uuid)");
+      query.setParameter("uuid", activity.getId());
+      query.executeUpdate();
 
       transaction.commit();
       session.close();
