@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.vote.common.Code;
+import org.vote.common.Email;
 
 /**
  * 初始化投票系统上下文变量
@@ -12,6 +13,7 @@ public class InitContextListener implements ServletContextListener {
   @Override
   public void contextInitialized(ServletContextEvent arg0) {
     Code.initialize();
+    Email.initialize();
     System.out.println("初始化投票系统上下文成功");
   }
 

@@ -12,7 +12,7 @@
   <%@ include file="components/link.jsp" %>
   <link href="css/login.css" rel="stylesheet" type="text/css">
   <script src="js/login.js"></script>
-  <title>用户登录</title>
+  <title>用户注册</title>
 </head>
 
 <body class="lg-container">

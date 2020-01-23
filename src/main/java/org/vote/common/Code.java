@@ -32,6 +32,13 @@ public class Code {
     codes.put(1101, "注册账户失败原因未知");
     codes.put(1102, "提交数据为空");
     codes.put(1103, "配置用户密码出错");
+    codes.put(1104, "配置用户邮件出错");
+
+    // 用户验证功能返回码
+    codes.put(1300, "验证账户成功");
+    codes.put(1301, "验证账户失败原因未知");
+    codes.put(1302, "邮件地址不存在");
+    codes.put(1303, "邮件验证码错误");
   }
 
   public Code(int code) {
