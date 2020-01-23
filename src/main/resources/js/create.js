@@ -115,7 +115,7 @@ function handleSubmit() {
   post('v2/create', formData)
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.desc);
+        openModal('success', data.codeDesc);
       } else {
         openModal('error', `${data.code} ${data.codeDesc}`);
       }

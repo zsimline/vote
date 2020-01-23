@@ -19,6 +19,6 @@
   </filter>
   <filter-mapping>
     <filter-name>encodeFilter</filter-name>
-    <url-pattern>/vote/v2/*</url-pattern>
+    <url-pattern>/v2/*</url-pattern>
   </filter-mapping>
 </web-app>

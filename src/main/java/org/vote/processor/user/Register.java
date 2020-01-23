@@ -71,7 +71,7 @@ public class Register extends HttpServlet {
    */
   private void verifyEmail(HttpServletResponse response, User user) throws ServletException, IOException {
     String emailAddress = user.getEmail();
-    String mailContent = "<a href=\"https://127.0.0.1:8080/vote/activation.jsp?"
+    String mailContent = "<a href=\"http://127.0.0.1:8080/vote/activation.jsp?"
                          + "email=" + emailAddress + "&code=" + user.getPassword()
                          + "\">点击链接激活账户</a>";
 

@@ -10,14 +10,9 @@
 <head>
   <%@ include file="components/meta.jsp" %>
   <%@ include file="components/link.jsp" %>
-  <title>激活账户</title>
-</head>
-
-<body>
-  <%@ include file="components/header.jsp" %>
-
   <script>
-    const activationAddress = `127.0.0.1:8080/vote/v2/activation?${window.location.href.split('?')[1]}`;
+    window.onload = function() {
+    const activationAddress = `http://127.0.0.1:8080/vote/v2/activation?${window.location.href.split('?')[1]}`;
     get(activationAddress)
       .then(data => {
         if (!(data.code % 100)) {
@@ -27,9 +22,18 @@
         }
       })
       .catch(err => {
+        console.log(err);
         openModal('error', '验证账户失败')
       });
-  </script>
+    }
+    </script>
+  <title>激活账户</title>
+</head>
+
+<body>
+  <%@ include file="components/header.jsp" %>
+
+  <div class="container"></div>
 
   <%@ include file="components/modal.jsp" %>
   <%@ include file="components/footer.jsp" %>
