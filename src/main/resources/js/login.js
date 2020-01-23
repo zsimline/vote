@@ -70,7 +70,10 @@ function handleLogin() {
   postJSON('v2/login', JSON.stringify(postData))
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.codeDesc)
+        openModal('success', data.codeDesc);
+        setTimeout(() => {
+          window.location.href = "index.jsp";
+        }, 1800);
       } else {
         openModal('error', `${data.code} ${data.codeDesc}`);
       }
