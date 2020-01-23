@@ -37,12 +37,45 @@ function handleRegister() {
   postJSON('v2/register', JSON.stringify(postData))
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', '注册账户成功')
+        openModal('success', data.codeDesc)
       } else {
         openModal('error', `${data.code} ${data.codeDesc}`);
       }
     })
     .catch(err => {
       openModal('error', '注册账户失败')
+    });
+}
+
+
+function handleLogin() {
+  const email = $('#email').val();
+  const password = $('#password').val();
+  
+  if (email === '') {
+    openModal('error', '电子邮件不能为空');
+    return;
+  }
+  if (password === '') {
+    openModal('error', '密码不能为空');
+    return;
+  }
+
+  const postData = {    
+    'email': email,
+    'password': password
+  };
+
+  // 向服务器提交数据
+  postJSON('v2/login', JSON.stringify(postData))
+    .then(data => {
+      if (!(data.code % 100)) {
+        openModal('success', data.codeDesc)
+      } else {
+        openModal('error', `${data.code} ${data.codeDesc}`);
+      }
+    })
+    .catch(err => {
+      openModal('error', '登录账户失败')
     });
 }
