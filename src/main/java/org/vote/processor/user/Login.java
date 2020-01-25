@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,6 +21,7 @@ import org.vote.common.HibernateUtil;
 import org.vote.common.MD5;
 import org.vote.common.UUIDTool;
 import org.vote.common.CookieFactory;
+import org.vote.common.Utils;
 
 /**
  * 处理登录账户
@@ -33,24 +33,24 @@ public class Login extends HttpServlet {
   public Login() {
   }
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // 将输入流转换为JSON字符串
-    String postData = IOUtils.toString(request.getInputStream(), "UTF-8");
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String jsonStr = Utils.inputToJsonStr(request);
 
-    if (postData != null) {
+    if (jsonStr != null) {
       Gson gson = new Gson();
-      User userVerify = gson.fromJson(postData, User.class);
+      User userVerify = gson.fromJson(jsonStr, User.class);
       User user = getUserByEmail(userVerify.getEmail());
-      
+
+      // 验证账户是够存在
       if (user == null) {
         completed(response, 1202);
-        return ;
+        return;
       }
 
       // 验证账户是否是已激活的
       if (user.getIsActive() == false) {
         completed(response, 1204);
-        return ;
+        return;
       }
 
       try {
@@ -77,11 +77,7 @@ public class Login extends HttpServlet {
     }
   }
 
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request, response);
-  }
-
-/**
+  /**
    * 根据邮件地址获取用户
    * 
    * @param emailAddress 邮件地址
@@ -94,28 +90,27 @@ public class Login extends HttpServlet {
 
     try {
       transaction.begin();
-      
+
       String hql = "FROM User WHERE email = :emailAddress";
       Query query = session.createQuery(hql);
       query.setParameter("emailAddress", emailAddress);
       List<User> results = (List<User>) query.list();
-      
+
       transaction.commit();
       session.close();
-      
-      return results.isEmpty() ? null :results.get(0);
+
+      return results.isEmpty() ? null : results.get(0);
     } catch (Exception e) {
       e.printStackTrace();
       return null;
     }
   }
 
-
   /**
    * 向用户返回操作执行的结果
    * 
    * @param response Servlet响应对象
-   * @param status 自定义的返回码
+   * @param status   自定义的返回码
    * @throws ServletException
    * @throws IOException
    */
@@ -128,10 +123,10 @@ public class Login extends HttpServlet {
   }
 
   /**
-   * 执行新建活动的数据库操作
+   * 执行更新登录令牌的数据库操作
    * 
    * @param activity 活动实例
-   * @return true/false 新建活动成功/失败
+   * @return true/false 更新登录令牌成功/失败
    */
   private boolean dbExcute(User user) {
     Session session = HibernateUtil.getSessionFactory().openSession();

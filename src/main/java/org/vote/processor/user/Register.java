@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -18,6 +17,7 @@ import org.vote.beans.User;
 import org.vote.common.Code;
 import org.vote.common.HibernateUtil;
 import org.vote.common.MD5;
+import org.vote.common.Utils;
 import org.vote.common.Email;
 
 /**
@@ -30,13 +30,12 @@ public class Register extends HttpServlet {
   public Register() {
   }
 
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // 将输入流转换为JSON字符串
-    String postData = IOUtils.toString(request.getInputStream(), "UTF-8");
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String jsonStr = Utils.inputToJsonStr(request);
 
-    if (postData != null) {
+    if (jsonStr != null) {
       Gson gson = new Gson();
-      User user = gson.fromJson(postData, User.class);
+      User user = gson.fromJson(jsonStr, User.class);
 
       // 取用户密码的哈希摘要
       try {
@@ -55,10 +54,6 @@ public class Register extends HttpServlet {
     } else {
       completed(response, 1102);
     }
-  }
-
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request, response);
   }
 
   /**
