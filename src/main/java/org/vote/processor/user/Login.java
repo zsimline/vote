@@ -42,6 +42,7 @@ public class Login extends HttpServlet {
       
       if (user == null) {
         completed(response, 1202);
+        return ;
       }
 
       try {

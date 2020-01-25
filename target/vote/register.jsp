@@ -45,6 +45,11 @@
     </div>
   </div>
   <%@ include file="components/modal.jsp" %>
+  <script>
+    function handleModalClose() {
+      window.location.href = "login.jsp";
+    }
+  </script>
 </body>
 
 </html>

@@ -37,9 +37,9 @@ function handleRegister() {
   postJSON('v2/register', JSON.stringify(postData))
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.codeDesc)
+        openModal('success', data.codeDesc);
       } else {
-        openModal('error', `${data.code} ${data.codeDesc}`);
+        openModal('error', data.codeDesc);
       }
     })
     .catch(err => {
@@ -72,10 +72,10 @@ function handleLogin() {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);
         setTimeout(() => {
-          window.location.href = "index.jsp";
-        }, 1800);
+          window.location.href = "index.jsp"
+        }, 1800)
       } else {
-        openModal('error', `${data.code} ${data.codeDesc}`);
+        openModal('error', data.codeDesc);
       }
     })
     .catch(err => {
