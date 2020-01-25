@@ -5,7 +5,7 @@
 function handleSubmit() {
   // 获取表单数据
   const title = $('#title').val();
-  const imgAddr = $('#img-addr').val();
+  const imgAddr = $('#img-name').val();
   const suffix = $('#suffix').val();
   const quantifier = $('#quantifier').val();
   const maxium = $('#maxium').val();
@@ -100,7 +100,7 @@ function handleSubmit() {
   
   const formData = new FormData()
   formData.append('title', title);
-  formData.append('imgAddr', $('#img-addr').prop('files')[0]);
+  formData.append('imgAddr', $('#img-name').prop('files')[0]);
   formData.append('suffix', suffix);
   formData.append('quantifier', quantifier);
   formData.append('maxium', maxium);

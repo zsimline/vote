@@ -88,11 +88,11 @@ input[type="file"] {
   margin-top: 40px;
 }
 
-#otheropts label {
+#options label {
   vertical-align: bottom;
 }
 
-#otheropts .switch {
+#options .switch {
   margin-left: 6px;
 }
 

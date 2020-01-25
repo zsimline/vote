@@ -32,8 +32,8 @@
       <span class="extra-tip">投票的标题，最多40个字符</span>
     </div>
     <div class="inputcon">
-      <label for="img-addr">宣传图片</label>
-      <input type="file" id="img-addr" class="form-control input-sm">
+      <label for="img-name">宣传图片</label>
+      <input type="file" id="img-name" class="form-control input-sm">
       <span class="extra-tip">投票页顶部图片，文件小于1M</span>
     </div>
     <div class="inputcon">
@@ -77,7 +77,7 @@
 
     <h5>其它选项</h5>
     <hr>
-    <div id="otheropts">
+    <div id="options">
       <label for="name">人物姓名</label>
       <div class="switch switch-square">
         <input id="name" type="checkbox" data-index="0" data-toggle="switch" />

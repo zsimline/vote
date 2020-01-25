@@ -40,15 +40,9 @@ public class Apply implements Serializable {
   
   // 电子邮件
   private String email;
-  
-  // 微信号
-  private String wechat;
-  
+
   // 学校名
   private String school;
-  
-  // 院系[,专业[,班级]描述
-  private String classdesc;
   
   // 公司名
   private String company;
@@ -216,20 +210,6 @@ public class Apply implements Serializable {
   }
 
   /**
-   * @return wechat
-   */
-  public String getWechat() {
-    return wechat;
-  }
-
-  /**
-   * @param wechat 要设置的 wechat
-   */
-  public void setWechat(String wechat) {
-    this.wechat = wechat;
-  }
-
-  /**
    * @return school
    */
   public String getSchool() {
@@ -241,20 +221,6 @@ public class Apply implements Serializable {
    */
   public void setSchool(String school) {
     this.school = school;
-  }
-
-  /**
-   * @return classdesc
-   */
-  public String getClassdesc() {
-    return classdesc;
-  }
-
-  /**
-   * @param classdesc 要设置的 classdesc
-   */
-  public void setClassdesc(String classdesc) {
-    this.classdesc = classdesc;
   }
 
   /**

@@ -94,8 +94,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ## TODO
 
-5. 用户模块
-
 6. 报名页面
 
 7. 投票页面及前端后端处理

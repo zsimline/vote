@@ -40,6 +40,161 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Flat-UI-Icons';
+  src: url('../fonts/Flat-UI-Icons.eot');
+  src: url('../fonts/Flat-UI-Icons.eot?#iefix') format('embedded-opentype'), url('../fonts/Flat-UI-Icons.woff') format('woff'), url('../fonts/Flat-UI-Icons.ttf') format('truetype'), url('../fonts/Flat-UI-Icons.svg#Flat-UI-Icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+  font-family: 'Flat-UI-Icons';
+  content: attr(data-icon);
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+}
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="fui-"] {
+*/
+.fui-arrow-right,
+.fui-arrow-left,
+.fui-cmd,
+.fui-check-inverted,
+.fui-heart,
+.fui-location,
+.fui-plus,
+.fui-check,
+.fui-cross,
+.fui-list,
+.fui-new,
+.fui-video,
+.fui-photo,
+.fui-volume,
+.fui-time,
+.fui-eye,
+.fui-chat,
+.fui-search,
+.fui-user,
+.fui-mail,
+.fui-lock,
+.fui-gear,
+.fui-radio-unchecked,
+.fui-radio-checked,
+.fui-checkbox-unchecked,
+.fui-checkbox-checked,
+.fui-calendar-solid,
+.fui-pause,
+.fui-play,
+.fui-check-inverted-2 {
+  display: inline-block;
+  font-family: 'Flat-UI-Icons';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+}
+.fui-arrow-right:before {
+  content: "\e02c";
+}
+.fui-arrow-left:before {
+  content: "\e02d";
+}
+.fui-cmd:before {
+  content: "\e02f";
+}
+.fui-check-inverted:before {
+  content: "\e006";
+}
+.fui-heart:before {
+  content: "\e007";
+}
+.fui-location:before {
+  content: "\e008";
+}
+.fui-plus:before {
+  content: "\e009";
+}
+.fui-check:before {
+  content: "\e00a";
+}
+.fui-cross:before {
+  content: "\e00b";
+}
+.fui-list:before {
+  content: "\e00c";
+}
+.fui-new:before {
+  content: "\e00d";
+}
+.fui-video:before {
+  content: "\e00e";
+}
+.fui-photo:before {
+  content: "\e00f";
+}
+.fui-volume:before {
+  content: "\e010";
+}
+.fui-time:before {
+  content: "\e011";
+}
+.fui-eye:before {
+  content: "\e012";
+}
+.fui-chat:before {
+  content: "\e013";
+}
+.fui-search:before {
+  content: "\e01c";
+}
+.fui-user:before {
+  content: "\e01d";
+}
+.fui-mail:before {
+  content: "\e01e";
+}
+.fui-lock:before {
+  content: "\e01f";
+}
+.fui-gear:before {
+  content: "\e024";
+}
+.fui-radio-unchecked:before {
+  content: "\e02b";
+}
+.fui-radio-checked:before {
+  content: "\e032";
+}
+.fui-checkbox-unchecked:before {
+  content: "\e033";
+}
+.fui-checkbox-checked:before {
+  content: "\e034";
+}
+.fui-calendar-solid:before {
+  content: "\e022";
+}
+.fui-pause:before {
+  content: "\e03b";
+}
+.fui-play:before {
+  content: "\e03c";
+}
+.fui-check-inverted-2:before {
+  content: "\e000";
+}
+.dropdown-arrow-inverse {
+  border-bottom-color: #34495e !important;
+  border-top-color: #34495e !important;
+}
 
 body {
   font-family: "Lato", Helvetica, Arial, sans-serif;
@@ -728,7 +883,7 @@ fieldset[disabled] .btn-link:focus {
   border-bottom-style: none;
   -webkit-transition: 0.25s;
   transition: 0.25s;
-  -webkit-transform: scale(1.001);
+  transform: scale(1.001);
   -ms-transform: scale(1.001);
   transform: scale(1.001);
 }
@@ -769,7 +924,6 @@ fieldset[disabled] .btn-link:focus {
 }
 .navbar .nav {
   margin-right: 0;
-  display: inline-block;
   float: left;
 }
 .navbar .nav > li {
@@ -781,7 +935,7 @@ fieldset[disabled] .btn-link:focus {
   top: 100%;
   visibility: visible;
   z-index: 100;
-  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
   display: block\9;
 }
 .navbar .nav > li.active > a,
@@ -813,11 +967,11 @@ fieldset[disabled] .btn-link:focus {
   left: 15px;
   top: 5px;
   width: 0;
-  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 .navbar .nav > li > ul li:hover ul {
   opacity: 1;
-  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
   visibility: visible;
   display: block\9;
 }
@@ -862,8 +1016,8 @@ fieldset[disabled] .btn-link:focus {
   position: absolute;
   top: 0;
   width: 234px;
-  -webkit-transform: scale(1, 0.99);
-  -webkit-transform-origin: 0 0;
+  transform: scale(1, 0.99);
+  transform-origin: 0 0;
   visibility: hidden;
   -webkit-transition: 0.25s ease-out;
   transition: 0.25s ease-out;
@@ -1056,7 +1210,7 @@ fieldset[disabled] .btn-link:focus {
   top: 100%;
   visibility: visible;
   z-index: 1000;
-  -webkit-transform: none;
+  transform: none;
 }
 .navbar .nav li.dropdown > .dropdown-toggle {
   outline: none;
@@ -2270,7 +2424,7 @@ fieldset[disabled] .form-control + .input-icon,
   top: 100%;
   width: 0;
   z-index: 10;
-  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
   -webkit-transition: 0.25s;
   transition: 0.25s;
 }
@@ -2474,7 +2628,7 @@ fieldset[disabled] .form-control + .input-icon,
   left: 23px;
   top: -9px;
   width: 0;
-  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 .share ul {
   list-style-type: none;
@@ -3119,21 +3273,21 @@ body.vjs-full-window {
   0% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   50% {
     background: #ebedee;
     border-radius: 0;
-    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
   }
@@ -3142,21 +3296,21 @@ body.vjs-full-window {
   0% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   50% {
     background: #ebedee;
     border-radius: 0;
-    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
   }
@@ -3165,21 +3319,21 @@ body.vjs-full-window {
   0% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   50% {
     background: #ebedee;
     border-radius: 0;
-    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
   }
@@ -3188,21 +3342,21 @@ body.vjs-full-window {
   0% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   50% {
     background: #ebedee;
     border-radius: 0;
-    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
   }
   100% {
     background: #e74c3c;
     border-radius: 10px;
-    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
   }
@@ -3275,7 +3429,7 @@ body.vjs-full-window {
   left: -12px;
   top: 35px;
   width: 0;
-  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 .login-form .control-group {
   margin-bottom: 6px;

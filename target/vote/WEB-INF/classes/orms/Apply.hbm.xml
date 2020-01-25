@@ -17,9 +17,7 @@
     <property name="name" column="name" type="java.lang.String" length="15"/>
     <property name="telephone" column="telephone" type="java.lang.String" length="11"/>
     <property name="email" column="email" type="java.lang.String" length="255"/>
-    <property name="wechat" column="wechat" type="java.lang.String" length="44"/>
     <property name="school" column="school" type="java.lang.String" length="16"/>
-    <property name="classdesc" column="classdesc" type="java.lang.String" length="30"/>
     <property name="company" column="company" type="java.lang.String" length="26"/>
     <property name="address" column="address" type="java.lang.String" length="40"/>
   </class>
