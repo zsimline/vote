@@ -29,6 +29,9 @@ public class User implements Serializable {
   // 该账号是否可用
   private boolean isActive;
 
+  // 登录令牌
+  private String token;
+
   public User() {
     this.isStaff = false;
     this.isActive = false;
@@ -130,5 +133,19 @@ public class User implements Serializable {
    */
   public void setIsActive(boolean isActive) {
     this.isActive = isActive;
+  }
+
+  /**
+   * @return token
+   */
+  public String getToken() {
+    return token;
+  }
+
+  /**
+   * @param token 要设置的 token
+   */
+  public void setToken(String token) {
+    this.token = token;
   }
 }

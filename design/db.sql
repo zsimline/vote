@@ -13,6 +13,7 @@ CREATE TABLE `user`
   `organization` varchar(45) NOT NULL,  -- 所属组织
   `is_staff` TINYINT(1)  DEFAULT 0,     -- 是否为管理人员
   `is_active` TINYINT(1) DEFAULT 1,     -- 账号是否可用
+  `token` CHAR(32) DEFAULT NULL,        -- 登录令牌
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8mb4;
 

@@ -39,6 +39,8 @@ public class Code {
     codes.put(1201, "登录账户失败原因未知");
     codes.put(1202, "账户不存在");
     codes.put(1203, "密码错误");
+    codes.put(1204, "您的账户还未验证或已被冻结");
+    codes.put(1205, "生成登录令牌失效");
 
     // 用户验证功能返回码
     codes.put(1300, "验证账户成功");

@@ -34,6 +34,9 @@ function post(url, data) {
       processData: false,
       dataType: 'json',
       cache: false,
+      xhrFields: {
+        withCredentials: true
+      },
       success: data => {
         resolve(data);
       },

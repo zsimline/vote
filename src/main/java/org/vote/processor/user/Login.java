@@ -20,6 +20,8 @@ import org.vote.beans.User;
 import org.vote.common.Code;
 import org.vote.common.HibernateUtil;
 import org.vote.common.MD5;
+import org.vote.common.UUIDTool;
+import org.vote.common.CookieFactory;
 
 /**
  * 处理登录账户
@@ -45,9 +47,26 @@ public class Login extends HttpServlet {
         return ;
       }
 
+      // 验证账户是否是已激活的
+      if (user.getIsActive() == false) {
+        completed(response, 1204);
+        return ;
+      }
+
       try {
         if (MD5.verify(userVerify.getPassword(), user.getPassword())) {
-          completed(response, 1200);
+          // 生成登录令牌
+          String token = UUIDTool.getUUID();
+          user.setToken(token);
+
+          if (dbExcute(user)) {
+            CookieFactory cookieFactory = new CookieFactory(response);
+            cookieFactory.setCookie("uid", String.valueOf(user.getId()));
+            cookieFactory.setCookie("token", token);
+            completed(response, 1200);
+          } else {
+            completed(response, 1205);
+          }
         } else {
           completed(response, 1203);
         }
@@ -120,7 +139,7 @@ public class Login extends HttpServlet {
 
     try {
       transaction.begin();
-      session.save(user);
+      session.update(user);
       transaction.commit();
       session.close();
     } catch (Exception e) {
