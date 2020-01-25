@@ -94,8 +94,10 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ## TODO
 
-6. 报名页面
+7. 审核功能
 
-7. 投票页面及前端后端处理
+8. 编辑功能
 
-8. ...
+9. 投票页面及前端后端处理
+
+10. ...

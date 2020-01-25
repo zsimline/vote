@@ -4,6 +4,7 @@
  */
 function handleSubmit() {
   // 获取表单数据
+  const aid = $('#aid').text();
   const title = $('#title').val();
   const imgName = $('#img-name').val();
   const description = tinyMCE.activeEditor.getContent();
@@ -69,6 +70,7 @@ function handleSubmit() {
   }
 
   const formData = new FormData();
+  formData.append('aid', aid);
   formData.append('title', title);
   formData.append('imgName', $('#img-name').prop('files')[0]);
   formData.append('description', description);
@@ -104,7 +106,7 @@ function handleSubmit() {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);
       } else {
-        openModal('error', `${data.code} ${data.codeDesc}`);
+        openModal('error', data.codeDesc);
       }
     })
     .catch(err => {

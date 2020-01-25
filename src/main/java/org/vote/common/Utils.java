@@ -2,7 +2,11 @@ package org.vote.common;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.File;
 import java.io.IOException;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,5 +28,21 @@ public class Utils {
       e.printStackTrace();
       return null;
     }
+  }
+
+  /**
+   * 按时间创建多级目录
+   * 
+   * @param basePath 文件夹基目录
+   * @return true/false 创建目录成功/失败
+   */
+  public static String mkdirByDate(String basePath) {
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/DD");
+    String fullPath = basePath + simpleDateFormat.format(new Date());
+    File directory = new File(fullPath);
+    if (!directory.exists()) {
+      return directory.mkdirs() ? fullPath : null;
+    }
+    return fullPath;
   }
 }

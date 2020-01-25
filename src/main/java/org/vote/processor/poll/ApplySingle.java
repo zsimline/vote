@@ -2,7 +2,6 @@ package org.vote.processor.poll;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,13 +15,12 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.google.gson.Gson;
 
-import org.vote.beans.Activity;
+import org.vote.beans.Apply;
 import org.vote.common.Code;
 import org.vote.common.HibernateUtil;
 import org.vote.common.UUIDTool;
@@ -31,18 +29,18 @@ import org.vote.common.Utils;
 /**
  * 处理创建活动
  */
-@WebServlet("/v2/create")
-public class Create extends HttpServlet {
+@WebServlet("/v2/apply")
+public class ApplySingle extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  public Create() {
+  public ApplySingle() {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // 只处理 multipart 类型的表单数据
     boolean multipart = ServletFileUpload.isMultipartContent(request);
     if (multipart) {
-      Activity activity = new Activity();
+      Apply apply = new Apply();
 
       // 创建磁盘文件工厂
       DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -60,9 +58,6 @@ public class Create extends HttpServlet {
         List<FileItem> items = upload.parseRequest(request);
         Iterator<FileItem> iter = items.iterator();
 
-        // TODO 设置发布者
-        activity.setPublisher(1000001);
-
         while (iter.hasNext()) {
           FileItem item = iter.next();
 
@@ -73,26 +68,28 @@ public class Create extends HttpServlet {
             // 表单值
             String fieldContent = item.getString("UTF-8");
 
-            if (fieldName.equals("title")) {
-              activity.setTitle(fieldContent);
-            } else if (fieldName.equals("suffix")) {
-              activity.setSuffix(fieldContent);
-            } else if (fieldName.equals("quantifier")) {
-              activity.setQuantifier(fieldContent);
+            if (fieldName.equals("aid")) {
+              apply.setAid(fieldContent);
+            } else if (fieldName.equals("title")) {
+              apply.setTitle(fieldContent);
             } else if (fieldName.equals("description")) {
-              activity.setDescription(fieldContent);
-            } else if (fieldName.equals("voteTimeStart")) {
-              activity.setVoteTimeStart(new Date(Long.parseLong(fieldContent)));
-            } else if (fieldName.equals("voteTimeEnd")) {
-              activity.setVoteTimeEnd(new Date(Long.parseLong(fieldContent)));
-            } else if (fieldName.equals("signUpTimeStart")) {
-              activity.setApplyTimeStart(new Date(Long.parseLong(fieldContent)));
-            } else if (fieldName.equals("signUpTimeEnd")) {
-              activity.setApplyTimeEnd(new Date(Long.parseLong(fieldContent)));
-            } else if (fieldName.equals("maxium")) {
-              activity.setMaxium(Integer.parseInt(fieldContent));
-            } else if (fieldName.equals("options")) {
-              activity.setOptions(fieldContent);
+              apply.setDescription(fieldContent);
+            } else if (fieldName.equals("name")) {
+              apply.setName(fieldContent);
+            } else if (fieldName.equals("sex")) {
+              apply.setSex(Byte.valueOf(fieldContent));
+            } else if (fieldName.equals("age")) {
+              apply.setAge(Integer.valueOf(fieldContent));
+            } else if (fieldName.equals("telephone")) {
+              apply.setTelephone(fieldContent);
+            } else if (fieldName.equals("email")) {
+              apply.setEmail(fieldContent);
+            } else if (fieldName.equals("school")) {
+              apply.setSchool(fieldContent);
+            } else if (fieldName.equals("company")) {
+              apply.setCompany(fieldContent);
+            } else if (fieldName.equals("address")) {
+              apply.setAddress(fieldContent);
             }
           } else { // 文件数据
             String filename = item.getName();
@@ -100,8 +97,8 @@ public class Create extends HttpServlet {
 
             // 文件后缀名不为 jpg/png
             if (!ext.equals("jpg") && !ext.equals("png")) {
-              completed(response, 1002);
-              return ;
+              completed(response, 1402);
+              return;
             }
 
             // 定义上传文件路径
@@ -110,7 +107,7 @@ public class Create extends HttpServlet {
 
             // 定义本机存储的文件名
             String localFileName = UUIDTool.getUUID() + "." + ext;
-            activity.setImgName(localFileName);
+            apply.setImgName(localFileName);
 
             // 存储文件
             File file = new File(fullPath, localFileName);
@@ -118,18 +115,15 @@ public class Create extends HttpServlet {
           }
         }
 
-        // 设置UUID主键
-        activity.setId(UUIDTool.getUUID());
-
         // 执行数据存储
-        if (dbExcute(activity)) {
-          completed(response, 1000);
+        if (dbExcute(apply)) {
+          completed(response, 1400);
         } else {
-          completed(response, 1001);
+          completed(response, 1401);
         }
       } catch (Exception e) {
         e.printStackTrace();
-        completed(response, 1001);
+        completed(response, 1401);
       }
     }
   }
@@ -151,25 +145,18 @@ public class Create extends HttpServlet {
   }
 
   /**
-   * 执行新建活动的数据库操作
+   * 执行新建报名的数据库操作
    * 
-   * @param activity 活动实例
-   * @return true/false 新建活动成功/失败
+   * @param apply 报名实例
+   * @return true/false 新建报名成功/失败
    */
-  private boolean dbExcute(Activity activity) {
+  private boolean dbExcute(Apply apply) {
     Session session = HibernateUtil.getSessionFactory().openSession();
     Transaction transaction = session.beginTransaction();
 
     try {
       transaction.begin();
-
-      // 创建投票表
-      SQLQuery query = session.createSQLQuery("call create_ticket_table(:uuid)");
-      query.setParameter("uuid", activity.getId());
-      query.executeUpdate();
-
-      session.save(activity);
-
+      session.save(apply);
       transaction.commit();
       session.close();
     } catch (Exception e) {

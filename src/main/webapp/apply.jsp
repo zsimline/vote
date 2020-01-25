@@ -48,13 +48,10 @@
       });
     </script>
 
-    <%@ include file="components/options/name.jsp" %>
     <%@ include file="components/options/sex.jsp" %>
     <%@ include file="components/options/age.jsp" %>
     <%@ include file="components/options/telephone.jsp" %>
-    <%@ include file="components/options/email.jsp" %>
     <%@ include file="components/options/school.jsp" %>
-    <%@ include file="components/options/company.jsp" %>
     <%@ include file="components/options/address.jsp" %>
 
     <label class="checkbox" for="lisence">
@@ -65,6 +62,8 @@
     <button class="btn btn-primary" onclick="handleSubmit()">　　报名　　</button>
 
   </div>
+
+  <span id="aid" class="hidden">24ed2c04b58c41e0a51e38f51e715ccb</span>
 
   <%@ include file="components/modal.jsp" %>
   <%@ include file="components/footer.jsp" %>

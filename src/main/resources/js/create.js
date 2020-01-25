@@ -117,7 +117,7 @@ function handleSubmit() {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);
       } else {
-        openModal('error', `${data.code} ${data.codeDesc}`);
+        openModal('error', data.codeDesc);
       }
     })
     .catch(err => {

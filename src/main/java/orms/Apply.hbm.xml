@@ -12,7 +12,7 @@
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
     <property name="description" column="description" type="java.lang.String" length="3000" not-null="true"/>
     <property name="imgName" column="img_name" type="java.lang.String" length="36"/>
-    <property name="sex" column="sex" type="java.lang.Boolean"/>
+    <property name="sex" column="sex" type="java.lang.Byte"/>
     <property name="age" column="age" type="java.lang.Integer"/>
     <property name="name" column="name" type="java.lang.String" length="15"/>
     <property name="telephone" column="telephone" type="java.lang.String" length="11"/>

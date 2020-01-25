@@ -1,4 +1,4 @@
-package org.vote.processor.ticket;
+package org.vote.processor.poll;
 
 import java.io.IOException;
 
