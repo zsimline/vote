@@ -92,10 +92,10 @@ public class Register extends HttpServlet {
   }
 
   /**
-   * 执行新建活动的数据库操作
+   * 执行新建用户的数据库操作
    * 
-   * @param activity 活动实例
-   * @return true/false 新建活动成功/失败
+   * @param user 用户实例
+   * @return true/false 新建用户成功/失败
    */
   private boolean dbExcute(User user) {
     Session session = HibernateUtil.getSessionFactory().openSession();

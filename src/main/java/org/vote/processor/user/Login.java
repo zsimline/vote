@@ -125,7 +125,7 @@ public class Login extends HttpServlet {
   /**
    * 执行更新登录令牌的数据库操作
    * 
-   * @param activity 活动实例
+   * @param user 活动实例
    * @return true/false 更新登录令牌成功/失败
    */
   private boolean dbExcute(User user) {

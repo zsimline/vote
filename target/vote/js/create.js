@@ -5,7 +5,7 @@
 function handleSubmit() {
   // 获取表单数据
   const title = $('#title').val();
-  const imgAddr = $('#img-name').val();
+  const imgName = $('#img-name').val();
   const suffix = $('#suffix').val();
   const quantifier = $('#quantifier').val();
   const maxium = $('#maxium').val();
@@ -30,7 +30,7 @@ function handleSubmit() {
     openModal('error', '投票标题不能为空');
     return ;
   }
-  if (imgAddr === '') {
+  if (imgName === '') {
     openModal('error', '请上传宣传图片');
     return ;
   }
@@ -100,7 +100,7 @@ function handleSubmit() {
   
   const formData = new FormData()
   formData.append('title', title);
-  formData.append('imgAddr', $('#img-name').prop('files')[0]);
+  formData.append('imgName', $('#img-name').prop('files')[0]);
   formData.append('suffix', suffix);
   formData.append('quantifier', quantifier);
   formData.append('maxium', maxium);

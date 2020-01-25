@@ -12,6 +12,8 @@
   <%@ include file="components/link.jsp" %>
   <script src="tinymce/tinymce-5.1.5.min.js"></script>
   <script src="js/flatui-radio-0.0.3.js"></script>
+  <script src="js/flatui-checkbox-0.0.3.js"></script>
+  <script src="js/apply.js"></script>
   <title>活动报名</title>
 </head>
 
@@ -25,10 +27,12 @@
       <span class="extra-tip">如姓名、作品名等，最多15个字符</span>
     </div>
     <div class="inputcon">
-      <label for="img-name">宣传图片</label>
+      <label for="img-name">介绍图片</label>
       <input type="file" id="img-name" class="form-control input-sm">
-      <span class="extra-tip">您个人的宣传图片，文件小于1M</span>
+      <span class="extra-tip">您个人的介绍图片，文件小于1M</span>
     </div>
+
+    <label>详细描述</label>
     <div id="tinymce"></div>
     <!-- 富文本编辑器配置 -->
     <script>
@@ -44,15 +48,21 @@
       });
     </script>
 
-  <%@ include file="components/options/name.jsp" %>
-  <%@ include file="components/options/sex.jsp" %>
-  <%@ include file="components/options/age.jsp" %>
-  <%@ include file="components/options/telephone.jsp" %>
-  <%@ include file="components/options/email.jsp" %>
-  <%@ include file="components/options/school.jsp" %>
-  <%@ include file="components/options/company.jsp" %>
-  <%@ include file="components/options/address.jsp" %>
+    <%@ include file="components/options/name.jsp" %>
+    <%@ include file="components/options/sex.jsp" %>
+    <%@ include file="components/options/age.jsp" %>
+    <%@ include file="components/options/telephone.jsp" %>
+    <%@ include file="components/options/email.jsp" %>
+    <%@ include file="components/options/school.jsp" %>
+    <%@ include file="components/options/company.jsp" %>
+    <%@ include file="components/options/address.jsp" %>
 
+    <label class="checkbox" for="lisence">
+      <input type="checkbox" id="lisence" data-toggle="checkbox">
+      我同意投票<a href="./license.jsp">服务条款</a>
+    </label>
+
+    <button class="btn btn-primary" onclick="handleSubmit()">　　报名　　</button>
 
   </div>
 

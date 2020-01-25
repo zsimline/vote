@@ -98,7 +98,7 @@ public class Activation extends HttpServlet {
   }
 
   /**
-   * 执行新建活动的数据库操作
+   * 执行用户激活的数据库操作
    * 
    * @param activity 活动实例
    * @return true/false 新建活动成功/失败
