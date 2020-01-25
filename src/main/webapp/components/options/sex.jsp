@@ -5,13 +5,12 @@
 %>
 
 <div class="inputcon">
+  <label for="name">真实性别</label>
   <label class="radio">
-    <input type="radio" name="group1" value="1" data-toggle="radio">
-    Radio is off
+    <input type="radio" name="group1" value="1" data-toggle="radio" checked>男
   </label>
-  
   <label class="radio">
-    <input type="radio" name="group1" value="2" data-toggle="radio" checked>
-    Radio is on
+    <input type="radio" name="group1" value="2" data-toggle="radio">女
   </label>
+  <span class="extra-tip">选择您的性别</span>
 </div>

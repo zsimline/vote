@@ -63,8 +63,8 @@ CREATE TABLE `apply`
   `description` VARCHAR(3000) NOT NULL,  -- 报名描述（富文本）
   `img_name` CHAR(36) DEFAULT NULL,      -- 宣传图片名
   `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
-  `sex` TINYINT(1) DEFAULT NULL,         -- 人物性别
-  `age` TINYINT(3) DEFAULT NULL,         -- 人物年龄
+  `sex` TINYINT(1) DEFAULT NULL,         -- 真实性别
+  `age` TINYINT(3) DEFAULT NULL,         -- 真实年龄
   `telephone` CHAR(11) DEFAULT NULL,     -- 手机号码
   `email` VARCHAR(255) DEFAULT NULL,     -- 电子邮件
   `school` VARCHAR(16) DEFAULT NULL,     -- 学校名称

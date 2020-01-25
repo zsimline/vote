@@ -78,15 +78,15 @@
     <h5>其它选项</h5>
     <hr>
     <div id="options">
-      <label for="name">人物姓名</label>
+      <label for="name">真实姓名</label>
       <div class="switch switch-square">
         <input id="name" type="checkbox" data-index="0" data-toggle="switch" />
       </div><br>
-      <label for="sex">人物性别</label>
+      <label for="sex">真实性别</label>
       <div class="switch switch-square">
         <input id="sex" type="checkbox" data-index="1" data-toggle="switch" />
       </div><br>
-      <label for="age">人物年龄</label>
+      <label for="age">真实年龄</label>
       <div class="switch switch-square">
         <input id="age" type="checkbox" data-index="2" data-toggle="switch" />
       </div><br>
@@ -98,17 +98,9 @@
       <div class="switch switch-square">
         <input id="email" type="checkbox" data-index="4" data-toggle="switch" />
       </div><br>
-      <label for="wechat">微信号码</label>
-      <div class="switch switch-square">
-        <input id="wechat" type="checkbox" data-index="5" data-toggle="switch" />
-      </div><br>
       <label for="school">学校名称</label>
       <div class="switch switch-square">
         <input id="school" type="checkbox" data-index="6" data-toggle="switch" />
-      </div><br>
-      <label for="classdesc">班级描述</label>
-      <div class="switch switch-square">
-        <input id="classdesc" type="checkbox" data-index="7" data-toggle="switch" />
       </div><br>
       <label for="company">公司名称</label>
       <div class="switch switch-square">

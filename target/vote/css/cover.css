@@ -120,3 +120,8 @@ input[type="file"] {
 .page-qrcode .nav-tabs {
   font-size: 16px;
 }
+
+/*! 报名页样式 */
+.radio {
+  display: inline-block;
+}
