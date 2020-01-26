@@ -15,34 +15,26 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>3.1.0</version>
-      <scope>provided</scope>
     </dependency>
     <dependency> 
       <groupId>javax.servlet.jsp</groupId> 
       <artifactId>jsp-api</artifactId> 
       <version>2.1</version> 
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.25</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -73,7 +65,12 @@
       <groupId>javax.transaction</groupId>
       <artifactId>jta</artifactId>
       <version>1.1</version>
-    </dependency> 
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.2</version>
+    </dependency>
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
@@ -99,43 +96,30 @@
   <build>
     <finalName>vote</finalName>
     <outputDirectory>${basedir}/target/vote/WEB-INF/classes</outputDirectory>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
           <configuration>
             <outputDirectory>${basedir}/target/vote</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/resources</directory>
-                  <filtering>false</filtering>
-                  <includes>
-                    <include>css/*</include>
-                    <include>js/*</include>
-                    <include>fonts/**</include>
-                    <include>images/**</include>
-                    <include>tinymce/**</include>
-                  </includes> 
-                </resource>
-                <resource> 
-                  <directory>src/main/java/orms</directory>
-                  <filtering>true</filtering>
-                </resource>
-                <resource>
-                  <directory>src/main/webapp</directory>
-                  <filtering>true</filtering>
-                  <includes>
-                    <include>*.jsp</include>
-                    <include>favicon.ico</include>
-                    <include>components/**</include>
-                  </includes>
-                </resource>
+            <resources>
+              <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+              </resource>
+              <resource> 
+                <directory>src/main/java/orms</directory>
+                <filtering>false</filtering>
+              </resource>
+              <resource>
+                <directory>src/main/webapp</directory>
+                <filtering>false</filtering>
+              </resource>
             </resources>
           </configuration>
         </plugin>
