@@ -1,4 +1,4 @@
-package org.vote.processor.poll;
+package org.vote.processor.vote;
 
 import java.io.File;
 import java.io.IOException;
