@@ -8,17 +8,17 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="components/meta.jsp" %>
-  <%@ include file="components/link.jsp" %>
-  <script src="tinymce/tinymce-5.1.5.min.js"></script>
-  <script src="js/flatui-radio-0.0.3.js"></script>
-  <script src="js/flatui-checkbox-0.0.3.js"></script>
-  <script src="js/apply.js"></script>
+  <%@ include file="../components/meta.jsp" %>
+  <%@ include file="../components/link.jsp" %>
+  <script src="../tinymce/tinymce-5.1.5.min.js"></script>
+  <script src="../js/flatui-radio-0.0.3.js"></script>
+  <script src="../js/flatui-checkbox-0.0.3.js"></script>
+  <script src="../js/apply.js"></script>
   <title>活动报名</title>
 </head>
 
 <body>
-  <%@ include file="components/header.jsp" %>
+  <%@ include file="../components/header.jsp" %>
 
   <div class="container">
     <div class="inputcon">
@@ -48,15 +48,15 @@
       });
     </script>
 
-    <%@ include file="components/options/sex.jsp" %>
-    <%@ include file="components/options/age.jsp" %>
-    <%@ include file="components/options/telephone.jsp" %>
-    <%@ include file="components/options/school.jsp" %>
-    <%@ include file="components/options/address.jsp" %>
+    <%@ include file="../components/options/sex.jsp" %>
+    <%@ include file="../components/options/age.jsp" %>
+    <%@ include file="../components/options/telephone.jsp" %>
+    <%@ include file="../components/options/school.jsp" %>
+    <%@ include file="../components/options/address.jsp" %>
 
     <label class="checkbox" for="lisence">
       <input type="checkbox" id="lisence" data-toggle="checkbox">
-      我同意投票<a href="./license.jsp">服务条款</a>
+      我同意投票<a href="license.jsp">服务条款</a>
     </label>
 
     <button class="btn btn-primary" onclick="handleSubmit()">　　报名　　</button>
@@ -65,8 +65,8 @@
 
   <span id="aid" class="hidden">24ed2c04b58c41e0a51e38f51e715ccb</span>
 
-  <%@ include file="components/modal.jsp" %>
-  <%@ include file="components/footer.jsp" %>
+  <%@ include file="../components/modal.jsp" %>
+  <%@ include file="../components/footer.jsp" %>
 </body>
 
 </html>
