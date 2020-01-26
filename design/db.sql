@@ -7,7 +7,7 @@ USE vote;
 CREATE TABLE `user`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 用户ID
-  `email` VARCHAR(255) UNIQUE NOT NULL, -- 电子邮件(作账号)
+  `email` VARCHAR(191) UNIQUE NOT NULL, -- 电子邮件(作账号)
   `password` CHAR(32) NOT NULL,         -- 用户密码
   `nickname` VARCHAR(15) NOT NULL,      -- 用户昵称
   `organization` varchar(45) NOT NULL,  -- 所属组织
@@ -66,7 +66,7 @@ CREATE TABLE `apply`
   `sex` TINYINT(1) DEFAULT NULL,         -- 真实性别
   `age` TINYINT(3) DEFAULT NULL,         -- 真实年龄
   `telephone` CHAR(11) DEFAULT NULL,     -- 手机号码
-  `email` VARCHAR(255) DEFAULT NULL,     -- 电子邮件
+  `email` VARCHAR(191) DEFAULT NULL,     -- 电子邮件
   `school` VARCHAR(16) DEFAULT NULL,     -- 学校名称
   `company` VARCHAR(26) DEFAULT NULL,    -- 公司名称
   `address` VARCHAR(40) DEFAULT NULL,    -- 收货地址

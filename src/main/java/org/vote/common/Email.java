@@ -17,6 +17,9 @@ import javax.mail.PasswordAuthentication;
 public class Email {
   // SMTP邮件服务器地址
   private static final String smtpHost = "smtp.163.com";
+
+  // SMTP邮件服务器端口
+  private static final String smtpPort = "465";
   
   // 邮件发送者地址
   private static final String from = "zsimline@163.com";
@@ -27,18 +30,20 @@ public class Email {
   // 邮件会话对象
   private static Session session;
 
-  // 初始化邮件客户端
+  /**
+   * 初始化邮件客户端
+   */
   public static void initialize() {
     try {
-      // 获取系统属性
+      // 设置邮件服务器属性
       Properties properties = new Properties();
-
-      // 设置发送邮件的邮件服务器
       properties.setProperty("mail.smtp.host", smtpHost);
+      properties.setProperty("mail.smtp.port", smtpPort);
+      properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+      properties.setProperty("mail.smtp.socketFactory.port", smtpPort);
 
       // 设置邮件服务器需要验证
       properties.setProperty("mail.smtp.auth", "true");
-   
       Authenticator authenticator = new Authenticator() {
         @Override
         public PasswordAuthentication getPasswordAuthentication() {
@@ -62,7 +67,7 @@ public class Email {
    */
   public static boolean sendMail(String to, String content) {
     try {
-      // 创建默认的 MimeMessage 对象
+      // 创建消息对象
       MimeMessage message = new MimeMessage(session);
 
       // 设置发信人

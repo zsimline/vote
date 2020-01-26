@@ -40,6 +40,7 @@ public class Activation extends HttpServlet {
     }
     if (!user.getPassword().equals(password)) {
       completed(response, 1303);
+      return ;
     }
 
     // 设置账户为激活的

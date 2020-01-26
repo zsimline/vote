@@ -7,7 +7,7 @@
     <id name="id" column="id" type="java.lang.Long">
       <generator class="native"/>
     </id>
-    <property name="email" column="email" type="java.lang.String" length="255" unique="true" not-null="true"/>
+    <property name="email" column="email" type="java.lang.String" length="191" unique="true" not-null="true"/>
     <property name="password" column="password" type="java.lang.String" length="32" not-null="true"/>
     <property name="nickname" column="nickname" type="java.lang.String" length="15" not-null="true"/>
     <property name="organization" column="organization" type="java.lang.String" length="45" not-null="true"/>
