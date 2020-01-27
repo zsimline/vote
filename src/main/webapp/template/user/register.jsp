@@ -47,7 +47,7 @@
   <%@ include file="../components/modal.jsp" %>
   <script>
     function handleModalClose() {
-      window.location.href = "login.jsp";
+      window.location.href = "login";
     }
   </script>
 </body>

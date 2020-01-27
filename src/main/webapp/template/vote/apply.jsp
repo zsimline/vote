@@ -48,15 +48,52 @@
       });
     </script>
 
-    <%@ include file="../components/options/sex.jsp" %>
-    <%@ include file="../components/options/age.jsp" %>
-    <%@ include file="../components/options/telephone.jsp" %>
-    <%@ include file="../components/options/school.jsp" %>
-    <%@ include file="../components/options/address.jsp" %>
+    <%
+      String[] options = (String[])request.getAttribute("options");
+      for (int i = 0; i < options.length; i++) {
+    %>
+      <%
+        if (options[i].equals("1")) {
+      %>
+        <%@ include file="../components/options/name.jsp" %>
+      <%
+        } else if (options[i].equals("2")) {
+      %>
+      <%@ include file="../components/options/sex.jsp" %>
+      <%
+        } else if (options[i].equals("3")) {
+      %>
+      <%@ include file="../components/options/age.jsp" %>
+      <%
+        } else if (options[i].equals("4")) {
+      %>
+      <%@ include file="../components/options/telephone.jsp" %>
+      <%
+        } else if (options[i].equals("5")) {
+      %>
+      <%@ include file="../components/options/email.jsp" %>
+      <%
+        } else if (options[i].equals("6")) {
+      %>
+      <%@ include file="../components/options/school.jsp" %>
+      <%
+        } else if (options[i].equals("7")) {
+      %>
+      <%@ include file="../components/options/company.jsp" %>
+      <%
+        } else if (options[i].equals("8")) {
+      %> 
+      <%@ include file="../components/options/address.jsp" %>
+      <%
+        }
+      %>
+    <% 
+      } 
+    %>
 
     <label class="checkbox" for="lisence">
       <input type="checkbox" id="lisence" data-toggle="checkbox">
-      我同意投票<a href="license.jsp">服务条款</a>
+      我同意投票<a href="license">服务条款</a>
     </label>
 
     <button class="btn btn-primary" onclick="handleSubmit()">　　报名　　</button>

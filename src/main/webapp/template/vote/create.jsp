@@ -80,23 +80,23 @@
     <div id="options">
       <label for="name">真实姓名</label>
       <div class="switch switch-square">
-        <input id="name" type="checkbox" data-index="0" data-toggle="switch" />
+        <input id="name" type="checkbox" data-index="1" data-toggle="switch" />
       </div><br>
       <label for="sex">真实性别</label>
       <div class="switch switch-square">
-        <input id="sex" type="checkbox" data-index="1" data-toggle="switch" />
+        <input id="sex" type="checkbox" data-index="2" data-toggle="switch" />
       </div><br>
       <label for="age">真实年龄</label>
       <div class="switch switch-square">
-        <input id="age" type="checkbox" data-index="2" data-toggle="switch" />
+        <input id="age" type="checkbox" data-index="3" data-toggle="switch" />
       </div><br>
       <label for="telephone">手机号码</label>
       <div class="switch switch-square">
-        <input id="telephone" type="checkbox" data-index="3" data-toggle="switch" />
+        <input id="telephone" type="checkbox" data-index="4" data-toggle="switch" />
       </div><br>
       <label for="email">电子邮件</label>
       <div class="switch switch-square">
-        <input id="email" type="checkbox" data-index="4" data-toggle="switch" />
+        <input id="email" type="checkbox" data-index="5" data-toggle="switch" />
       </div><br>
       <label for="school">学校名称</label>
       <div class="switch switch-square">
@@ -104,11 +104,11 @@
       </div><br>
       <label for="company">公司名称</label>
       <div class="switch switch-square">
-        <input id="company" type="checkbox" data-index="8" data-toggle="switch" />
+        <input id="company" type="checkbox" data-index="7" data-toggle="switch" />
       </div><br>
       <label for="address">收货地址</label>
       <div class="switch switch-square">
-        <input id="address" type="checkbox" data-index="9" data-toggle="switch" />
+        <input id="address" type="checkbox" data-index="8" data-toggle="switch" />
       </div><br>
     </div>
 
@@ -116,7 +116,7 @@
 
     <label class="checkbox" for="lisence">
       <input type="checkbox" id="lisence" data-toggle="checkbox">
-      我同意投票<a href="./license.jsp">服务条款</a>
+      我同意投票<a href="license">服务条款</a>
     </label>
 
     <button class="btn btn-primary" onclick="handleSubmit()">　发布投票　</button>
