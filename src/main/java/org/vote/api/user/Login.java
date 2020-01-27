@@ -1,4 +1,4 @@
-package org.vote.processor.user;
+package org.vote.api.user;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +26,7 @@ import org.vote.common.Utils;
 /**
  * 处理登录账户
  */
-@WebServlet("/v2/login")
+@WebServlet("/api/login")
 public class Login extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

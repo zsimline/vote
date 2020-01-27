@@ -1,4 +1,4 @@
-package org.vote.processor.user;
+package org.vote.api.user;
 
 import java.io.IOException;
 
@@ -23,7 +23,7 @@ import org.vote.common.Email;
 /**
  * 处理创建活动
  */
-@WebServlet("/v2/register")
+@WebServlet("/api/register")
 public class Register extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

@@ -101,7 +101,7 @@ function handleSubmit() {
   }
 
   // 向服务器提交数据
-  post('v2/apply', formData)
+  post('/api/apply', formData)
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);

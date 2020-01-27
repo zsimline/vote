@@ -1,4 +1,4 @@
-package org.vote.processor.vote;
+package org.vote.api.vote;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 /**
  * 处理删除活动
  */
-@WebServlet("/v2/delete")
+@WebServlet("/api/delete")
 public class Delete extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

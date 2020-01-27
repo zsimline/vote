@@ -1,4 +1,4 @@
-package org.vote.processor.vote;
+package org.vote.api.vote;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ import org.vote.common.Utils;
 /**
  * 处理创建活动
  */
-@WebServlet("/v2/create")
+@WebServlet("/api/create")
 public class Create extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

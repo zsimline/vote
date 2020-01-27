@@ -12,7 +12,7 @@
   <%@ include file="/components/link.jsp" %>
   <script>
     window.onload = function() {
-    const activationAddress = `http://127.0.0.1:8080/vote/v2/activation?${window.location.href.split('?')[1]}`;
+    const activationAddress = `http://vote.zizaixian.top/api/activation?${window.location.href.split('?')[1]}`;
     get(activationAddress)
       .then(data => {
         if (!(data.code % 100)) {

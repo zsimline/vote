@@ -15,42 +15,51 @@
 
 ### 主页
 
-- 网站主页 https://lumingvote.com
+- 网站主页 http://vote.zizaixian.top
 
-- 管理中心 https://lumingvote.com/action
+- 管理中心 http://vote.zizaixian.top/action
 
 ### 用户
 
-- 登录页 https://lumingvote.com/user/login.jsp
+- 登录页 http://vote.zizaixian.top/user/login.jsp
 
-- 注册页 https://lumingvote.com/user/register.jsp
+- 注册页 http://vote.zizaixian.top/user/register.jsp
 
-- 信息页 https://lumingvote.com/user/profile
+- 信息页 http://vote.zizaixian.top/user/profile
 
-- 用户主页 https://lumingvote.com/user/home
+- 用户主页 http://vote.zizaixian.top/user/home
 
 
 ### 投票
 
-- 创建投票 https://lumingvote.com/vote/create.jsp
+- 创建投票 http://vote.zizaixian.top/vote/create
 
-- 投票管理 https://lumingvote.com/vote/manage
+- 投票管理 http://vote.zizaixian.top/vote/manage
 
-- 审核报名 https://lumingvote.com/vote/review?aid=activitieId
+- 审核报名 http://vote.zizaixian.top/vote/review?aid=activitieId
 
-- 报名设置 https://lumingvote.com/vote/signupconf?aid=activitieId
+- 报名设置 http://vote.zizaixian.top/vote/additem?aid=activitieId
 
-- 礼物设置 https://lumingvote.com/vote/giftconf?aid=activitieId
+- 礼物设置 http://vote.zizaixian.top/vote/giftconf?aid=activitieId
 
-- 活动链接 https://lumingvote.com/vote/qrcode.jsp?aid=activitieId
+- 活动链接 http://vote.zizaixian.top/vote/qrcode?aid=activitieId
 
-- 结果分析 https://lumingvote.com/vote/analysis?aid=activitieId
+- 结果汇总 http://vote.zizaixian.top/vote/gather?aid=activitieId
 
 
 ## 系统接口
 
-- 处理创建投票 https://lumingvote.com/vote/v2/create
+- 处理创建投票 http://vote.zizaixian.top/api/create
 
+- 处理删除投票 http://vote.zizaixian.top/api/delete
+
+- 处理用户报名 http://vote.zizaixian.top/api/apply
+
+- 处理用户注册 http://vote.zizaixian.top/api/register
+
+- 处理用户登录 http://vote.zizaixian.top/api/login
+
+- 处理验证账户 http://vote.zizaixian.top/api/activation
 
 
 ## 微信网页授权 
@@ -91,6 +100,14 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 
 **前端技术：** flat-ui(free v2.1.1) + bootstrap(v3.0.0) + font-awesome(v4.7.0)
+
+**技术规范**
+
+1. API接口无任何后缀名
+
+2. 视图接口无任何后缀名
+
+
 
 ## TODO
 

@@ -1,4 +1,4 @@
-package org.vote.processor.user;
+package org.vote.api.user;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +23,7 @@ import org.vote.common.HibernateUtil;
 /**
  * 处理激活账户
  */
-@WebServlet("/v2/activation")
+@WebServlet("/api/activation")
 public class Activation extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
