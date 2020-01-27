@@ -8,14 +8,14 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="/components/meta.jsp" %>
-  <%@ include file="/components/link.jsp" %>
+  <%@ include file="../components/meta.jsp" %>
+  <%@ include file="../components/link.jsp" %>
   <script src="/js/qrcode.min.js"></script>
   <title>链接与二维码</title>
 </head>
 
 <body>
-  <%@ include file="/components/header.jsp" %>
+  <%@ include file="../components/header.jsp" %>
 
   <div class="container page-qrcode">
     <ul class="nav nav-tabs">
@@ -51,5 +51,5 @@
     </script>
   </div>
 
-  <%@ include file="/components/footer.jsp" %>
+  <%@ include file="../components/footer.jsp" %>
 </body>

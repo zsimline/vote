@@ -8,8 +8,8 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="/components/meta.jsp" %>
-  <%@ include file="/components/link.jsp" %>
+  <%@ include file="../components/meta.jsp" %>
+  <%@ include file="../components/link.jsp" %>
   <link rel="stylesheet" href="/css/datetimepicker-4.0.0.min.css">
   <script src="/js/moment-with-locales-2.9.0.js"></script>
   <script src="/js/datetimepicker-4.0.0.js"></script>
@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <%@ include file="/components/header.jsp" %>
+  <%@ include file="../components/header.jsp" %>
 
   <!-- 投票配置项 -->
   <div class="container">
@@ -148,8 +148,8 @@
   </script>
 
   <script src="/js/create.js"></script>
-  <%@ include file="/components/modal.jsp" %>
-  <%@ include file="/components/footer.jsp" %>
+  <%@ include file="../components/modal.jsp" %>
+  <%@ include file="../components/footer.jsp" %>
 </body>
 
 </html>

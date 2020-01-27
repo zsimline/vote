@@ -8,14 +8,14 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="/components/meta.jsp" %>
-  <%@ include file="/components/link.jsp" %>
+  <%@ include file="../components/meta.jsp" %>
+  <%@ include file="../components/link.jsp" %>
   <script src="/js/manage.js"></script>
   <title>管理投票</title>
 </head>
 
 <body>
-  <%@ include file="/components/header.jsp" %>
+  <%@ include file="../components/header.jsp" %>
 
   <div class="container">
     <div class="panel panel-default">
@@ -38,6 +38,6 @@
     </div>
   </div>
 
-  <%@ include file="/components/modal.jsp" %>
-  <%@ include file="/components/footer.jsp" %>
+  <%@ include file="../components/modal.jsp" %>
+  <%@ include file="../components/footer.jsp" %>
 </body>

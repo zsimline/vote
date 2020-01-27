@@ -8,8 +8,8 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="/components/meta.jsp" %>
-  <%@ include file="/components/link.jsp" %>
+  <%@ include file="../components/meta.jsp" %>
+  <%@ include file="../components/link.jsp" %>
   <link href="/css/login.css" rel="stylesheet" type="text/css">
   <script src="/js/login.js"></script>
   <title>用户注册</title>
@@ -44,7 +44,7 @@
       <a href="">忘记密码</a>
     </div>
   </div>
-  <%@ include file="/components/modal.jsp" %>
+  <%@ include file="../components/modal.jsp" %>
   <script>
     function handleModalClose() {
       window.location.href = "login.jsp";
