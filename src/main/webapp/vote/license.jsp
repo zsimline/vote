@@ -8,8 +8,8 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="../components/meta.jsp" %>
-  <%@ include file="../components/link.jsp" %>
+  <%@ include file="/components/meta.jsp" %>
+  <%@ include file="/components/link.jsp" %>
   <title>软件许可协议</title>
 </head>
 

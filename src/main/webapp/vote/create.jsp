@@ -8,19 +8,19 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="../components/meta.jsp" %>
-  <%@ include file="../components/link.jsp" %>
-  <link rel="stylesheet" href="../css/datetimepicker-4.0.0.min.css">
-  <script src="../js/moment-with-locales-2.9.0.js"></script>
-  <script src="../js/datetimepicker-4.0.0.js"></script>
-  <script src="../tinymce/tinymce-5.1.5.min.js"></script>
-  <script src="../js/flatui-checkbox-0.0.3.js"></script>
-  <script src="../js/bootstrap-switch-1.3.js"></script>
+  <%@ include file="/components/meta.jsp" %>
+  <%@ include file="/components/link.jsp" %>
+  <link rel="stylesheet" href="/css/datetimepicker-4.0.0.min.css">
+  <script src="/js/moment-with-locales-2.9.0.js"></script>
+  <script src="/js/datetimepicker-4.0.0.js"></script>
+  <script src="/tinymce/tinymce-5.1.5.min.js"></script>
+  <script src="/js/flatui-checkbox-0.0.3.js"></script>
+  <script src="/js/bootstrap-switch-1.3.js"></script>
   <title>创建投票</title>
 </head>
 
 <body>
-  <%@ include file="../components/header.jsp" %>
+  <%@ include file="/components/header.jsp" %>
 
   <!-- 投票配置项 -->
   <div class="container">
@@ -147,9 +147,9 @@
     });
   </script>
 
-  <script src="../js/create.js"></script>
-  <%@ include file="../components/modal.jsp" %>
-  <%@ include file="../components/footer.jsp" %>
+  <script src="/js/create.js"></script>
+  <%@ include file="/components/modal.jsp" %>
+  <%@ include file="/components/footer.jsp" %>
 </body>
 
 </html>

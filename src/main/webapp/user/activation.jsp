@@ -8,8 +8,8 @@
 <html lang="zh">
 
 <head>
-  <%@ include file="../components/meta.jsp" %>
-  <%@ include file="../components/link.jsp" %>
+  <%@ include file="/components/meta.jsp" %>
+  <%@ include file="/components/link.jsp" %>
   <script>
     window.onload = function() {
     const activationAddress = `http://127.0.0.1:8080/vote/v2/activation?${window.location.href.split('?')[1]}`;
@@ -31,12 +31,12 @@
 </head>
 
 <body>
-  <%@ include file="../components/header.jsp" %>
+  <%@ include file="/components/header.jsp" %>
 
   <div class="container"></div>
 
-  <%@ include file="../components/modal.jsp" %>
-  <%@ include file="../components/footer.jsp" %>
+  <%@ include file="/components/modal.jsp" %>
+  <%@ include file="/components/footer.jsp" %>
 </body>
 
 </html>
