@@ -10,9 +10,13 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
+
+  <span id="email" class="hidden"><%= request.getAttribute("email") %></span>
+  <span id="code" class="hidden"><%= request.getAttribute("code") %></span>
+
   <script>
     window.onload = function() {
-    const activationAddress = `http://vote.zizaixian.top/api/user/activation?${window.location.href.split('?')[1]}`;
+    const activationAddress = `http://127.0.0.1/api/user/activation?email=${$('#email').text()}&code=${$('#code').text()}`;
     get(activationAddress)
       .then(data => {
         if (!(data.code % 100)) {

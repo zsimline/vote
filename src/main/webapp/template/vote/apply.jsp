@@ -63,7 +63,7 @@
 
   </div>
 
-  <span id="aid" class="hidden">24ed2c04b58c41e0a51e38f51e715ccb</span>
+  <span id="aid" class="hidden"><%= request.getAttribute("aid") %></span>
 
   <%@ include file="../components/modal.jsp" %>
   <%@ include file="../components/footer.jsp" %>

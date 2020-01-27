@@ -37,6 +37,7 @@ public class Activation extends HttpServlet {
     User user = getUserByEmail(emailAddress);
     if (user == null) {
       completed(response, 1302);
+      return ;
     }
     if (!user.getPassword().equals(password)) {
       completed(response, 1303);

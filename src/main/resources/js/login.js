@@ -72,7 +72,7 @@ function handleLogin() {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);
         setTimeout(() => {
-          window.location.href = "index.jsp"
+          window.location.href = "/"
         }, 1800)
       } else {
         openModal('error', data.codeDesc);
