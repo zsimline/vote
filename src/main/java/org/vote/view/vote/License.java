@@ -12,11 +12,11 @@ import org.vote.common.BaseView;
 /**
  * 显示创建投票页面
  */
-@WebServlet("/vote/licence")
-public class Licence extends BaseView {
+@WebServlet("/vote/license")
+public class License extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    display(request, response, "/template/vote/lisence.jsp");
+    display(request, response, "/template/vote/license.jsp");
   }
 }

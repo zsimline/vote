@@ -101,13 +101,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 **前端技术：** flat-ui(free v2.1.1) + bootstrap(v3.0.0) + font-awesome(v4.7.0)
 
-**技术规范**
-
-1. API接口无任何后缀名
-
-2. 视图接口无任何后缀名
-
-
 
 ## TODO
 
@@ -115,6 +108,8 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 8. 编辑功能
 
-9. 投票页面及前端后端处理
+10. 批量添加功能
 
-10. ...
+11. 投票页面及前端后端处理
+
+12. ...

@@ -1,6 +1,7 @@
 package org.vote.common;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import org.vote.beans.User;
 import org.vote.common.HibernateUtil;
+import org.vote.common.CookieFactory;
+
 
 /**
  * 基础视图类
@@ -80,5 +84,30 @@ public class BaseView extends HttpServlet {
       e.printStackTrace();
       return null;
     }
+  }
+
+  /**
+   * 识别用户身份并认证
+   * 
+   * @param request 请求对象
+   * @return 用户身份识别并认证成功返回其ID, 否则返回null
+   */
+  protected String userIdentify(HttpServletRequest request, HttpServletResponse response) {
+    CookieFactory cookieFactory = new CookieFactory(request, response);
+    HashMap<String, String> cookieMap = cookieFactory.cookiesToHashMap();
+
+    String uid = cookieMap.get("uid");
+    String token = cookieMap.get("token");
+    if (uid == null || token == null) {
+      return null;
+    }
+
+    // 根据UID获取用户实例并判断认证令牌是否相等
+    User user = (User)getInstanceById(User.class, Long.valueOf(uid));
+    if (user == null || !user.getToken().equals(token)) {
+      return null;
+    }
+
+    return uid;
   }
 }

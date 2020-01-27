@@ -1,16 +1,23 @@
 package org.vote.common;
 
+import java.util.HashMap;
+
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * Cookie处理器
  */
 public class CookieFactory {
-  // Servlet 响应对象
+  // 请求对象
+  HttpServletRequest request;
+
+  // 响应对象
   HttpServletResponse response;
 
-  public CookieFactory(HttpServletResponse response) {
+  public CookieFactory(HttpServletRequest request, HttpServletResponse response) {
+    this.request = request;
     this.response = response;
   }
 
@@ -20,8 +27,6 @@ public class CookieFactory {
    * 
    * @param name
    * @param value
-   * @param expire
-   * @param path
    */
   public void setCookie(String name, String value) {
     Cookie cookie = new Cookie(name, value);
@@ -44,5 +49,23 @@ public class CookieFactory {
     cookie.setMaxAge(expiry);
     cookie.setPath(path);
     response.addCookie(cookie);
+  }
+
+  /**
+   * cookie转换为哈希表
+   * 
+   * @return 转换后的哈希表
+   */
+  public HashMap<String, String> cookiesToHashMap() {
+    HashMap<String, String> cookieMap = new HashMap<String, String>();
+    Cookie[] cookies = request.getCookies();
+    
+    if (cookies != null) {
+      for (int i = 0; i < cookies.length; i++) {
+        cookieMap.put(cookies[i].getName(), cookies[i].getValue());
+      }
+    }
+
+    return cookieMap;
   }
 }

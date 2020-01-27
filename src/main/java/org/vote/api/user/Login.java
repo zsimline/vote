@@ -60,7 +60,7 @@ public class Login extends HttpServlet {
           user.setToken(token);
 
           if (dbExcute(user)) {
-            CookieFactory cookieFactory = new CookieFactory(response);
+            CookieFactory cookieFactory = new CookieFactory(request, response);
             cookieFactory.setCookie("uid", String.valueOf(user.getId()));
             cookieFactory.setCookie("token", token);
             completed(response, 1200);
