@@ -30,7 +30,7 @@
       &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
     </a>
     <div class="lg-ref">
-      <a href="register.jsp">注册账户</a>
+      <a href="register">注册账户</a>
       &nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="">忘记密码</a>

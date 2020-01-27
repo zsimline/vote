@@ -38,7 +38,7 @@
       &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
     </a>
     <div class="lg-ref">
-      <a href="login.jsp">登录账户</a>
+      <a href="login">登录账户</a>
       &nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;
       <a href="">忘记密码</a>

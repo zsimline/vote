@@ -29,13 +29,16 @@
     <br>
     
     <h4>投票页链接地址</h4>
-    <input type="text" id="link-input" class="form-control" readonly value="https://lumingvote.com/vote/action.jsp?aid=0794698fcf4b4903aab2c33938d05acf">
+    <input type="text" id="link-input" class="form-control" readonly value="http://vote.zizaixian.top/vote/action.jsp?aid=<%= request.getAttribute("aid") %>">
     <button class="btn btn-success" onclick="copyLink()">复制链接</button>
     <hr>
     <h4>使用微信扫描二维码</h4>
     <div id="qrcode"></div>
+
+    <span id="aid" class="hidden"><%= request.getAttribute("aid") %></span>
+
     <script type="text/javascript">
-      const link = `https://lumingvote.com/vote/action.jsp?aid=${getQueryString('aid')}`;
+      const link = `https://lumingvote.com/vote/action.jsp?aid=${$('#aid').text()}`;
       new QRCode(document.getElementById("qrcode"), link);
       
       function getQueryString(name) {

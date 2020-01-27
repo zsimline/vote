@@ -12,11 +12,13 @@ import org.vote.common.BaseView;
 /**
  * 显示创建投票页面
  */
-@WebServlet("/vote/create")
-public class Create extends BaseView {
+@WebServlet("/vote/qrcode")
+public class Qrcode extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    display(request, response, "/template/vote/create.jsp");
+    String aid = request.getParameter("aid");
+    request.setAttribute("aid", aid);
+    display(request, response, "/template/vote/qrcode.jsp");
   }
 }

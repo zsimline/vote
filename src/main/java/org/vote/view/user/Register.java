@@ -1,4 +1,4 @@
-package org.vote.view.vote;
+package org.vote.view.user;
 
 import java.io.IOException;
 
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.common.BaseView;
 
 /**
- * 显示创建投票页面
+ * 显示用户注册页面
  */
-@WebServlet("/vote/create")
-public class Create extends BaseView {
+@WebServlet("/user/register")
+public class Register extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    display(request, response, "/template/vote/create.jsp");
+    display(request, response, "/template/user/register.jsp");
   }
 }
