@@ -49,17 +49,17 @@
 
 ## 系统接口
 
-- 处理创建投票 http://vote.zizaixian.top/api/create
+- 处理创建投票 http://vote.zizaixian.top/api/vote/create
 
-- 处理删除投票 http://vote.zizaixian.top/api/delete
+- 处理删除投票 http://vote.zizaixian.top/api/vote/delete
 
-- 处理用户报名 http://vote.zizaixian.top/api/apply
+- 处理用户报名 http://vote.zizaixian.top/api/vote/apply
 
-- 处理用户注册 http://vote.zizaixian.top/api/register
+- 处理用户注册 http://vote.zizaixian.top/api/user/register
 
-- 处理用户登录 http://vote.zizaixian.top/api/login
+- 处理用户登录 http://vote.zizaixian.top/api/user/login
 
-- 处理验证账户 http://vote.zizaixian.top/api/activation
+- 处理验证账户 http://vote.zizaixian.top/api/user/activation
 
 
 ## 微信网页授权 

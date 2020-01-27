@@ -31,7 +31,7 @@ import org.vote.common.Utils;
 /**
  * 处理创建活动
  */
-@WebServlet("/api/create")
+@WebServlet("/api/vote/create")
 public class Create extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

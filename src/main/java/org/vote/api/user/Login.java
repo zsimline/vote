@@ -26,7 +26,7 @@ import org.vote.common.Utils;
 /**
  * 处理登录账户
  */
-@WebServlet("/api/login")
+@WebServlet("/api/user/login")
 public class Login extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

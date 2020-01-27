@@ -23,7 +23,7 @@ import org.vote.common.Email;
 /**
  * 处理创建活动
  */
-@WebServlet("/api/register")
+@WebServlet("/api/user/register")
 public class Register extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

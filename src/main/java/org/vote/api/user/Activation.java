@@ -23,7 +23,7 @@ import org.vote.common.HibernateUtil;
 /**
  * 处理激活账户
  */
-@WebServlet("/api/activation")
+@WebServlet("/api/user/activation")
 public class Activation extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

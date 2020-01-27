@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 /**
  * 处理删除活动
  */
-@WebServlet("/api/delete")
+@WebServlet("/api/vote/delete")
 public class Delete extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

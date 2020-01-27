@@ -29,7 +29,7 @@ import org.vote.common.Utils;
 /**
  * 处理创建活动
  */
-@WebServlet("/api/apply")
+@WebServlet("/api/vote/apply")
 public class ApplySingle extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
