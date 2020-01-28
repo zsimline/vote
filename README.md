@@ -109,3 +109,39 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 11. 投票页面及前端后端处理
 
 12. ...
+
+<button class="layui-btn" onclick="addtr();"><i class="fa fa-plus"></i>新增一行</button>
+
+function addtr() {
+        layer.open({
+          type: 1,
+          title: '编辑人员信息',
+          closeBtn: 1,
+          area: '516px',
+          skin: '#fff', //没有背景色
+          shadeClose: true,
+          content: $('#edit-content'),
+          btn: ["保存", "关闭"],
+          btn1: function (index, layero) {
+            var Name = $("#Name").val();
+            var Age = $("#Age").val();
+            var Gender = $("#Gender").val();
+            var Height = $("#Height").val();
+            var Province = $("#Province").val();
+            var Sport = $("#Sport").val();
+            var obj = {
+              "Name": Name,
+              "Age": Age,
+              "Gender": Gender,
+              "Height": Height,
+              "Province": Province,
+              "Sport": Sport
+            };
+            reponse.addtr(obj, "table");
+            //reponse.editsavetr(obj, "table");
+            layer.close(index);
+          }, btn2: function (index, layero) {
+            layer.close(index);
+          }
+        });
+      };

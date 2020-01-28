@@ -11,6 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
+  <link rel="stylesheet" href="/css/manage.css">
   <script src="/js/qrcode.min.js"></script>
   <title>链接与二维码</title>
 </head>

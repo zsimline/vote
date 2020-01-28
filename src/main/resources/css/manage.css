@@ -1,0 +1,44 @@
+.container > .nav-tabs {
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+/*! 表格弹框样式 */
+.alertceng{
+  background: #FFFFFF;
+  padding: 10px;
+  display: none;
+}
+.alertceng span.title{
+  margin-right: 10px;
+}
+
+/*！ 链接与二维码页样式 */
+.page-qrcode input {
+  width: 55%;
+  color: #000 !important;
+}
+
+/*！ 审核报名页样式 */
+.table-operation {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: solid 1px #ccc;
+  color: #454545;
+}
+
+.table-operation:nth-child(1) {
+  border-right: none;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.table-operation:nth-child(2) {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.table-operation:hover {
+  background-color: #f3f3f3;
+}

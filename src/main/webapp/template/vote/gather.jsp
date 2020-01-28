@@ -11,6 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
+  <link rel="stylesheet" href="/css/manage.css">
   <title>结果汇总</title>
 </head>
 

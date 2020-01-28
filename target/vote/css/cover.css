@@ -2,7 +2,6 @@
  * 覆盖第三方库样式
  */
 
-
 /*! 覆盖顶部导航条样式 */
 .navbar {
   border-radius: 0px;
@@ -107,18 +106,8 @@ input[type="file"] {
   margin: auto 2px;
 }
 
-.container > .nav-tabs {
-  margin-top: 40px;
-  font-size: 16px;
-}
 
 /*! 报名页样式 */
 .radio {
   display: inline-block;
-}
-
-/*！ 链接与二维码页样式 */
-.page-qrcode input {
-  width: 55%;
-  color: #000 !important;
 }

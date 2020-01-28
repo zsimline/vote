@@ -36,7 +36,8 @@
           <span class="label label-default">报名开始时间：${activity.applyTimeStart}</span>
           <span class="label label-default">报名截止时间：${activity.applyTimeEnd}</span>
           <span class="label label-default">投票开始时间：${activity.voteTimeStart}</span>
-          <span class="label label-default">投票截止时间：${activity.voteTimeEnd}</span><br>
+          <span class="label label-default">投票截止时间：${activity.voteTimeEnd}</span>
+          <br>
           <span class="label label-default">投票总数：${activity.sumVoted}</span>
           <span class="label label-default">访问总数：${activity.sumVisited}</span>
 
