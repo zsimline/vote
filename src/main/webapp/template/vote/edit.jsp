@@ -11,17 +11,17 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <title>审核报名</title>
+  <title>编辑报名</title>
 </head>
 
 <body>
   <%@ include file="../components/header.jsp" %>
   <div class="container">
     <ul class="nav nav-tabs">
-      <li role="presentation">
+      <li role="presentation" class="active">
         <a href="/vote/edit?aid=${aid}">编辑</a>
       </li>
-      <li role="presentation" class="active">
+      <li role="presentation">
         <a href="/vote/review?aid=${aid}">审核报名</a>
       </li>
       <li role="presentation">

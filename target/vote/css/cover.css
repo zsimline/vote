@@ -107,21 +107,18 @@ input[type="file"] {
   margin: auto 2px;
 }
 
-/*！ 链接与二维码页样式 */
-.page-qrcode {
+.container > .nav-tabs {
   margin-top: 40px;
-}
-
-.page-qrcode input {
-  width: 55%;
-  color: #000 !important;
-}
-
-.page-qrcode .nav-tabs {
   font-size: 16px;
 }
 
 /*! 报名页样式 */
 .radio {
   display: inline-block;
+}
+
+/*！ 链接与二维码页样式 */
+.page-qrcode input {
+  width: 55%;
+  color: #000 !important;
 }

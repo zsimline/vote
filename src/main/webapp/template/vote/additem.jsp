@@ -11,7 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <title>审核报名</title>
+  <title>批量添加</title>
 </head>
 
 <body>
@@ -21,10 +21,10 @@
       <li role="presentation">
         <a href="/vote/edit?aid=${aid}">编辑</a>
       </li>
-      <li role="presentation" class="active">
+      <li role="presentation">
         <a href="/vote/review?aid=${aid}">审核报名</a>
       </li>
-      <li role="presentation">
+      <li role="presentation" class="active">
         <a href="/vote/additem?aid=${aid}">批量添加</a>
       </li>
       <li role="presentation">

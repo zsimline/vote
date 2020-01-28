@@ -20,17 +20,28 @@
 
   <div class="container page-qrcode">
     <ul class="nav nav-tabs">
-      <li role="presentation"><a href="#">编辑</a></li>
-      <li role="presentation"><a href="#">审核报名</a></li>
-      <li role="presentation"><a href="#">批量添加</a></li>
-      <li role="presentation"><a href="#">结果与日志</a></li>
-      <li role="presentation" class="active"><a href="#">链接与二维码</a></li>
+      <li role="presentation">
+        <a href="/vote/edit?aid=${aid}">编辑</a>
+      </li>
+      <li role="presentation">
+        <a href="/vote/review?aid=${aid}">审核报名</a>
+      </li>
+      <li role="presentation">
+        <a href="/vote/additem?aid=${aid}">批量添加</a>
+      </li>
+      <li role="presentation">
+        <a href="/vote/gather?aid=${aid}">结果与日志</a>
+      </li>
+      <li role="presentation" class="active">
+        <a href="/vote/qrcode?aid=${aid}">链接与二维码</a>
+      </li>
     </ul>
-    
+
     <br>
-    
+
     <h4>投票页链接地址</h4>
-    <input type="text" id="link-input" class="form-control" readonly value="http://vote.zizaixian.top/vote/action.jsp?aid=<%= request.getAttribute("aid") %>">
+    <input type="text" id="link-input" class="form-control" readonly
+      value="http://vote.zizaixian.top/vote/action?aid=<%= request.getAttribute("aid") %>">
     <button class="btn btn-success" onclick="copyLink()">复制链接</button>
     <hr>
     <h4>使用微信扫描二维码</h4>
@@ -41,7 +52,7 @@
     <script type="text/javascript">
       const link = 'https://lumingvote.com/vote/action.jsp?aid=' + $('#aid').text();
       new QRCode(document.getElementById("qrcode"), link);
-      
+
       function getQueryString(name) {
         const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         const r = window.location.search.substr(1).match(reg);

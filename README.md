@@ -17,18 +17,15 @@
 
 - 网站主页 http://vote.zizaixian.top
 
-- 管理中心 http://vote.zizaixian.top/action
-
 ### 用户
 
-- 登录页 http://vote.zizaixian.top/user/login.jsp
+- 登录页 http://vote.zizaixian.top/user/login
 
-- 注册页 http://vote.zizaixian.top/user/register.jsp
+- 注册页 http://vote.zizaixian.top/user/register
 
 - 信息页 http://vote.zizaixian.top/user/profile
 
 - 用户主页 http://vote.zizaixian.top/user/home
-
 
 ### 投票
 
@@ -45,7 +42,6 @@
 - 活动链接 http://vote.zizaixian.top/vote/qrcode?aid=activitieId
 
 - 结果汇总 http://vote.zizaixian.top/vote/gather?aid=activitieId
-
 
 ## 系统接口
 

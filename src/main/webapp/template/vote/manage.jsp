@@ -25,17 +25,21 @@
           <h3 class="panel-title">测试投票</h3>
         </div>
         <div class="panel-body">
-          <button class="btn btn-primary">编辑</button>
-          <button class="btn btn-success">审核报名</button>
-          <button class="btn btn-warning">批量添加</button>
-          <button class="btn btn-info">结果与日志</button>
+          <a class="btn btn-primary" href="/vote/edit?aid=${activity.id}">编辑</a>
+          <a class="btn btn-success" href="/vote/review?aid=${activity.id}">审核报名</a>
+          <a class="btn btn-warning" href="/vote/additem?aid=${activity.id}">批量添加</a>
+          <a class="btn btn-info" href="/vote/gather?aid=${activity.id}">结果与日志</a>
           <a class="btn btn-inverse" href="/vote/qrcode?aid=${activity.id}">链接与二维码</a>
           <a class="btn btn-danger" onclick="deleteActivity('${activity.id}')">删除</a>
         </div>
         <div class="panel-footer">
-          <span class="label label-default">投票总数：612568</span>
-          <span class="label label-default">访问总数：17845962</span>
-          <span class="label label-default">创建时间：2020-01-21 21:33</span>
+          <span class="label label-default">报名开始时间：${activity.applyTimeStart}</span>
+          <span class="label label-default">报名截止时间：${activity.applyTimeEnd}</span>
+          <span class="label label-default">投票开始时间：${activity.voteTimeStart}</span>
+          <span class="label label-default">投票截止时间：${activity.voteTimeEnd}</span><br>
+          <span class="label label-default">投票总数：${activity.sumVoted}</span>
+          <span class="label label-default">访问总数：${activity.sumVisited}</span>
+
         </div>
       </div>
     </c:forEach>

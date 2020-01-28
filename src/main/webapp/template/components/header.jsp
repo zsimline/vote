@@ -8,7 +8,7 @@
   <!-- 导航条头部 -->
   <div class="navbar-header">
     <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-collapse-02"></button>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/index">
       <i class="fa fa-fire"></i>
       <span>鹿鸣投票</span>
     </a>
@@ -18,16 +18,16 @@
   <div class="navbar-collapse collapse navbar-collapse-01">
     <ul class="nav navbar-nav navbar-left">
       <li>
-        <a href="#">首页</a>
+        <a href="/index">首页</a>
       </li>
       <li>
-        <a href="#">发布投票</a>
+        <a href="/vote/create">发布投票</a>
       </li>
       <li>
-        <a href="#">管理中心</a>
+        <a href="/vote/manage">管理中心</a>
       </li>
       <li>
-        <a href="#">关于我们</a>
+        <a href="/about">关于我们</a>
       </li>
     </ul>
 
