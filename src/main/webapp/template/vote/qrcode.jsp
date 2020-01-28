@@ -3,6 +3,7 @@
   contentType="text/html;charset=UTF-8"
   pageEncoding="UTF-8"
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML>
 <html lang="zh">
@@ -38,7 +39,7 @@
     <span id="aid" class="hidden"><%= request.getAttribute("aid") %></span>
 
     <script type="text/javascript">
-      const link = `https://lumingvote.com/vote/action.jsp?aid=${$('#aid').text()}`;
+      const link = 'https://lumingvote.com/vote/action.jsp?aid=' + $('#aid').text();
       new QRCode(document.getElementById("qrcode"), link);
       
       function getQueryString(name) {

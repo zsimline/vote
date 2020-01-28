@@ -3,6 +3,7 @@
   contentType="text/html;charset=UTF-8"
   pageEncoding="UTF-8"
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML>
 <html lang="zh">
@@ -18,26 +19,27 @@
   <%@ include file="../components/header.jsp" %>
 
   <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">测试投票</h3>
+    <c:forEach items="${activitys}" var="activity">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">测试投票</h3>
+        </div>
+        <div class="panel-body">
+          <button class="btn btn-primary">编辑</button>
+          <button class="btn btn-success">审核报名</button>
+          <button class="btn btn-warning">批量添加</button>
+          <button class="btn btn-info">结果与日志</button>
+          <a class="btn btn-inverse" href="/vote/qrcode?aid=${activity.id}">链接与二维码</a>
+          <a class="btn btn-danger" onclick="deleteActivity('${activity.id}')">删除</a>
+        </div>
+        <div class="panel-footer">
+          <span class="label label-default">投票总数：612568</span>
+          <span class="label label-default">访问总数：17845962</span>
+          <span class="label label-default">创建时间：2020-01-21 21:33</span>
+        </div>
       </div>
-      <div class="panel-body">
-        <button class="btn btn-primary">编辑</button>
-        <button class="btn btn-success">审核报名</button>
-        <button class="btn btn-warning">批量添加</button>
-        <button class="btn btn-info">结果与日志</button>
-        <button class="btn btn-inverse">链接与二维码</button>
-        <button class="btn btn-danger" onclick="deleteActivity('0794698fcf4b4903aab2c33938d05acf')">删除</button>
-      </div>
-      <div class="panel-footer">
-        <span class="label label-default">投票总数：612568</span>
-        <span class="label label-default">访问总数：17845962</span>
-        <span class="label label-default">创建时间：2020-01-21 21:33</span>
-      </div>
-    </div>
+    </c:forEach>
   </div>
-
   <%@ include file="../components/modal.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>

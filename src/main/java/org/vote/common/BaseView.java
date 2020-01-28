@@ -2,6 +2,7 @@ package org.vote.common;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import org.vote.beans.User;
 import org.vote.common.HibernateUtil;
 import org.vote.common.CookieFactory;
-
 
 /**
  * 基础视图类
@@ -80,6 +81,72 @@ public class BaseView extends HttpServlet {
       transaction.commit();
       session.close();
       return instance;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  /**
+   * 根据HQL查询语句获取数据实例列表
+   * 
+   * @param hql 查询语句
+   * @param keys 查询语句参数集合
+   * @param values 查询语句参数值集合
+   * @return 数据实例集合
+   */
+  protected List<?> getInstanceByHql(String hql, String[] keys, String[] values) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+
+    try {
+      transaction.begin();
+      
+      // 创建查询语句并设置查询参数
+      Query query = session.createQuery(hql);
+      for (int i = 0; i < keys.length; i++) {
+        query.setParameter(keys[i], values[i]);
+      }
+  
+      List<?> results = query.list();
+      
+      transaction.commit();
+      session.close();
+
+      return results.isEmpty() ? null : results;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  /**
+   * 根据HQL查询语句获取数据实例列表
+   * 
+   * @param hql 查询语句
+   * @param keys 查询语句参数集合
+   * @param values 查询语句参数值集合
+   * @return 数据实例集合
+   */
+  protected List<?> getInstanceByHql(String hql, String[] keys, long[] values) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+
+    try {
+      transaction.begin();
+      
+      // 创建查询语句并设置查询参数
+      Query query = session.createQuery(hql);
+      for (int i = 0; i < keys.length; i++) {
+        query.setParameter(keys[i], values[i]);
+      }
+  
+      List<?> results = query.list();
+      
+      transaction.commit();
+      session.close();
+
+      return results.isEmpty() ? null : results;
     } catch (HibernateException e) {
       e.printStackTrace();
       return null;
