@@ -33,9 +33,9 @@
 
 - 投票管理 http://vote.zizaixian.top/vote/manage
 
-- 审核报名 http://vote.zizaixian.top/vote/review?aid=activitieId
+- 审核报名 http://vote.zizaixian.top/vote/apply_manage?aid=activitieId
 
-- 报名设置 http://vote.zizaixian.top/vote/additem?aid=activitieId
+- 报名设置 http://vote.zizaixian.top/vote/item_manage?aid=activitieId
 
 - 礼物设置 http://vote.zizaixian.top/vote/giftconf?aid=activitieId
 

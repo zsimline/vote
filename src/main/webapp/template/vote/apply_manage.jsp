@@ -16,7 +16,7 @@
   <script src="/js/jquery.basictable.min.js"></script>
   <script src="/js/reponsetable.min.js"></script>
   <script src="/js/layer-3.1.1.js"></script>
-  <title>审核报名</title>
+  <title>报名管理</title>
 </head>
 
 <body>
@@ -27,10 +27,10 @@
         <a href="/vote/edit?aid=${aid}">编辑</a>
       </li>
       <li role="presentation" class="active">
-        <a href="/vote/review?aid=${aid}">审核报名</a>
+        <a href="/vote/apply_manage?aid=${aid}">报名管理</a>
       </li>
       <li role="presentation">
-        <a href="/vote/additem?aid=${aid}">批量添加</a>
+        <a href="/vote/item_manage?aid=${aid}">条目管理</a>
       </li>
       <li role="presentation">
         <a href="/vote/gather?aid=${aid}">结果与日志</a>
@@ -62,7 +62,7 @@
       <p><span class="title">市级:</span><input type="text" id="Sport" /></p>
     </div>
 
-    <script src="/js/review.js"></script>
+    <script src="/js/apply_manage.js"></script>
   
   </div>
   <%@ include file="../components/footer.jsp" %>

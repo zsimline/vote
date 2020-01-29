@@ -25,10 +25,10 @@
         <a href="/vote/edit?aid=${aid}">编辑</a>
       </li>
       <li role="presentation">
-        <a href="/vote/review?aid=${aid}">审核报名</a>
+        <a href="/vote/apply_manage?aid=${aid}">报名管理</a>
       </li>
       <li role="presentation">
-        <a href="/vote/additem?aid=${aid}">批量添加</a>
+        <a href="/vote/item_manage?aid=${aid}">条目管理</a>
       </li>
       <li role="presentation">
         <a href="/vote/gather?aid=${aid}">结果与日志</a>
