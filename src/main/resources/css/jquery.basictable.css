@@ -13,7 +13,6 @@ table.bt tfoot td,
 table.bt tbody td {
 	border: none;
 	display: block;
-	vertical-align: top;
 }
 
 table.bt tfoot th:before,

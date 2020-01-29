@@ -36,8 +36,8 @@ public class Activation extends BaseApi {
     }
 
     // 设置账户为激活的
+    // 更新用户实例
     user.setIsActive(true);
-    
     if (updateInstance(user)) {
       completed(response, 1300);
     } else {
