@@ -59,7 +59,7 @@ CREATE TABLE `apply`
   `id` INT UNSIGNED AUTO_INCREMENT,      -- 报名ID
   `aid` CHAR(32) NOT NULL,               -- 活动ID
   `number` SMALLINT UNSIGNED NOT NULL,   -- 条目编号
-  `status` TINYINT(1) NOT NULL,          -- 审核状态
+  `status` CHAR(1) NOT NULL,             -- 审核状态
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
   `description` VARCHAR(3000) NOT NULL,  -- 报名描述（富文本）
   `img_addr` CHAR(56) DEFAULT NULL,      -- 宣传图片地址

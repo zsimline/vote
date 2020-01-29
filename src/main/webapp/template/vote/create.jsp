@@ -116,7 +116,7 @@
 
     <label class="checkbox" for="lisence">
       <input type="checkbox" id="lisence" data-toggle="checkbox">
-      我同意投票<a href="license">服务条款</a>
+      我同意投票<a href="/index/license">服务条款</a>
     </label>
 
     <button class="btn btn-primary" onclick="handleSubmit()">　发布投票　</button>

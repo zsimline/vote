@@ -8,7 +8,8 @@
       <generator class="native"/>
     </id>
     <property name="aid" column="aid" type="java.lang.String" length="32" not-null="true"/>
-    <property name="reviewed" column="reviewed" type="java.lang.Boolean"/>
+    <property name="number" column="number" type="java.lang.Integer"/>
+    <property name="status" column="status" type="java.lang.Character"/>
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
     <property name="description" column="description" type="java.lang.String" length="3000" not-null="true"/>
     <property name="imgAddr" column="img_addr" type="java.lang.String" length="56"/>

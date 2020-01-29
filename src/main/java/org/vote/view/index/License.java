@@ -1,4 +1,4 @@
-package org.vote.view.vote;
+package org.vote.view.index;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import org.vote.common.BaseView;
 /**
  * 显示创建投票页面
  */
-@WebServlet("/vote/license")
+@WebServlet("/index/license")
 public class License extends BaseView {
   private static final long serialVersionUID = 1L;
 

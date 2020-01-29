@@ -13,16 +13,19 @@ public class Apply implements Serializable {
   
   // 活动ID
   private String aid;
+
+  // 投票编号
+  private int number;
   
-  // 是否通过审核
-  private boolean reviewed;
+  // 审核状态
+  private char status;
   
   // 条目标题
   private String title;
   
   // 条目描述
   private String description;
-  
+
   // 图片地址
   private String imgAddr;
 
@@ -51,9 +54,8 @@ public class Apply implements Serializable {
   private String address;
 
   public Apply() {
-    this.reviewed = false;
+    this.status = 'W';
   }
-
 
   /**
    * @return id
@@ -82,19 +84,33 @@ public class Apply implements Serializable {
   public void setAid(String aid) {
     this.aid = aid;
   }
-
+  
   /**
-   * @return reviewed
+   * @return number
    */
-  public boolean getReviewed() {
-    return reviewed;
+  public int getNumber() {
+    return number;
   }
 
   /**
-   * @param reviewed 要设置的 reviewed
+   * @param number 要设置的 number
    */
-  public void setReviewed(boolean reviewed) {
-    this.reviewed = reviewed;
+  public void setNumber(int number) {
+    this.number = number;
+  }
+
+  /**
+   * @return status
+   */
+  public char getStatus() {
+    return status;
+  }
+
+  /**
+   * @param status 要设置的 status
+   */
+  public void setStatus(char status) {
+    this.status = status;
   }
 
   /**
