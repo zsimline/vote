@@ -20,7 +20,7 @@
     <property name="sumEntry" column="sum_entry" type="java.lang.Integer" />
     <property name="sumVoted" column="sum_voted" type="java.lang.Long" />
     <property name="sumVisited" column="sum_visited" type="java.lang.Long" />
-    <property name="imgName" column="img_name" type="java.lang.String" length="36"/>
+    <property name="imgAddr" column="img_addr" type="java.lang.String" length="56"/>
     <property name="options" column="options" type="java.lang.String" length="300" not-null="true"/>
     <property name="destroyed" column="destroyed" type="java.lang.Boolean" />
   </class>

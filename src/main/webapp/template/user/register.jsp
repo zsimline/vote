@@ -10,8 +10,8 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <link href="/css/login.css" rel="stylesheet" type="text/css">
-  <script src="/js/login.js"></script>
+  <link href="/css/user.css" rel="stylesheet" type="text/css">
+  <script src="/js/user.js"></script>
   <title>用户注册</title>
 </head>
 
@@ -45,11 +45,6 @@
     </div>
   </div>
   <%@ include file="../components/modal.jsp" %>
-  <script>
-    function handleModalClose() {
-      window.location.href = "login";
-    }
-  </script>
 </body>
 
 </html>

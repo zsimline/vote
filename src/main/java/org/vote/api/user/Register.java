@@ -4,27 +4,22 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.google.gson.Gson;
 
 import org.vote.beans.User;
-import org.vote.common.Code;
-import org.vote.common.HibernateUtil;
 import org.vote.common.MD5;
+import org.vote.common.BaseApi;
 import org.vote.common.Utils;
 import org.vote.common.Email;
 
 /**
- * 处理创建活动
+ * 处理注册账户
  */
 @WebServlet("/api/user/register")
-public class Register extends HttpServlet {
+public class Register extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   public Register() {
@@ -45,7 +40,7 @@ public class Register extends HttpServlet {
         completed(response, 1103);
       }
 
-      if (dbExcute(user)) {
+      if (saveInstance(user)) {
         verifyEmail(response, user);
         completed(response, 1100);
       } else {
@@ -73,44 +68,5 @@ public class Register extends HttpServlet {
     if (!Email.sendMail(emailAddress, mailContent)) {
       completed(response, 1104);
     }
-  }
-
-  /**
-   * 向用户返回操作执行的结果
-   * 
-   * @param response Servlet响应对象
-   * @param status 自定义的返回码
-   * @throws ServletException
-   * @throws IOException
-   */
-  private void completed(HttpServletResponse response, int status) throws ServletException, IOException {
-    Code code = new Code(status);
-    Gson gson = new Gson();
-    String jsonObj = gson.toJson(code);
-    response.getWriter().write(jsonObj);
-    response.setStatus(200);
-  }
-
-  /**
-   * 执行新建用户的数据库操作
-   * 
-   * @param user 用户实例
-   * @return true/false 新建用户成功/失败
-   */
-  private boolean dbExcute(User user) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      session.save(user);
-      transaction.commit();
-      session.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    }
-
-    return true;
   }
 }

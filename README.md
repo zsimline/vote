@@ -151,3 +151,51 @@ function addtr() {
         const r = window.location.search.substr(1).match(reg);
         return r ? unescape(r[2]) : null;
       }
+
+  
+function reloadTable() {
+  const data = [
+    { "Title": "1111", "ImgName": 15, "Description": "1", "WhoAdded": 189, "Province": "1", "Sport": "1" },
+    { "Title": "2222", "ImgName": 15, "Description": "2", "WhoAdded": 2, "Province": "2", "Sport": "2" },
+    { "Title": "3333", "ImgName": 15, "Description": "4", "WhoAdded": 189, "Province": "3", "Sport": "3" }
+  ]
+  reponse.reloadtable(data, "table");
+}
+
+
+function edittr(a, e) {
+  const tr = $(a).parent().parent();
+  reponse.resiverowdata(tr, "table");
+  const rowdata = $("#table").data("rowdata");
+
+  layer.open({
+    type: 1,
+    title: '编辑人员信息',
+    closeBtn: 1,
+    area: '516px',
+    skin: '#fff',
+    shadeClose: true,
+    content: $('#edit-content'),
+    btn: ["保存", "关闭"],
+    btn1: function (index, layero) {
+      const Title = $("#Title").val();
+      const ImgName = $("#ImgName").val();
+      const Description = $("#Description").val();
+      const WhoAdded = $("#WhoAdded").val();
+      const Province = $("#Province").val();
+      const Sport = $("#Sport").val();
+      const obj = {
+        "Title": Title,
+        "ImgName": ImgName,
+        "Description": Description,
+        "WhoAdded": WhoAdded,
+        "Province": Province,
+        "Sport": Sport
+      };
+      reponse.editsavetr(obj, "table");
+      layer.close(index);
+    }, btn2: function (index, layero) {
+      layer.close(index);
+    }
+  });
+}

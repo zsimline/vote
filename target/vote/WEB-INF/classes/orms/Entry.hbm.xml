@@ -11,6 +11,6 @@
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
     <property name="description" column="description" type="java.lang.String" length="3000" not-null="true"/>
     <property name="acquisition" column="acquisition" type="java.lang.Long" not-null="true"/>
-    <property name="imgName" column="img_name" type="java.lang.String" length="36"/>
+    <property name="imgAddr" column="img_addr" type="java.lang.String" length="56"/>
   </class>
 </hibernate-mapping>

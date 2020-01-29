@@ -34,7 +34,7 @@ CREATE TABLE `activity`
   `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,     -- 条目总数
   `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
   `sum_visited` INT UNSIGNED DEFAULT 0,         -- 访问总数
-  `img_name` CHAR(36) DEFAULT NULL,             -- 宣传图片名
+  `img_addr` CHAR(56) DEFAULT NULL,             -- 宣传图片名
   `options` VARCHAR(300) NOT NULL,              -- 其它必填项
   `destroyed` TINYINT(1) DEFAULT 0,             -- 是否销毁
   PRIMARY KEY(`id`),
@@ -49,19 +49,20 @@ CREATE TABLE `entry`
   `title` VARCHAR(25) NOT NULL,         -- 条目标题
   `description` VARCHAR(3000) NOT NULL, -- 条目描述
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
-  `img_name` CHAR(36) DEFAULT NULL,     -- 宣传图片名
+  `img_addr` CHAR(56) DEFAULT NULL,     -- 宣传图片地址
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 报名信息表
-CREATE TABLE `apply` 
+CREATE TABLE `apply`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,      -- 报名ID
   `aid` CHAR(32) NOT NULL,               -- 活动ID
-  `reviewed` TINYINT(1) NOT NULL,        -- 是否通过审核
+  `number` SMALLINT UNSIGNED NOT NULL,   -- 条目编号
+  `status` TINYINT(1) NOT NULL,          -- 审核状态
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
   `description` VARCHAR(3000) NOT NULL,  -- 报名描述（富文本）
-  `img_name` CHAR(36) DEFAULT NULL,      -- 宣传图片名
+  `img_addr` CHAR(56) DEFAULT NULL,      -- 宣传图片地址
   `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
   `sex` TINYINT(1) DEFAULT NULL,         -- 真实性别
   `age` TINYINT(3) DEFAULT NULL,         -- 真实年龄

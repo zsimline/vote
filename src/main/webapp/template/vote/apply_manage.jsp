@@ -30,7 +30,7 @@
         <a href="/vote/apply_manage?aid=${aid}">报名管理</a>
       </li>
       <li role="presentation">
-        <a href="/vote/item_manage?aid=${aid}">条目管理</a>
+        <a href="/vote/entry_manage?aid=${aid}">条目管理</a>
       </li>
       <li role="presentation">
         <a href="/vote/gather?aid=${aid}">结果与日志</a>
@@ -61,6 +61,30 @@
       <p><span class="title">省份:</span><input type="text" id="Province" /></p>
       <p><span class="title">市级:</span><input type="text" id="Sport" /></p>
     </div>
+
+    <!-- 其它可选列 -->
+    <%
+      String[] options = (String[])request.getAttribute("options");
+      for (int i = 0; i < options.length; i++) {
+        if (options[i].equals("1")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"Name\" data-title=\"真实姓名\"></span>");
+        } else if (options[i].equals("2")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"Sex\" data-title=\"真实性别\"></span>");
+        } else if (options[i].equals("3")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"Age\" data-title=\"真实年龄\"></span>");
+        } else if (options[i].equals("4")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"Telephone\" data-title=\"手机号码\"></span>");
+        } else if (options[i].equals("5")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"Email\" data-title=\"电子邮件\"></span>");
+        } else if (options[i].equals("6")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"School\" data-title=\"学校名称\"></span>");
+        } else if (options[i].equals("7")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"Company\" data-title=\"公司名称\"></span>");
+        } else if (options[i].equals("8")) {
+          out.write("<span class=\"hidden table-column\" data-field=\"Address\" data-title=\"收货地址\"></span>");
+        }
+      }
+    %>
 
     <script src="/js/apply_manage.js"></script>
   

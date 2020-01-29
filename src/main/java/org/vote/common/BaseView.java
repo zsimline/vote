@@ -88,7 +88,7 @@ public class BaseView extends HttpServlet {
   }
 
   /**
-   * 根据HQL查询语句获取数据实例列表
+   * 根据查询语句获取数据实例列表
    * 
    * @param hql 查询语句
    * @param keys 查询语句参数集合
@@ -121,7 +121,7 @@ public class BaseView extends HttpServlet {
   }
 
   /**
-   * 根据HQL查询语句获取数据实例列表
+   * 根据查询语句获取数据实例列表
    * 
    * @param hql 查询语句
    * @param keys 查询语句参数集合

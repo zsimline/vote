@@ -9,9 +9,11 @@ function deleteActivity(aid) {
     get(`/api/vote/delete?aid=${aid}`)
       .then(data => {
         if (!(data.code % 100)) {
-          openModal('success', '删除投票成功')
+          openModal('success', '删除投票成功', () => {
+            window.location.reload();
+          });
         } else {
-          openModal('error', `${data.code} ${data.codeDesc}`);
+          openModal('error', data.codeDesc);
         }
       })
       .catch(err => {

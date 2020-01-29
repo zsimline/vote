@@ -4,25 +4,17 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.vote.common.HibernateUtil;
-
-import org.vote.common.Code;
+import org.vote.common.BaseApi;
 import org.vote.beans.Activity;
-
-import com.google.gson.Gson;
 
 /**
  * 处理删除活动
  */
 @WebServlet("/api/vote/delete")
-public class Delete extends HttpServlet {
+public class Delete extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   public Delete() {
@@ -30,60 +22,51 @@ public class Delete extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
-    if (dbExcute(aid) > 0) {
+    Activity activity = (Activity)getInstanceById(Activity.class, aid);
+    String uid = userIdentify(request, response);
+    
+    // 验证是否可删除
+    if (!canDelete(uid, activity)) {
+      completed(response, 1902);
+      return ;
+    }
+
+    // 设置活动为销毁
+    // 删除投票表并更新活动实例
+    activity.setDestroyed(true);
+    if (deleteTicketTable(aid) && updateInstance(activity)) {
       completed(response, 1900);
     } else {
       completed(response, 1901);
     }
   }
 
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request, response);
+  /**
+   * 验证投票是否可被删除
+   * 当出现以下情况时投票不可被删除
+   * - 用户未登录
+   * - 活动不存在
+   * - 活动不属于该用户
+   * 
+   * @param uid 活动ID
+   * @param activity 活动实例
+   * @return true/false 投票可/不可被删除
+   */
+  private boolean canDelete(String uid, Activity activity) {
+    return uid != null && activity != null &&
+           activity.getPublisher() == Long.valueOf(uid);
   }
 
   /**
-   * 向用户返回操作执行的结果
-   * @param response Servlet响应对象
-   * @param status 自定义的返回码
-   * @throws ServletException
-   * @throws IOException
+   * 创建投票表
+   * 
+   * @param aid 活动ID
+   * @return 创建投票表成功/失败
    */
-  private void completed(HttpServletResponse response, int status) throws ServletException, IOException {
-    Code code = new Code(status);
-    Gson gson = new Gson();
-    String jsonObj = gson.toJson(code);
-    response.getWriter().write(jsonObj);
-    response.setStatus(200);
-  }
-
-  /**
-   * 执行删除活动的数据库操作
-   * @return 影响的行数
-   */
-  private int dbExcute(String aid) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      
-      Activity activity = (Activity) session.get(Activity.class, aid);
-      System.out.println(activity);
-      activity.setDestroyed(true);
-      session.update(activity);
-
-      // 删除投票表
-      SQLQuery query = session.createSQLQuery("call drop_ticket_table(:uuid)");
-      query.setParameter("uuid", activity.getId());
-      query.executeUpdate();
-
-      transaction.commit();
-      session.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return 0;
-    }
-
-    return 1;
+  private boolean deleteTicketTable(String aid) {
+    // 调用创建投票表事务
+    String hql = "call drop_ticket_table(:uuid)";
+    String[] keys = {"uuid"}, values = {aid};
+    return dbExcute(hql, keys, values);
   }
 }

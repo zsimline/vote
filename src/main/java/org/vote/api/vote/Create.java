@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,15 +15,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import com.google.gson.Gson;
-
 import org.vote.beans.Activity;
-import org.vote.common.Code;
-import org.vote.common.HibernateUtil;
+import org.vote.common.BaseApi;
 import org.vote.common.UUIDTool;
 import org.vote.common.Utils;
 
@@ -32,17 +24,26 @@ import org.vote.common.Utils;
  * 处理创建活动
  */
 @WebServlet("/api/vote/create")
-public class Create extends HttpServlet {
+public class Create extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   public Create() {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String uid = userIdentify(request, response);
+    if (uid == null) {
+      completed(response, 1003);
+      return ;
+    }
+
     // 只处理 multipart 类型的表单数据
     boolean multipart = ServletFileUpload.isMultipartContent(request);
     if (multipart) {
       Activity activity = new Activity();
+
+      // 设置发布者
+      activity.setPublisher(Long.valueOf(uid));
 
       // 创建磁盘文件工厂
       DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -59,9 +60,6 @@ public class Create extends HttpServlet {
       try {
         List<FileItem> items = upload.parseRequest(request);
         Iterator<FileItem> iter = items.iterator();
-
-        // TODO 设置发布者
-        activity.setPublisher(1000001);
 
         while (iter.hasNext()) {
           FileItem item = iter.next();
@@ -109,8 +107,8 @@ public class Create extends HttpServlet {
             String fullPath = Utils.mkdirByDate(basePath);
 
             // 定义本机存储的文件名
-            String localFileName = UUIDTool.getUUID() + "." + ext;
-            activity.setImgName(localFileName);
+            String localFileName =  UUIDTool.getUUID() + "." + ext;
+            activity.setImgAddr(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
 
             // 存储文件
             File file = new File(fullPath, localFileName);
@@ -122,7 +120,7 @@ public class Create extends HttpServlet {
         activity.setId(UUIDTool.getUUID());
 
         // 执行数据存储
-        if (dbExcute(activity)) {
+        if (createTicketTable(activity.getId()) && saveInstance(activity)) {
           completed(response, 1000);
         } else {
           completed(response, 1001);
@@ -132,51 +130,18 @@ public class Create extends HttpServlet {
         completed(response, 1001);
       }
     }
-  }
+  }  
 
   /**
-   * 向用户返回操作执行的结果
+   * 创建投票表
    * 
-   * @param response Servlet响应对象
-   * @param status   自定义的返回码
-   * @throws ServletException
-   * @throws IOException
+   * @param aid 活动ID
+   * @return 创建投票表成功/失败
    */
-  private void completed(HttpServletResponse response, int status) throws ServletException, IOException {
-    Code code = new Code(status);
-    Gson gson = new Gson();
-    String jsonObj = gson.toJson(code);
-    response.getWriter().write(jsonObj);
-    response.setStatus(200);
-  }
-
-  /**
-   * 执行新建活动的数据库操作
-   * 
-   * @param activity 活动实例
-   * @return true/false 新建活动成功/失败
-   */
-  private boolean dbExcute(Activity activity) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-
-      // 创建投票表
-      SQLQuery query = session.createSQLQuery("call create_ticket_table(:uuid)");
-      query.setParameter("uuid", activity.getId());
-      query.executeUpdate();
-
-      session.save(activity);
-
-      transaction.commit();
-      session.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    }
-
-    return true;
+  private boolean createTicketTable(String aid) {
+    // 调用创建投票表事务
+    String hql = "call create_ticket_table(:uuid)";
+    String[] keys = {"uuid"}, values = {aid};
+    return dbExcute(hql, keys, values);
   }
 }

@@ -168,9 +168,9 @@ resource.
     <body-content>JSP</body-content>
     <attribute>
         <description>
-Collection of items to iterate over.
+Collection of s to iterate over.
         </description>
-	<name>items</name>
+	<name>s</name>
 	<required>false</required>
 	<rtexprvalue>true</rtexprvalue>
 	<type>java.lang.Object</type>
@@ -180,11 +180,11 @@ Collection of items to iterate over.
     </attribute>
     <attribute>
         <description>
-If items specified:
-Iteration begins at the item located at the
-specified index. First item of the collection has
+If s specified:
+Iteration begins at the  located at the
+specified index. First  of the collection has
 index 0.
-If items not specified:
+If s not specified:
 Iteration begins with index set at the value
 specified.
         </description>
@@ -195,10 +195,10 @@ specified.
     </attribute>
     <attribute>
         <description>
-If items specified:
-Iteration ends at the item located at the
+If s specified:
+Iteration ends at the  located at the
 specified index (inclusive).
-If items not specified:
+If s not specified:
 Iteration ends when index reaches the value
 specified.
         </description>
@@ -209,7 +209,7 @@ specified.
     </attribute>
     <attribute>
         <description>
-Iteration will only process every step items of
+Iteration will only process every step s of
 the collection, starting with the first one.
         </description>
 	<name>step</name>
@@ -220,7 +220,7 @@ the collection, starting with the first one.
     <attribute>
         <description>
 Name of the exported scoped variable for the
-current item of the iteration. This scoped
+current  of the iteration. This scoped
 variable has nested visibility. Its type depends
 on the object of the underlying collection.
         </description>
@@ -252,7 +252,7 @@ visibility.
         <description>
 String of tokens to iterate over.
         </description>
-	<name>items</name>
+	<name>s</name>
 	<required>true</required>
 	<rtexprvalue>true</rtexprvalue>
 	<type>java.lang.String</type>
@@ -303,7 +303,7 @@ of the string, starting with the first one.
     <attribute>
         <description>
 Name of the exported scoped variable for the
-current item of the iteration. This scoped
+current  of the iteration. This scoped
 variable has nested visibility.
         </description>
 	<name>var</name>

@@ -24,7 +24,7 @@ public class Apply implements Serializable {
   private String description;
   
   // 图片地址
-  private String imgName;
+  private String imgAddr;
 
   // 人物性别
   private byte sex;
@@ -126,17 +126,17 @@ public class Apply implements Serializable {
   }
 
   /**
-   * @return imgName
+   * @return imgAddr
    */
-  public String getImgName() {
-    return imgName;
+  public String getImgAddr() {
+    return imgAddr;
   }
 
   /**
-   * @param imgName 要设置的 imgName
+   * @param imgAddr 要设置的 imgAddr
    */
-  public void setImgName(String imgName) {
-    this.imgName = imgName;
+  public void setImgAddr(String imgAddr) {
+    this.imgAddr = imgAddr;
   }
 
   /**

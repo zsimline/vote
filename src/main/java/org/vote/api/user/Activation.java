@@ -5,26 +5,17 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import com.google.gson.Gson;
-
 import org.vote.beans.User;
-import org.vote.common.Code;
-import org.vote.common.HibernateUtil;
-
+import org.vote.common.BaseApi;
 
 /**
- * 处理激活账户
+ * 处理账户激活
  */
 @WebServlet("/api/user/activation")
-public class Activation extends HttpServlet {
+public class Activation extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   public Activation() {
@@ -47,27 +38,11 @@ public class Activation extends HttpServlet {
     // 设置账户为激活的
     user.setIsActive(true);
     
-    if (dbExcute(user)) {
+    if (updateInstance(user)) {
       completed(response, 1300);
     } else {
       completed(response, 1301);
     }
-  }
-
-  /**
-   * 向用户返回操作执行的结果
-   * 
-   * @param response Servlet响应对象
-   * @param status 自定义的返回码
-   * @throws ServletException
-   * @throws IOException
-   */
-  private void completed(HttpServletResponse response, int status) throws ServletException, IOException {
-    Code code = new Code(status);
-    Gson gson = new Gson();
-    String jsonObj = gson.toJson(code);
-    response.getWriter().write(jsonObj);
-    response.setStatus(200);
   }
 
   /**
@@ -78,47 +53,9 @@ public class Activation extends HttpServlet {
    */
   @SuppressWarnings("unchecked")
   private User getUserByEmail(String emailAddress) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      
-      String hql = "FROM User WHERE email = :emailAddress";
-      Query query = session.createQuery(hql);
-      query.setParameter("emailAddress", emailAddress);
-      List<User> results = (List<User>) query.list();
-      
-      transaction.commit();
-      session.close();
-      
-      return results.isEmpty() ? null :results.get(0);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  /**
-   * 执行用户激活的数据库操作
-   * 
-   * @param activity 活动实例
-   * @return true/false 新建活动成功/失败
-   */
-  private boolean dbExcute(User user) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      session.update(user);
-      transaction.commit();
-      session.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    }
-
-    return true;
+    String hql = "FROM User WHERE email = :emailAddress";
+    String[] keys = {"emailAddress"},values = {emailAddress};
+    List<User> results = (List<User>)getInstanceByHql(hql, keys, values);
+    return results.isEmpty() ? null : results.get(0);
   }
 }

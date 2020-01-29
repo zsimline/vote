@@ -1,3 +1,12 @@
+/**
+ * 处理与用户相关的操作
+ * 如用户注册、登录、更改密码等
+ */
+
+/**
+ * 处理用户注册
+ * 校验表单并向后端发送数据
+ */
 function handleRegister() {
   // 获取表单数据
   const nickname = $('#nickname').val();
@@ -37,7 +46,9 @@ function handleRegister() {
   postJSON('/api/user/register', JSON.stringify(postData))
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.codeDesc);
+        openModal('success', data.codeDesc, () => {
+          window.location.href="/user/login";
+        });
       } else {
         openModal('error', data.codeDesc);
       }
@@ -47,7 +58,10 @@ function handleRegister() {
     });
 }
 
-
+/**
+ * 处理用户登录
+ * 校验表单并向后端发送数据
+ */
 function handleLogin() {
   const email = $('#email').val();
   const password = $('#password').val();
@@ -70,10 +84,9 @@ function handleLogin() {
   postJSON('/api/user/login', JSON.stringify(postData))
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.codeDesc);
-        setTimeout(() => {
-          window.location.href = "/"
-        }, 1800)
+        openModal('success', data.codeDesc, () => {
+          window.location.href = "/";
+        });
       } else {
         openModal('error', data.codeDesc);
       }

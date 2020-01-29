@@ -18,14 +18,16 @@ public class Code {
   public static void initialize() {
     codes = new HashMap<Integer, String>();
 
-    // 发布功能返回码
+    // 发布投票功能返回码
     codes.put(1000, "发布投票成功");
     codes.put(1001, "发布投票失败原因未知");
     codes.put(1002, "图片文件后缀名只能为.jpg/.png");
+    codes.put(1003, "无权执行操作");
 
-    // 发布功能返回码
+    // 删除投票功能返回码
     codes.put(1900, "删除投票成功");
     codes.put(1901, "删除投票失败原因未知");
+    codes.put(1902, "无权执行操作");
 
     // 用户注册功能返回码
     codes.put(1100, "注册账户成功，我们已向您的邮箱发了一封验证消息，请及时查收并验证账户");

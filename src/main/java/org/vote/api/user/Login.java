@@ -5,29 +5,23 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.google.gson.Gson;
 
 import org.vote.beans.User;
-import org.vote.common.Code;
-import org.vote.common.HibernateUtil;
+import org.vote.common.BaseApi;
 import org.vote.common.MD5;
 import org.vote.common.UUIDTool;
 import org.vote.common.CookieFactory;
 import org.vote.common.Utils;
 
 /**
- * 处理登录账户
+ * 处理账户登录
  */
 @WebServlet("/api/user/login")
-public class Login extends HttpServlet {
+public class Login extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   public Login() {
@@ -59,7 +53,7 @@ public class Login extends HttpServlet {
           String token = UUIDTool.getUUID();
           user.setToken(token);
 
-          if (dbExcute(user)) {
+          if (updateInstance(user)) {
             CookieFactory cookieFactory = new CookieFactory(request, response);
             cookieFactory.setCookie("uid", String.valueOf(user.getId()));
             cookieFactory.setCookie("token", token);
@@ -85,63 +79,9 @@ public class Login extends HttpServlet {
    */
   @SuppressWarnings("unchecked")
   private User getUserByEmail(String emailAddress) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-
-      String hql = "FROM User WHERE email = :emailAddress";
-      Query query = session.createQuery(hql);
-      query.setParameter("emailAddress", emailAddress);
-      List<User> results = (List<User>) query.list();
-
-      transaction.commit();
-      session.close();
-
-      return results.isEmpty() ? null : results.get(0);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  /**
-   * 向用户返回操作执行的结果
-   * 
-   * @param response Servlet响应对象
-   * @param status   自定义的返回码
-   * @throws ServletException
-   * @throws IOException
-   */
-  private void completed(HttpServletResponse response, int status) throws ServletException, IOException {
-    Code code = new Code(status);
-    Gson gson = new Gson();
-    String jsonObj = gson.toJson(code);
-    response.getWriter().write(jsonObj);
-    response.setStatus(200);
-  }
-
-  /**
-   * 执行更新登录令牌的数据库操作
-   * 
-   * @param user 活动实例
-   * @return true/false 更新登录令牌成功/失败
-   */
-  private boolean dbExcute(User user) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      session.update(user);
-      transaction.commit();
-      session.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    }
-
-    return true;
+    String hql = "FROM User WHERE email = :emailAddress";
+    String[] keys = {"emailAddress"},values = {emailAddress};
+    List<User> results = (List<User>)getInstanceByHql(hql, keys, values);
+    return results.isEmpty() ? null : results.get(0);
   }
 }

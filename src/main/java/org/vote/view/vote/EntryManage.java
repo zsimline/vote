@@ -12,12 +12,12 @@ import org.vote.common.BaseView;
 /**
  * 显示创建投票页面
  */
-@WebServlet("/vote/item_manage")
-public class ItemManage extends BaseView {
+@WebServlet("/vote/entry_manage")
+public class EntryManage extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     request.setAttribute("aid", request.getParameter("aid"));
-    display(request, response, "/template/vote/item_manage.jsp");
+    display(request, response, "/template/vote/entry_manage.jsp");
   }
 }

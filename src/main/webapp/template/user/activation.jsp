@@ -16,7 +16,7 @@
 
   <script>
     window.onload = function() {
-    const activationAddress = `http://127.0.0.1/api/user/activation?email=${$('#email').text()}&code=${$('#code').text()}`;
+    const activationAddress = "http://127.0.0.1/api/user/activation?email=" + $('#email').text() + "&code=" + $('#code').text();
     get(activationAddress)
       .then(data => {
         if (!(data.code % 100)) {

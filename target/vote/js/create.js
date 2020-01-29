@@ -115,7 +115,9 @@ function handleSubmit() {
   post('/api/vote/create', formData)
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.codeDesc);
+        openModal('success', data.codeDesc, () => {
+          window.location.href = '/vote/manage';
+        });
       } else {
         openModal('error', data.codeDesc);
       }

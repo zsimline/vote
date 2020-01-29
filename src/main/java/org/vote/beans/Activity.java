@@ -52,7 +52,7 @@ public class Activity implements Serializable {
   private long sumVisited;
 
   // 宣传图片地址
-  private String imgName;
+  private String imgAddr;
 
   // 其它必填项
   private String options;
@@ -265,17 +265,17 @@ public class Activity implements Serializable {
   }
 
   /**
-   * @return imgName
+   * @return imgAddr
    */
-  public String getImgName() {
-    return imgName;
+  public String getImgAddr() {
+    return imgAddr;
   }
 
   /**
-   * @param imgName 要设置的 imgName
+   * @param imgAddr 要设置的 imgAddr
    */
-  public void setImgName(String imgName) {
-    this.imgName = imgName;
+  public void setImgAddr(String imgAddr) {
+    this.imgAddr = imgAddr;
   }
 
   /**

@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,22 +14,16 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import com.google.gson.Gson;
-
 import org.vote.beans.Apply;
-import org.vote.common.Code;
-import org.vote.common.HibernateUtil;
+import org.vote.common.BaseApi;
 import org.vote.common.UUIDTool;
 import org.vote.common.Utils;
 
 /**
- * 处理创建活动
+ * 处理活动报名
  */
 @WebServlet("/api/vote/apply")
-public class ApplySingle extends HttpServlet {
+public class ApplySingle extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   public ApplySingle() {
@@ -107,7 +100,7 @@ public class ApplySingle extends HttpServlet {
 
             // 定义本机存储的文件名
             String localFileName = UUIDTool.getUUID() + "." + ext;
-            apply.setImgName(localFileName);
+            apply.setImgAddr(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
 
             // 存储文件
             File file = new File(fullPath, localFileName);
@@ -116,7 +109,7 @@ public class ApplySingle extends HttpServlet {
         }
 
         // 执行数据存储
-        if (dbExcute(apply)) {
+        if (saveInstance(apply)) {
           completed(response, 1400);
         } else {
           completed(response, 1401);
@@ -126,44 +119,5 @@ public class ApplySingle extends HttpServlet {
         completed(response, 1401);
       }
     }
-  }
-
-  /**
-   * 向用户返回操作执行的结果
-   * 
-   * @param response Servlet响应对象
-   * @param status   自定义的返回码
-   * @throws ServletException
-   * @throws IOException
-   */
-  private void completed(HttpServletResponse response, int status) throws ServletException, IOException {
-    Code code = new Code(status);
-    Gson gson = new Gson();
-    String jsonObj = gson.toJson(code);
-    response.getWriter().write(jsonObj);
-    response.setStatus(200);
-  }
-
-  /**
-   * 执行新建报名的数据库操作
-   * 
-   * @param apply 报名实例
-   * @return true/false 新建报名成功/失败
-   */
-  private boolean dbExcute(Apply apply) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      session.save(apply);
-      transaction.commit();
-      session.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    }
-
-    return true;
   }
 }
