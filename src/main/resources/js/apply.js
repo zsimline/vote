@@ -1,106 +1,182 @@
+// 报名选项
+const applyOptions = {
+  name: {
+    id: "#name",
+    errTip: "真实姓名不能为空",
+  },
+  sex: {
+    id: "#sex",
+    errTip: "真实性别不能为空",
+  },
+  age: {
+    id: "#age",
+    errTip: "真实年龄不能为空",
+  },
+  telephone: {
+    id: "#telephone",
+    errTip: "手机号码不能为空",
+  },
+  email: {
+    id: "#email",
+    errTip: "电子邮件不能为空",
+  },
+  school: {
+    id: "#school",
+    errTip: "学校名称不能为空",
+  },
+  company: {
+    id: "#company",
+    errTip: "公司名称不能为空",
+  },
+  address: {
+    id: "#address",
+    errTip: "收货地址不能为空",
+  },
+};
+
 /**
  * 处理表单提交
  * 获取表单数据并校验
  */
 function handleSubmit() {
-  // 获取表单数据
-  const aid = $('#aid').text();
-  const title = $('#title').val();
-  const imgName = $('#img-name').val();
-  const description = tinyMCE.activeEditor.getContent();
-  const name = $('#name').val();
-  const sex = $(":radio:checked").val();
-  const age = $('#age').val();
-  const telephone = $('#telephone').val();
-  const email = $('#email').val();
-  const school = $('#school').val();
-  const company = $('#company').val();
-  const address = $('#address').val();
-
-  // 校验表单是否为空
-  if (title !== undefined && title === '') {
-    openModal('error', '标题不能为空');
-    return;
-  }
-  if (imgName !== undefined && imgName === '') {
-    openModal('error', '请上传介绍图片');
-    return;
-  }
-  if (description !== undefined && description === '') {
-    openModal('error', '详细描述不能为空');
-    return;
-  }
-  if (name !== undefined && name === '') {
-    openModal('error', '真实姓名不能为空');
-    return;
-  }
-  if (sex !== undefined && sex === '') {
-    openModal('error', '真实性别不能为空');
-    return;
-  }
-  if (age !== undefined && age === '') {
-    openModal('error', '真实年龄不能为空');
-    return;
-  }
-  if (telephone !== undefined && telephone === '') {
-    openModal('error', '手机号码不能为空');
-    return;
-  }
-  if (email !== undefined && email === '') {
-    openModal('error', '电子邮件不能为空');
-    return;
-  }
-  if (school !== undefined && school === '') {
-    openModal('error', '学校名称不能为空');
-    return;
-  }
-  if (company !== undefined && company === '') {
-    openModal('error', '公司名称不能为空');
-    return;
-  }
-  if (address !== undefined && address === '') {
-    openModal('error', '收货地址不能为空');
-    return;
-  }
-
   // 判断用户是够勾选同意协议
   if (!$('#lisence').is(':checked')) {
-    openModal('error', '请勾选`我同意投票服务条款`');
-    return;
+    openModal('error', '请勾选 [我同意投票服务条款]');
+    return ;
   }
 
-  const formData = new FormData();
-  formData.append('aid', aid);
-  formData.append('title', title);
-  formData.append('imgName', $('#img-name').prop('files')[0]);
-  formData.append('description', description);
+  // 校验表单并追加数据
+  checkFactory.formData = new FormData();  
+  if (checkFactory.check()) {
+    uploadData(checkFactory.formData);
+  }
+}
 
-  if (name) {
-    formData.append('name', name);
+/**
+ * 校验标题是否为空
+ * 校验通过后将数据追加到容器中
+ *
+ * @return true/false 校验成功/失败
+ */
+function checkTitle() {
+  const title = $('#title').val();
+  if (title === '') {
+    openModal('error', '标题不能为空');
+    return false;
+  } else {
+    this.formData.append('title', title);
+    return true;
   }
-  if (sex) {
-    formData.append('sex', sex);
-  }
-  if (age) {
-    formData.append('age', age);
-  }
-  if (telephone) {
-    formData.append('telephone', telephone);
-  }
-  if (email) {
-    formData.append('email', email);
-  }
-  if (school) {
-    formData.append('school', school);
-  }
-  if (company) {
-    formData.append('company', company);
-  }
-  if (address) {
-    formData.append('address', address);
+}
+
+/**
+ * 校验详细介绍是否为空
+ * 校验通过后将数据追加到容器中
+ *
+ * @return true/flase 校验成功/失败
+ */
+function checkIntroduction() {
+  if (window.tinyMCE === undefined) {
+    return true;
   }
 
-  // 向服务器提交数据
+  const introduction = tinyMCE.activeEditor.getContent();
+  if (introduction === '') {
+    openModal('error', '详细介绍不能为空');
+    return false;
+  } else {
+    this.formData.append('introduction', introduction);
+    return true;
+  }
+}
+
+/**
+ * 校验参赛图片是否为空
+ * 校验通过后将数据追加到容器中
+ *
+ * @return true/false 校验成功/失败
+ */
+function checkImgEntry() {
+  const imgEntry = $('#img-entry').val();
+  if (imgEntry === undefined) {
+    return true;
+  } else if (imgEntry === '') {
+    openModal('error', '参赛图片不能为空');
+    return false;
+  } else {
+    this.formData.append('imgEntry', $('#img-entry').prop('files')[0]);
+    return true;
+  }
+}
+
+/**
+ * 校验其它可选项是否为空
+ * 校验通过后将数据追加到容器中
+ *
+ * @return true/false 校验成功/失败
+ */
+function checkApplyOptions() {
+  const keys =  Object.keys(applyOptions);
+  for (let i = 0; i < keys.length; i++) {
+    const value = $(applyOptions[keys[i]].id).val();
+    if (value === undefined) {
+      continue;
+    } else if (value === '') {
+      openModal('error', applyOptions[keys[i]].errTip);
+      return false;
+    } else {
+      this.formData.append(keys[i], value);
+    }
+  }
+
+  return true;
+}
+
+/**
+ * 校验活动ID是否为空
+ * 校验通过后将数据追加到容器中
+ *
+ * @return true/false 校验成功/失败
+ */
+function checkAid() {
+  const aid = $('#aid').text();
+  if (aid === '') {
+    openModal('error', '页面生成错误');
+    return false;
+  } else {
+    this.formData.append('aid', aid);
+    return true;
+  }
+}
+
+// 创建校验工厂
+const checkFactory = {
+  formData: null,
+  check: function() {
+    for (let i = 0; i < this.functions.length; i++) {
+      if (!this.functions[i]()) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+// 绑定校验函数
+// 使校验函数的this指针指向checkFactory
+checkFactory.functions = [
+  checkTitle.bind(checkFactory),
+  checkImgEntry.bind(checkFactory),
+  checkIntroduction.bind(checkFactory),
+  checkApplyOptions.bind(checkFactory),
+  checkAid.bind(checkFactory),
+];
+
+/**
+ * 上传报名数据
+ * 
+ * @param {FormData} formData
+ */
+function uploadData(formData) {
   post('/api/vote/apply', formData)
     .then(data => {
       if (!(data.code % 100)) {

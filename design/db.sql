@@ -25,7 +25,7 @@ CREATE TABLE `activity`
   `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
   `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
   `quantifier` CHAR(1) NOT NULL,                -- 条目量词
-  `description` TEXT NOT NULL,                  -- 活动描述（富文本）
+  `summary` TEXT NOT NULL,                      -- 活动简介（富文本）
   `vote_time_start` DATETIME NOT NULL,          -- 投票开始时间
   `vote_time_end` DATETIME NOT NULL,            -- 投票截止时间
   `apply_time_start` DATETIME NOT NULL,         -- 报名开始时间
@@ -34,8 +34,9 @@ CREATE TABLE `activity`
   `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,     -- 条目总数
   `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
   `sum_visited` INT UNSIGNED DEFAULT 0,         -- 访问总数
-  `img_addr` CHAR(56) DEFAULT NULL,             -- 宣传图片名
+  `img_main` CHAR(56) DEFAULT NULL,             -- 宣传图片名
   `options` VARCHAR(300) NOT NULL,              -- 其它必填项
+  `can_apply` TINYINT(1) DEFAULT 0,             -- 能否报名
   `destroyed` TINYINT(1) DEFAULT 0,             -- 是否销毁
   PRIMARY KEY(`id`),
   CHECK(`maxium` < 101)
@@ -47,9 +48,9 @@ CREATE TABLE `entry`
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 条目ID
   `aid` CHAR(32) NOT NULL,              -- 活动ID
   `title` VARCHAR(25) NOT NULL,         -- 条目标题
-  `description` TEXT NOT NULL,          -- 条目描述
+  `introduction` TEXT DEFAULT NULL,     -- 条目描述
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
-  `img_addr` CHAR(56) DEFAULT NULL,     -- 宣传图片地址
+  `img_entry` CHAR(56) DEFAULT NULL,    -- 宣传图片地址
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -61,8 +62,8 @@ CREATE TABLE `apply`
   `number` SMALLINT UNSIGNED NOT NULL,   -- 条目编号
   `status` CHAR(1) NOT NULL,             -- 审核状态
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
-  `description` TEXT NOT NULL,           -- 报名描述（富文本）
-  `img_addr` CHAR(56) DEFAULT NULL,      -- 宣传图片地址
+  `introduction` TEXT DEFAULT NULL,      -- 报名描述（富文本）
+  `img_entry` CHAR(56) DEFAULT NULL,     -- 宣传图片地址
   `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
   `sex` TINYINT(1) DEFAULT NULL,         -- 真实性别
   `age` TINYINT(3) DEFAULT NULL,         -- 真实年龄
@@ -75,21 +76,21 @@ CREATE TABLE `apply`
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 投票信息表
-CREATE TABLE `ticket`
-(
-  `id` INT UNSIGNED AUTO_INCREMENT,       -- 投票ID
-  `openid` CHAR(28) NOT NULL,             -- 投票者OpenID
-  `whom` INT UNSIGNED NOT NULL,           -- 投向条目的ID
-  `nickname` VARCHAR(32) DEFAULT NULL,    -- 投票者昵称
-  `sex` TINYINT(1) DEFAULT NULL,          -- 投票者性别
-  `country` VARCHAR(12) DEFAULT NULL,     -- 投票者所属国家
-  `province` VARCHAR(10) DEFAULT NULL,    -- 投票者所属省份
-  `city` VARCHAR(8) DEFAULT NULL,         -- 投票者所属城市
-  `headimgurl` VARCHAR(255) DEFAULT NULL, -- 投票者头像地址
-  `timestamp` DATETIME NOT NULL,          -- 投票时间
-  `ipaddr` CHAR(15) NOT NULL,             -- IP地址
-  PRIMARY KEY (`id`)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+--CREATE TABLE `ticket`
+--(
+--  `id` INT UNSIGNED AUTO_INCREMENT,       -- 投票ID
+--  `openid` CHAR(28) NOT NULL,             -- 投票者OpenID
+--  `whom` INT UNSIGNED NOT NULL,           -- 投向条目的ID
+--  `nickname` VARCHAR(32) DEFAULT NULL,    -- 投票者昵称
+--  `sex` TINYINT(1) DEFAULT NULL,          -- 投票者性别
+--  `country` VARCHAR(12) DEFAULT NULL,     -- 投票者所属国家
+--  `province` VARCHAR(10) DEFAULT NULL,    -- 投票者所属省份
+--  `city` VARCHAR(8) DEFAULT NULL,         -- 投票者所属城市
+--  `headimgurl` VARCHAR(255) DEFAULT NULL, -- 投票者头像地址
+--  `timestamp` DATETIME NOT NULL,          -- 投票时间
+--  `ipaddr` CHAR(15) NOT NULL,             -- IP地址
+--  PRIMARY KEY (`id`)
+--)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 创建投票表
 DELIMITER $$

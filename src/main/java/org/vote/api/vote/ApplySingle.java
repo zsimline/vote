@@ -65,8 +65,8 @@ public class ApplySingle extends BaseApi {
               apply.setAid(fieldContent);
             } else if (fieldName.equals("title")) {
               apply.setTitle(fieldContent);
-            } else if (fieldName.equals("description")) {
-              apply.setDescription(fieldContent);
+            } else if (fieldName.equals("introduction")) {
+              apply.setIntroduction(fieldContent);
             } else if (fieldName.equals("name")) {
               apply.setName(fieldContent);
             } else if (fieldName.equals("sex")) {
@@ -100,7 +100,7 @@ public class ApplySingle extends BaseApi {
 
             // 定义本机存储的文件名
             String localFileName = UUIDTool.getUUID() + "." + ext;
-            apply.setImgAddr(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
+            apply.setImgEntry(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
 
             // 存储文件
             File file = new File(fullPath, localFileName);

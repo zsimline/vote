@@ -32,8 +32,8 @@
       <span class="extra-tip">投票的标题，最多40个字符</span>
     </div>
     <div class="inputcon">
-      <label for="img-name">宣传图片</label>
-      <input type="file" id="img-name" class="form-control input-sm">
+      <label for="img-main">宣传图片</label>
+      <input type="file" id="img-main" class="form-control input-sm">
       <span class="extra-tip">投票页顶部图片，文件小于1M</span>
     </div>
     <div class="inputcon">
@@ -88,13 +88,13 @@
     <h5>报名选项</h5>
     <hr>
     <div class="apply-options">
-      <label for="name">参赛图片</label>
+      <label for="img-entry">参赛图片</label>
       <div class="switch switch-square">
-        <input id="imgAddr1" type="checkbox" data-index="0" checked>
+        <input id="img-entry" type="checkbox" data-index="0" checked>
       </div><br>
-      <label for="name">详细介绍</label>
+      <label for="introduction">详细介绍</label>
       <div class="switch switch-square">
-        <input id="description1" type="checkbox" data-index="1" checked>
+        <input id="introduction" type="checkbox" data-index="1" checked>
       </div><br>
       <label for="name">真实姓名</label>
       <div class="switch switch-square">
@@ -133,7 +133,7 @@
     <hr>
 
     <label class="checkbox" for="lisence">
-      <input type="checkbox" id="lisence" data-toggle="checkbox">
+      <input type="checkbox" id="lisence">
       我同意投票<a href="/index/license">服务条款</a>
     </label>
 

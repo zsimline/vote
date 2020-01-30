@@ -11,7 +11,7 @@
     <property name="publisher" column="publisher" type="java.lang.Long" not-null="true"/>
     <property name="suffix" column="suffix" type="java.lang.String" length="3" not-null="true"/>
     <property name="quantifier" column="quantifier" type="java.lang.String" length="1" not-null="true"/>
-    <property name="description" column="description" type="java.lang.String" not-null="true"/>
+    <property name="summary" column="summary" type="java.lang.String" not-null="true"/>
     <property name="voteTimeStart" column="vote_time_start" type="java.util.Date" not-null="true"/>
     <property name="voteTimeEnd" column="vote_time_end" type="java.util.Date" not-null="true"/>
     <property name="applyTimeStart" column="apply_time_start" type="java.util.Date" not-null="true"/>
@@ -20,7 +20,7 @@
     <property name="sumEntry" column="sum_entry" type="java.lang.Integer" />
     <property name="sumVoted" column="sum_voted" type="java.lang.Long" />
     <property name="sumVisited" column="sum_visited" type="java.lang.Long" />
-    <property name="imgAddr" column="img_addr" type="java.lang.String" length="56"/>
+    <property name="imgMain" column="img_main" type="java.lang.String" length="56"/>
     <property name="options" column="options" type="java.lang.String" length="300" not-null="true"/>
     <property name="destroyed" column="destroyed" type="java.lang.Boolean" />
   </class>

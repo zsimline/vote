@@ -77,8 +77,8 @@ public class Create extends BaseApi {
               activity.setSuffix(fieldContent);
             } else if (fieldName.equals("quantifier")) {
               activity.setQuantifier(fieldContent);
-            } else if (fieldName.equals("description")) {
-              activity.setDescription(fieldContent);
+            } else if (fieldName.equals("summary")) {
+              activity.setSummary(fieldContent);
             } else if (fieldName.equals("voteTimeStart")) {
               activity.setVoteTimeStart(new Date(Long.parseLong(fieldContent)));
             } else if (fieldName.equals("voteTimeEnd")) {
@@ -108,7 +108,7 @@ public class Create extends BaseApi {
 
             // 定义本机存储的文件名
             String localFileName =  UUIDTool.getUUID() + "." + ext;
-            activity.setImgAddr(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
+            activity.setImgMain(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
 
             // 存储文件
             File file = new File(fullPath, localFileName);

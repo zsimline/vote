@@ -26,62 +26,49 @@
       <input type="text" id="title" class="form-control input-sm" placeholder="请输入标题" maxlength="15">
       <span class="extra-tip">如姓名、作品名等，最多15个字符</span>
     </div>
-    <div class="inputcon">
-      <label for="img-name">介绍图片</label>
-      <input type="file" id="img-name" class="form-control input-sm">
-      <span class="extra-tip">您个人的介绍图片，文件小于1M</span>
-    </div>
-
-    <label>详细描述</label>
-    <div id="tinymce"></div>
-    <!-- 富文本编辑器配置 -->
-    <script>
-      tinymce.init({
-        selector: '#tinymce',
-        language: 'zh_CN',
-        min_height: 500,
-        width: 1200,
-        statusbar: false,
-        plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists imagetools textpattern help emoticons autosave autoresize',
-        toolbar: 'undo redo | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat',
-        fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
-      });
-    </script>
 
     <%
       String[] options = (String[])request.getAttribute("options");
       for (int i = 0; i < options.length; i++) {
     %>
       <%
-        if (options[i].equals("1")) {
+        if (options[i].equals("0")) {
       %>
-        <%@ include file="../components/options/name.jsp" %>
+        <%@ include file="../components/options/img_entry.jsp" %>
+      <%
+        } else if (options[i].equals("1")) {
+      %>
+        <%@ include file="../components/options/introduction.jsp" %>
       <%
         } else if (options[i].equals("2")) {
       %>
-      <%@ include file="../components/options/sex.jsp" %>
+        <%@ include file="../components/options/name.jsp" %>
       <%
         } else if (options[i].equals("3")) {
       %>
-      <%@ include file="../components/options/age.jsp" %>
+      <%@ include file="../components/options/sex.jsp" %>
       <%
         } else if (options[i].equals("4")) {
       %>
-      <%@ include file="../components/options/telephone.jsp" %>
+      <%@ include file="../components/options/age.jsp" %>
       <%
         } else if (options[i].equals("5")) {
       %>
-      <%@ include file="../components/options/email.jsp" %>
+      <%@ include file="../components/options/telephone.jsp" %>
       <%
         } else if (options[i].equals("6")) {
       %>
-      <%@ include file="../components/options/school.jsp" %>
+      <%@ include file="../components/options/email.jsp" %>
       <%
         } else if (options[i].equals("7")) {
       %>
-      <%@ include file="../components/options/company.jsp" %>
+      <%@ include file="../components/options/school.jsp" %>
       <%
         } else if (options[i].equals("8")) {
+      %>
+      <%@ include file="../components/options/company.jsp" %>
+      <%
+        } else if (options[i].equals("9")) {
       %> 
       <%@ include file="../components/options/address.jsp" %>
       <%
@@ -92,7 +79,7 @@
     %>
 
     <label class="checkbox" for="lisence">
-      <input type="checkbox" id="lisence" data-toggle="checkbox">
+      <input type="checkbox" id="lisence">
       我同意投票<a href="/index/license">服务条款</a>
     </label>
 

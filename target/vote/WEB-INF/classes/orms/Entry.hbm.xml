@@ -9,8 +9,8 @@
     </id>
     <property name="aid" column="aid" type="java.lang.String" length="32" not-null="true"/>
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
-    <property name="description" column="description" type="java.lang.String" not-null="true"/>
+    <property name="introduction" column="introduction" type="java.lang.String"/>
     <property name="acquisition" column="acquisition" type="java.lang.Long" not-null="true"/>
-    <property name="imgAddr" column="img_addr" type="java.lang.String" length="56"/>
+    <property name="imgEntry" column="img_entry" type="java.lang.String" length="56"/>
   </class>
 </hibernate-mapping>

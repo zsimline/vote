@@ -24,8 +24,8 @@ public class Activity implements Serializable {
   // 条目量词
   private String quantifier;
 
-  // 活动描述
-  private String description;
+  // 活动简介
+  private String summary;
 
   // 投票开始时间
   private Date voteTimeStart;
@@ -52,7 +52,7 @@ public class Activity implements Serializable {
   private long sumVisited;
 
   // 宣传图片地址
-  private String imgAddr;
+  private String imgMain;
 
   // 其它必填项
   private String options;
@@ -138,17 +138,17 @@ public class Activity implements Serializable {
   }
 
   /**
-   * @return description
+   * @return summary
    */
-  public String getDescription() {
-    return description;
+  public String getSummary() {
+    return summary;
   }
 
   /**
-   * @param description 要设置的 description
+   * @param summary 要设置的 summary
    */
-  public void setDescription(String description) {
-    this.description = description;
+  public void setSummary(String summary) {
+    this.summary = summary;
   }
 
   /**
@@ -265,17 +265,17 @@ public class Activity implements Serializable {
   }
 
   /**
-   * @return imgAddr
+   * @return imgMain
    */
-  public String getImgAddr() {
-    return imgAddr;
+  public String getImgMain() {
+    return imgMain;
   }
 
   /**
-   * @param imgAddr 要设置的 imgAddr
+   * @param imgMain 要设置的 imgMain
    */
-  public void setImgAddr(String imgAddr) {
-    this.imgAddr = imgAddr;
+  public void setImgMain(String imgMain) {
+    this.imgMain = imgMain;
   }
 
   /**

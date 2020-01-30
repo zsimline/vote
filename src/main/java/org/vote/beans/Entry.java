@@ -17,14 +17,14 @@ public class Entry implements Serializable {
   // 条目标题
   private String title;
 
-  // 条目描述
-  private String description;
+  // 条目介绍
+  private String introduction;
 
   // 取得投票数
   private long acquisition;
 
   // 图片地址
-  private String imgAddr;
+  private String imgEntry;
 
   public Entry() {
     this.acquisition = 0;
@@ -73,17 +73,17 @@ public class Entry implements Serializable {
   }
 
   /**
-   * @return description
+   * @return introduction
    */
-  public String getDescription() {
-    return description;
+  public String getIntroduction() {
+    return introduction;
   }
 
   /**
-   * @param description 要设置的 description
+   * @param introduction 要设置的 introduction
    */
-  public void setDescription(String description) {
-    this.description = description;
+  public void setIntroduction(String introduction) {
+    this.introduction = introduction;
   }
 
   /**
@@ -101,16 +101,16 @@ public class Entry implements Serializable {
   }
 
   /**
-   * @return imgAddr
+   * @return imgEntry
    */
-  public String getImgAddr() {
-    return imgAddr;
+  public String getImgEntry() {
+    return imgEntry;
   }
 
   /**
-   * @param imgAddr 要设置的 imgAddr
+   * @param imgEntry 要设置的 imgEntry
    */
-  public void setImgAddr(String imgAddr) {
-    this.imgAddr = imgAddr;
+  public void setImgEntry(String imgEntry) {
+    this.imgEntry = imgEntry;
   }
 }

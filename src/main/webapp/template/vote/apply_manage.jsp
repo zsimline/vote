@@ -71,42 +71,52 @@
                 for (int i = 0; i < options.length; i++) {
               %>
               <%
-                if (options[i].equals("1")) {
+                if (options[i].equals("0")) {
               %>
-                <%@ include file="../components/options/name.jsp" %>
-                <span class="hidden table-column" data-field="name" data-title="真实姓名"></span>
+                <%@ include file="../components/options/img_entry.jsp" %>
+                <span class="hidden table-column" data-field="imgEntry" data-title="参赛图片"></span>
+              <%
+                } else if (options[i].equals("1")) {
+              %>
+              <%@ include file="../components/options/introduction.jsp" %>
+              <span class="hidden table-column" data-field="introduction" data-title="详细介绍""></span>
               <%
                 } else if (options[i].equals("2")) {
+              %>
+              <%@ include file="../components/options/name.jsp" %>
+              <span class="hidden table-column" data-field="name" data-title="详细介绍""></span>
+              <%
+                } else if (options[i].equals("3")) {
               %>
                 <%@ include file="../components/options/sex.jsp" %>
                 <span class="hidden table-column" data-field="sex" data-title="真实性别"></span>
               <%
-                } else if (options[i].equals("3")) {
+                } else if (options[i].equals("4")) {
               %>
                 <%@ include file="../components/options/age.jsp" %>
                 <span class="hidden table-column" data-field="age" data-title="真实年龄"></span>
               <%
-                } else if (options[i].equals("4")) {
+                } else if (options[i].equals("5")) {
               %>
                 <%@ include file="../components/options/telephone.jsp" %>
                 <span class="hidden table-column" data-field="telephone" data-title="手机号码"></span>
               <%
-                } else if (options[i].equals("5")) {
+                } else if (options[i].equals("6")) {
               %>
                 <%@ include file="../components/options/email.jsp" %>
                 <span class="hidden table-column" data-field="email" data-title="电子邮件"></span>
               <%
-                } else if (options[i].equals("6")) {
+                } else if (options[i].equals("7")) {
               %>
                 <%@ include file="../components/options/school.jsp" %>
                 <span class="hidden table-column" data-field="school" data-title="学校名称"></span>
               <%
-                } else if (options[i].equals("7")) {
+                } else if (options[i].equals("8")) {
               %>
                 <%@ include file="../components/options/company.jsp" %>
                 <span class="hidden table-column" data-field="company" data-title="公司名称"></span>
               <%
-                } else if (options[i].equals("8")) {
+                } else if (options[i].equals("9")) {
               %> 
                 <%@ include file="../components/options/address.jsp" %>
                 <span class="hidden table-column" data-field="address" data-title="收货地址"></span>
