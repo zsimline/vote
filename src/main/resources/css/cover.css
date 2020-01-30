@@ -2,6 +2,12 @@
  * 覆盖第三方库样式
  */
 
+ .container {
+  min-height: 100vh;
+  margin-bottom: 25px;
+  overflow-x: hidden;
+}
+
 /*! 覆盖顶部导航条样式 */
 .navbar {
   border-radius: 0px;
@@ -49,12 +55,6 @@ h4 {
 .fa {
   margin-right: 4px;
 }
-
-.container {
-  min-height: 100vh;
-  margin-bottom: 25px;
-}
-
 
 /*！ 创建投票页样式 */
 .form-control {

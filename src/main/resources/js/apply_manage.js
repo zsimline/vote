@@ -2,20 +2,21 @@
  * 处理审核报名
  */
 
-const tableOptions = {
+const tbOpts = {
   id: "table",
   operation: "editer",
   type: "numbers",
   colum: fetchColumn(),
-  data: [
-    { "number": 1, "title": "张三", "imgAddr": 15, "description": "男", "whoAdd": 189 },
-    { "number": 2, "title": "李四", "imgAddr": 15, "description": "男", "whoAdd": 189 },
-    { "number": 3, "title": "王五", "imgAddr": 15, "description": "男", "whoAdd": 189 },
-    { "number": 4, "title": "赵六", "imgAddr": 15, "description": "男", "whoAdd": 189 },
-    { "number": 5, "title": "陈七", "imgAddr": 15, "description": "女", "whoAdd": 189 },
-  ]
+  data: [],
 }
 
+get('/api/vote/data_apply?aid=c515c87d5f2a4d80b2d08595a1968cec')
+  .then(data => {
+    reponse.reloadtable(data, "table");
+  })
+  .catch(err => {
+    console.error(err);
+  });
 
 function fetchColumn() {
   const column = [
@@ -41,8 +42,7 @@ $(function () {
   $('#table').basictable({
     breakpoint: 768
   });
-
-  $("#table").reponsetable(tableOptions);
+  $("#table").reponsetable(tbOpts);
 });
 
 /**

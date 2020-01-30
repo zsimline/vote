@@ -43,7 +43,14 @@
   background-color: #f3f3f3;
 }
 
+/*! 表格样式 */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .reponsetable th,
 .reponsetable td {
   text-align: center;
+  white-space: nowrap;
 }

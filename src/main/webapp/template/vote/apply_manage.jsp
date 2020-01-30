@@ -42,7 +42,8 @@
 
     <br>
 
-    <div>
+    <!-- 响应式表格 -->
+    <div class="table-container">
       <div class="btn-container">
         <button class="layui-btn" onclick="exportExcel();"><i class="fa fa-floppy-o"></i>导出Excel</button>
         <button class="layui-btn" onclick="reloadTable();"><i class="fa fa-undo"></i>刷新表格</button>
@@ -67,21 +68,21 @@
       String[] options = (String[])request.getAttribute("options");
       for (int i = 0; i < options.length; i++) {
         if (options[i].equals("1")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"Name\" data-title=\"真实姓名\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"name\" data-title=\"真实姓名\"></span>");
         } else if (options[i].equals("2")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"Sex\" data-title=\"真实性别\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"sex\" data-title=\"真实性别\"></span>");
         } else if (options[i].equals("3")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"Age\" data-title=\"真实年龄\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"age\" data-title=\"真实年龄\"></span>");
         } else if (options[i].equals("4")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"Telephone\" data-title=\"手机号码\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"telephone\" data-title=\"手机号码\"></span>");
         } else if (options[i].equals("5")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"Email\" data-title=\"电子邮件\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"email\" data-title=\"电子邮件\"></span>");
         } else if (options[i].equals("6")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"School\" data-title=\"学校名称\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"school\" data-title=\"学校名称\"></span>");
         } else if (options[i].equals("7")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"Company\" data-title=\"公司名称\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"company\" data-title=\"公司名称\"></span>");
         } else if (options[i].equals("8")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"Address\" data-title=\"收货地址\"></span>");
+          out.write("<span class=\"hidden table-column\" data-field=\"address\" data-title=\"收货地址\"></span>");
         }
       }
     %>

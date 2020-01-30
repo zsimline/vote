@@ -38,8 +38,8 @@ public class BaseApi extends HttpServlet {
   protected void completed(HttpServletResponse response, int status) throws ServletException, IOException {
     Code code = new Code(status);
     Gson gson = new Gson();
-    String jsonObj = gson.toJson(code);
-    response.getWriter().write(jsonObj);
+    String jsonStr = gson.toJson(code);
+    response.getWriter().write(jsonStr);
     response.setStatus(200);
   }
 
@@ -223,5 +223,20 @@ public class BaseApi extends HttpServlet {
     }
 
     return uid;
+  }
+
+  /**
+   * 发送JSON数据
+   * 将对象转换为JSON字符串并发送
+   * 
+   * @param response 响应对象
+   * @param objs 要转换的对象
+   * @throws IOException
+   */
+  protected void sendJson(HttpServletResponse response, List<?> objs) throws IOException {
+    Gson gson = new Gson();
+    String jsonStr = gson.toJson(objs);
+    response.getWriter().write(jsonStr);
+    response.setStatus(200);
   }
 }

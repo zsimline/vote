@@ -115,6 +115,3 @@ function handleSubmit() {
       openModal('error', '发布投票失败')
     });
 }
-
-function handleModalClose() {
-}
