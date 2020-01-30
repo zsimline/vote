@@ -8,20 +8,20 @@ const tbOpts = {
   type: "numbers",
   colum: fetchColumn(),
   data: [],
+  images: [],
+  descriptions: []
 }
-
-const images = [];
-const descriptions = [];
 
 get('/api/vote/data_apply?aid=156c5b6e68a749b2907d888627e4f426')
   .then(data => {
     data.forEach((element, index) => {
       if (element.imgAddr) {
-        element.imgAddr = `<img src=${element.imgAddr} onclick="showImage(${index})">`;        
+        element.imgAddr = `<img src=${element.imgAddr} title="点击我查看大图" class="table-img" onclick="showImage(${index})">`;
+        tbOpts.images.push(element.imgAddr);
       }
       if (element.description) {
-        descriptions.push(element.description);
-        element.description = `<a onclick="showDescription(${index})">查看</a>`
+        tbOpts.descriptions.push(element.description);
+        element.description = `<a href="javascript:showDescription(${index})" title="点击我查看详细描述">查看</a>`
       }
     })
     reponse.reloadtable(data, "table");
@@ -79,10 +79,9 @@ function deletetr(a, e) {
 
 
 function showDescription(index) {
-  openModal('userdef', descriptions[index], ()=>{});
+  openModal('userdef', tbOpts.descriptions[index], ()=>{});
 }
 
 function showImage(index) {
-  console.log(tbOpts.data[index]);
-  openModal('userdef', tbOpts.data[index].imgAddr, ()=>{});
+  openModal('userdef', tbOpts.images[index], ()=>{});
 }

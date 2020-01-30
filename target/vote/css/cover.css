@@ -56,6 +56,12 @@ h4 {
   margin-right: 4px;
 }
 
+.modal-header .close {
+  margin-top: -26px;
+  font-size: 24px;
+  outline: none;
+}
+
 /*！ 创建投票页样式 */
 .form-control {
   display: inline-block;
