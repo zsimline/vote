@@ -18,47 +18,47 @@ function handleSubmit() {
   const address = $('#address').val();
 
   // 校验表单是否为空
-  if (title !==undefined && title === '') {
+  if (title !== undefined && title === '') {
     openModal('error', '标题不能为空');
     return;
   }
-  if (imgName !==undefined && imgName === '') {
+  if (imgName !== undefined && imgName === '') {
     openModal('error', '请上传介绍图片');
     return;
   }
-  if (description !==undefined && description === '') {
+  if (description !== undefined && description === '') {
     openModal('error', '详细描述不能为空');
     return;
   }
-  if (name !==undefined && name === '') {
+  if (name !== undefined && name === '') {
     openModal('error', '真实姓名不能为空');
     return;
   }
-  if (sex !==undefined && sex === '') {
+  if (sex !== undefined && sex === '') {
     openModal('error', '真实性别不能为空');
     return;
   }
-  if (age !==undefined && age === '') {
+  if (age !== undefined && age === '') {
     openModal('error', '真实年龄不能为空');
     return;
   }
-  if (telephone !==undefined && telephone === '') {
+  if (telephone !== undefined && telephone === '') {
     openModal('error', '手机号码不能为空');
     return;
   }
-  if (email !==undefined && email === '') {
+  if (email !== undefined && email === '') {
     openModal('error', '电子邮件不能为空');
     return;
   }
-  if (school !==undefined && school === '') {
+  if (school !== undefined && school === '') {
     openModal('error', '学校名称不能为空');
     return;
   }
-  if (company !==undefined && company === '') {
+  if (company !== undefined && company === '') {
     openModal('error', '公司名称不能为空');
     return;
   }
-  if (address !==undefined && address === '') {
+  if (address !== undefined && address === '') {
     openModal('error', '收货地址不能为空');
     return;
   }

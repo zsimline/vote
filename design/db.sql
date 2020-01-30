@@ -25,7 +25,7 @@ CREATE TABLE `activity`
   `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
   `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
   `quantifier` CHAR(1) NOT NULL,                -- 条目量词
-  `description` TEXT NOT NULL,        -- 活动描述（富文本）
+  `description` TEXT NOT NULL,                  -- 活动描述（富文本）
   `vote_time_start` DATETIME NOT NULL,          -- 投票开始时间
   `vote_time_end` DATETIME NOT NULL,            -- 投票截止时间
   `apply_time_start` DATETIME NOT NULL,         -- 报名开始时间

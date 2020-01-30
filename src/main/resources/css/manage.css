@@ -59,3 +59,9 @@
   width: 100%;
   cursor: pointer;
 }
+
+@media screen and (min-width: 768px) {
+  .modal-dialog {
+    width: 52%;
+  }
+}

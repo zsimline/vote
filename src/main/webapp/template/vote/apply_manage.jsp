@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/css/jquery.basictable.css">
   <script src="/js/jquery.basictable.min.js"></script>
   <script src="/js/reponsetable.min.js"></script>
-  <script src="/js/layer-3.1.1.js"></script>
+  <script src="/js/flatui-radio-0.0.3.js"></script>
   <title>报名管理</title>
 </head>
 
@@ -54,41 +54,79 @@
       </script>
     </div>
 
-    <div id="edit-content" class="alertceng">
-      <p><span class="title">姓名:</span><input type="text" id="Name" /></p>
-      <p><span class="title">年龄:</span><input type="text" id="Age" /></p>
-      <p><span class="title">性别:</span><input type="text" id="Gender" /></p>
-      <p><span class="title">身高:</span><input type="text" id="Height" /></p>
-      <p><span class="title">省份:</span><input type="text" id="Province" /></p>
-      <p><span class="title">市级:</span><input type="text" id="Sport" /></p>
+    <!-- 编辑框 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">编辑报名信息</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="editModalBody">
+              <%
+                String[] options = (String[])request.getAttribute("options");
+                for (int i = 0; i < options.length; i++) {
+              %>
+              <%
+                if (options[i].equals("1")) {
+              %>
+                <%@ include file="../components/options/name.jsp" %>
+                <span class="hidden table-column" data-field="name" data-title="真实姓名"></span>
+              <%
+                } else if (options[i].equals("2")) {
+              %>
+                <%@ include file="../components/options/sex.jsp" %>
+                <span class="hidden table-column" data-field="sex" data-title="真实性别"></span>
+              <%
+                } else if (options[i].equals("3")) {
+              %>
+                <%@ include file="../components/options/age.jsp" %>
+                <span class="hidden table-column" data-field="age" data-title="真实年龄"></span>
+              <%
+                } else if (options[i].equals("4")) {
+              %>
+                <%@ include file="../components/options/telephone.jsp" %>
+                <span class="hidden table-column" data-field="telephone" data-title="手机号码"></span>
+              <%
+                } else if (options[i].equals("5")) {
+              %>
+                <%@ include file="../components/options/email.jsp" %>
+                <span class="hidden table-column" data-field="email" data-title="电子邮件"></span>
+              <%
+                } else if (options[i].equals("6")) {
+              %>
+                <%@ include file="../components/options/school.jsp" %>
+                <span class="hidden table-column" data-field="school" data-title="学校名称"></span>
+              <%
+                } else if (options[i].equals("7")) {
+              %>
+                <%@ include file="../components/options/company.jsp" %>
+                <span class="hidden table-column" data-field="company" data-title="公司名称"></span>
+              <%
+                } else if (options[i].equals("8")) {
+              %> 
+                <%@ include file="../components/options/address.jsp" %>
+                <span class="hidden table-column" data-field="address" data-title="收货地址"></span>
+              <%
+                }
+              %>
+            <% 
+              }
+            %>
+          </div>
+          <div class="modal-footer">
+            <button id="editModalButton" type="button" class="btn btn-success" data-dismiss="modal">　保存　</button>
+            <button id="editModalButton" type="button" class="btn btn-fefault" data-dismiss="modal">　取消　</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 其它可选列 -->
-    <%
-      String[] options = (String[])request.getAttribute("options");
-      for (int i = 0; i < options.length; i++) {
-        if (options[i].equals("1")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"name\" data-title=\"真实姓名\"></span>");
-        } else if (options[i].equals("2")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"sex\" data-title=\"真实性别\"></span>");
-        } else if (options[i].equals("3")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"age\" data-title=\"真实年龄\"></span>");
-        } else if (options[i].equals("4")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"telephone\" data-title=\"手机号码\"></span>");
-        } else if (options[i].equals("5")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"email\" data-title=\"电子邮件\"></span>");
-        } else if (options[i].equals("6")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"school\" data-title=\"学校名称\"></span>");
-        } else if (options[i].equals("7")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"company\" data-title=\"公司名称\"></span>");
-        } else if (options[i].equals("8")) {
-          out.write("<span class=\"hidden table-column\" data-field=\"address\" data-title=\"收货地址\"></span>");
-        }
-      }
-    %>
-
     <script src="/js/apply_manage.js"></script>
-  
+
   </div>
   <%@ include file="../components/modal.jsp" %>
   <%@ include file="../components/footer.jsp" %>

@@ -71,44 +71,62 @@
       <input type="text" class="form-control input-sm" id="signup-time-end">
       <span class="extra-tip">截止时间后不能继续报名</span>
     </div>
+
     <h5>活动简介</h5>
     <hr>
     <div id="tinymce"></div>
 
-    <h5>其它选项</h5>
+    <h5>报名设置</h5>
     <hr>
-    <div id="options">
+    <div class="apply-options">
+      <label for="name">关闭报名通道</label>
+      <div class="switch">
+        <input id="compan" type="checkbox">
+      </div>
+    </div>
+
+    <h5>报名选项</h5>
+    <hr>
+    <div class="apply-options">
+      <label for="name">参赛图片</label>
+      <div class="switch switch-square">
+        <input id="imgAddr1" type="checkbox" data-index="0" checked>
+      </div><br>
+      <label for="name">详细介绍</label>
+      <div class="switch switch-square">
+        <input id="description1" type="checkbox" data-index="1" checked>
+      </div><br>
       <label for="name">真实姓名</label>
       <div class="switch switch-square">
-        <input id="name" type="checkbox" data-index="1" data-toggle="switch" />
+        <input id="name" type="checkbox" data-index="2">
       </div><br>
       <label for="sex">真实性别</label>
       <div class="switch switch-square">
-        <input id="sex" type="checkbox" data-index="2" data-toggle="switch" />
+        <input id="sex" type="checkbox" data-index="3">
       </div><br>
       <label for="age">真实年龄</label>
       <div class="switch switch-square">
-        <input id="age" type="checkbox" data-index="3" data-toggle="switch" />
+        <input id="age" type="checkbox" data-index="4">
       </div><br>
       <label for="telephone">手机号码</label>
       <div class="switch switch-square">
-        <input id="telephone" type="checkbox" data-index="4" data-toggle="switch" />
+        <input id="telephone" type="checkbox" data-index="5">
       </div><br>
       <label for="email">电子邮件</label>
       <div class="switch switch-square">
-        <input id="email" type="checkbox" data-index="5" data-toggle="switch" />
+        <input id="email" type="checkbox" data-index="6">
       </div><br>
       <label for="school">学校名称</label>
       <div class="switch switch-square">
-        <input id="school" type="checkbox" data-index="6" data-toggle="switch" />
+        <input id="school" type="checkbox" data-index="7">
       </div><br>
       <label for="company">公司名称</label>
       <div class="switch switch-square">
-        <input id="company" type="checkbox" data-index="7" data-toggle="switch" />
+        <input id="company" type="checkbox" data-index="8">
       </div><br>
       <label for="address">收货地址</label>
       <div class="switch switch-square">
-        <input id="address" type="checkbox" data-index="8" data-toggle="switch" />
+        <input id="address" type="checkbox" data-index="9">
       </div><br>
     </div>
 
@@ -125,7 +143,7 @@
   <!-- 时间拾取器配置 -->
   <script type="text/javascript">
     $(function () {
-      const options = { locale: 'zh-cn', format:"YYYY-MM-DD hh:mm" };
+      const options = { locale: 'zh-cn', format: "YYYY-MM-DD hh:mm" };
       $('#vote-time-start').datetimepicker(options);
       $('#vote-time-end').datetimepicker(options);
       $('#signup-time-start').datetimepicker(options);

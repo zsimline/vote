@@ -93,11 +93,11 @@ input[type="file"] {
   margin-top: 40px;
 }
 
-#options label {
+.apply-options label {
   vertical-align: bottom;
 }
 
-#options .switch {
+.apply-options .switch {
   margin-left: 6px;
 }
 

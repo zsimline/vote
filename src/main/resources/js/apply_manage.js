@@ -85,3 +85,53 @@ function showDescription(index) {
 function showImage(index) {
   openModal('userdef', tbOpts.images[index], ()=>{});
 }
+
+
+function edittr(which) {
+  const tr = $(which).parent().parent();
+  reponse.resiverowdata(tr, "table");
+  const rowData = $("#table").data("rowdata");
+  Object.keys(rowData).forEach(key => {
+    $(`#${key}`).val(rowData[key]);
+  })
+  $('#editModal').modal();
+
+
+
+  //reponse.editsavetr(obj, "table");
+}
+
+const applyOptions = {
+  name: {
+    id: "#name",
+    errTip: "真实姓名不能为空"
+  },
+  sex: {
+    id: "#sex",
+    errTip: "真实性别不能为空"
+  },
+  age: {
+    id: "#age",
+    errTip: "真实年龄不能为空"
+  },
+  telephone: {
+    id: "#telephone",
+    errTip: "手机号码不能为空"
+  },
+  email: {
+    id: "#email",
+    errTip: "电子邮件不能为空"
+  },
+  school: {
+    id: "#school",
+    errTip: "学校名称不能为空"
+  },
+  company: {
+    id: "#company",
+    errTip: "公司名称不能为空"
+  },
+  address: {
+    id: "#address",
+    errTip: "收货地址不能为空"
+  },
+}
