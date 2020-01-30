@@ -85,6 +85,8 @@ function openModal(type, message, cb=()=>{}) {
     messageTyped = `<span style="color:green">${message}</span>`;
   } else if (type === 'error') {
     messageTyped = `<span style="color:red">${message}</span>`;
+  } else if (type === 'userdef') {
+    messageTyped = message;
   }
   
   $('#commonModalButton').bind('click', cb);

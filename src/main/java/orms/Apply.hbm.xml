@@ -11,7 +11,7 @@
     <property name="number" column="number" type="java.lang.Integer"/>
     <property name="status" column="status" type="java.lang.Character"/>
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
-    <property name="description" column="description" type="java.lang.String" length="3000" not-null="true"/>
+    <property name="description" column="description" type="java.lang.String" not-null="true"/>
     <property name="imgAddr" column="img_addr" type="java.lang.String" length="56"/>
     <property name="sex" column="sex" type="java.lang.Byte"/>
     <property name="age" column="age" type="java.lang.Integer"/>

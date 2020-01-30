@@ -9,7 +9,7 @@
     </id>
     <property name="aid" column="aid" type="java.lang.String" length="32" not-null="true"/>
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
-    <property name="description" column="description" type="java.lang.String" length="3000" not-null="true"/>
+    <property name="description" column="description" type="java.lang.String" not-null="true"/>
     <property name="acquisition" column="acquisition" type="java.lang.Long" not-null="true"/>
     <property name="imgAddr" column="img_addr" type="java.lang.String" length="56"/>
   </class>

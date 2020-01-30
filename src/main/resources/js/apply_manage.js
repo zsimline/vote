@@ -10,13 +10,26 @@ const tbOpts = {
   data: [],
 }
 
-get('/api/vote/data_apply?aid=c515c87d5f2a4d80b2d08595a1968cec')
+const images = [];
+const descriptions = [];
+
+get('/api/vote/data_apply?aid=156c5b6e68a749b2907d888627e4f426')
   .then(data => {
+    data.forEach((element, index) => {
+      if (element.imgAddr) {
+        element.imgAddr = `<img src=${element.imgAddr} onclick="showImage(${index})">`;        
+      }
+      if (element.description) {
+        descriptions.push(element.description);
+        element.description = `<a onclick="showDescription(${index})">查看</a>`
+      }
+    })
     reponse.reloadtable(data, "table");
   })
   .catch(err => {
     console.error(err);
   });
+
 
 function fetchColumn() {
   const column = [
@@ -62,4 +75,14 @@ function exportExcel() {
 function deletetr(a, e) {
   const tr = $(a).parent().parent();
   reponse.deletetr(tr, e);
+}
+
+
+function showDescription(index) {
+  openModal('userdef', descriptions[index], ()=>{});
+}
+
+function showImage(index) {
+  console.log(tbOpts.data[index]);
+  openModal('userdef', tbOpts.data[index].imgAddr, ()=>{});
 }

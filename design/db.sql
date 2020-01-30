@@ -25,7 +25,7 @@ CREATE TABLE `activity`
   `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
   `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
   `quantifier` CHAR(1) NOT NULL,                -- 条目量词
-  `description` VARCHAR(3000) NOT NULL,         -- 活动描述（富文本）
+  `description` TEXT NOT NULL,        -- 活动描述（富文本）
   `vote_time_start` DATETIME NOT NULL,          -- 投票开始时间
   `vote_time_end` DATETIME NOT NULL,            -- 投票截止时间
   `apply_time_start` DATETIME NOT NULL,         -- 报名开始时间
@@ -47,7 +47,7 @@ CREATE TABLE `entry`
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 条目ID
   `aid` CHAR(32) NOT NULL,              -- 活动ID
   `title` VARCHAR(25) NOT NULL,         -- 条目标题
-  `description` VARCHAR(3000) NOT NULL, -- 条目描述
+  `description` TEXT NOT NULL,          -- 条目描述
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
   `img_addr` CHAR(56) DEFAULT NULL,     -- 宣传图片地址
   PRIMARY KEY(`id`)
@@ -61,7 +61,7 @@ CREATE TABLE `apply`
   `number` SMALLINT UNSIGNED NOT NULL,   -- 条目编号
   `status` CHAR(1) NOT NULL,             -- 审核状态
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
-  `description` VARCHAR(3000) NOT NULL,  -- 报名描述（富文本）
+  `description` TEXT NOT NULL,           -- 报名描述（富文本）
   `img_addr` CHAR(56) DEFAULT NULL,      -- 宣传图片地址
   `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
   `sex` TINYINT(1) DEFAULT NULL,         -- 真实性别
