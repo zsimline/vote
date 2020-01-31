@@ -112,7 +112,7 @@ function handleSubmit() {
   formData.append('options', options);
 
   // 向服务器提交数据
-  post('/api/vote/create', formData)
+  post('/api/vote/publish', formData)
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc, () => {

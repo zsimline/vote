@@ -66,10 +66,12 @@
             </button>
           </div>
           <div class="modal-body" id="editModalBody">
-              <%
-                String[] options = (String[])request.getAttribute("options");
-                for (int i = 0; i < options.length; i++) {
-              %>
+            <%@ include file="../components/options/title.jsp" %>
+
+            <%
+              String[] options = (String[])request.getAttribute("options");
+              for (int i = 0; i < options.length; i++) {
+            %>
               <%
                 if (options[i].equals("0")) {
               %>
@@ -128,7 +130,7 @@
             %>
           </div>
           <div class="modal-footer">
-            <button id="editModalButton" type="button" class="btn btn-success" data-dismiss="modal">　保存　</button>
+            <button id="editModalButton" type="button" class="btn btn-success" data-dismiss="modal" onclick="updateApplyInfo()">　保存　</button>
             <button id="editModalButton" type="button" class="btn btn-fefault" data-dismiss="modal">　取消　</button>
           </div>
         </div>
@@ -136,7 +138,6 @@
     </div>
 
     <script src="/js/apply_manage.js"></script>
-
   </div>
   <%@ include file="../components/modal.jsp" %>
   <%@ include file="../components/footer.jsp" %>
