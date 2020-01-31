@@ -10,9 +10,6 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <script src="/tinymce/tinymce-5.1.5.min.js"></script>
-  <script src="/js/flatui-radio-0.0.3.js"></script>
-  <script src="/js/flatui-checkbox-0.0.3.js"></script>
   <script src="/js/apply.js"></script>
   <title>活动报名</title>
 </head>
@@ -21,12 +18,8 @@
   <%@ include file="../components/header.jsp" %>
 
   <div class="container">
-    <div class="inputcon">
-      <label for="title">标题</label>
-      <input type="text" id="title" class="form-control input-sm" placeholder="请输入标题" maxlength="15">
-      <span class="extra-tip">如姓名、作品名等，最多15个字符</span>
-    </div>
-
+    <%@ include file="../components/options/title.jsp" %>
+    
     <%
       String[] options = (String[])request.getAttribute("options");
       for (int i = 0; i < options.length; i++) {
@@ -78,13 +71,9 @@
       } 
     %>
 
-    <label class="checkbox" for="lisence">
-      <input type="checkbox" id="lisence" data-toggle="checkbox">
-      我同意投票<a href="/index/license">服务条款</a>
-    </label>
+    <%@ include file="../components/lisence.jsp" %>
 
     <button class="btn btn-primary" onclick="handleSubmit()">　　报名　　</button>
-
   </div>
 
   <span id="aid" class="hidden"><%= request.getAttribute("aid") %></span>

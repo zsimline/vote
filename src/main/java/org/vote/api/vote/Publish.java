@@ -23,11 +23,11 @@ import org.vote.common.Utils;
 /**
  * 处理创建活动
  */
-@WebServlet("/api/vote/create")
-public class Create extends BaseApi {
+@WebServlet("/api/vote/publish")
+public class Publish extends BaseApi {
   private static final long serialVersionUID = 1L;
 
-  public Create() {
+  public Publish() {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

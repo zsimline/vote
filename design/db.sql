@@ -47,6 +47,7 @@ CREATE TABLE `entry`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 条目ID
   `aid` CHAR(32) NOT NULL,              -- 活动ID
+  `number` SMALLINT UNSIGNED NOT NULL,  -- 参赛编号
   `title` VARCHAR(25) NOT NULL,         -- 条目标题
   `introduction` TEXT DEFAULT NULL,     -- 条目描述
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
@@ -59,7 +60,6 @@ CREATE TABLE `apply`
 (
   `id` INT UNSIGNED AUTO_INCREMENT,      -- 报名ID
   `aid` CHAR(32) NOT NULL,               -- 活动ID
-  `number` SMALLINT UNSIGNED NOT NULL,   -- 条目编号
   `status` CHAR(1) NOT NULL,             -- 审核状态
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
   `introduction` TEXT DEFAULT NULL,      -- 报名描述（富文本）

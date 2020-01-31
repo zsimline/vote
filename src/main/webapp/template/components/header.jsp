@@ -21,7 +21,7 @@
         <a href="/index">首页</a>
       </li>
       <li>
-        <a href="/vote/create">发布投票</a>
+        <a href="/vote/publish">发布投票</a>
       </li>
       <li>
         <a href="/vote/manage">管理中心</a>

@@ -12,8 +12,8 @@ import org.vote.common.BaseView;
 /**
  * 显示创建投票页面
  */
-@WebServlet("/vote/create")
-public class Create extends BaseView {
+@WebServlet("/vote/publish")
+public class Publish extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,7 +21,7 @@ public class Create extends BaseView {
     if (uid == null) {
       response.sendRedirect("/user/login");
     } else {
-      display(request, response, "/template/vote/create.jsp");
+      display(request, response, "/template/vote/publish.jsp");
     }
   }
 }

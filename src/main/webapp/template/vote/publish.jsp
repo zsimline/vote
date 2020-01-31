@@ -13,10 +13,8 @@
   <link rel="stylesheet" href="/css/datetimepicker-4.0.0.min.css">
   <script src="/js/moment-with-locales-2.9.0.js"></script>
   <script src="/js/datetimepicker-4.0.0.js"></script>
-  <script src="/tinymce/tinymce-5.1.5.min.js"></script>
-  <script src="/js/flatui-checkbox-0.0.3.js"></script>
   <script src="/js/bootstrap-switch-1.3.js"></script>
-  <title>创建投票</title>
+  <title>发布投票</title>
 </head>
 
 <body>
@@ -74,68 +72,22 @@
 
     <h5>活动简介</h5>
     <hr>
-    <div id="tinymce"></div>
+    <%@ include file="../components/tinymce.jsp" %>
 
     <h5>报名设置</h5>
     <hr>
     <div class="apply-options">
-      <label for="name">关闭报名通道</label>
+      <label for="name">禁止外部人员报名</label>
       <div class="switch">
-        <input id="compan" type="checkbox">
+        <input id="c" type="checkbox">
       </div>
     </div>
 
     <h5>报名选项</h5>
     <hr>
-    <div class="apply-options">
-      <label for="img-entry">参赛图片</label>
-      <div class="switch switch-square">
-        <input id="img-entry" type="checkbox" data-index="0" checked>
-      </div><br>
-      <label for="introduction">详细介绍</label>
-      <div class="switch switch-square">
-        <input id="introduction" type="checkbox" data-index="1" checked>
-      </div><br>
-      <label for="name">真实姓名</label>
-      <div class="switch switch-square">
-        <input id="name" type="checkbox" data-index="2">
-      </div><br>
-      <label for="sex">真实性别</label>
-      <div class="switch switch-square">
-        <input id="sex" type="checkbox" data-index="3">
-      </div><br>
-      <label for="age">真实年龄</label>
-      <div class="switch switch-square">
-        <input id="age" type="checkbox" data-index="4">
-      </div><br>
-      <label for="telephone">手机号码</label>
-      <div class="switch switch-square">
-        <input id="telephone" type="checkbox" data-index="5">
-      </div><br>
-      <label for="email">电子邮件</label>
-      <div class="switch switch-square">
-        <input id="email" type="checkbox" data-index="6">
-      </div><br>
-      <label for="school">学校名称</label>
-      <div class="switch switch-square">
-        <input id="school" type="checkbox" data-index="7">
-      </div><br>
-      <label for="company">公司名称</label>
-      <div class="switch switch-square">
-        <input id="company" type="checkbox" data-index="8">
-      </div><br>
-      <label for="address">收货地址</label>
-      <div class="switch switch-square">
-        <input id="address" type="checkbox" data-index="9">
-      </div><br>
-    </div>
+    <%@ include file="../components/options/apply_options.jsp" %>
 
-    <hr>
-
-    <label class="checkbox" for="lisence">
-      <input type="checkbox" id="lisence" data-toggle="checkbox">
-      我同意投票<a href="/index/license">服务条款</a>
-    </label>
+    <%@ include file="../components/lisence.jsp" %>
 
     <button class="btn btn-primary" onclick="handleSubmit()">　发布投票　</button>
   </div>
@@ -148,20 +100,6 @@
       $('#vote-time-end').datetimepicker(options);
       $('#signup-time-start').datetimepicker(options);
       $('#signup-time-end').datetimepicker(options);
-    });
-  </script>
-
-  <!-- 富文本编辑器配置 -->
-  <script>
-    tinymce.init({
-      selector: '#tinymce',
-      language: 'zh_CN',
-      min_height: 500,
-      width: 1200,
-      statusbar: false,
-      plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists imagetools textpattern help emoticons autosave autoresize',
-      toolbar: 'undo redo | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat',
-      fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
     });
   </script>
 

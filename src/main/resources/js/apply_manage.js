@@ -47,9 +47,9 @@ function flushTable(data) {
 
 function fetchColumn() {
   const column = [
-    { "field": "number", "title": "编号" },
+    { "field": "id", "title": "编号" },
     { "field": "title", "title": "标题" },
-    { "field": "whoAdd", "title": "添加者" },
+    { "field": "status", "title": "审核状态" },
   ];
 
   const tableColumns = Array.from($('.table-column'));
@@ -57,7 +57,7 @@ function fetchColumn() {
     column.push({
       "field": element.dataset.field, 
       "title": element.dataset.title
-    });   
+    });
   });
   
   return column;

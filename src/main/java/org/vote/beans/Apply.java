@@ -13,9 +13,6 @@ public class Apply implements Serializable {
   
   // 活动ID
   private String aid;
-
-  // 投票编号
-  private int number;
   
   // 审核状态
   private char status;
@@ -85,20 +82,6 @@ public class Apply implements Serializable {
     this.aid = aid;
   }
   
-  /**
-   * @return number
-   */
-  public int getNumber() {
-    return number;
-  }
-
-  /**
-   * @param number 要设置的 number
-   */
-  public void setNumber(int number) {
-    this.number = number;
-  }
-
   /**
    * @return status
    */

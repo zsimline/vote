@@ -4,8 +4,9 @@
   pageEncoding="UTF-8"
 %>
 
+<script src="/js/flatui-radio-0.0.3.js"></script>
 <div class="inputcon">
-  <label for="name">真实性别</label>
+  <label for="sex">真实性别</label>
   <label class="radio">
     <input type="radio" name="sex" value="男" data-toggle="radio" checked>男
   </label>
