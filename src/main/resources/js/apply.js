@@ -1,35 +1,35 @@
 // 报名选项
 const applyOptions = {
   name: {
-    id: "#name",
+    selector: "#name",
     errTip: "真实姓名不能为空",
   },
   sex: {
-    id: "#sex",
+    selector: "input[name='sex']:checked",
     errTip: "真实性别不能为空",
   },
   age: {
-    id: "#age",
+    selector: "#age",
     errTip: "真实年龄不能为空",
   },
   telephone: {
-    id: "#telephone",
+    selector: "#telephone",
     errTip: "手机号码不能为空",
   },
   email: {
-    id: "#email",
+    selector: "#email",
     errTip: "电子邮件不能为空",
   },
   school: {
-    id: "#school",
+    selector: "#school",
     errTip: "学校名称不能为空",
   },
   company: {
-    id: "#company",
+    selector: "#company",
     errTip: "公司名称不能为空",
   },
   address: {
-    id: "#address",
+    selector: "#address",
     errTip: "收货地址不能为空",
   },
 };
@@ -118,7 +118,7 @@ function checkImgEntry() {
 function checkApplyOptions() {
   const keys =  Object.keys(applyOptions);
   for (let i = 0; i < keys.length; i++) {
-    const value = $(applyOptions[keys[i]].id).val();
+    const value = $(applyOptions[keys[i]].selector).val();
     if (value === undefined) {
       continue;
     } else if (value === '') {

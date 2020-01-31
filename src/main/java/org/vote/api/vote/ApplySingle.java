@@ -70,7 +70,7 @@ public class ApplySingle extends BaseApi {
             } else if (fieldName.equals("name")) {
               apply.setName(fieldContent);
             } else if (fieldName.equals("sex")) {
-              apply.setSex(Byte.valueOf(fieldContent));
+              apply.setSex(fieldContent);
             } else if (fieldName.equals("age")) {
               apply.setAge(Integer.valueOf(fieldContent));
             } else if (fieldName.equals("telephone")) {

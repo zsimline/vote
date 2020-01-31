@@ -5,6 +5,7 @@
 %>
 
 <label>详细描述</label>
+<script src="/tinymce/tinymce-5.1.5.min.js"></script>
 <div id="tinymce"></div>
 <!-- 富文本编辑器配置 -->
 <script>

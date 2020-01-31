@@ -65,14 +65,14 @@ CREATE TABLE `apply`
   `introduction` TEXT DEFAULT NULL,      -- 报名描述（富文本）
   `img_entry` CHAR(56) DEFAULT NULL,     -- 宣传图片地址
   `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
-  `sex` TINYINT(1) DEFAULT NULL,         -- 真实性别
+  `sex` CHAR(1) DEFAULT NULL,            -- 真实性别
   `age` TINYINT(3) DEFAULT NULL,         -- 真实年龄
   `telephone` CHAR(11) DEFAULT NULL,     -- 手机号码
   `email` VARCHAR(191) DEFAULT NULL,     -- 电子邮件
   `school` VARCHAR(16) DEFAULT NULL,     -- 学校名称
   `company` VARCHAR(26) DEFAULT NULL,    -- 公司名称
   `address` VARCHAR(40) DEFAULT NULL,    -- 收货地址
-  PRIMARY KEY(`id`)
+  PRIMARY KEY(`id`),
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 投票信息表

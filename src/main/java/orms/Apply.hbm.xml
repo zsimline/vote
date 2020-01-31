@@ -13,7 +13,7 @@
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
     <property name="introduction" column="introduction" type="java.lang.String"/>
     <property name="imgEntry" column="img_entry" type="java.lang.String" length="56"/>
-    <property name="sex" column="sex" type="java.lang.Byte"/>
+    <property name="sex" column="sex" type="java.lang.String" length="1"/>
     <property name="age" column="age" type="java.lang.Integer"/>
     <property name="name" column="name" type="java.lang.String" length="15"/>
     <property name="telephone" column="telephone" type="java.lang.String" length="11"/>

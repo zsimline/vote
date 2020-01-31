@@ -79,7 +79,7 @@
     %>
 
     <label class="checkbox" for="lisence">
-      <input type="checkbox" id="lisence">
+      <input type="checkbox" id="lisence" data-toggle="checkbox">
       我同意投票<a href="/index/license">服务条款</a>
     </label>
 

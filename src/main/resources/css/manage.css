@@ -1,16 +1,12 @@
+/*！
+ * 与投票管理相关的页面样式表
+ * 包含：管理主页面、编辑页面、报名管理页面、
+ *      条目管理页面、结果与日志页面、链接与二维码页面
+ */
+
 .container > .nav-tabs {
   font-size: 16px;
   margin-top: 40px;
-}
-
-/*! 表格弹框样式 */
-.alertceng{
-  background: #FFFFFF;
-  padding: 10px;
-  display: none;
-}
-.alertceng span.title{
-  margin-right: 10px;
 }
 
 /*！ 链接与二维码页样式 */
@@ -19,7 +15,7 @@
   color: #000 !important;
 }
 
-/*！ 审核报名页样式 */
+/*！报名管理页样式 */
 .table-operation {
   font-size: 16px;
   cursor: pointer;
@@ -41,6 +37,10 @@
 
 .table-operation:hover {
   background-color: #f3f3f3;
+}
+
+.tox.tox-tinymce {
+  width: 100% !important;
 }
 
 /*! 表格样式 */
@@ -65,3 +65,4 @@
     width: 52%;
   }
 }
+

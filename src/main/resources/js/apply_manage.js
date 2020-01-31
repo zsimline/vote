@@ -1,5 +1,5 @@
 /**
- * 处理审核报名
+ * 处理管理报名
  */
 
 const tbOpts = {
@@ -12,23 +12,37 @@ const tbOpts = {
   introductions: []
 }
 
+// 请求
 get('/api/vote/data_apply?aid=ef3d7491468d4549a7516911703d7dfb')
   .then(data => {
-    data.forEach((element, index) => {
-      if (element.imgEntry) {
-        element.imgEntry = `<img src=${element.imgEntry} title="点击我查看大图" class="table-img" onclick="showImage(${index})">`;
-        tbOpts.images.push(element.imgEntry);
-      }
-      if (element.introduction) {
-        tbOpts.introductions.push(element.introduction);
-        element.introduction = `<a href="javascript:showDescription(${index})" title="点击我查看详细描述">查看</a>`
-      }
-    })
-    reponse.reloadtable(data, "table");
+    flushTable(data);
   })
   .catch(err => {
     console.error(err);
   });
+
+
+/**
+ * 刷新表格数据
+ * 
+ * @param {object} data 表格数据
+ */
+function flushTable(data) {
+  data.forEach((element, index) => {
+    if (element.imgEntry) {
+      element.imgEntry = `<img src=${element.imgEntry} title="点击我查看大图" class="table-img" onclick="showImage(${index})">`;
+      tbOpts.images.push(element.imgEntry);
+    }
+    if (element.introduction) {
+      tbOpts.introductions.push(element.introduction);
+      element.introduction = `<a href="javascript:showDescription(${index})" title="点击我查看详细描述">查看</a>`
+    }
+  })
+  reponse.reloadtable(data, "table");
+}
+
+
+
 
 
 function fetchColumn() {
@@ -49,12 +63,8 @@ function fetchColumn() {
   return column;
 }
 
-$(function () {
-  $('#table').basictable({
-    breakpoint: 768
-  });
-  $("#table").reponsetable(tbOpts);
-});
+
+
 
 /**
  * 导出表格为Excel
@@ -62,17 +72,6 @@ $(function () {
 function exportExcel() {
   const tableobj = $("#table").data("tableObj");
   reponse.JSONToCSVConvertor(tableobj, true, "人员表格");
-}
-
-/**
- * 删除表格行
- * 
- * @param {*} a 
- * @param {*} e 
- */
-function deletetr(a, e) {
-  const tr = $(a).parent().parent();
-  reponse.deletetr(tr, e);
 }
 
 
@@ -99,3 +98,11 @@ function edittr(which) {
   //reponse.editsavetr(obj, "table");
 }
 
+
+
+
+
+
+
+// 初始化表格
+$("#table").reponsetable(tbOpts);

@@ -30,7 +30,7 @@ public class Apply implements Serializable {
   private String imgEntry;
 
   // 人物性别
-  private byte sex;
+  private String sex;
   
   // 人物年龄
   private int age;
@@ -158,14 +158,14 @@ public class Apply implements Serializable {
   /**
    * @return sex
    */
-  public byte getSex() {
+  public String getSex() {
     return sex;
   }
 
   /**
    * @param sex 要设置的 sex
    */
-  public void setSex(byte sex) {
+  public void setSex(String sex) {
     this.sex = sex;
   }
 

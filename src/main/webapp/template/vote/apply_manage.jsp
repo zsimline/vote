@@ -50,7 +50,7 @@
       </div>
       <table id="table" class="reponsetable"></table>
       <script type="text/html" id="editer">
-        <a class="table-operation" onclick="edittr(this)"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="deletetr(this)"><i class="fa fa-trash"></i></a>
+        <a class="table-operation" onclick="edittr(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="approveApply(this)" title="通过审核"><i class="fa fa-check"></i></a><a class="table-operation" onclick="rejectApply(this)" title="拒绝审核"><i class="fa fa-times"></i></a>
       </script>
     </div>
 
