@@ -1,5 +1,13 @@
+/**
+ * 报名管理相关操作
+ */
+
 // 报名选项
 const applyOptions = {
+  title: {
+    selector: "#title",
+    errTip: "标题不能为空", 
+  },
   name: {
     selector: "#name",
     errTip: "真实姓名不能为空",
@@ -34,24 +42,24 @@ const applyOptions = {
   },
 };
 
-/**
- * 处理管理报名
- */
+// 与服务器同步的表格数据 
+let tableData = null;
 
+// 表格配置选项
 const tbOpts = {
   id: "table",
   operation: "editer",
   type: "numbers",
-  colum: fetchColumn(),
+  colum: generateColum(),
   data: [],
+  introductions: [],
   images: [],
-  introductions: []
+  activeTr: 0,
 }
 
-// 请求
 get('/api/vote/data_apply?aid=ef3d7491468d4549a7516911703d7dfb')
   .then(data => {
-    flushTable(data);
+    flushTableData(data);
   })
   .catch(err => {
     console.error(err);
@@ -59,83 +67,85 @@ get('/api/vote/data_apply?aid=ef3d7491468d4549a7516911703d7dfb')
 
 
 /**
- * 刷新表格数据
  * 
- * @param {object} data 表格数据
+ * @param {*} data 
  */
-function flushTable(data) {
+function flushTableData(data) {
   data.forEach((element, index) => {
-    if (element.imgEntry) {
-      element.imgEntry = `<img src=${element.imgEntry} title="点击我查看大图" class="table-img" onclick="showImage(${index})">`;
-      tbOpts.images.push(element.imgEntry);
-    }
-    if (element.introduction) {
-      tbOpts.introductions[element.id] = element.introduction;
-      element.introduction = `<a href="javascript:showDescription(${element.id})" title="点击我查看详细描述">查看</a>`
-    }
+    element.index = index;
   })
-  reponse.reloadtable(data, "table");
+  tableData = JSON.parse(JSON.stringify(data));
+  flushTable(data);
 }
 
 
-function fetchColumn() {
-  const column = [
+/**
+ * 获取页面中隐藏标签的数据
+ * 根据数据生成表格的列
+ * 
+ * @return 表格列数组
+ */
+function generateColum() {
+  const columns = [
+    { "field": "index", "title": "index" },
     { "field": "id", "title": "编号" },
     { "field": "title", "title": "标题" },
     { "field": "status", "title": "审核状态" },
   ];
-
+  
   const tableColumns = Array.from($('.table-column'));
   tableColumns.forEach(element => {
-    column.push({
+    columns.push({
       "field": element.dataset.field, 
       "title": element.dataset.title
     });
   });
-  
-  return column;
+
+  return columns;
 }
-
-
-
 
 /**
- * 导出表格为Excel
+ * 刷新表格数据
+ * 
+ * @param {object[]} data 表格数据
  */
-function exportExcel() {
-  const tableobj = $("#table").data("tableObj");
-  reponse.JSONToCSVConvertor(tableobj, true, "人员表格");
+function flushTable(data) {
+  data.forEach((element, index) => {
+    if (element.imgEntry) {
+      element.imgEntry = ` <img src=${element.imgEntry} title="点击我查看大图" class="table-img" onclick="showImage(${index})">`;
+    }
+    if (element.introduction) {
+      element.introduction = `<a href="javascript:showDescription(${index})" title="点击我查看详细描述">查看</a>`
+    }
+  })
+  reponse.reloadtable(data, "table");
 }
-
-
-function showDescription(index) {
-  openModal('userdef', tbOpts.introductions[index], ()=>{});
-}
-
-function showImage(index) {
-  openModal('userdef', tbOpts.images[index], ()=>{});
-}
-
 
 /**
  * 编辑报名信息
  * 
  * @param {ThisType} which 那一行
  */
-function edittr(which) {
+function editTr(which) {
   const tr = $(which).parent().parent();
-  reponse.resiverowdata(tr, "table");
-  const rowData = $("#table").data("rowdata");
   
-  //
-  Object.keys(rowData).forEach(key => {
-    $(`#${key}`).val(rowData[key]);
+  // 获取当前行信息
+  const rowData = tableData[tr.children().first().text()]
+  
+  // 同步表格行中的值到编辑框
+  Object.keys(applyOptions).forEach(key => {
+    $(applyOptions[key].selector).val(rowData[key]);
   })
-  
-  // 如果存在详细介绍，则将详细介绍的内容同步到富文本编辑器中
+
+
+  // 如果存在详细介绍
+  // 则将详细介绍的内容同步到富文本编辑器中
   if(rowData.introduction) {
-    tinyMCE.activeEditor.setContent(tbOpts.introductions[rowData.id]);
+    tinyMCE.activeEditor.setContent(rowData.introduction);
   }
+
+  // 设置活动行为当前编辑行
+  tbOpts.activeTr = rowData.index;
 
   $('#editModal').modal();
 }
@@ -145,8 +155,11 @@ function edittr(which) {
  */
 function updateApplyInfo() {
   Object.keys(applyOptions).forEach(key => {
-    rowData[key] = $(`#${key}`).val();
+    tableData[tbOpts.activeTr][key] = $(applyOptions[key].selector).val();
   });
+
+  data = JSON.parse(JSON.stringify(tableData));
+  flushTable(data);
 }
 
 /**
@@ -206,6 +219,33 @@ function checkImgEntry() {
   }
 }
 
-
 // 初始化表格
 $("#table").reponsetable(tbOpts);
+
+
+/**
+ * 导出表格为Excel
+ */
+function exportExcel() {
+  const tableobj = $("#table").data("tableObj");
+  reponse.JSONToCSVConvertor(tableobj, true, "人员表格");
+}
+
+/**
+ * 显示详细介绍
+ * 
+ * @param {number} index 表格行索引
+ */
+function showDescription(index) {
+  openModal('userdef', tableData[index].introduction, ()=>{});
+}
+
+/**
+ * 显示图片大图
+ * 
+ * @param {number} index  表格行索引
+ */
+function showImage(index) {
+  const img = `<img src="${tableData[index].imgEntry}">`
+  openModal('userdef', img, ()=>{});
+}

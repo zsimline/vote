@@ -101,18 +101,6 @@ input[type="file"] {
   margin-left: 6px;
 }
 
-
-/*！ 管理投票页样式 */
-.panel {
-  margin-top: 30px;
-}
-
-.panel-body .btn {
-  padding: 6px 12px;
-  margin: auto 2px;
-}
-
-
 /*! 报名页样式 */
 .radio {
   display: inline-block;

@@ -1,12 +1,22 @@
 /*！
  * 与投票管理相关的页面样式表
- * 包含：管理主页面、编辑页面、报名管理页面、
- *      条目管理页面、结果与日志页面、链接与二维码页面
+ * 包含：管理主页、编辑页、报名管理页、
+ *      条目管理页、结果与日志页、链接与二维码页
  */
 
 .container > .nav-tabs {
   font-size: 16px;
   margin-top: 40px;
+}
+
+/*！ 管理主页样式 */
+.panel {
+  margin-top: 30px;
+}
+
+.panel-body .btn {
+  padding: 6px 12px;
+  margin: auto 2px;
 }
 
 /*！ 链接与二维码页样式 */
@@ -15,33 +25,28 @@
   color: #000 !important;
 }
 
-/*！报名管理页样式 */
+/*! 与表格相关样式 */
 .table-operation {
   font-size: 16px;
   cursor: pointer;
   padding: 5px 10px;
   border: solid 1px #ccc;
+  border-right: none;
   color: #454545;
 }
-
-.table-operation:nth-child(1) {
-  border-right: none;
+.table-operation:first-child {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-
-.table-operation:nth-child(2) {
+.table-operation:last-child {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+  border-right: solid 1px #ccc;
 }
-
 .table-operation:hover {
   background-color: #f3f3f3;
 }
 
-.tox.tox-tinymce {
-  width: 100% !important;
-}
 
 /*! 表格样式 */
 .table-container {
@@ -55,6 +60,11 @@
   white-space: nowrap;
 }
 
+.reponsetable th[data-field="index"],
+.reponsetable td[data-field="index"] {
+  display: none;
+}
+
 .table-img {
   width: 100%;
   cursor: pointer;
@@ -66,3 +76,6 @@
   }
 }
 
+.tox.tox-tinymce {
+  width: 100% !important;
+}
