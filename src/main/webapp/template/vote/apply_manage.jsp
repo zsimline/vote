@@ -45,6 +45,7 @@
     <!-- 响应式表格 -->
     <div class="table-container">
       <div class="btn-container">
+        <button class="layui-btn" onclick="appendApply();"><i class="fa fa-plus"></i>新增报名</button>
         <button class="layui-btn" onclick="exportExcel();"><i class="fa fa-floppy-o"></i>导出Excel</button>
         <button class="layui-btn" onclick="reloadTable();"><i class="fa fa-undo"></i>刷新表格</button>
       </div>
@@ -130,7 +131,7 @@
             %>
           </div>
           <div class="modal-footer">
-            <button id="editModalButton" type="button" class="btn btn-success" data-dismiss="modal" onclick="updateApplyInfo()">　保存　</button>
+            <button id="editModalButton" type="button" class="btn btn-success" data-dismiss="modal" onclick="saveOrUpdate()">　保存　</button>
             <button id="editModalButton" type="button" class="btn btn-fefault" data-dismiss="modal">　取消　</button>
           </div>
         </div>

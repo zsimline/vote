@@ -54,7 +54,7 @@ const tbOpts = {
   data: [],
   introductions: [],
   images: [],
-  activeTr: 0,
+  activeTr: -1,
 }
 
 function fetchTableData() {
@@ -222,6 +222,25 @@ function uploadUpadteData(formData, id) {
     });
 }
 
+/**
+ * 上传新增报名数据
+ * 
+ * @param {FormData} formData
+ */
+function uploadAppendData(formData) {
+  post(`/api/vote/apply?aid=${$('#aid').text()}`, formData)
+    .then(data => {
+      if (!(data.code % 100)) {
+        openModal('success', data.codeDesc);
+        //flushTable(formData, data);
+      } else {
+        openModal('error', data.codeDesc);
+      }
+    })
+    .catch(err => {
+      openModal('error', '新增报名失败')
+    });
+}
 
 /**
  * 校验标题是否为空
@@ -245,7 +264,7 @@ function checkTitle() {
  *
  * @return true/flase 校验成功/失败
  */
-function checkIntroduction() {
+function checkIntroduction(formData) {
   if (window.tinyMCE === undefined) {
     return true;
   }
@@ -255,7 +274,7 @@ function checkIntroduction() {
     openModal('error', '详细介绍不能为空');
     return false;
   } else {
-    this.formData.append('introduction', introduction);
+    formData.append('introduction', introduction);
     return true;
   }
 }
@@ -266,7 +285,7 @@ function checkIntroduction() {
  *
  * @return true/false 校验成功/失败
  */
-function checkImgEntry() {
+function checkImgEntry(formData) {
   const imgEntry = $('#img-entry').val();
   if (imgEntry === undefined) {
     return true;
@@ -274,7 +293,7 @@ function checkImgEntry() {
     openModal('error', '参赛图片不能为空');
     return false;
   } else {
-    this.formData.append('imgEntry', $('#img-entry').prop('files')[0]);
+    formData.append('imgEntry', $('#img-entry').prop('files')[0]);
     return true;
   }
 }
@@ -312,7 +331,7 @@ function exportExcel() {
  * @param {number} index 表格行索引
  */
 function showDescription(index) {
-  openModal('userdef', tableData[index].introduction, ()=>{});
+  openModal('userdef', tableData[index].introduction);
 }
 
 /**
@@ -322,5 +341,49 @@ function showDescription(index) {
  */
 function showImage(index) {
   const img = `<img src="${tableData[index].imgEntry}">`
-  openModal('userdef', img, ()=>{});
+  openModal('userdef', img);
+}
+
+
+function appendApply() {
+  clearEditModal();
+  tbOpts.activeTr = -1;
+  $('#editModal').modal();
+}
+
+
+function clearEditModal() {
+  Object.values(applyOptions).forEach(element => {
+    $(element.selector).val('');
+  })
+  if (window.tinyMCE !== undefined) {
+    tinyMCE.activeEditor.setContent('');
+  }
+}
+
+
+function appendApplyInfo() {
+  const formData = new FormData();
+
+  Object.keys(applyOptions).forEach(key => {
+    const value = $(applyOptions[key].selector).val();
+    if (value !== undefined) {
+      formData.append(key, value);
+    }
+  });
+
+  if (checkTitle(formData) && checkImgEntry(formData) && checkIntroduction(formData)) {
+    uploadAppendData(formData);
+  }
+}
+
+/**
+ * 新增或更新报名信息
+ */
+function saveOrUpdate() {
+  if (tbOpts.activeTr == -1) {
+    appendApplyInfo();
+  } else {
+    updateApplyInfo();
+  }
 }

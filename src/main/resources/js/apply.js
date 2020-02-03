@@ -1,5 +1,9 @@
 // 报名选项
 const applyOptions = {
+  title: {
+    selector: "#title",
+    errTip: "标题不能为空", 
+  },
   name: {
     selector: "#name",
     errTip: "真实姓名不能为空",
@@ -49,23 +53,6 @@ function handleSubmit() {
   checkFactory.formData = new FormData();  
   if (checkFactory.check()) {
     uploadData(checkFactory.formData);
-  }
-}
-
-/**
- * 校验标题是否为空
- * 校验通过后将数据追加到容器中
- *
- * @return true/false 校验成功/失败
- */
-function checkTitle() {
-  const title = $('#title').val();
-  if (title === '') {
-    openModal('error', '标题不能为空');
-    return false;
-  } else {
-    this.formData.append('title', title);
-    return true;
   }
 }
 
@@ -132,23 +119,6 @@ function checkApplyOptions() {
   return true;
 }
 
-/**
- * 校验活动ID是否为空
- * 校验通过后将数据追加到容器中
- *
- * @return true/false 校验成功/失败
- */
-function checkAid() {
-  const aid = $('#aid').text();
-  if (aid === '') {
-    openModal('error', '页面生成错误');
-    return false;
-  } else {
-    this.formData.append('aid', aid);
-    return true;
-  }
-}
-
 // 创建校验工厂
 const checkFactory = {
   formData: null,
@@ -164,11 +134,9 @@ const checkFactory = {
 // 绑定校验函数
 // 使校验函数的this指针指向checkFactory
 checkFactory.functions = [
-  checkTitle.bind(checkFactory),
   checkImgEntry.bind(checkFactory),
   checkIntroduction.bind(checkFactory),
   checkApplyOptions.bind(checkFactory),
-  checkAid.bind(checkFactory),
 ];
 
 /**
@@ -177,7 +145,7 @@ checkFactory.functions = [
  * @param {FormData} formData
  */
 function uploadData(formData) {
-  post('/api/vote/apply', formData)
+  post(`/api/vote/apply?aid=${$('#aid').text()}`, formData)
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc, () => {
