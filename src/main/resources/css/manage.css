@@ -66,8 +66,13 @@
 }
 
 .table-img {
-  width: 100%;
+  max-width: 50px;
+  max-height: 50px;
   cursor: pointer;
+}
+
+.modal img {
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
