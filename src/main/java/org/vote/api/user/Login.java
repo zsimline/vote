@@ -37,13 +37,13 @@ public class Login extends BaseApi {
 
       // 验证账户是够存在
       if (user == null) {
-        completed(response, 1202);
+        complete(response, 1202);
         return;
       }
 
       // 验证账户是否是已激活的
       if (user.getIsActive() == false) {
-        completed(response, 1204);
+        complete(response, 1204);
         return;
       }
 
@@ -57,16 +57,16 @@ public class Login extends BaseApi {
             CookieFactory cookieFactory = new CookieFactory(request, response);
             cookieFactory.setCookie("uid", String.valueOf(user.getId()));
             cookieFactory.setCookie("token", token);
-            completed(response, 1200);
+            complete(response, 1200);
           } else {
-            completed(response, 1205);
+            complete(response, 1205);
           }
         } else {
-          completed(response, 1203);
+          complete(response, 1203);
         }
       } catch (Exception e) {
         e.printStackTrace();
-        completed(response, 1201);
+        complete(response, 1201);
       }
     }
   }

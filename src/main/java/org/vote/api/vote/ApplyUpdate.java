@@ -32,10 +32,17 @@ public class ApplyUpdate extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String aid = request.getParameter("aid");
+    if (!isMyActivity(aid, request, response)) {
+      complete(response, 1503);
+      return ;
+    }
+
+    // 从数据库中获取报名数据数据
     Apply apply = getApplyInfo(request, response);
     if (apply == null) {
-      completed(response, 1502);
-      return;
+      complete(response, 1502); 
+      return ;
     }
 
     // 只处理 multipart 类型的表单数据
@@ -96,7 +103,7 @@ public class ApplyUpdate extends BaseApi {
 
             // 文件后缀名不为 jpg/png
             if (!ext.equals("jpg") && !ext.equals("png")) {
-              completed(response, 1402);
+              complete(response, 1402);
               return;
             }
 
@@ -116,13 +123,13 @@ public class ApplyUpdate extends BaseApi {
 
         // 执行数据存储
         if (updateInstance((apply))) {
-          completed(response, 1500, apply.getImgEntry());
+          complete(response, 1500, apply.getImgEntry());
         } else {
-          completed(response, 1501);
+          complete(response, 1501);
         }
       } catch (Exception e) {
         e.printStackTrace();
-        completed(response, 1501);
+        complete(response, 1501);
       }
     }
   }

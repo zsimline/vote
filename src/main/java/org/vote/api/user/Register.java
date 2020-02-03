@@ -37,17 +37,17 @@ public class Register extends BaseApi {
         user.setPassword(MD5.md5(user.getPassword()));
       } catch (Exception e) {
         e.printStackTrace();
-        completed(response, 1103);
+        complete(response, 1103);
       }
 
       if (saveInstance(user)) {
         verifyEmail(response, user);
-        completed(response, 1100);
+        complete(response, 1100);
       } else {
-        completed(response, 1101);
+        complete(response, 1101);
       }
     } else {
-      completed(response, 1102);
+      complete(response, 1102);
     }
   }
 
@@ -66,7 +66,7 @@ public class Register extends BaseApi {
                          + "\">点击链接激活账户</a>";
 
     if (!Email.sendMail(emailAddress, mailContent)) {
-      completed(response, 1104);
+      complete(response, 1104);
     }
   }
 }

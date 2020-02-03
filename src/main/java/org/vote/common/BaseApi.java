@@ -17,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import org.vote.common.HibernateUtil;
+import org.vote.beans.Activity;
 import org.vote.beans.User;
 import org.vote.common.Code;
 
@@ -35,7 +36,7 @@ public class BaseApi extends HttpServlet {
    * @throws ServletException
    * @throws IOException
    */
-  protected void completed(HttpServletResponse response, int status) throws ServletException, IOException {
+  protected void complete(HttpServletResponse response, int status) throws ServletException, IOException {
     Code code = new Code(status);
     Gson gson = new Gson();
     String jsonStr = gson.toJson(code);
@@ -52,7 +53,7 @@ public class BaseApi extends HttpServlet {
    * @throws ServletException
    * @throws IOException
    */
-  protected void completed(HttpServletResponse response, int status, String extraStr) throws ServletException, IOException {
+  protected void complete(HttpServletResponse response, int status, String extraStr) throws ServletException, IOException {
     Code code = new Code(status);
     code.setExtraStr(extraStr);
     Gson gson = new Gson();
@@ -256,5 +257,26 @@ public class BaseApi extends HttpServlet {
     String jsonStr = gson.toJson(objs);
     response.getWriter().write(jsonStr);
     response.setStatus(200);
+  }
+
+  /**
+   * 验证该用户是否有具有对某个活动的操作权限
+   * 这些权限包括更新活动信息、更新报名信息、新增报名信息、
+   * 审核报名信息、管理条目信息、结果与日志的查询
+   * 当出现以下情况时该用户不可操作活动：
+   * 用户未登录、活动不存在、活动不属于该用户
+   * 
+   * @param aid 活动ID 
+   * @param request 请求对象
+   * @param response 响应对象
+   * @return true/false 有/无权限
+   * @throws ServletException
+   * @throws IOException
+   */
+  protected boolean isMyActivity(String aid, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String uid = userIdentify(request, response);
+    if (aid == null || uid == null) return false;
+    Activity activity = (Activity)getInstanceById(Activity.class, aid);
+    return activity != null && activity.getPublisher() == Long.valueOf(uid);
   }
 }

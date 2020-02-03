@@ -94,7 +94,7 @@ function generateColum() {
   return columns;
 }
 
-$("#table").reponsetable(tbOpts);
+$("#table").initialize(tbOpts);
 
 /**
  * 初始化表格并填充表格数据
@@ -117,7 +117,7 @@ function initTable(data) {
     }
   })
   tbOpts.data = data;
-  reponse.reloadtable(tbOpts.data, 'table');
+  basicTable.reload(tbOpts.data, 'table');
 }
 
 /**
@@ -142,7 +142,7 @@ function initTable(data) {
     tbOpts.data[rowData.index] = rowData;
   }
 
-  reponse.reloadtable(tbOpts.data, "table");
+  basicTable.reload(tbOpts.data, "table");
 }
 
 /**
@@ -208,7 +208,7 @@ function updateApplyInfo() {
  * @param {string} id
  */
 function uploadUpadteData(formData, id) {
-  post(`/api/vote/apply_update?id=${id}`, formData)
+  post(`/api/vote/apply_update?aid=${$('#aid').text()}&id=${id}`, formData)
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);
@@ -302,8 +302,8 @@ function flushTable(formData, resData) {
  * 导出表格为Excel
  */
 function exportExcel() {
-  const tableobj = $("#table").data("tableObj");
-  reponse.JSONToCSVConvertor(tableobj, true, "人员表格");
+  const excelData = JSON.parse(JSON.stringify(tbOpts));
+  basicTable.JSONToCSVConvertor(excelData, true, "报名信息表");
 }
 
 /**

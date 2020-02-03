@@ -90,7 +90,7 @@ public class ApplySingle extends BaseApi {
 
             // 文件后缀名不为 jpg/png
             if (!ext.equals("jpg") && !ext.equals("png")) {
-              completed(response, 1402);
+              complete(response, 1402);
               return;
             }
 
@@ -110,13 +110,13 @@ public class ApplySingle extends BaseApi {
 
         // 执行数据存储
         if (saveInstance(apply)) {
-          completed(response, 1400);
+          complete(response, 1400);
         } else {
-          completed(response, 1401);
+          complete(response, 1401);
         }
       } catch (Exception e) {
         e.printStackTrace();
-        completed(response, 1401);
+        complete(response, 1401);
       }
     }
   }

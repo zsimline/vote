@@ -136,6 +136,8 @@
         </div>
       </div>
     </div>
+    
+    <span id="aid" class="hidden">${aid}</span>
 
     <script src="/js/apply_manage.js"></script>
   </div>

@@ -33,7 +33,7 @@ public class Publish extends BaseApi {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String uid = userIdentify(request, response);
     if (uid == null) {
-      completed(response, 1003);
+      complete(response, 1003);
       return ;
     }
 
@@ -98,7 +98,7 @@ public class Publish extends BaseApi {
 
             // 文件后缀名不为 jpg/png
             if (!ext.equals("jpg") && !ext.equals("png")) {
-              completed(response, 1002);
+              complete(response, 1002);
               return ;
             }
 
@@ -121,13 +121,13 @@ public class Publish extends BaseApi {
 
         // 执行数据存储
         if (createTicketTable(activity.getId()) && saveInstance(activity)) {
-          completed(response, 1000);
+          complete(response, 1000);
         } else {
-          completed(response, 1001);
+          complete(response, 1001);
         }
       } catch (Exception e) {
         e.printStackTrace();
-        completed(response, 1001);
+        complete(response, 1001);
       }
     }
   }  

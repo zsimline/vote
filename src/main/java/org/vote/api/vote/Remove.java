@@ -27,7 +27,7 @@ public class Remove extends BaseApi {
     
     // 验证是否可删除
     if (!canDelete(uid, activity)) {
-      completed(response, 1902);
+      complete(response, 1902);
       return ;
     }
 
@@ -35,9 +35,9 @@ public class Remove extends BaseApi {
     // 删除投票表并更新活动实例
     activity.setDestroyed(true);
     if (deleteTicketTable(aid) && updateInstance(activity)) {
-      completed(response, 1900);
+      complete(response, 1900);
     } else {
-      completed(response, 1901);
+      complete(response, 1901);
     }
   }
 

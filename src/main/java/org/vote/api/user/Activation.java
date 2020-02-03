@@ -27,11 +27,11 @@ public class Activation extends BaseApi {
 
     User user = getUserByEmail(emailAddress);
     if (user == null) {
-      completed(response, 1302);
+      complete(response, 1302);
       return ;
     }
     if (!user.getPassword().equals(password)) {
-      completed(response, 1303);
+      complete(response, 1303);
       return ;
     }
 
@@ -39,9 +39,9 @@ public class Activation extends BaseApi {
     // 更新用户实例
     user.setIsActive(true);
     if (updateInstance(user)) {
-      completed(response, 1300);
+      complete(response, 1300);
     } else {
-      completed(response, 1301);
+      complete(response, 1301);
     }
   }
 
