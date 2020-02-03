@@ -34,103 +34,104 @@ public class ApplyUpdate extends BaseApi {
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Apply apply = getApplyInfo(request, response);
     if (apply == null) {
-      completed(response, 1503);
-      return ;
+      completed(response, 1502);
+      return;
     }
-   // 只处理 multipart 类型的表单数据
-   boolean multipart = ServletFileUpload.isMultipartContent(request);
-   if (multipart) {
-     // 创建磁盘文件工厂
-     DiskFileItemFactory factory = new DiskFileItemFactory();
 
-     // 设置缓冲区大小
-     factory.setSizeThreshold(1024 * 1024 * 2);
+    // 只处理 multipart 类型的表单数据
+    boolean multipart = ServletFileUpload.isMultipartContent(request);
+    if (multipart) {
+      // 创建磁盘文件工厂
+      DiskFileItemFactory factory = new DiskFileItemFactory();
 
-     // 创建文件上传处理器
-     ServletFileUpload upload = new ServletFileUpload(factory);
+      // 设置缓冲区大小
+      factory.setSizeThreshold(1024 * 1024 * 2);
 
-     // 单个文件大小不超过1M
-     upload.setFileSizeMax(1024 * 1024);
+      // 创建文件上传处理器
+      ServletFileUpload upload = new ServletFileUpload(factory);
 
-     try {
-       List<FileItem> items = upload.parseRequest(request);
-       Iterator<FileItem> iter = items.iterator();
+      // 单个文件大小不超过1M
+      upload.setFileSizeMax(1024 * 1024);
 
-       while (iter.hasNext()) {
-         FileItem item = iter.next();
+      try {
+        List<FileItem> items = upload.parseRequest(request);
+        Iterator<FileItem> iter = items.iterator();
 
-         if (item.isFormField()) { // 普通表单数据
-           // 表单名
-           String fieldName = item.getFieldName();
+        while (iter.hasNext()) {
+          FileItem item = iter.next();
 
-           // 表单值
-           String fieldContent = item.getString("UTF-8");
+          if (item.isFormField()) { // 普通表单数据
+            // 表单名
+            String fieldName = item.getFieldName();
 
-           if (fieldName.equals("aid")) {
-             apply.setAid(fieldContent);
-           } else if (fieldName.equals("title")) {
-             apply.setTitle(fieldContent);
-           } else if (fieldName.equals("introduction")) {
-             apply.setIntroduction(fieldContent);
-           } else if (fieldName.equals("name")) {
-             apply.setName(fieldContent);
-           } else if (fieldName.equals("sex")) {
-             apply.setSex(fieldContent);
-           } else if (fieldName.equals("age")) {
-             apply.setAge(Integer.valueOf(fieldContent));
-           } else if (fieldName.equals("telephone")) {
-             apply.setTelephone(fieldContent);
-           } else if (fieldName.equals("email")) {
-             apply.setEmail(fieldContent);
-           } else if (fieldName.equals("school")) {
-             apply.setSchool(fieldContent);
-           } else if (fieldName.equals("company")) {
-             apply.setCompany(fieldContent);
-           } else if (fieldName.equals("address")) {
-             apply.setAddress(fieldContent);
-           }
-         } else { // 文件数据
-           String filename = item.getName();
-           String ext = filename.substring(filename.indexOf(".") + 1);
+            // 表单值
+            String fieldContent = item.getString("UTF-8");
 
-           // 文件后缀名不为 jpg/png
-           if (!ext.equals("jpg") && !ext.equals("png")) {
-             completed(response, 1402);
-             return;
-           }
+            if (fieldName.equals("aid")) {
+              apply.setAid(fieldContent);
+            } else if (fieldName.equals("title")) {
+              apply.setTitle(fieldContent);
+            } else if (fieldName.equals("introduction")) {
+              apply.setIntroduction(fieldContent);
+            } else if (fieldName.equals("name")) {
+              apply.setName(fieldContent);
+            } else if (fieldName.equals("sex")) {
+              apply.setSex(fieldContent);
+            } else if (fieldName.equals("age")) {
+              apply.setAge(Integer.valueOf(fieldContent));
+            } else if (fieldName.equals("telephone")) {
+              apply.setTelephone(fieldContent);
+            } else if (fieldName.equals("email")) {
+              apply.setEmail(fieldContent);
+            } else if (fieldName.equals("school")) {
+              apply.setSchool(fieldContent);
+            } else if (fieldName.equals("company")) {
+              apply.setCompany(fieldContent);
+            } else if (fieldName.equals("address")) {
+              apply.setAddress(fieldContent);
+            }
+          } else { // 文件数据
+            String filename = item.getName();
+            String ext = filename.substring(filename.indexOf(".") + 1);
 
-           // 定义上传文件路径
-           String basePath = request.getSession().getServletContext().getRealPath("/") + "uploads/";
-           String fullPath = Utils.mkdirByDate(basePath);
+            // 文件后缀名不为 jpg/png
+            if (!ext.equals("jpg") && !ext.equals("png")) {
+              completed(response, 1402);
+              return;
+            }
 
-           // 定义本机存储的文件名
-           String localFileName = UUIDTool.getUUID() + "." + ext;
-           apply.setImgEntry(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
+            // 定义上传文件路径
+            String basePath = request.getSession().getServletContext().getRealPath("/") + "uploads/";
+            String fullPath = Utils.mkdirByDate(basePath);
 
-           // 存储文件
-           File file = new File(fullPath, localFileName);
-           item.write(file);
-         }
-       }
+            // 定义本机存储的文件名
+            String localFileName = UUIDTool.getUUID() + "." + ext;
+            apply.setImgEntry(fullPath.substring(fullPath.indexOf("/uploads")) + "/" + localFileName);
 
-       // 执行数据存储
-       if (updateInstance((apply))) {
-         completed(response, 1400);
-       } else {
-         completed(response, 1401);
-       }
-     } catch (Exception e) {
-       e.printStackTrace();
-       completed(response, 1401);
-     }
-   }
+            // 存储文件
+            File file = new File(fullPath, localFileName);
+            item.write(file);
+          }
+        }
+
+        // 执行数据存储
+        if (updateInstance((apply))) {
+          completed(response, 1500, apply.getImgEntry());
+        } else {
+          completed(response, 1501);
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+        completed(response, 1501);
+      }
+    }
   }
 
   private Apply getApplyInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Apply apply = null;
-    try {    
+    try {
       String id = request.getParameter("id");
-      apply = (Apply)getInstanceById(Apply.class, Long.valueOf(id));
+      apply = (Apply) getInstanceById(Apply.class, Long.valueOf(id));
     } catch (NumberFormatException e) {
       e.printStackTrace();
     }

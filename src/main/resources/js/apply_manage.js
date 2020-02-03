@@ -57,13 +57,17 @@ const tbOpts = {
   activeTr: 0,
 }
 
-get('/api/vote/data_apply?aid=ef3d7491468d4549a7516911703d7dfb')
+function fetchTableData() {
+  get('/api/vote/data_apply?aid=ef3d7491468d4549a7516911703d7dfb')
   .then(data => {
     initTable(data);
   })
   .catch(err => {
     console.error(err);
   });
+}
+
+fetchTableData();
 
 /**
  * 获取页面中隐藏标签的数据
@@ -90,6 +94,8 @@ function generateColum() {
   return columns;
 }
 
+$("#table").reponsetable(tbOpts);
+
 /**
  * 初始化表格并填充表格数据
  * 
@@ -111,7 +117,7 @@ function initTable(data) {
     }
   })
   tbOpts.data = data;
-  $("#table").reponsetable(tbOpts);
+  reponse.reloadtable(tbOpts.data, 'table');
 }
 
 /**
@@ -192,13 +198,7 @@ function updateApplyInfo() {
   }
 
   uploadUpadteData(formData, tableData[tbOpts.activeTr].id);
-
-  //flushSingleRow(JSON.stringify(tableData[tbOpts.activeTr]));
 }
-
-
-
-
 
 
 /**
@@ -212,6 +212,7 @@ function uploadUpadteData(formData, id) {
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);
+        flushTable(formData, data);
       } else {
         openModal('error', data.codeDesc);
       }
@@ -278,7 +279,24 @@ function checkImgEntry() {
   }
 }
 
-
+/**
+ * 刷新表格
+ * 
+ * @param {FormData} formData 要刷新的行数据
+ * @param {Object} resData 响应数据
+ */
+function flushTable(formData, resData) {
+  const keys = formData.keys();
+  while (key = keys.next().value) {
+    // 更新了图片时需要重新加载图片
+    if (key === 'imgEntry') {
+      tableData[tbOpts.activeTr].imgEntry = resData.extraStr;
+      continue;
+    }
+    tableData[tbOpts.activeTr][key] = formData.get(key);
+  }
+  flushSingleRow(JSON.stringify(tableData[tbOpts.activeTr]));
+}
 
 /**
  * 导出表格为Excel

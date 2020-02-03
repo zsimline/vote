@@ -12,6 +12,9 @@ public class Code {
   // 返回码说明
   private String codeDesc;
 
+  // 额外说明
+  private String extraStr;
+
   // 返回码映射
   private static HashMap<Integer, String> codes;
 
@@ -92,5 +95,19 @@ public class Code {
    */
   public void setCodeDesc(String codeDesc) {
     this.codeDesc = codeDesc;
+  }
+
+  /**
+   * @return extraStr
+   */
+  public String getExtraStr() {
+    return extraStr;
+  }
+
+  /**
+   * @param extraStr 要设置的 extraStr
+   */
+  public void setExtraStr(String extraStr) {
+    this.extraStr = extraStr;
   }
 }

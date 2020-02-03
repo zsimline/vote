@@ -30,13 +30,31 @@ public class BaseApi extends HttpServlet {
   /**
    * 向用户返回操作执行的结果
    * 
-   * @param response Servlet响应对象
+   * @param response 响应对象
    * @param status   自定义的返回码
    * @throws ServletException
    * @throws IOException
    */
   protected void completed(HttpServletResponse response, int status) throws ServletException, IOException {
     Code code = new Code(status);
+    Gson gson = new Gson();
+    String jsonStr = gson.toJson(code);
+    response.getWriter().write(jsonStr);
+    response.setStatus(200);
+  }
+
+  /**
+   * 向用户返回操作执行的结果
+   * 
+   * @param response 响应对象
+   * @param status   自定义的返回码
+   * @param extraStr 额外发送的字符串
+   * @throws ServletException
+   * @throws IOException
+   */
+  protected void completed(HttpServletResponse response, int status, String extraStr) throws ServletException, IOException {
+    Code code = new Code(status);
+    code.setExtraStr(extraStr);
     Gson gson = new Gson();
     String jsonStr = gson.toJson(code);
     response.getWriter().write(jsonStr);
