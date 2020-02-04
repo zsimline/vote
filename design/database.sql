@@ -72,7 +72,7 @@ CREATE TABLE `apply`
   `school` VARCHAR(16) DEFAULT NULL,     -- 学校名称
   `company` VARCHAR(26) DEFAULT NULL,    -- 公司名称
   `address` VARCHAR(40) DEFAULT NULL,    -- 收货地址
-  PRIMARY KEY(`id`),
+  PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 投票信息表

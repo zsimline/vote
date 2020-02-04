@@ -58,7 +58,7 @@ const tbOpts = {
 }
 
 function fetchTableData() {
-  get('/api/vote/data_apply?aid=ef3d7491468d4549a7516911703d7dfb')
+  get('/api/vote/data_apply?aid=0d11eed65e8e4c90ac99d91f2b8b6627')
   .then(data => {
     initTable(data);
   })

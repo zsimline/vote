@@ -37,7 +37,7 @@ public class Utils {
    * @return true/false 创建目录成功/失败
    */
   public static String mkdirByDate(String basePath) {
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/DD");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
     String fullPath = basePath + simpleDateFormat.format(new Date());
     File directory = new File(fullPath);
     if (!directory.exists()) {
