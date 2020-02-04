@@ -54,12 +54,10 @@ public class Code {
     codes.put(1303, "邮件验证码错误");
 
     // 报名活动功能返回码
-    codes.put(1400, "报名成功");
     codes.put(1401, "报名失败原因未知");
     codes.put(1402, "图片文件后缀名只能为.jpg/.png");
 
     // 更新报名信息功能返回码
-    codes.put(1500, "更新报名信息成功");
     codes.put(1501, "更新报名信息失败原因未知");
     codes.put(1502, "报名ID不存在");
     codes.put(1503, "无权执行操作");

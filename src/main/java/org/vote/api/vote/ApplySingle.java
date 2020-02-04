@@ -115,7 +115,7 @@ public class ApplySingle extends BaseApi {
 
         // 执行数据存储
         if (saveInstance(apply)) {
-          complete(response, 1400);
+          sendJSON(response, apply);
         } else {
           complete(response, 1401);
         }

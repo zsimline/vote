@@ -147,15 +147,13 @@ checkFactory.functions = [
 function uploadData(formData) {
   post(`/api/vote/apply?aid=${$('#aid').text()}`, formData)
     .then(data => {
-      if (!(data.code % 100)) {
-        openModal('success', data.codeDesc, () => {
-          window.location.href = "/";
-        });
+      if (!data.code) {
+        console.log(data);
       } else {
         openModal('error', data.codeDesc);
       }
     })
     .catch(err => {
-      openModal('error', '发布投票失败')
+      console.error(err);
     });
 }

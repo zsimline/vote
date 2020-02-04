@@ -25,9 +25,9 @@ public class DataApply extends BaseApi {
     String aid = request.getParameter("aid");
 
     if (isMyActivity(aid, request, response)) {
-      sendJson(response, fetchApplys(aid));
+      sendJSON(response, fetchApplys(aid));
     } else {  // 报名数据不可被获取时返回空数据
-      sendJson(response, Collections.emptyList());     
+      sendJSON(response, Collections.emptyList());     
     }
   }
 

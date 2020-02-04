@@ -52,15 +52,14 @@ const tbOpts = {
   type: "numbers",
   colum: generateColum(),
   data: [],
-  introductions: [],
-  images: [],
   activeTr: -1,
 }
 
 function fetchTableData() {
   get(`/api/vote/data_apply?aid=${$('#aid').text()}`)
     .then(data => {
-      initTable(data);
+      initTableData(data);
+      initTable(tableData);
     })
     .catch(err => {
       console.error(err);
@@ -92,54 +91,43 @@ function generateColum() {
   return columns;
 }
 
-$("#table").initialize(tbOpts);
-
 /**
- * 初始化表格并填充表格数据
- * 
- * @param {object[]} data 表格行数据数组
+ * 初始化表格数据
+ *
+ * @param {Onject[]} data 从服务器返回的原始数据
  */
-function initTable(data) {
+
+function initTableData(data) {
   data.forEach((element, index) => {
     element.index = index;
-  })
-  tableData = JSON.parse(JSON.stringify(data));
+  });
+  tableData = data;
+}
+
+/**
+ * 初始化表格结果
+ * 同时填充表格数据
+ * 
+ * @param {object[]} tableData 表格行数据数组
+ */
+function initTable(tableData) {
+  // 初始化表格结构
+  $("#table").initialize(tbOpts);
+
+  // 需要填充到表格中的数据
+  const data = JSON.parse(JSON.stringify(tableData));
 
   // 填充表格数据
   data.forEach((element, index) => {
     if (element.imgEntry) {
-      element.imgEntry = `<img src=${element.imgEntry} title="点击我查看大图" class="table-img" onclick="showImage(${index})">`;
+      element.imgEntry = `<img src=${element.imgEntry} title="点击我查看大图" class="table-img" onclick="showBigImage(${index})">`;
     }
     if (element.introduction) {
       element.introduction = `<a href="javascript:showDescription(${index})" title="点击我查看详细描述">查看</a>`
     }
-  })
+  });
+  basicTable.reload(data, 'table');
   tbOpts.data = data;
-  basicTable.reload(tbOpts.data, 'table');
-}
-
-/**
- * 刷新单一行数据
- * 
- * @param {string} rowDataStr 行数据字符串
- * @param {string} append 是否为追加数据
- */
- function flushSingleRow(rowDataStr, append=false) {
-  const rowData = JSON.parse(rowDataStr);
-  if (rowData.imgEntry) {
-    rowData.imgEntry = `<img src=${rowData.imgEntry} title="点击我查看大图" class="table-img" onclick="showImage(${rowData.index})">`;
-  }
-  if (rowData.introduction) {
-    rowData.introduction = `<a href="javascript:showDescription(${rowData.index})" title="点击我查看详细描述">查看</a>`
-  }
-  
-  if (append) {
-    tbOpts.data.push(rowData);
-  } else {
-    tbOpts.data[rowData.index] = rowData;
-  }
-
-  basicTable.reload(tbOpts.data, "table");
 }
 
 /**
@@ -207,15 +195,14 @@ function updateApplyInfo() {
 function uploadUpadteData(formData, id) {
   post(`/api/vote/apply_update?aid=${$('#aid').text()}&id=${id}`, formData)
     .then(data => {
-      if (!(data.code % 100)) {
-        openModal('success', data.codeDesc);
-        flushTable(formData, data);
+      if (!data.code) {
+        flushTable(data);
       } else {
         openModal('error', data.codeDesc);
       }
     })
     .catch(err => {
-      openModal('error', '发布投票失败')
+      console.error(err);
     });
 }
 
@@ -227,9 +214,8 @@ function uploadUpadteData(formData, id) {
 function uploadAppendData(formData) {
   post(`/api/vote/apply?aid=${$('#aid').text()}`, formData)
     .then(data => {
-      if (!(data.code % 100)) {
-        openModal('success', data.codeDesc);
-        flushTable(formData, data, true);
+      if (!data.code) {
+        flushTable(data, true);
       } else {
         openModal('error', data.codeDesc);
       }
@@ -299,25 +285,15 @@ function checkImgEntry(formData) {
 /**
  * 刷新表格
  * 
- * @param {FormData} formData 要刷新的行数据
  * @param {Object} resData 响应数据
  */
-function flushTable(formData, resData, append=false) {
+function flushTable(resData, append=false) {
   if (append) {
     tbOpts.activeTr = tableData.length;
-    tableData.push({});
   }
-
-  const keys = formData.keys();
-  while (key = keys.next().value) {
-    // 更新了图片时需要重新加载图片
-    if (key === 'imgEntry') {
-      tableData[tbOpts.activeTr].imgEntry = resData.extraStr;
-      continue;
-    }
-    tableData[tbOpts.activeTr][key] = formData.get(key);
-  }
-  flushSingleRow(JSON.stringify(tableData[tbOpts.activeTr]), append);
+  resData.index = tbOpts.activeTr;
+  tableData[tbOpts.activeTr] = resData;
+  initTable(tableData);
 }
 
 /**
@@ -342,7 +318,7 @@ function showDescription(index) {
  * 
  * @param {number} index  表格行索引
  */
-function showImage(index) {
+function showBigImage(index) {
   const img = `<img src="${tableData[index].imgEntry}">`
   openModal('userdef', img);
 }

@@ -245,14 +245,29 @@ public class BaseApi extends HttpServlet {
   }
 
   /**
-   * 发送JSON数据
+   * 向用户发送JSON
+   * 将对象转换为JSON字符串并发送
+   * 
+   * @param response 响应对象
+   * @param obj 要转换的对象
+   * @throws IOException
+   */
+  protected void sendJSON(HttpServletResponse response, Object obj) throws IOException {
+    Gson gson = new Gson();
+    String jsonStr = gson.toJson(obj);
+    response.getWriter().write(jsonStr);
+    response.setStatus(200);
+  }
+
+  /**
+   * 向用户发送JSON
    * 将对象转换为JSON字符串并发送
    * 
    * @param response 响应对象
    * @param objs 要转换的对象
    * @throws IOException
    */
-  protected void sendJson(HttpServletResponse response, List<?> objs) throws IOException {
+  protected void sendJSON(HttpServletResponse response, List<?> objs) throws IOException {
     Gson gson = new Gson();
     String jsonStr = gson.toJson(objs);
     response.getWriter().write(jsonStr);

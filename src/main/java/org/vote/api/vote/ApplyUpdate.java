@@ -123,7 +123,7 @@ public class ApplyUpdate extends BaseApi {
 
         // 执行数据存储
         if (updateInstance((apply))) {
-          complete(response, 1500, apply.getImgEntry());
+          sendJSON(response, apply);
         } else {
           complete(response, 1501);
         }
