@@ -11,10 +11,10 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <link rel="stylesheet" href="/css/manage.css">
   <link rel="stylesheet" href="/css/jquery.basictable.css">
+  <link rel="stylesheet" href="/css/manage.css">
   <script src="/js/jquery.basictable.min.js"></script>
-  <script src="/js/reponsetable.min.js"></script>
+  <script src="/js/basictable.min.js"></script>
   <script src="/js/flatui-radio-0.0.3.js"></script>
   <title>报名管理</title>
 </head>
@@ -87,7 +87,7 @@
                 } else if (options[i].equals("2")) {
               %>
               <%@ include file="../components/options/name.jsp" %>
-              <span class="hidden table-column" data-field="name" data-title="详细介绍""></span>
+              <span class="hidden table-column" data-field="name" data-title="真实姓名""></span>
               <%
                 } else if (options[i].equals("3")) {
               %>
@@ -139,7 +139,7 @@
     </div>
     
     <span id="aid" class="hidden">${aid}</span>
-
+    
     <script src="/js/apply_manage.js"></script>
   </div>
   <%@ include file="../components/modal.jsp" %>

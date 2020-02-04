@@ -23,13 +23,14 @@ public class DataApply extends BaseApi {
   
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
-    
+
     if (isMyActivity(aid, request, response)) {
       sendJson(response, fetchApplys(aid));
     } else {  // 报名数据不可被获取时返回空数据
       sendJson(response, Collections.emptyList());     
     }
   }
+
 
   /**
    * 获取报名数据

@@ -58,16 +58,14 @@ const tbOpts = {
 }
 
 function fetchTableData() {
-  get('/api/vote/data_apply?aid=0d11eed65e8e4c90ac99d91f2b8b6627')
-  .then(data => {
-    initTable(data);
-  })
-  .catch(err => {
-    console.error(err);
-  });
+  get(`/api/vote/data_apply?aid=${$('#aid').text()}`)
+    .then(data => {
+      initTable(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 }
-
-fetchTableData();
 
 /**
  * 获取页面中隐藏标签的数据
@@ -128,7 +126,6 @@ function initTable(data) {
  */
  function flushSingleRow(rowDataStr, append=false) {
   const rowData = JSON.parse(rowDataStr);
-
   if (rowData.imgEntry) {
     rowData.imgEntry = `<img src=${rowData.imgEntry} title="点击我查看大图" class="table-img" onclick="showImage(${rowData.index})">`;
   }
@@ -232,12 +229,13 @@ function uploadAppendData(formData) {
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc);
-        //flushTable(formData, data);
+        flushTable(formData, data, true);
       } else {
         openModal('error', data.codeDesc);
       }
     })
     .catch(err => {
+      console.log(err);
       openModal('error', '新增报名失败')
     });
 }
@@ -304,7 +302,12 @@ function checkImgEntry(formData) {
  * @param {FormData} formData 要刷新的行数据
  * @param {Object} resData 响应数据
  */
-function flushTable(formData, resData) {
+function flushTable(formData, resData, append=false) {
+  if (append) {
+    tbOpts.activeTr = tableData.length;
+    tableData.push({});
+  }
+
   const keys = formData.keys();
   while (key = keys.next().value) {
     // 更新了图片时需要重新加载图片
@@ -314,7 +317,7 @@ function flushTable(formData, resData) {
     }
     tableData[tbOpts.activeTr][key] = formData.get(key);
   }
-  flushSingleRow(JSON.stringify(tableData[tbOpts.activeTr]));
+  flushSingleRow(JSON.stringify(tableData[tbOpts.activeTr]), append);
 }
 
 /**
@@ -387,3 +390,10 @@ function saveOrUpdate() {
     updateApplyInfo();
   }
 }
+
+function reloadTable() {
+  fetchTableData();
+}
+
+
+fetchTableData();
