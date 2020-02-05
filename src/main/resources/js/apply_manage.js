@@ -403,5 +403,18 @@ function jumpByStatus(status) {
   window.location.href = `/vote/apply_manage?aid=${$('#aid').text()}&status=${status}&page=1`;
 }
 
+function approveApply(which) {
+  const tr = $(which).parent().parent();
+  const rowData = tableData[tr.children().first().text()]
+
+  get(`/api/vote/review?aid=${$('#aid').text()}&id=${rowData.id}&status=y`)
+    .then(data => {
+      if (!(data.code % 100)) {
+        delete tableData[tr.children().first().text()];
+        flushTable()
+      }
+      console.log(data);
+    })
+}
 
 fetchTableData();

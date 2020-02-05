@@ -61,6 +61,11 @@ public class Code {
     codes.put(1501, "更新报名信息失败原因未知");
     codes.put(1502, "报名ID不存在");
     codes.put(1503, "无权执行操作");
+
+    // 审核报名功能返回码
+    codes.put(1600, "审核成功");
+    codes.put(1601, "审核失败原因未知");
+    codes.put(1602, "无权执行操作");
   }
 
   public Code(int code) {

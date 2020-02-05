@@ -283,14 +283,14 @@ public class BaseApi extends HttpServlet {
    * 当出现以下情况时该用户不可操作活动：
    * 用户未登录、活动不存在、活动不属于该用户
    * 
-   * @param aid 活动ID 
    * @param request 请求对象
    * @param response 响应对象
    * @return true/false 有/无权限
    * @throws ServletException
    * @throws IOException
    */
-  protected boolean isMyActivity(String aid, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected boolean isMyActivity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    String aid = request.getParameter("aid");
     String uid = userIdentify(request, response);
     if (aid == null || uid == null) return false;
     Activity activity = (Activity)getInstanceById(Activity.class, aid);

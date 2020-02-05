@@ -113,11 +113,9 @@ public class ApplySingle extends BaseApi {
           }
         }
 
-        boolean isMyActivity = isMyActivity(aid, request, response);
+        boolean isMyActivity = isMyActivity(request, response);
         if (isMyActivity) {
           apply.setStatus('Y');
-          int page = (getSumPages(request) + 14) / 15;
-          
         }
 
         // 执行数据存储
@@ -131,12 +129,5 @@ public class ApplySingle extends BaseApi {
         complete(response, 1401);
       }
     }
-  }
-
-  private int getSumPages(HttpServletRequest request) {
-    String aid = request.getParameter("aid");
-    String[] keys = { "aid", "status" };
-    Object[] values = { aid, 'Y' };
-    return (countRows(Apply.class, keys, values) + 14) / 15;
   }
 }

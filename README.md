@@ -100,16 +100,9 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ## TODO
 
-7. 前端-新增报名成功后表格刷新
-
-8. 前端-表格按审核状态过滤
-
 9. 后端-通过审核与拒绝审核
 
-10. 前端-刷新表格
-
 99. Bug
-  -  刷新编辑框时其中的文件表单不能清空
 
 
 优化

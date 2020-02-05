@@ -32,8 +32,7 @@ public class ApplyUpdate extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String aid = request.getParameter("aid");
-    if (!isMyActivity(aid, request, response)) {
+    if (!isMyActivity(request, response)) {
       complete(response, 1503);
       return ;
     }
