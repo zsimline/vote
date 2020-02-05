@@ -27,7 +27,7 @@
         <a href="/vote/edit?aid=${aid}">编辑</a>
       </li>
       <li role="presentation" class="active">
-        <a href="/vote/apply_manage?aid=${aid}">报名管理</a>
+        <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=${page}">报名管理</a>
       </li>
       <li role="presentation">
         <a href="/vote/entry_manage?aid=${aid}">条目管理</a>
@@ -48,8 +48,44 @@
         <button class="layui-btn" onclick="appendApply();"><i class="fa fa-plus"></i>新增报名</button>
         <button class="layui-btn" onclick="exportExcel();"><i class="fa fa-floppy-o"></i>导出Excel</button>
         <button class="layui-btn" onclick="reloadTable();"><i class="fa fa-undo"></i>刷新表格</button>
+        
+        <!-- 审核状态过滤 -->
+        <div id="status-filter">
+          <label class="radio" onclick="jumpByStatus('w')">
+            <c:choose>
+              <c:when test="${status == 'w'}">
+                <input type="radio" name="status" data-toggle="radio" checked>待审核
+              </c:when>
+              <c:otherwise>
+                <input type="radio" name="status" data-toggle="radio">待审核
+              </c:otherwise>
+            </c:choose>
+          </label>
+          <label class="radio" onclick="jumpByStatus('y')">
+            <c:choose>
+              <c:when test="${status == 'y'}">
+                <input type="radio" name="status" data-toggle="radio" checked>已通过
+              </c:when>
+              <c:otherwise>
+                <input type="radio" name="status" data-toggle="radio">已通过
+              </c:otherwise>
+            </c:choose>
+          </label>
+          <label class="radio" onclick="jumpByStatus('n')">
+            <c:choose>
+              <c:when test="${status == 'n'}">
+                <input type="radio" name="status" data-toggle="radio" checked>未通过
+              </c:when>
+              <c:otherwise>
+                <input type="radio" name="status" data-toggle="radio">未通过
+              </c:otherwise>
+            </c:choose>
+          </label>
+        </div>
       </div>
+      
       <table id="table" class="reponsetable"></table>
+      
       <script type="text/html" id="editer">
         <a class="table-operation" onclick="editApplyInfo(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="approveApply(this)" title="通过审核"><i class="fa fa-check"></i></a><a class="table-operation" onclick="rejectApply(this)" title="拒绝审核"><i class="fa fa-times"></i></a>
       </script>
@@ -139,35 +175,53 @@
     </div>
   
     <div class="pagination">
-      <ul> 1 
+      <ul>
         <%
           int curPage = Integer.valueOf((String)request.getAttribute("page"));
           int sumPages = (Integer)request.getAttribute("sumPages");
           int lo = curPage - 4 > 0 ? curPage - 4 : 1;
-          int hi = curPage + 6 > sumPages ? sumPages : curPage + 6;
-
-          System.out.println(lo);
-          System.out.println(hi);
+          int hi = lo + 7 > sumPages ? sumPages : lo + 7;
         %>
-
-        <li class="previous">
-          <a href="#" class="fui-arrow-left"></a>
+        <li title="首页">
+          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=1"><i class="fa fa-angle-double-left"></i></a>
         </li>
-
+        <li title="上一页">
+          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= curPage-1 > 0 ? curPage - 1 : 1 %>" class="fui-arrow-left"></a>
+        </li>
         <% 
           while (lo <= hi) {
-            System.out.println(lo);
         %>
-            <li><a href="#fakelink"><%= lo %></a></li>
+          <%
+            if (lo == curPage) {
+          %>
+              <li>
+                <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= lo %>" class="active"><%= lo %></a>
+              </li>
+          <%
+            } else {
+          %>
+              <li>
+                <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= lo %>"><%= lo %></a>
+              </li>
+          <%
+            }
+          %>
         <%
             lo++;
           }
         %>
-
-        <li class="next">
-          <a href="#" class="fui-arrow-right"></a>
+        <li title="下一页">
+          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= curPage+1 > sumPages ? sumPages : curPage+1 %>" class="fui-arrow-right"></a>
+        </li>
+        <li title="尾页">
+          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= sumPages %>"><i class="fa fa-angle-double-right"></i></a>
         </li>
       </ul>
+      <div class="pagination-jump">
+        共 ${sumPages} 页 到第
+        <input type="text" id="page-jump" class="form-control input-sm"/>
+        页<button class="btn" onclick="pageJump()">跳转</button>
+      </div>
     </div>
 
     <span id="aid" class="hidden">${aid}</span>

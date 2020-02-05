@@ -23,7 +23,7 @@
         <a href="/vote/edit?aid=${aid}">编辑</a>
       </li>
       <li role="presentation">
-        <a href="/vote/apply_manage?aid=${aid}">报名管理</a>
+        <a href="/vote/apply_manage?aid=${aid}&status=w&page=1">报名管理</a>
       </li>
       <li role="presentation">
         <a href="/vote/entry_manage?aid=${aid}">条目管理</a>

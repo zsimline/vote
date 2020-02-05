@@ -21,14 +21,23 @@ public class ApplyManage extends BaseView {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
-    int sumPages = (countRows(Apply.class) + 14) / 15;
+    int sumPages = getSumPages(request);
 
     request.setAttribute("aid", aid);
     request.setAttribute("options", activity.getOptions().split(","));
     request.setAttribute("status", request.getParameter("status"));
     request.setAttribute("page", request.getParameter("page"));
-    request.setAttribute("curPage", request.getParameter("page"));
     request.setAttribute("sumPages", sumPages > 0 ? sumPages : 1);
+
+
     display(request, response, "/template/vote/apply_manage.jsp");
+  }
+
+  private int getSumPages(HttpServletRequest request) {
+    String aid = request.getParameter("aid");
+    char status = request.getParameter("status").charAt(0);
+    String[] keys = { "aid", "status" };
+    Object[] values = { aid, status };
+    return (countRows(Apply.class, keys, values) + 14) / 15;
   }
 }

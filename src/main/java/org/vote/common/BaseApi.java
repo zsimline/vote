@@ -362,4 +362,38 @@ public class BaseApi extends HttpServlet {
       return 0;
     }
   }
+
+  /**
+   * 按条件统计行数
+   * 
+   * @param clazz  实例类
+   * @param keys   条件名集合
+   * @param values 条件值集合
+   * @return 行数
+   */
+  protected int countRows(Class<?> clazz, String[] keys, Object[] values) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+
+    try {
+      transaction.begin();
+      
+      // 创建条件容器并添加条件
+      Criteria criteria = session.createCriteria(clazz);
+      for (int i = 0; i < keys.length; i++) {
+        criteria.add(Restrictions.eq(keys[i], values[i]));
+      }
+
+      // 统计行数
+      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+    
+      transaction.commit();
+      session.close();
+      
+      return totalRows;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return 0;
+    }
+  }
 }

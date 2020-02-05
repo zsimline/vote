@@ -373,3 +373,16 @@ function reloadTable() {
 
 
 fetchTableData();
+
+function pageJump() {
+  const to = $('#page-jump').val();
+  if (to === '') {
+    openModal('error', '请输入要跳转到的页码数');
+  } else {
+    window.location.href = `/vote/apply_manage?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${to}`;
+  }
+}
+
+function jumpByStatus(status) {
+  window.location.href = `/vote/apply_manage?aid=${$('#aid').text()}&status=${status}&page=1`;  
+}
