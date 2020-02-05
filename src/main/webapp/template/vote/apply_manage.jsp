@@ -137,8 +137,42 @@
         </div>
       </div>
     </div>
-    
+  
+    <div class="pagination">
+      <ul> 1 
+        <%
+          int curPage = Integer.valueOf((String)request.getAttribute("page"));
+          int sumPages = (Integer)request.getAttribute("sumPages");
+          int lo = curPage - 4 > 0 ? curPage - 4 : 1;
+          int hi = curPage + 6 > sumPages ? sumPages : curPage + 6;
+
+          System.out.println(lo);
+          System.out.println(hi);
+        %>
+
+        <li class="previous">
+          <a href="#" class="fui-arrow-left"></a>
+        </li>
+
+        <% 
+          while (lo <= hi) {
+            System.out.println(lo);
+        %>
+            <li><a href="#fakelink"><%= lo %></a></li>
+        <%
+            lo++;
+          }
+        %>
+
+        <li class="next">
+          <a href="#" class="fui-arrow-right"></a>
+        </li>
+      </ul>
+    </div>
+
     <span id="aid" class="hidden">${aid}</span>
+    <span id="status" class="hidden">${status}</span>
+    <span id="page" class="hidden">${page}</span>
     
     <script src="/js/apply_manage.js"></script>
   </div>

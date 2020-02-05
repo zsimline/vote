@@ -9,7 +9,7 @@ const applyOptions = {
     errTip: "真实姓名不能为空",
   },
   sex: {
-    selector: "input[name='sex']:checked",
+    selector: "#sex",
     errTip: "真实性别不能为空",
   },
   age: {

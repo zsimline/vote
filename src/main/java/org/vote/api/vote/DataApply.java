@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.beans.Apply;
+import org.vote.beans.Page;
 import org.vote.common.BaseApi;
 
 /**
@@ -25,22 +27,29 @@ public class DataApply extends BaseApi {
     String aid = request.getParameter("aid");
 
     if (isMyActivity(aid, request, response)) {
-      sendJSON(response, fetchApplys(aid));
+      Page page = new Page();
+      page.setSumPages((countRows(Apply.class) + 1) / 15);
+      page.setResults(fetchApplys(request));
+      sendJSON(response, page);
     } else {  // 报名数据不可被获取时返回空数据
       sendJSON(response, Collections.emptyList());     
     }
   }
 
-
   /**
    * 获取报名数据
    * 
-   * @param aid 活动ID
-   * @return 报名数据
+   * @param request 请求对象
+   * @return 报名数据集合
    */
-  private List<?> fetchApplys(String aid) {
-    String hql = "FROM Apply WHERE aid = :aid";
-    String[] keys = {"aid"}, values = {aid};
-    return getInstanceByHql(hql, keys, values);
+  private List<?> fetchApplys(HttpServletRequest request) {
+    String aid = request.getParameter("aid");
+    char status = request.getParameter("status").charAt(0);
+    int page = Integer.valueOf(request.getParameter("page"));
+    
+    String[] keys = { "aid", "status" };
+    Object[] values = { aid, status };
+
+    return paginationQuery(Apply.class, keys, values, page, 15);
   }
 }

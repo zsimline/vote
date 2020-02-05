@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.vote.common.HibernateUtil;
 import org.vote.beans.Activity;
 import org.vote.beans.User;
@@ -293,5 +295,71 @@ public class BaseApi extends HttpServlet {
     if (aid == null || uid == null) return false;
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
     return activity != null && activity.getPublisher() == Long.valueOf(uid);
+  }
+
+  /**
+   * 按条件分页查询
+   * 
+   * @param clazz  实例类
+   * @param keys   条件名集合
+   * @param values 条件值集合
+   * @param page   当前页面索引
+   * @param max    单页最大数量
+   * @return 查询结果集
+   */
+  protected List<?> paginationQuery(Class<?> clazz, String[] keys, Object[] values, int page, int max) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+
+    try {
+      transaction.begin();
+
+      // 创建条件容器并添加条件
+      Criteria criteria = session.createCriteria(clazz);  
+      for (int i = 0; i < keys.length; i++) {
+        criteria.add(Restrictions.eq(keys[i], values[i]));
+      }
+    
+      // 设置起始页面与单页最大选择数量
+      criteria.setFirstResult((page-1) * max);
+      criteria.setMaxResults(max);
+
+      List<?> results = criteria.list();
+      
+      transaction.commit();
+      session.close();
+
+      return results;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  /**
+   * 统计行数
+   * 
+   * @param clazz 实例类
+   * @return 行数
+   */
+  protected int countRows(Class<?> clazz) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+
+    try {
+      transaction.begin();
+
+      // 统计行数
+      Criteria criteria = session.createCriteria(clazz);
+      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+    
+      transaction.commit();
+      session.close();
+      
+      return totalRows;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return 0;
+    }
   }
 }

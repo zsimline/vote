@@ -26,7 +26,7 @@
         </div>
         <div class="panel-body">
           <a class="btn btn-primary" href="/vote/edit?aid=${activity.id}">编辑</a>
-          <a class="btn btn-success" href="/vote/apply_manage?aid=${activity.id}">报名管理</a>
+          <a class="btn btn-success" href="/vote/apply_manage?aid=${activity.id}&status=w&page=1">报名管理</a>
           <a class="btn btn-warning" href="/vote/entry_manage?aid=${activity.id}">条目管理</a>
           <a class="btn btn-info" href="/vote/gather?aid=${activity.id}">结果与日志</a>
           <a class="btn btn-inverse" href="/vote/qrcode?aid=${activity.id}">链接与二维码</a>

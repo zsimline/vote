@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import org.hibernate.criterion.Projections;
 import org.vote.beans.User;
 import org.vote.common.HibernateUtil;
 import org.vote.common.CookieFactory;
@@ -51,7 +52,7 @@ public class BaseView extends HttpServlet {
   protected Object getInstanceById(Class<?> clazz, String id) {
     Session session = HibernateUtil.getSessionFactory().openSession();
     Transaction transaction = session.beginTransaction();
-
+    
     try {
       transaction.begin();
       Object instance = session.get(clazz, id);
@@ -176,5 +177,32 @@ public class BaseView extends HttpServlet {
     }
 
     return uid;
+  }
+
+  /**
+   * 统计行数
+   * 
+   * @param clazz 实例类
+   * @return 行数
+   */
+  protected int countRows(Class<?> clazz) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+
+    try {
+      transaction.begin();
+
+      // 统计行数
+      Criteria criteria = session.createCriteria(clazz);
+      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+    
+      transaction.commit();
+      session.close();
+      
+      return totalRows;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return 0;
+    }
   }
 }

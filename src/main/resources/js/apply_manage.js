@@ -13,7 +13,7 @@ const applyOptions = {
     errTip: "真实姓名不能为空",
   },
   sex: {
-    selector: "input[name='sex']:checked",
+    selector: "#sex",
     errTip: "真实性别不能为空",
   },
   age: {
@@ -56,9 +56,9 @@ const tbOpts = {
 }
 
 function fetchTableData() {
-  get(`/api/vote/data_apply?aid=${$('#aid').text()}`)
+  get(`/api/vote/data_apply?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${$('#page').text()}`)
     .then(data => {
-      initTableData(data);
+      initTableData(data.results);
       initTable(tableData);
     })
     .catch(err => {
