@@ -87,8 +87,8 @@ public class Publish extends BaseApi {
               activity.setApplyTimeStart(new Date(Long.parseLong(fieldContent)));
             } else if (fieldName.equals("signUpTimeEnd")) {
               activity.setApplyTimeEnd(new Date(Long.parseLong(fieldContent)));
-            } else if (fieldName.equals("maxium")) {
-              activity.setMaxium(Integer.parseInt(fieldContent));
+            } else if (fieldName.equals("maximum")) {
+              activity.setMaximum(Integer.parseInt(fieldContent));
             } else if (fieldName.equals("options")) {
               activity.setOptions(fieldContent);
             }

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.Apply;
-import org.vote.beans.Page;
 import org.vote.common.BaseApi;
 
 /**
@@ -27,10 +26,7 @@ public class DataApply extends BaseApi {
     String aid = request.getParameter("aid");
 
     if (isMyActivity(aid, request, response)) {
-      Page page = new Page();
-      page.setSumPages((countRows(Apply.class) + 1) / 15);
-      page.setResults(fetchApplys(request));
-      sendJSON(response, page);
+      sendJSON(response, fetchApplys(request));
     } else {  // 报名数据不可被获取时返回空数据
       sendJSON(response, Collections.emptyList());     
     }
@@ -47,6 +43,8 @@ public class DataApply extends BaseApi {
     char status = request.getParameter("status").charAt(0);
     int page = Integer.valueOf(request.getParameter("page"));
     
+    if (page == -1)
+
     String[] keys = { "aid", "status" };
     Object[] values = { aid, status };
 

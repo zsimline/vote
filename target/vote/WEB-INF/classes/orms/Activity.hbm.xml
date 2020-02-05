@@ -16,7 +16,7 @@
     <property name="voteTimeEnd" column="vote_time_end" type="java.util.Date" not-null="true"/>
     <property name="applyTimeStart" column="apply_time_start" type="java.util.Date" not-null="true"/>
     <property name="applyTimeEnd" column="apply_time_end" type="java.util.Date" not-null="true"/>
-    <property name="maxium" column="maxium" type="java.lang.Integer" not-null="true"/>
+    <property name="maximum" column="maximum" type="java.lang.Integer" not-null="true"/>
     <property name="sumEntry" column="sum_entry" type="java.lang.Integer" />
     <property name="sumVoted" column="sum_voted" type="java.lang.Long" />
     <property name="sumVisited" column="sum_visited" type="java.lang.Long" />

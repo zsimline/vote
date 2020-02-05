@@ -22,14 +22,11 @@ public class ApplyManage extends BaseView {
     String aid = request.getParameter("aid");
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
     int sumPages = getSumPages(request);
-
     request.setAttribute("aid", aid);
-    request.setAttribute("options", activity.getOptions().split(","));
     request.setAttribute("status", request.getParameter("status"));
     request.setAttribute("page", request.getParameter("page"));
     request.setAttribute("sumPages", sumPages > 0 ? sumPages : 1);
-
-
+    request.setAttribute("options", activity.getOptions().split(","));
     display(request, response, "/template/vote/apply_manage.jsp");
   }
 

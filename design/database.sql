@@ -30,7 +30,7 @@ CREATE TABLE `activity`
   `vote_time_end` DATETIME NOT NULL,            -- 投票截止时间
   `apply_time_start` DATETIME NOT NULL,         -- 报名开始时间
   `apply_time_end` DATETIME NOT NULL,           -- 报名截止时间
-  `maxium` TINYINT UNSIGNED NOT NULL,           -- 单次最多选择
+  `maximum` TINYINT UNSIGNED NOT NULL,          -- 单次最多选择
   `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,     -- 条目总数
   `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
   `sum_visited` INT UNSIGNED DEFAULT 0,         -- 访问总数
@@ -112,7 +112,7 @@ SET @sql_create_table = concat(
   `ipaddr` CHAR(15) NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;");
-PREPARE sql_create_table FROM @sql_create_table;  
+PREPARE sql_create_table FROM @sql_create_table;
 EXECUTE sql_create_table; 
 END
 $$

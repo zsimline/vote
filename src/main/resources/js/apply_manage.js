@@ -58,7 +58,7 @@ const tbOpts = {
 function fetchTableData() {
   get(`/api/vote/data_apply?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${$('#page').text()}`)
     .then(data => {
-      initTableData(data.results);
+      initTableData(data);
       initTable(tableData);
     })
     .catch(err => {
@@ -131,14 +131,42 @@ function initTable(tableData) {
 }
 
 /**
- * 编辑报名信息
+ * 刷新表格
+ * 
+ * @param {Object} resData 响应数据
+ */
+function flushTable(resData, append=false) {
+  if (append) {
+    tbOpts.activeTr = tableData.length;
+  }
+  resData.index = tbOpts.activeTr;
+  tableData[tbOpts.activeTr] = resData;
+  initTable(tableData);
+}
+
+/**
+ * 新增或更新报名信息
+ */
+function saveOrUpdate() {
+  if (tbOpts.activeTr == -1) {
+    handleApplyInfoAdded();
+  } else {
+    handleApplyInfoChanged();
+  }
+}
+
+/**
+ * 为更新报名做准备
+ * 同步要编辑的行中的数据到编辑框中
  * 
  * @param {ThisType} which 那一行
  */
-function editApplyInfo(which) {
+function readyToUpdate(which) {
+  clearEditModal();
+
   const tr = $(which).parent().parent();
-  
-  // 获取当前行信息
+
+  // 获取当前行数据，当前行索引存储在隐藏列中
   const rowData = tableData[tr.children().first().text()]
   
   // 同步表格行中的值到编辑框
@@ -148,7 +176,7 @@ function editApplyInfo(which) {
 
   // 如果存在详细介绍
   // 则将详细介绍的内容同步到富文本编辑器中
-  if(rowData.introduction) {
+  if(window.tinyMCE !== undefined) {
     tinyMCE.activeEditor.setContent(rowData.introduction);
   }
 
@@ -159,12 +187,23 @@ function editApplyInfo(which) {
 }
 
 /**
- * 处理更新报名信息时的表单校验以及数据提交
+ * 为新增报名做准备
  */
-function updateApplyInfo() {
-  if (!checkTitle()) {
-    return ;
-  }
+function readyToAppend() {
+  // 清空并打开编辑框
+  clearEditModal();
+  $('#editModal').modal();
+
+  // 活动行为-1时说明此时在新增行
+  tbOpts.activeTr = -1;
+}
+
+/**
+ * 处理报名信息变更
+ * 校验、封装新的报名数据
+ */
+function handleApplyInfoChanged() {
+  if (!checkTitle()) return ;
 
   const formData = new FormData();
 
@@ -185,6 +224,25 @@ function updateApplyInfo() {
   uploadUpadteData(formData, tableData[tbOpts.activeTr].id);
 }
 
+/**
+ * 处理报名信息新增
+ * 校验、封装新的报名数据
+ */
+function handleApplyInfoAdded() {
+  const formData = new FormData();
+
+  Object.keys(applyOptions).forEach(key => {
+    const value = $(applyOptions[key].selector).val();
+    if (value !== undefined) {
+      formData.append(key, value);
+    }
+  });
+
+  if (checkTitle(formData) && checkImgEntry(formData) 
+      && checkIntroduction(formData)) {
+    uploadAppendData(formData);
+  }
+}
 
 /**
  * 上传报名更新数据
@@ -222,14 +280,12 @@ function uploadAppendData(formData) {
     })
     .catch(err => {
       console.log(err);
-      openModal('error', '新增报名失败')
     });
 }
 
 /**
- * 校验标题是否为空
- * 校验通过后将数据追加到容器中
- *
+ * 校验标题是否为空 
+ * 
  * @return true/false 校验成功/失败
  */
 function checkTitle() {
@@ -249,9 +305,7 @@ function checkTitle() {
  * @return true/flase 校验成功/失败
  */
 function checkIntroduction(formData) {
-  if (window.tinyMCE === undefined) {
-    return true;
-  }
+  if (window.tinyMCE === undefined) return true;
 
   const introduction = tinyMCE.activeEditor.getContent();
   if (introduction === '') {
@@ -283,20 +337,6 @@ function checkImgEntry(formData) {
 }
 
 /**
- * 刷新表格
- * 
- * @param {Object} resData 响应数据
- */
-function flushTable(resData, append=false) {
-  if (append) {
-    tbOpts.activeTr = tableData.length;
-  }
-  resData.index = tbOpts.activeTr;
-  tableData[tbOpts.activeTr] = resData;
-  initTable(tableData);
-}
-
-/**
  * 导出表格为Excel
  */
 function exportExcel() {
@@ -323,58 +363,28 @@ function showBigImage(index) {
   openModal('userdef', img);
 }
 
-
-function appendApply() {
-  clearEditModal();
-  tbOpts.activeTr = -1;
-  $('#editModal').modal();
-}
-
-
+/**
+ * 清空编辑框中内容
+ */
 function clearEditModal() {
   Object.values(applyOptions).forEach(element => {
     $(element.selector).val('');
   })
+
+  // 清空文件表单中的内容
+  $('#img-entry').val('')
+
+  // 清空富文本编辑器中内容
   if (window.tinyMCE !== undefined) {
     tinyMCE.activeEditor.setContent('');
   }
 }
 
-
-function appendApplyInfo() {
-  const formData = new FormData();
-
-  Object.keys(applyOptions).forEach(key => {
-    const value = $(applyOptions[key].selector).val();
-    if (value !== undefined) {
-      formData.append(key, value);
-    }
-  });
-
-  if (checkTitle(formData) && checkImgEntry(formData) && checkIntroduction(formData)) {
-    uploadAppendData(formData);
-  }
-}
-
 /**
- * 新增或更新报名信息
+ * 当用户输入要跳转的页码时，
+ * 跳转到指定的页面
  */
-function saveOrUpdate() {
-  if (tbOpts.activeTr == -1) {
-    appendApplyInfo();
-  } else {
-    updateApplyInfo();
-  }
-}
-
-function reloadTable() {
-  fetchTableData();
-}
-
-
-fetchTableData();
-
-function pageJump() {
+function jumpByPage() {
   const to = $('#page-jump').val();
   if (to === '') {
     openModal('error', '请输入要跳转到的页码数');
@@ -383,6 +393,15 @@ function pageJump() {
   }
 }
 
+/**
+ * 当用户切换审核状态时，
+ * 跳转到对应状态的第一页
+ * 
+ * @param {string} status 审核状态
+ */
 function jumpByStatus(status) {
-  window.location.href = `/vote/apply_manage?aid=${$('#aid').text()}&status=${status}&page=1`;  
+  window.location.href = `/vote/apply_manage?aid=${$('#aid').text()}&status=${status}&page=1`;
 }
+
+
+fetchTableData();

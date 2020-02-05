@@ -40,7 +40,7 @@ public class Activity implements Serializable {
   private Date applyTimeEnd;
 
   // 最多选择的条目数
-  private int maxium;
+  private int maximum;
 
   // 条目总数
   private int sumEntry;
@@ -209,17 +209,17 @@ public class Activity implements Serializable {
 
 
   /**
-   * @return maxium
+   * @return maximum
    */
-  public int getMaxium() {
-    return maxium;
+  public int getMaximum() {
+    return maximum;
   }
 
   /**
-   * @param maxium 要设置的 maxium
+   * @param maximum 要设置的 maximum
    */
-  public void setMaxium(int maxium) {
-    this.maxium = maxium;
+  public void setMaximum(int maximum) {
+    this.maximum = maximum;
   }
 
   /**

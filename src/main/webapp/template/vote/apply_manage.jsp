@@ -45,9 +45,9 @@
     <!-- 响应式表格 -->
     <div class="table-container">
       <div class="btn-container">
-        <button class="layui-btn" onclick="appendApply();"><i class="fa fa-plus"></i>新增报名</button>
+        <button class="layui-btn" onclick="readyToAppend();"><i class="fa fa-plus"></i>新增报名</button>
         <button class="layui-btn" onclick="exportExcel();"><i class="fa fa-floppy-o"></i>导出Excel</button>
-        <button class="layui-btn" onclick="reloadTable();"><i class="fa fa-undo"></i>刷新表格</button>
+        <button class="layui-btn" onclick="fetchTableData();"><i class="fa fa-undo"></i>刷新表格</button>
         
         <!-- 审核状态过滤 -->
         <div id="status-filter">
@@ -87,7 +87,7 @@
       <table id="table" class="reponsetable"></table>
       
       <script type="text/html" id="editer">
-        <a class="table-operation" onclick="editApplyInfo(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="approveApply(this)" title="通过审核"><i class="fa fa-check"></i></a><a class="table-operation" onclick="rejectApply(this)" title="拒绝审核"><i class="fa fa-times"></i></a>
+        <a class="table-operation" onclick="readyToUpdate(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="approveApply(this)" title="通过审核"><i class="fa fa-check"></i></a><a class="table-operation" onclick="rejectApply(this)" title="拒绝审核"><i class="fa fa-times"></i></a>
       </script>
     </div>
 
@@ -220,7 +220,7 @@
       <div class="pagination-jump">
         共 ${sumPages} 页 到第
         <input type="text" id="page-jump" class="form-control input-sm"/>
-        页<button class="btn" onclick="pageJump()">跳转</button>
+        页<button class="btn" onclick="jumpByPage()">跳转</button>
       </div>
     </div>
 
