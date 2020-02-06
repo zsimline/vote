@@ -1,0 +1,36 @@
+  /**
+   * 按条件映射查询
+   * 
+   * @param clazz 实例类
+   * @param column 映射列名
+   * @param propertyName 条件名
+   * @param value 条件值
+   * @return
+   */
+  protected Object projectionQuery(Class<?> clazz, String column, String propertyName, String value) {
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction transaction = session.beginTransaction();
+
+    try {
+      transaction.begin();
+
+      // 创建条件容器并添加条件
+      Criteria criteria = session.createCriteria(clazz);
+      criteria.add(Restrictions.eq(propertyName, value));
+
+      // 创建映射列表并添加映射列
+      ProjectionList projectionList = Projections.projectionList();
+      projectionList.add(Projections.property(column));
+      criteria.setProjection(projectionList);
+
+      List<?> activitys = (List<?>) criteria.list();
+      
+      transaction.commit();
+      session.close();
+
+      return activitys.size() == 0 ? ((Object []) activitys.get(0))[0] : null;
+      } catch (HibernateException e) {
+        e.printStackTrace();
+        return null;
+      }
+  }

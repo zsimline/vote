@@ -49,9 +49,9 @@ CREATE TABLE `entry`
   `aid` CHAR(32) NOT NULL,              -- 活动ID
   `number` SMALLINT UNSIGNED NOT NULL,  -- 参赛编号
   `title` VARCHAR(25) NOT NULL,         -- 条目标题
-  `introduction` TEXT DEFAULT NULL,     -- 条目描述
+  `introduction` TEXT DEFAULT NULL,     -- 详细介绍
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
-  `img_entry` CHAR(56) DEFAULT NULL,    -- 宣传图片地址
+  `img_entry` CHAR(56) DEFAULT NULL,    -- 参赛图片地址
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -62,8 +62,8 @@ CREATE TABLE `apply`
   `aid` CHAR(32) NOT NULL,               -- 活动ID
   `status` CHAR(1) NOT NULL,             -- 审核状态
   `title` VARCHAR(15) NOT NULL,          -- 条目标题
-  `introduction` TEXT DEFAULT NULL,      -- 报名描述（富文本）
-  `img_entry` CHAR(56) DEFAULT NULL,     -- 宣传图片地址
+  `introduction` TEXT DEFAULT NULL,      -- 详细介绍（富文本）
+  `img_entry` CHAR(56) DEFAULT NULL,     -- 参赛图片地址
   `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
   `sex` CHAR(1) DEFAULT NULL,            -- 真实性别
   `age` TINYINT(3) DEFAULT NULL,         -- 真实年龄

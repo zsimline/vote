@@ -2,52 +2,44 @@
 **Luming Remote Voting System**
 
 
->远程投票是比赛活动提高参与度，测试参赛人员社会认可度常用方法之一，现有远程投票系统存在水军重复投票、赛外利益无关人员参与度不高等问题。基于此，拟采用“充分宣传，一号一投，有奖投票，阐述理由”的管理策略。模块有投票模块、防止刷票模块、用户模块、奖励模块、汇总模块、微信模块、管理员模块等。
+>远程投票是比赛活动提高参与度，测试参赛人员社会认可度常用方法之一，现有远程投票系统存在水军重复投票、赛外利益无关人员参与度不高等问题。基于此，拟采用“充分宣传，一号一投，有奖投票，阐述理由”的管理策略。模块有...
 
 **指导思想**：简单；投票活动是借助社交网络传播的，因此应将投票范围限定为用户群体较大的社交平台；投票系统的主要职责是给用户一个链接，用户点击链接进入页面后，找到喜欢的作品/人投上自己的一票，所以投票页做太多的装饰无任何意义；市面上已有的投票服务网站已经足够强大，再开发一个类似的是得不偿失的，因此应将免费服务作为首选考虑因素，不要开发任何收费型功能；渐进式、增量式开发。
 
 **定位**：基于微信客户端投票（不允许在非微信端投票）、开源、免费、国内。
 
-**功能**：用户报名->发布者审核；
-
 
 ## 站点地图
 
-### 主页
-
 - 网站主页 http://vote.zizaixian.top
 
-### 用户
+### 用户相关
 
-- 登录页 http://vote.zizaixian.top/user/login
+- 主页  http://vote.zizaixian.top/user/home
 
 - 注册页 http://vote.zizaixian.top/user/register
 
-- 信息页 http://vote.zizaixian.top/user/profile
+- 登录页 http://vote.zizaixian.top/user/login
 
-- 用户主页 http://vote.zizaixian.top/user/home
+### 投票相关
 
-### 投票
+- 发布投票 http://vote.zizaixian.top/vote/publish
 
-- 创建投票 http://vote.zizaixian.top/vote/create
+- 管理中心 http://vote.zizaixian.top/vote/manage
 
-- 投票管理 http://vote.zizaixian.top/vote/manage
+- 报名管理 http://vote.zizaixian.top/vote/apply_manage
 
-- 审核报名 http://vote.zizaixian.top/vote/apply_manage?aid=activitieId
+- 条目管理 http://vote.zizaixian.top/vote/entry_manage
 
-- 报名设置 http://vote.zizaixian.top/vote/item_manage?aid=activitieId
+- 活动链接 http://vote.zizaixian.top/vote/qrcode
 
-- 礼物设置 http://vote.zizaixian.top/vote/giftconf?aid=activitieId
-
-- 活动链接 http://vote.zizaixian.top/vote/qrcode?aid=activitieId
-
-- 结果汇总 http://vote.zizaixian.top/vote/gather?aid=activitieId
+- 结果汇总 http://vote.zizaixian.top/vote/gather
 
 ## 系统接口
 
-- 处理创建投票 http://vote.zizaixian.top/api/vote/create
+- 处理创建投票 http://vote.zizaixian.top/api/vote/publish
 
-- 处理删除投票 http://vote.zizaixian.top/api/vote/delete
+- 处理删除投票 http://vote.zizaixian.top/api/vote/remove
 
 - 处理用户报名 http://vote.zizaixian.top/api/vote/apply
 
@@ -82,66 +74,58 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 **POST** https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${access_token}
 
 
-### 系统架构
+## 系统架构
 
-**Linux + Nginx + Mysql + Tomcat**
+### 后端服务
 
-**Linux:** Debian v4.9.144-3.1
+**Linux + Nginx + Mysql + Java + Tomcat**
 
-**Nginx:** Http Server 负载均衡、反向代理
+- Linux: Debian v4.9.144-3.1
 
-**Mysql:** MariaDB v15.1 数据存储
+- Nginx: Http Server 负载均衡、反向代理
 
-**Tomcat** Servlet Container v8.5.37
+- Mysql: MariaDB v15.1 数据存储
+
+- Java:  JVM v1.8 应用程序运行平台
+
+- Tomcat: Servlet Container v8.5.37
 
 
-**前端技术：** flat-ui(free v2.1.1) + bootstrap(v3.0.0) + font-awesome(v4.7.0)
+### 前端技术
+
+- bootstrap(v3.0.0)
+
+- flat-ui(free v2.1.1)
+
+- font-awesome(v4.7.0)
 
 
 ## TODO
 
+### 待开发
+
 9. 后端-通过审核与拒绝审核
 
-99. Bug
+### 待弥补的不足
 
 
-优化
+### 待修复的Bug
 
-```java
-/**
-   * 按条件映射查询
-   * 
-   * @param clazz 实例类
-   * @param column 映射列名
-   * @param propertyName 条件名
-   * @param value 条件值
-   * @return
-   */
-  protected Object projectionQuery(Class<?> clazz, String column, String propertyName, String value) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
 
-    try {
-      transaction.begin();
 
-      // 创建条件容器并添加条件
-      Criteria criteria = session.createCriteria(clazz);
-      criteria.add(Restrictions.eq(propertyName, value));
 
-      // 创建映射列表并添加映射列
-      ProjectionList projectionList = Projections.projectionList();
-      projectionList.add(Projections.property(column));
-      criteria.setProjection(projectionList);
+## 平台规则与系统限制
 
-      List<?> activitys = (List<?>) criteria.list();
-      
-      transaction.commit();
-      session.close();
+1. 投票被发布后，默认的外部人员可以报名，发布者也可以批量添加报名，当外部报名通道被关闭后，外部人员不可报名。
 
-      return activitys.size() == 0 ? ((Object []) activitys.get(0))[0] : null;
-      } catch (HibernateException e) {
-        e.printStackTrace();
-        return null;
-      }
-  }
-```
+3. 如果外部人员报名后发现报名信息填写错误，可已通知发布者帮其修改，但是其本人是无法修改的。
+
+3. 审核状态分为三种：待审核、已通过审核、未通过审核。其中，审核状态可以由待审核转为已通过审核与未通过审核，未通过审核可以转为待审核与已通过审核，但已通过审核不能转为待审核与未通过审核。
+
+4. 报名通过审核后，必要的参赛信息如标题、参赛图片、详细介绍等会由报名信息表同步到条目信息表。
+
+5. 当审核状态处于待审核与未通过审核时，其报名信息是可以修改的，一旦状态变为已通过审核，其报名信息虽然也可以修改，但是必要的参赛信息不会同步到条目信息表。
+
+6. 外部人员报名后，其审核状态为待审核，而发布者批量添加报名后，其审核状态为已通过审核。
+
+7. 

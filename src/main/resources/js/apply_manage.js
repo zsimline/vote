@@ -77,7 +77,6 @@ function generateColum() {
     { "field": "index", "title": "index" },
     { "field": "id", "title": "编号" },
     { "field": "title", "title": "标题" },
-    { "field": "status", "title": "审核状态" },
   ];
   
   const tableColumns = Array.from($('.table-column'));
