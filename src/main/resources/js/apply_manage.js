@@ -402,18 +402,30 @@ function jumpByStatus(status) {
   window.location.href = `/vote/apply_manage?aid=${$('#aid').text()}&status=${status}&page=1`;
 }
 
-function approveApply(which) {
+/**
+ * 审核报名
+ * 
+ * @param {ThisType} which 哪一行
+ * @param {string} status 审核状态y/n
+ */
+function review(which, status) {
   const tr = $(which).parent().parent();
-  const rowData = tableData[tr.children().first().text()]
+  const index = tr.children().first().text();
+  const rowData = tableData[index];
 
-  get(`/api/vote/review?aid=${$('#aid').text()}&id=${rowData.id}&status=y`)
+  get(`/api/vote/review?aid=${$('#aid').text()}&id=${rowData.id}&status=${status}`)
     .then(data => {
       if (!(data.code % 100)) {
-        delete tableData[tr.children().first().text()];
-        flushTable()
+        tableData.splice(index, 1);
+        initTableData(tableData);
+        initTable(tableData);
+      } else {
+        openModal('error', data.codeDesc);
       }
-      console.log(data);
     })
+    .catch(err => {
+      console.error(err);
+    });
 }
 
 fetchTableData();

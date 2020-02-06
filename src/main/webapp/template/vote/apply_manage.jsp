@@ -30,7 +30,7 @@
         <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=${page}">报名管理</a>
       </li>
       <li role="presentation">
-        <a href="/vote/entry_manage?aid=${aid}">条目管理</a>
+        <a href="/vote/entry_manage?aid=${aid}&page=1">条目管理</a>
       </li>
       <li role="presentation">
         <a href="/vote/gather?aid=${aid}">结果与日志</a>
@@ -87,7 +87,17 @@
       <table id="table" class="reponsetable"></table>
       
       <script type="text/html" id="editer">
-        <a class="table-operation" onclick="readyToUpdate(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="approveApply(this)" title="通过审核"><i class="fa fa-check"></i></a><a class="table-operation" onclick="rejectApply(this)" title="拒绝审核"><i class="fa fa-times"></i></a>
+        <c:choose>
+          <c:when test="${status == 'w'}">
+            <a class="table-operation" onclick="readyToUpdate(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="review(this, 'y')" title="通过审核"><i class="fa fa-check"></i></a><a class="table-operation" onclick="review(this, 'n')" title="拒绝审核"><i class="fa fa-times"></i></a>
+          </c:when>
+          <c:when test="${status == 'y'}">
+            <a class="table-operation" onclick="readyToUpdate(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a>
+          </c:when>
+          <c:when test="${status == 'n'}">
+            <a class="table-operation" onclick="readyToUpdate(this)" title="编辑报名信息"><i class="fa fa-pencil"></i></a><a class="table-operation" onclick="review(this, 'y')" title="通过审核"><i class="fa fa-check"></i></a>
+          </c:when>
+        </c:choose>
       </script>
     </div>
 

@@ -29,8 +29,12 @@ public class Entry implements Serializable {
   // 图片地址
   private String imgEntry;
 
+  // 条目是否冻结
+  private boolean isFreeze;
+
   public Entry() {
     this.acquisition = 0;
+    this.isFreeze = false;
   }
 
   /**
@@ -129,5 +133,19 @@ public class Entry implements Serializable {
    */
   public void setImgEntry(String imgEntry) {
     this.imgEntry = imgEntry;
+  }
+
+  /**
+   * @return isFreeze
+   */
+  public boolean getIsFreeze() {
+    return isFreeze;
+  }
+
+  /**
+   * @param isFreeze 要设置的 isFreeze
+   */
+  public void setIsFreeze(boolean isFreeze) {
+    this.isFreeze = isFreeze;
   }
 }

@@ -13,5 +13,6 @@
     <property name="introduction" column="introduction" type="java.lang.String"/>
     <property name="acquisition" column="acquisition" type="java.lang.Long" not-null="true"/>
     <property name="imgEntry" column="img_entry" type="java.lang.String" length="56"/>
+    <property name="isFreeze" column="is_freeze" type="java.lang.Boolean"/>
   </class>
 </hibernate-mapping>

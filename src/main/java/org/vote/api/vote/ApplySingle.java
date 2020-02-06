@@ -114,9 +114,7 @@ public class ApplySingle extends BaseApi {
         }
 
         boolean isMyActivity = isMyActivity(request, response);
-        if (isMyActivity) {
-          apply.setStatus('Y');
-        }
+        if (isMyActivity) apply.setStatus('Y');
 
         // 执行数据存储
         if (saveInstance(apply)) {

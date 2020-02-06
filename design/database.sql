@@ -52,6 +52,7 @@ CREATE TABLE `entry`
   `introduction` TEXT DEFAULT NULL,     -- 详细介绍
   `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
   `img_entry` CHAR(56) DEFAULT NULL,    -- 参赛图片地址
+  `is_freeze` TINYINT(1) DEFAULT 0,     -- 条目是否冻结
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 

@@ -26,7 +26,7 @@
         <a href="/vote/apply_manage?aid=${aid}&status=w&page=1">报名管理</a>
       </li>
       <li role="presentation">
-        <a href="/vote/entry_manage?aid=${aid}">条目管理</a>
+        <a href="/vote/entry_manage?aid=${aid}&page=1">条目管理</a>
       </li>
       <li role="presentation" class="active">
         <a href="/vote/gather?aid=${aid}">结果与日志</a>
