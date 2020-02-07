@@ -16,10 +16,10 @@
 </head>
 
 <body>
+  <div>
+    <img src="${activity.imgMain}" id="ac-img">
+  </div>
   <div class="container-fluid">
-    <div>
-      <img src="${activity.imgMain}" id="ac-img">
-    </div>
     <h1 id="ac-title">${activity.title}</h1>
     <div id="ac-info">
       <div>
@@ -35,6 +35,7 @@
         <span>${activity.sumVisited}</span>
       </div>
     </div>
+
     <div class="ac-time">
       <i class="fa fa-clock-o"></i>开始时间：${activity.voteTimeStart}
     </div>
@@ -42,18 +43,48 @@
       <i class="fa fa-clock-o"></i>截止时间：${activity.voteTimeEnd}
     </div>
 
+    <div id="ac-summary-title">
+      投票规则：每个微信每天可投一次，每次最多选择 ${activity.maximum} ${activity.quantifier}${activity.suffix}
+    </div>
+
+    <!-- 活动简介 -->
+    <div id="ac-summary-title">
+      活动简介：
+      <i class="fa fa-angle-double-down" onclick="switchSummaryShow(this)"></i>
+    </div>
     <div id="ac-summary">
-      <div id="ac-summary-title">
-        活动介绍：<i class="fa fa-angle-double-down"></i>
-      </div>
       ${activity.summary}
     </div>
+
+    <div id="search-box">
+      <input type="text" class="form-control" placeholder="输入标题或编号">
+      <button class="btn btn-success">搜索</button>
+    </div>
+
+    <div id="container-entry"></div>
+
+    <footer>
+      由<a href="http://vote.zizaixian.top">鹿鸣投票</a>提供技术支持
+    </footer>
   </div>
-  
+
+  <div id="tool-box">
+    <span>已选择 <em>0</em> / ${activity.maximum}</span>
+    <button class="btn btn-success">提交投票</button>
+    <a href="https://baidu.com">查看排名</a>
+  </div>
+
+  <span class="hidden" id="aid">${aid}</span>
+
   <script src="/js/action.js"></script>
 
-  <%@ include file="../components/modal.jsp" %>
 
+
+  <div class="footer">
+
+  </div>
+
+  <%@ include file="../components/modal.jsp" %>
 </body>
 
 </html>

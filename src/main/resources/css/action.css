@@ -2,6 +2,7 @@
   background-image: url(/images/bg-action.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  padding: 0px 3%;
 }
 
 #ac-img {
@@ -10,13 +11,13 @@
 
 #ac-title {
   font-size: 22px;
-  padding-left: 12px;
+  margin: 0px;
+  padding: 15px 5px;
 }
 
 #ac-info {
   background-color: #34495e;
   color: #fff;
-  width: 94%;
   margin: auto;
   border-radius: 8px;
   padding: 4px 0px;
@@ -37,13 +38,7 @@
 
 .ac-time {
   padding: 3px 0px;
-  margin-left: 3%;
   font-size: 16px;
-}
-
-#ac-summary {
-  padding: 10px 4%;
-  
 }
 
 #ac-summary p {
@@ -57,8 +52,71 @@
 #ac-summary-title {
   font-size: 16px !important;
   font-weight: 600;
+  padding-top: 10px;
 }
 
 #ac-summary-title i {
-  margin-left: 10px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+#container-entry {
+  margin-top: 20px;
+  padding: 15px 0px;
+  column-count: 2;
+  column-gap: 20px;
+}
+
+.entry {
+  text-align: center;
+  background-color: #ececec;
+  break-inside: avoid;
+  margin-top: 15px;
+}
+
+.entry img {
+  width: 100%;
+}
+
+.entry .btn {
+  width: 75%;
+  padding: 5px 15px;
+  font-size: 14px;
+  outline: none;
+}
+
+.entry-info {
+  display: block;
+  padding: 4px 0px;
+  font-size: 16px;
+}
+
+#tool-box {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: #eeeeee;
+  text-align: center;
+  padding: 6px 0px;
+  display: flex;
+  align-items: center;
+}
+
+#tool-box span,a {
+  flex: 0 0 25%;
+  font-size: 14px;
+}
+
+#tool-box .btn {
+  flex: 0 0 50%;
+}
+
+#search-box {
+  margin-top: 25px;
+}
+
+footer {
+  text-align: center;
+  background-color: transparent;
+  padding: 35px 0px 60px 0px;
 }

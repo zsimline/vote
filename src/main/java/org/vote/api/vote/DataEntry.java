@@ -38,6 +38,6 @@ public class DataEntry extends BaseApi {
     String[] keys = { "aid" };
     Object[] values = { aid };
 
-    return paginationQuery(Entry.class, keys, values, page, 15);
+    return paginationQuery(Entry.class, keys, values, page, 20);
   }
 }
