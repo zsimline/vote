@@ -29,19 +29,23 @@ function switchSummaryShow(which) {
  * @param {Array} data 条目数组
  */
 function appendEntry(data) {
-  data.forEach(element => {
-    const tplImgEntry = element.imgEntry ? `<img src="${element.imgEntry}">` : '';
-    const tplIntroduction = element.tplIntroduction
-      ? `<span class="entry-info">${element.number}. ${element.title}</span>`
-      : `<span class="entry-info" onclick="showIntroduction(${element.index})">${element.number}. ${element.title}</span>`
+  data.forEach(element=> {
+    if (element.introduction) {
+      var htmlTitle = `<h3 class="entry-title" onclick="showIntroduction(${element.index})">${element.number}. ${element.title}</h3>`;
+      var htmlImgEntry = element.imgEntry ? `<img src="${element.imgEntry}" onclick="showIntroduction(${element.index})">`  : `<img src="${element.imgEntry}">`;
+    } else {
+      var htmlTitle = `<span class="entry-title>${element.number}. ${element.title}</span>`;
+      var htmlImgEntry = element.imgEntry ? `<img src="${element.imgEntry}">` : '';
+    }
+
     const template = `
       <div class="entry">        
-        ${tplImgEntry}
-        ${tplIntroduction}
+        ${htmlImgEntry}
+        ${htmlTitle}
         <button class="btn btn-inverse" onclick="handleSelect(${element.number},this)">
           <i class="fa fa-check""></i> 选择
         </button>
-        <span class="entry-info">${element.acquisition}票</span>
+        <span class="entry-acquisition">${element.acquisition}票</span>
       </div>
     `
     $('#container-entry').append(template);
@@ -80,7 +84,7 @@ function handleSelect(number, which) {
 function switchCssClass(which, from, to) {
   $(which).removeClass(from);
   $(which).addClass(to);
-}
+} 
 
 // 为页面添加滚动条事件，当页面滚动到接近底部时，
 // 加载并添加更多的条目到页面中
@@ -123,7 +127,7 @@ function flushEntrys(data) {
  * @param {number} index 条目索引
  */
 function showIntroduction(index) {
-  openModal('userdef',glStatus.entrys[index].introduction);
+  openModal('userdef', glStatus.entrys[index].introduction);
 }
 
 glStatus.lock = true;

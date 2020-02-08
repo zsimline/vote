@@ -85,10 +85,16 @@
   outline: none;
 }
 
-.entry-info {
+.entry-title {
+  padding: 8px 0px 5px 0px;
+  font-size: 16px;
+  margin: 0px;
+}
+
+.entry-acquisition {
   display: block;
   padding: 4px 0px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 #tool-box {
@@ -109,6 +115,7 @@
 
 #tool-box .btn {
   flex: 0 0 50%;
+  font-weight: 900;
 }
 
 #search-box {

@@ -52,7 +52,7 @@ const tbOpts = {
   type: "numbers",
   colum: [
     { "field": "index", "title": "index" },
-    { "field": "id", "title": "编号" },
+    { "field": "number", "title": "编号" },
     { "field": "isFreeze", "title": "状态" },
     { "field": "title", "title": "标题" },
     { "field": "imgEntry", "title": "参赛图片" },

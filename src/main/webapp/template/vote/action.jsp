@@ -12,7 +12,7 @@
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
   <link rel="stylesheet" href="/css/action.css">
-  <title>报名管理</title>
+  <title>鹿鸣投票-${activity.title}</title>
 </head>
 
 <body>
