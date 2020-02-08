@@ -43,7 +43,7 @@ function handleRegister() {
   };
 
   // 向服务器提交数据
-  postJSON('/api/user/register', JSON.stringify(postData))
+  postJSON('/api/user/register', postData)
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc, () => {
@@ -81,7 +81,7 @@ function handleLogin() {
   };
 
   // 向服务器提交数据
-  postJSON('/api/user/login', JSON.stringify(postData))
+  postJSON('/api/user/login', postData)
     .then(data => {
       if (!(data.code % 100)) {
         openModal('success', data.codeDesc, () => {

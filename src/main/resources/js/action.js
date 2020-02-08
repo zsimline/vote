@@ -1,6 +1,6 @@
 // 全局状态量
 const glStatus = {
-  numbers: new Set(),
+  ids: new Set(),
   entrys: [],
   maximum: 3,
   nextPage: 1,
@@ -42,7 +42,7 @@ function appendEntry(data) {
       <div class="entry">        
         ${htmlImgEntry}
         ${htmlTitle}
-        <button class="btn btn-inverse" onclick="handleSelect(${element.number},this)">
+        <button class="btn btn-inverse" onclick="handleSelect(${element.id},this)">
           <i class="fa fa-check""></i> 选择
         </button>
         <span class="entry-acquisition">${element.acquisition}票</span>
@@ -55,22 +55,22 @@ function appendEntry(data) {
 /**
  * 处理选择
  * 
- * @param {number} number 条目编号
+ * @param {id} id 条目编号
  * @param {ThisType} which 按钮
  */
-function handleSelect(number, which) {
-  if (glStatus.numbers.has(number)) {
-    glStatus.numbers.delete(number);
+function handleSelect(id, which) {
+  if (glStatus.ids.has(id)) {
+    glStatus.ids.delete(id);
     switchCssClass(which, 'btn-default', 'btn-inverse');
     $(which).html('<i class="fa fa-check""></i> 选择');
-    $('#tool-box span em').text(`${glStatus.numbers.size}`)
-  } else if (glStatus.numbers.size + 1 > glStatus.maximum) {
+    $('#tool-box span em').text(`${glStatus.ids.size}`)
+  } else if (glStatus.ids.size + 1 > glStatus.maximum) {
     openModal('error', '超出最多选择的数量');
   } else {
-    glStatus.numbers.add(number);
+    glStatus.ids.add(id);
     switchCssClass(which, 'btn-inverse', 'btn-default');
     $(which).html('<i class="fa fa-check"></i> 已选');
-    $('#tool-box span em').text(`${glStatus.numbers.size}`)
+    $('#tool-box span em').text(`${glStatus.ids.size}`)
   }
 }
 
@@ -124,11 +124,27 @@ function flushEntrys(data) {
 /**
  * 显示详细介绍
  * 
- * @param {number} index 条目索引
+ * @param {id} index 条目索引
  */
 function showIntroduction(index) {
   openModal('userdef', glStatus.entrys[index].introduction);
 }
 
+/**
+ * 处理提交投票
+ */
+function handleSubmit() {
+  const postData = {
+    aid: $('#aid').text(),
+    ids: Array.from(glStatus.ids)
+  }
+
+  postJSON('/api/vote/action',  postData)
+    .then(data => {
+      console.log(data);
+    });
+}
+
+// 页面初始化
 glStatus.lock = true;
 loadMoreEntry();

@@ -1,6 +1,8 @@
 package org.vote.api.vote;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,10 +36,14 @@ public class DataEntry extends BaseApi {
   private List<?> fetchEntrys(HttpServletRequest request) {
     String aid = request.getParameter("aid");
     int page = Integer.valueOf(request.getParameter("page"));
+    
   
+  //  return  Collections.emptyList();
+
     String[] keys = { "aid" };
     Object[] values = { aid };
 
     return paginationQuery(Entry.class, keys, values, page, 20);
   }
 }
+// 

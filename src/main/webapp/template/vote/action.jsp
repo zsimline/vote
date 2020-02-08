@@ -70,7 +70,7 @@
 
   <div id="tool-box">
     <span>已选择 <em>0</em> / ${activity.maximum}</span>
-    <button class="btn btn-success">提交投票</button>
+    <button class="btn btn-success" onclick="handleSubmit()">提交投票</button>
     <a href="https://baidu.com">查看排名</a>
   </div>
 

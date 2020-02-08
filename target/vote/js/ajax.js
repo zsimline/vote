@@ -60,7 +60,7 @@ function postJSON(url, data) {
     $.ajax({
       url: url,
       type: 'POST',
-      data: data,
+      data: JSON.stringify(data),
       contentType: 'json',
       dataType: 'json',
       cache: false,

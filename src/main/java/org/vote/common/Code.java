@@ -66,6 +66,11 @@ public class Code {
     codes.put(1600, "审核成功");
     codes.put(1601, "审核失败原因未知");
     codes.put(1602, "无权执行操作");
+
+
+    // 投票功能返回码
+    codes.put(2000, "投票成功");
+    
   }
 
   public Code(int code) {

@@ -10,10 +10,15 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
+
 /**
  * 通用工具包
  */
 public class Utils {
+
+  // json 解析器
+  private static Gson gson = new Gson();
 
   /**
    * 将输入流转换为JSON字符串
@@ -44,5 +49,23 @@ public class Utils {
       return directory.mkdirs() ? fullPath : null;
     }
     return fullPath;
+  }
+  
+  /**
+   * 将JSON数据转换为对象
+   *
+   * @param request 请求对象
+   * @param clazz 实例类
+   * @return 实例对象
+   */
+  public static Object postDataToObj(HttpServletRequest request, Class<?> clazz) {
+    String jsonStr;
+    try {
+      jsonStr = IOUtils.toString(request.getInputStream(), "UTF-8");
+      return gson.fromJson(jsonStr, clazz);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 }
