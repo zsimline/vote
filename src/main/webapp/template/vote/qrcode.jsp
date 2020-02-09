@@ -51,7 +51,7 @@
     <span id="aid" class="hidden"><%= request.getAttribute("aid") %></span>
 
     <script type="text/javascript">
-      const link = 'https://lumingvote.com/vote/action?aid=' + $('#aid').text();
+      const link = 'http://vote.zizaixian.top/vote/action?aid=' + $('#aid').text();
       new QRCode(document.getElementById("qrcode"), link);
 
       function copyLink() {
