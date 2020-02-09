@@ -4,7 +4,10 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,12 +54,12 @@ public class Utils {
     }
     return fullPath;
   }
-  
+
   /**
    * 将JSON数据转换为对象
    *
    * @param request 请求对象
-   * @param clazz 实例类
+   * @param clazz   实例类
    * @return 实例对象
    */
   public static Object postDataToObj(HttpServletRequest request, Class<?> clazz) {
@@ -70,6 +73,34 @@ public class Utils {
     } catch (JsonSyntaxException e) {
       e.printStackTrace();
       System.out.println(jsonStr);
+      return null;
+    }
+  }
+
+  /**
+   * HTTPS 请求
+   * 
+   * @param urlStr url字符串
+   * @return 获取的数据
+   */
+  public static String httpsGet(String urlStr) {
+    try {
+      URL url = new URL(urlStr);
+      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      conn.setRequestMethod("GET");
+      conn.setRequestProperty("Content-type", "application/json");
+      conn.connect();
+      
+      // 将输入流转换为字符串并返回
+      return IOUtils.toString(conn.getInputStream(), "UTF-8");
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      return null;
+    } catch (ProtocolException e) {
+      e.printStackTrace();
+      return null;
+    } catch (IOException e) {
+      e.printStackTrace();
       return null;
     }
   }

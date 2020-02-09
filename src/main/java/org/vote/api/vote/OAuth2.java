@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.common.BaseApi;
 
 @WebServlet("/api/vote/oauth")
-public class OAuth  extends BaseApi {
+public class OAuth2 extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

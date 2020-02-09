@@ -78,7 +78,7 @@ CREATE TABLE `apply`
 
 -- 微信用户表
 CREATE TABLE `wechat` ( 
-  `id` CHAR(28) NOT NULL,                                   -- 微信用户OpenID
+  `id` CHAR(28) NOT NULL,                                   -- 微信用户openid
   `nickname` VARCHAR(32) DEFAULT NULL,      -- 微信用户昵称
   `sex` TINYINT(1) DEFAULT NULL,                      -- 微信用户性别
   `country` VARCHAR(12) DEFAULT NULL,         -- 微信用户所属国家

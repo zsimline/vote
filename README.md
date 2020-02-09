@@ -61,10 +61,10 @@ appsecret 96e410410d32e25d25a687dea7ec0afd
 1. 获取认证码
 https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx009793a980bbfa74&redirect_uri=http://vote.zizaixian.top/api/vote/oauth&response_type=code&scope=snsapi_userinfo&state=0d11eed65e8e4c90ac99d91f2b8b6627#wechat_redirect
 
-2. 通过认证码获取访问令牌与OpenID
+2. 通过认证码获取访问令牌与openid
 https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx009793a980bbfa74&secret=96e410410d32e25d25a687dea7ec0afd&code=${code}&grant_type=authorization_code
 
-3. 通过访问令牌与OpenID获取用户信息
+3. 通过访问令牌与openid获取用户信息
 https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}
 
 ### 通用access_token获取
@@ -72,6 +72,7 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 创建自定义菜单
 **POST** https://api.weixin.qq.com/cgi-bin/menu/create?access_token=${access_token}
+
 
 
 ## 系统架构
