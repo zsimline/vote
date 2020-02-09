@@ -21,7 +21,7 @@ public class Publish extends BaseView {
     if (uid == null) {
       response.sendRedirect("/user/login");
     } else {
-      display(request, response, "/template/vote/publish.jsp");
+      render(request, response, "/template/vote/publish.jsp");
     }
   }
 }

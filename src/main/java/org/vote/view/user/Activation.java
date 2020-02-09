@@ -21,6 +21,6 @@ public class Activation extends BaseView {
     String code = request.getParameter("code");    
     request.setAttribute("email", email);
     request.setAttribute("code", code);
-    display(request, response, "/template/user/activation.jsp");
+    render(request, response, "/template/user/activation.jsp");
   }
 }

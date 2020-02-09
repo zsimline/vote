@@ -38,7 +38,7 @@ public class BaseView extends HttpServlet {
    * @throws ServletException
    * @throws IOException
    */
-  protected void display(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
+  protected void render(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
     RequestDispatcher rd = request.getRequestDispatcher(path);
     rd.forward(request, response);
   }
@@ -48,21 +48,23 @@ public class BaseView extends HttpServlet {
    * 
    * @param clazz 实例类
    * @param id 实例ID
-   * @return
+   * @return 实例
    */
   protected Object getInstanceById(Class<?> clazz, String id) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-    
+    Session session = null;
     try {
-      transaction.begin();
-      Object instance = session.get(clazz, id);
-      transaction.commit();
-      session.close();
-      return instance;
+      session = HibernateUtil.getSessionFactory().openSession();
+      return session.get(clazz, id);
     } catch (HibernateException e) {
       e.printStackTrace();
       return null;
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+      return null;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
     }
   }
 

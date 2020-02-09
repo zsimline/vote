@@ -22,6 +22,6 @@ public class Apply extends BaseView {
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
     request.setAttribute("aid", aid);
     request.setAttribute("options", activity.getOptions().split(","));
-    display(request, response, "/template/vote/apply.jsp");
+    render(request, response, "/template/vote/apply.jsp");
   }
 }

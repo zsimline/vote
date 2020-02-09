@@ -17,6 +17,6 @@ public class Index extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    display(request, response, "/template/index/index.jsp");
+    render(request, response, "/template/index/index.jsp");
   }
 }

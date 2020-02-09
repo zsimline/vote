@@ -76,20 +76,27 @@ CREATE TABLE `apply`
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
+-- 微信用户表
+CREATE TABLE `wechat` ( 
+  `id` CHAR(28) NOT NULL,                                   -- 微信用户OpenID
+  `nickname` VARCHAR(32) DEFAULT NULL,      -- 微信用户昵称
+  `sex` TINYINT(1) DEFAULT NULL,                      -- 微信用户性别
+  `country` VARCHAR(12) DEFAULT NULL,         -- 微信用户所属国家
+  `province` VARCHAR(10) DEFAULT NULL,       -- 微信用户所属省份
+  `city` VARCHAR(8) DEFAULT NULL,                  -- 微信用户所属城市
+  `headimgurl` VARCHAR(255) DEFAULT NULL, -- 微信用户头像地址
+  `token` CHAR(32) DEFAULT NULL,                    -- 微信用户投票令牌
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
 -- 投票信息表
 --CREATE TABLE `ticket`
 --(
---  `id` INT UNSIGNED AUTO_INCREMENT,       -- 投票ID
---  `openid` CHAR(28) NOT NULL,             -- 投票者OpenID
+--  `id` INT UNSIGNED AUTO_INCREMENT,   -- 投票ID
+--  `openid` CHAR(28) NOT NULL,                    -- 投票者OpenID
 --  `whom` INT UNSIGNED NOT NULL,           -- 投向条目的ID
---  `nickname` VARCHAR(32) DEFAULT NULL,    -- 投票者昵称
---  `sex` TINYINT(1) DEFAULT NULL,          -- 投票者性别
---  `country` VARCHAR(12) DEFAULT NULL,     -- 投票者所属国家
---  `province` VARCHAR(10) DEFAULT NULL,    -- 投票者所属省份
---  `city` VARCHAR(8) DEFAULT NULL,         -- 投票者所属城市
---  `headimgurl` VARCHAR(255) DEFAULT NULL, -- 投票者头像地址
---  `timestamp` DATETIME NOT NULL,          -- 投票时间
---  `ipaddr` CHAR(15) NOT NULL,             -- IP地址
+--  `timestamp` DATETIME NOT NULL,            -- 投票时间
+--  `ip` CHAR(15) NOT NULL,                             -- IP地址
 --  PRIMARY KEY (`id`)
 --)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -103,14 +110,8 @@ SET @sql_create_table = concat(
   `id` INT UNSIGNED AUTO_INCREMENT,
   `openid` CHAR(28) NOT NULL,
   `whom` INT UNSIGNED NOT NULL,
-  `nickname` VARCHAR(32) DEFAULT NULL,
-  `sex` TINYINT(1) DEFAULT NULL,
-  `country` VARCHAR(12) DEFAULT NULL,
-  `province` VARCHAR(10) DEFAULT NULL,
-  `city` VARCHAR(8) DEFAULT NULL,
-  `headimgurl` VARCHAR(255) DEFAULT NULL,
   `timestamp` DATETIME NOT NULL,
-  `ipaddr` CHAR(15) NOT NULL,
+  `ip` CHAR(15) NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;");
 PREPARE sql_create_table FROM @sql_create_table;

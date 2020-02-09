@@ -25,7 +25,7 @@ public class Manage extends BaseView {
     } else {
       List<Activity> activitys = getActivitysByPublisher(uid);
       request.setAttribute("activitys", activitys);
-      display(request, response, "/template/vote/manage.jsp");
+      render(request, response, "/template/vote/manage.jsp");
     }
   }
 

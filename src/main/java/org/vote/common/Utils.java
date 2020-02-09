@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * 通用工具包
@@ -59,12 +60,16 @@ public class Utils {
    * @return 实例对象
    */
   public static Object postDataToObj(HttpServletRequest request, Class<?> clazz) {
-    String jsonStr;
+    String jsonStr = null;
     try {
       jsonStr = IOUtils.toString(request.getInputStream(), "UTF-8");
       return gson.fromJson(jsonStr, clazz);
-    } catch (Exception e) {
+    } catch (IOException e) {
       e.printStackTrace();
+      return null;
+    } catch (JsonSyntaxException e) {
+      e.printStackTrace();
+      System.out.println(jsonStr);
       return null;
     }
   }

@@ -18,6 +18,6 @@ public class Gather extends BaseView {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     request.setAttribute("aid", request.getParameter("aid"));
-    display(request, response, "/template/vote/gather.jsp");
+    render(request, response, "/template/vote/gather.jsp");
   }
 }

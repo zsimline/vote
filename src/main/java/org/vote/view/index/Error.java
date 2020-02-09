@@ -18,6 +18,6 @@ public class Error extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    display(request, response, "/template/index/error.jsp");
+    render(request, response, "/template/index/error.jsp");
   }
 }

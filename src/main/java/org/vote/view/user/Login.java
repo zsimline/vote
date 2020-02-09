@@ -17,6 +17,6 @@ public class Login extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    display(request, response, "/template/user/login.jsp");
+    render(request, response, "/template/user/login.jsp");
   }
 }

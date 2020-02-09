@@ -59,7 +59,7 @@ appsecret 96e410410d32e25d25a687dea7ec0afd
 ### OAuth认证
 
 1. 获取认证码
-https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx009793a980bbfa74&redirect_uri=http://vote.zizaixian.top&response_type=code&scope=snsapi_userinfo&state=lumingvoteremotevotesystem#wechat_redirect
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx009793a980bbfa74&redirect_uri=http://vote.zizaixian.top/api/vote/oauth&response_type=code&scope=snsapi_userinfo&state=0d11eed65e8e4c90ac99d91f2b8b6627#wechat_redirect
 
 2. 通过认证码获取访问令牌与OpenID
 https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx009793a980bbfa74&secret=96e410410d32e25d25a687dea7ec0afd&code=${code}&grant_type=authorization_code

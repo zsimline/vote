@@ -18,29 +18,11 @@ public class Ticket implements Serializable {
   // 投向条目的ID
   private long whom;
 
-  // 投票者昵称
-  private String nickname;
-
-  // 投票者性别
-  private boolean sex;
-
-  // 投票者所属国家
-  private String country;
-
-  // 投票者所属省份
-  private String province;
-
-  // 投票者所属城市
-  private String city;
-
-  // 投票者头像地址
-  private String headimgurl;
-
   // 投票时间
   private Date timestamp;
 
   // IP地址
-  private String ipaddr;
+  private String ip;
 
   /**
    * @return id
@@ -85,90 +67,6 @@ public class Ticket implements Serializable {
   }
 
   /**
-   * @return nickname
-   */
-  public String getNickname() {
-    return nickname;
-  }
-
-  /**
-   * @param nickname 要设置的 nickname
-   */
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
-
-  /**
-   * @return sex
-   */
-  public boolean getSex() {
-    return sex;
-  }
-
-  /**
-   * @param sex 要设置的 sex
-   */
-  public void setSex(boolean sex) {
-    this.sex = sex;
-  }
-
-  /**
-   * @return country
-   */
-  public String getCountry() {
-    return country;
-  }
-
-  /**
-   * @param country 要设置的 country
-   */
-  public void setCountry(String country) {
-    this.country = country;
-  }
-
-  /**
-   * @return province
-   */
-  public String getProvince() {
-    return province;
-  }
-
-  /**
-   * @param province 要设置的 province
-   */
-  public void setProvince(String province) {
-    this.province = province;
-  }
-
-  /**
-   * @return city
-   */
-  public String getCity() {
-    return city;
-  }
-
-  /**
-   * @param city 要设置的 city
-   */
-  public void setCity(String city) {
-    this.city = city;
-  }
-
-  /**
-   * @return headimgurl
-   */
-  public String getHeadimgurl() {
-    return headimgurl;
-  }
-
-  /**
-   * @param headimgurl 要设置的 headimgurl
-   */
-  public void setHeadimgurl(String headimgurl) {
-    this.headimgurl = headimgurl;
-  }
-
-  /**
    * @return timestamp
    */
   public Date getTimestamp() {
@@ -183,16 +81,16 @@ public class Ticket implements Serializable {
   }
 
   /**
-   * @return ipaddr
+   * @return ip
    */
-  public String getIpaddr() {
-    return ipaddr;
+  public String getIp() {
+    return ip;
   }
 
   /**
-   * @param ipaddr 要设置的 ipaddr
+   * @param ip 要设置的 ip
    */
-  public void setIpaddr(String ipaddr) {
-    this.ipaddr = ipaddr;
+  public void setIp(String ip) {
+    this.ip = ip;
   }
 }

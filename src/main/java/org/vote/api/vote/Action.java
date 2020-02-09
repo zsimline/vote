@@ -1,8 +1,6 @@
 package org.vote.api.vote;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,11 +31,8 @@ public class Action extends BaseApi {
         entry.setAcquisition(entry.getAcquisition() + 1);
         updateInstance(entry);
       }
-    } catch (Exception e) {
+    } catch (NullPointerException e) {
       e.printStackTrace();
     }
   }
-
-  
-
 }

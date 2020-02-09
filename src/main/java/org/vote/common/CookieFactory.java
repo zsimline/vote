@@ -61,8 +61,8 @@ public class CookieFactory {
     Cookie[] cookies = request.getCookies();
     
     if (cookies != null) {
-      for (int i = 0; i < cookies.length; i++) {
-        cookieMap.put(cookies[i].getName(), cookies[i].getValue());
+      for (Cookie cookie : cookies) {
+        cookieMap.put(cookie.getName(), cookie.getValue());
       }
     }
 

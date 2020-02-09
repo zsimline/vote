@@ -27,7 +27,7 @@ public class ApplyManage extends BaseView {
     request.setAttribute("page", request.getParameter("page"));
     request.setAttribute("sumPages", sumPages > 0 ? sumPages : 1);
     request.setAttribute("options", activity.getOptions().split(","));
-    display(request, response, "/template/vote/apply_manage.jsp");
+    render(request, response, "/template/vote/apply_manage.jsp");
   }
 
   private int getSumPages(HttpServletRequest request) {

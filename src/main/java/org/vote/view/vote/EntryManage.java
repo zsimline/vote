@@ -22,7 +22,7 @@ public class EntryManage extends BaseView {
     request.setAttribute("page", request.getParameter("page"));
     int sumPages = getSumPages(request);
     request.setAttribute("sumPages", sumPages > 0 ? sumPages : 1);    
-    display(request, response, "/template/vote/entry_manage.jsp");
+    render(request, response, "/template/vote/entry_manage.jsp");
   }
 
   private int getSumPages(HttpServletRequest request) {

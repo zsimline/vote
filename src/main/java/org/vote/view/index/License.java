@@ -17,6 +17,6 @@ public class License extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    display(request, response, "/template/vote/license.jsp");
+    render(request, response, "/template/vote/license.jsp");
   }
 }
