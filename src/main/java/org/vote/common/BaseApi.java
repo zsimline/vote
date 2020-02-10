@@ -49,22 +49,21 @@ public class BaseApi extends HttpServlet {
   /**
    * 执行数据库操作
    * 
-   * @param hql 查询语句
-   * @param keys 查询语句参数数组
-   * @param values 查询语句参数值数组
+   * @param hql 操作语句
+   * @param name 
+   * @param val
    * @return  操作执行成功/失败
    */
-  protected boolean dbExcute(String hql, String[] keys, String[] values) {
+  protected boolean dbExcute(String hql, String name, String val) {
     Session session = null;
     Transaction transaction = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
+
       // 创建查询语句并设置查询参数
       Query query = session.createSQLQuery(hql);
-      for (int i = 0; i < keys.length; i++) {
-        query.setParameter(keys[i], values[i]);
-      }
-
+      query.setParameter(name, val);
+      
       transaction = session.beginTransaction();
       transaction.begin();
       query.executeUpdate();

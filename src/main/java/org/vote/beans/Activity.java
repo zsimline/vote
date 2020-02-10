@@ -54,6 +54,9 @@ public class Activity implements Serializable {
   // 宣传图片地址
   private String imgMain;
 
+  // 图片数据
+  private String imgData;
+
   // 其它必填项
   private String options;
 
@@ -276,6 +279,20 @@ public class Activity implements Serializable {
    */
   public void setImgMain(String imgMain) {
     this.imgMain = imgMain;
+  }
+
+  /**
+   * @return imgData
+   */
+  public String getImgData() {
+    return imgData;
+  }
+
+  /**
+   * @param imgData 要设置的 imgData
+   */
+  public void setImgData(String imgData) {
+    this.imgData = imgData;
   }
 
   /**

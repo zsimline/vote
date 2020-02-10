@@ -64,9 +64,8 @@ public class Remove extends BaseApi {
    * @return 创建投票表成功/失败
    */
   private boolean deleteTicketTable(String aid) {
-    // 调用创建投票表事务
+    // 调用删除投票表事务
     String hql = "call drop_ticket_table(:uuid)";
-    String[] keys = {"uuid"}, values = {aid};
-    return dbExcute(hql, keys, values);
+    return dbExcute(hql, "uuid", aid);
   }
 }

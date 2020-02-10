@@ -3,6 +3,8 @@ package org.vote.common;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -14,6 +16,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 /**
@@ -21,22 +24,7 @@ import com.google.gson.JsonSyntaxException;
  */
 public class Utils {
   // json 解析器
-  private static Gson gson = new Gson();
-
-  /**
-   * 将输入流转换为JSON字符串
-   * 
-   * @param request Servlet 请求对象
-   * @return JSON字符串
-   */
-  public static String inputToJsonStr(HttpServletRequest request) {
-    try {
-      return IOUtils.toString(request.getInputStream(), "UTF-8");
-    } catch (IOException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
+  private static Gson gson =  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 
   /**
    * 获取JSON解析器
@@ -111,5 +99,40 @@ public class Utils {
       e.printStackTrace();
       return null;
     }
+  }
+
+  /**
+   * 获取当天的文件上传路径
+   * 
+   * @param request 请求对象
+   * @return 文件上传全路径
+   */
+  public static String getUploadPath(HttpServletRequest request) {
+    String basePath = request.getSession().getServletContext().getRealPath("/") + "uploads/";
+    return Utils.mkdirByDate(basePath);
+  }
+  
+  /**
+   * 存储文件
+   * 
+   * @param filePath 文件路径
+   * @param data 文件数据
+   * @return 存储文件成功成功/失败
+   */
+  public static boolean storeFile(String filePath, byte[] data) {
+     FileOutputStream fileOutputStream;
+     try {
+       fileOutputStream = new FileOutputStream(filePath);
+       fileOutputStream.write(data);
+       fileOutputStream.close();
+     } catch (FileNotFoundException e) {
+       e.printStackTrace();
+       return false;
+     } catch (IOException e) {
+       e.printStackTrace();
+       return false;
+     }
+
+     return true;
   }
 }

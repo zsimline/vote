@@ -60,13 +60,13 @@
       <span class="extra-tip">截止时间后不能继续投票</span>
     </div>
     <div class="inputcon">
-      <label for="signup-time-start">报名开始时间</label>
-      <input type="text" class="form-control input-sm" id="signup-time-start">
+      <label for="apply-time-start">报名开始时间</label>
+      <input type="text" class="form-control input-sm" id="apply-time-start">
       <span class="extra-tip">开始时间后才能报名</span>
     </div>
     <div class="inputcon">
-      <label for="signup-time-end">报名截止时间</label>
-      <input type="text" class="form-control input-sm" id="signup-time-end">
+      <label for="apply-time-end">报名截止时间</label>
+      <input type="text" class="form-control input-sm" id="apply-time-end">
       <span class="extra-tip">截止时间后不能继续报名</span>
     </div>
 
@@ -98,12 +98,12 @@
       const options = { locale: 'zh-cn', format: "YYYY-MM-DD hh:mm" };
       $('#vote-time-start').datetimepicker(options);
       $('#vote-time-end').datetimepicker(options);
-      $('#signup-time-start').datetimepicker(options);
-      $('#signup-time-end').datetimepicker(options);
+      $('#apply-time-start').datetimepicker(options);
+      $('#apply-time-end').datetimepicker(options);
     });
   </script>
 
-  <script src="/js/create.js"></script>
+  <script src="/js/publish.js"></script>
   <%@ include file="../components/modal.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>
