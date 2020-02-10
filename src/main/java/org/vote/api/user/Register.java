@@ -7,8 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import org.vote.beans.User;
 import org.vote.common.MD5;
 import org.vote.common.BaseApi;
@@ -26,28 +24,17 @@ public class Register extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String jsonStr = Utils.inputToJsonStr(request);
+    User user = (User) Utils.postDataToObj(request, User.class);
 
-    if (jsonStr != null) {
-      Gson gson = new Gson();
-      User user = gson.fromJson(jsonStr, User.class);
+    if (user != null) {
+      user.setPassword(MD5.md5(user.getPassword()));
+    } 
 
-      // 取用户密码的哈希摘要
-      try {
-        user.setPassword(MD5.md5(user.getPassword()));
-      } catch (Exception e) {
-        e.printStackTrace();
-        complete(response, 1103);
-      }
-
-      if (saveInstance(user)) {
-        verifyEmail(response, user);
-        complete(response, 1100);
-      } else {
-        complete(response, 1101);
-      }
+    if (saveInstance(user)) {
+      verifyEmail(response, user);
+      complete(response, 1100);
     } else {
-      complete(response, 1102);
+      complete(response, 1101);
     }
   }
 
@@ -66,7 +53,7 @@ public class Register extends BaseApi {
                          + "\">点击链接激活账户</a>";
 
     if (!Email.sendMail(emailAddress, mailContent)) {
-      complete(response, 1104);
+      complete(response, 1102);
     }
   }
 }

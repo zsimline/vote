@@ -8,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import org.vote.beans.User;
 import org.vote.common.BaseApi;
 import org.vote.common.MD5;
@@ -28,11 +26,9 @@ public class Login extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String jsonStr = Utils.inputToJsonStr(request);
+    User userVerify = (User) Utils.postDataToObj(request, User.class);
 
-    if (jsonStr != null) {
-      Gson gson = new Gson();
-      User userVerify = gson.fromJson(jsonStr, User.class);
+    if (userVerify != null) {
       User user = getUserByEmail(userVerify.getEmail());
 
       // 验证账户是够存在
@@ -42,7 +38,7 @@ public class Login extends BaseApi {
       }
 
       // 验证账户是否是已激活的
-      if (user.getIsActive() == false) {
+      if (user.getIsActive()) {
         complete(response, 1204);
         return;
       }
@@ -77,11 +73,8 @@ public class Login extends BaseApi {
    * @param emailAddress 邮件地址
    * @return 用户实例
    */
-  @SuppressWarnings("unchecked")
-  private User getUserByEmail(String emailAddress) {
-    String hql = "FROM User WHERE email = :emailAddress";
-    String[] keys = {"emailAddress"},values = {emailAddress};
-    List<User> results = (List<User>)getInstanceByHql(hql, keys, values);
-    return results.isEmpty() ? null : results.get(0);
+  private User getUserByEmail(String emailAddress) {    
+    List<?> results = conditionQuery(User.class, "emailAddress", emailAddress);
+    return results.isEmpty() ? null : (User) results.get(0);
   }
 }

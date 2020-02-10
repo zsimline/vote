@@ -14,9 +14,8 @@ public class MD5 {
    * 
    * @param text 明文
    * @return 密文
-   * @throws Exception
    */
-  public static String md5(String text) throws Exception {
+  public static String md5(String text) {
     return DigestUtils.md5Hex(text + key);
   }
 
@@ -25,15 +24,10 @@ public class MD5 {
    * 
    * @param text 明文
    * @param md5  密文
-   * @return true/false
-   * @throws Exception
+   * @return 验证成功/失败
    */
-  public static boolean verify(String text, String md5) throws Exception {
+  public static boolean verify(String text, String md5){
     String encryptStr = md5(text);
-    if (encryptStr.equalsIgnoreCase(md5)) {
-      return true;
-    }
-
-    return false;
+    return encryptStr.equalsIgnoreCase(md5) ? true : false;
   }
 }

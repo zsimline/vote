@@ -1,7 +1,10 @@
 package org.vote.common;
 
 import java.util.UUID;
- 
+
+/**
+ * UUID生成器
+ */
 public class UUIDTool {
 	public UUIDTool() {
   }

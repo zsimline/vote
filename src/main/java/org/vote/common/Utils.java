@@ -20,7 +20,6 @@ import com.google.gson.JsonSyntaxException;
  * 通用工具包
  */
 public class Utils {
-
   // json 解析器
   private static Gson gson = new Gson();
 
@@ -40,10 +39,19 @@ public class Utils {
   }
 
   /**
+   * 获取JSON解析器
+   * 
+   * @return JSON解析器
+   */
+  public static Gson getGson() {
+    return gson;
+  }
+
+  /**
    * 按时间创建多级目录
    * 
    * @param basePath 文件夹基目录
-   * @return true/false 创建目录成功/失败
+   * @return 创建成功后的全路径
    */
   public static String mkdirByDate(String basePath) {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");

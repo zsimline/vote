@@ -12,6 +12,7 @@ import org.vote.beans.Activity;
 import org.vote.beans.Wechat;
 import org.vote.common.BaseView;
 import org.vote.common.CookieFactory;
+import org.vote.common.OAuth;
 
 /**
  * 显示投票页面
@@ -27,7 +28,7 @@ public class Action extends BaseView {
     if (activity == null) {
       response.sendRedirect("/index/error");
     } else if (!hasAuth(request, response)) {
-      
+      response.sendRedirect(OAuth.getAuthCodeApiAddress(aid));
     } else {
       request.setAttribute("aid", aid);
       request.setAttribute("activity", activity);
@@ -42,7 +43,7 @@ public class Action extends BaseView {
     // 获取微信用户 openid 与访问令牌
     String openid = cookieMap.get("openid");
     String token = cookieMap.get("token");
-    
+
     // 未携带认证信息
     if (openid == null || token == null) {
       return false;
@@ -50,10 +51,10 @@ public class Action extends BaseView {
 
     // 已携带认证信息但认证失败
     Wechat wechat = (Wechat) getInstanceById(Wechat.class, openid);
-    if (wechat == null || wechat.getToken() != token) {
+    if (wechat == null || !wechat.getToken().equals(token)) {
       return false;
     }
-    
+
     return true;
   }
 }

@@ -2,6 +2,7 @@ package org.vote.common;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.vote.common.HibernateUtil;
 import org.vote.beans.Activity;
@@ -47,50 +47,38 @@ public class BaseApi extends HttpServlet {
   }
 
   /**
-   * 向用户返回操作执行的结果
-   * 
-   * @param response 响应对象
-   * @param status   自定义的返回码
-   * @param extraStr 额外发送的字符串
-   * @throws ServletException
-   * @throws IOException
-   */
-  protected void complete(HttpServletResponse response, int status, String extraStr) throws ServletException, IOException {
-    Code code = new Code(status);
-    code.setExtraStr(extraStr);
-    Gson gson = new Gson();
-    String jsonStr = gson.toJson(code);
-    response.getWriter().write(jsonStr);
-    response.setStatus(200);
-  }
-
-  /**
    * 执行数据库操作
    * 
    * @param hql 查询语句
-   * @param keys 查询语句参数集合
-   * @param values 查询语句参数值集合
-   * @return true/false 执行数据操作成功/失败
+   * @param keys 查询语句参数数组
+   * @param values 查询语句参数值数组
+   * @return  操作执行成功/失败
    */
   protected boolean dbExcute(String hql, String[] keys, String[] values) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
+    Transaction transaction = null;
     try {
-      transaction.begin();
-
+      session = HibernateUtil.getSessionFactory().openSession();
       // 创建查询语句并设置查询参数
       Query query = session.createSQLQuery(hql);
       for (int i = 0; i < keys.length; i++) {
         query.setParameter(keys[i], values[i]);
       }
-      query.executeUpdate();
 
+      transaction = session.beginTransaction();
+      transaction.begin();
+      query.executeUpdate();
       transaction.commit();
-      session.close();
     } catch (HibernateException e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
       e.printStackTrace();
       return false;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
     }
 
     return true;
@@ -99,21 +87,58 @@ public class BaseApi extends HttpServlet {
   /**
    * 保存数据实例
    * 
-   * @param instance
-   * @return 保存数据实例成功/失败
+   * @param instance 数据实例
+   * @return 操作执行成功/失败
    */
   protected boolean saveInstance(Object instance) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
+    Transaction transaction = null;
     try {
+      session = HibernateUtil.getSessionFactory().openSession();
+      transaction = session.beginTransaction();
       transaction.begin();
       session.save(instance);
       transaction.commit();
-      session.close();
     } catch (HibernateException e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
       e.printStackTrace();
       return false;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * 保存或更新数据实例
+   * 
+   * @param instance 数据实例
+   * @return 操作执行成功/失败
+   */
+  protected boolean saveOrUpdateInstance(Object instance) {
+    Session session = null;
+    Transaction transaction = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+      transaction = session.beginTransaction();
+      transaction.begin();
+      session.save(instance);
+      transaction.commit();
+    } catch (HibernateException e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+      return false;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
     }
 
     return true;
@@ -126,17 +151,24 @@ public class BaseApi extends HttpServlet {
    * @return 更新数据实例成功/失败
    */
   protected boolean updateInstance(Object instance) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
+    Transaction transaction = null;
     try {
+      session = HibernateUtil.getSessionFactory().openSession();
+      transaction = session.beginTransaction();
       transaction.begin();
       session.update(instance);
       transaction.commit();
-      session.close();
     } catch (HibernateException e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
       e.printStackTrace();
       return false;
+    } finally {
+      if (session != null) {
+        session.close();
+      }   
     }
 
     return true;
@@ -150,18 +182,20 @@ public class BaseApi extends HttpServlet {
    * @return
    */
   protected Object getInstanceById(Class<?> clazz, String id) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
     try {
-      transaction.begin();
-      Object instance = session.get(clazz, id);
-      transaction.commit();
-      session.close();
-      return instance;
+      session = HibernateUtil.getSessionFactory().openSession();
+      return session.get(clazz, id);
     } catch (HibernateException e) {
       e.printStackTrace();
       return null;
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+      return null;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
     }
   }
 
@@ -173,51 +207,20 @@ public class BaseApi extends HttpServlet {
    * @return
    */
   protected Object getInstanceById(Class<?> clazz, long id) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
     try {
-      transaction.begin();
-      Object instance = session.get(clazz, id);
-      transaction.commit();
-      session.close();
-      return instance;
+      session = HibernateUtil.getSessionFactory().openSession();
+      return session.get(clazz, id);
     } catch (HibernateException e) {
       e.printStackTrace();
       return null;
-    }
-  }
-
-  /**
-   * 根据查询语句获取数据实例列表
-   * 
-   * @param hql 查询语句
-   * @param keys 查询语句参数集合
-   * @param values 查询语句参数值集合
-   * @return 数据实例集合
-   */
-  protected List<?> getInstanceByHql(String hql, String[] keys, String[] values) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      
-      // 创建查询语句并设置查询参数
-      Query query = session.createQuery(hql);
-      for (int i = 0; i < keys.length; i++) {
-        query.setParameter(keys[i], values[i]);
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+      return null;
+    } finally {
+      if (session != null) {
+        session.close();
       }
-  
-      List<?> results = query.list();
-      
-      transaction.commit();
-      session.close();
-
-      return results.isEmpty() ? null : results;
-    } catch (HibernateException e) {
-      e.printStackTrace();
-      return null;
     }
   }
 
@@ -308,11 +311,9 @@ public class BaseApi extends HttpServlet {
    * @return 查询结果集
    */
   protected List<?> paginationQuery(Class<?> clazz, String[] keys, Object[] values, int page, int max) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
     try {
-      transaction.begin();
+      session = HibernateUtil.getSessionFactory().openSession();
 
       // 创建条件容器并添加条件
       Criteria criteria = session.createCriteria(clazz);  
@@ -324,23 +325,22 @@ public class BaseApi extends HttpServlet {
       criteria.setFirstResult((page-1) * max);
       criteria.setMaxResults(max);
 
-      List<?> results = criteria.list();
-      
-      transaction.commit();
-      session.close();
-
-      return results;
+      return criteria.list();
     } catch (HibernateException e) {
       e.printStackTrace();
-      return null;
+      return Collections.emptyList();
+    } finally {
+      if (session != null) {
+        session.close();
+      }
     }
   }
 
   /**
    * 按条件查询
    * 
-   * @param clazz  实例类
-   * @param keys   条件名集合
+   * @param clazz   实例类
+   * @param keys    条件名集合
    * @param values 条件值集合
    * @return 查询结果集
    */
@@ -358,7 +358,7 @@ public class BaseApi extends HttpServlet {
       return criteria.list();
     } catch (HibernateException e) {
       e.printStackTrace();
-      return null;
+      return Collections.emptyList();
     } finally {
       if (session != null) {
         session.close();
@@ -367,63 +367,30 @@ public class BaseApi extends HttpServlet {
   }
 
   /**
-   * 统计行数
+   * 按条件查询
    * 
-   * @param clazz 实例类
-   * @return 行数
+   * @param clazz   实例类
+   * @param conditonName 条件名
+   * @param conditonValue  条件值
+   * @return 查询结果集
    */
-  protected int countRows(Class<?> clazz) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+  protected List<?> conditionQuery(Class<?> clazz, String conditonName, Object conditonValue) {
+    Session session = null;
     try {
-      transaction.begin();
+      session = HibernateUtil.getSessionFactory().openSession();
 
-      // 统计行数
-      Criteria criteria = session.createCriteria(clazz);
-      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
-    
-      transaction.commit();
-      session.close();
-      
-      return totalRows;
+      // 创建条件容器并附加条件
+      Criteria criteria = session.createCriteria(clazz);  
+      criteria.add(Restrictions.eq(conditonName, conditonValue));
+
+      return criteria.list();
     } catch (HibernateException e) {
       e.printStackTrace();
-      return 0;
-    }
-  }
-
-  /**
-   * 按条件统计行数
-   * 
-   * @param clazz  实例类
-   * @param keys   条件名集合
-   * @param values 条件值集合
-   * @return 行数
-   */
-  protected int countRows(Class<?> clazz, String[] keys, Object[] values) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      
-      // 创建条件容器并添加条件
-      Criteria criteria = session.createCriteria(clazz);
-      for (int i = 0; i < keys.length; i++) {
-        criteria.add(Restrictions.eq(keys[i], values[i]));
+      return Collections.emptyList();
+    } finally {
+      if (session != null) {
+        session.close();
       }
-
-      // 统计行数
-      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
-    
-      transaction.commit();
-      session.close();
-      
-      return totalRows;
-    } catch (HibernateException e) {
-      e.printStackTrace();
-      return 0;
     }
   }
 }

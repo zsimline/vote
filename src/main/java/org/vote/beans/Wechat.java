@@ -9,13 +9,13 @@ public class Wechat implements Serializable {
   private static final long serialVersionUID = 1L;
 
   // 微信用户OpenID
-  private String id;
+  private String openid;
 
   // 微信用户昵称
   private String nickname;
 
   // 微信用户性别
-  private boolean sex;
+  private int sex;
 
   // 微信用户所属国家
   private String country;
@@ -35,15 +35,15 @@ public class Wechat implements Serializable {
   /**
    * @return id
    */
-  public String getId() {
-    return id;
+  public String getOpenid() {
+    return openid;
   }
 
   /**
    * @param id 要设置的 id
    */
-  public void setId(String id) {
-    this.id = id;
+  public void setOpenid(String openid) {
+    this.openid = openid;
   }
 
   /**
@@ -63,14 +63,14 @@ public class Wechat implements Serializable {
   /**
    * @return sex
    */
-  public boolean isSex() {
+  public int isSex() {
     return sex;
   }
 
   /**
    * @param sex 要设置的 sex
    */
-  public void setSex(boolean sex) {
+  public void setSex(int sex) {
     this.sex = sex;
   }
 

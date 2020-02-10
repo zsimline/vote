@@ -12,9 +12,6 @@ public class Code {
   // 返回码说明
   private String codeDesc;
 
-  // 额外说明
-  private String extraStr;
-
   // 返回码映射
   private static HashMap<Integer, String> codes;
 
@@ -35,9 +32,7 @@ public class Code {
     // 用户注册功能返回码
     codes.put(1100, "注册账户成功，我们已向您的邮箱发了一封验证消息，请及时查收并验证账户");
     codes.put(1101, "注册账户失败原因未知");
-    codes.put(1102, "提交数据为空");
-    codes.put(1103, "配置用户密码出错");
-    codes.put(1104, "配置用户邮件出错");
+    codes.put(1102, "配置用户邮件出错");
 
     // 用户登录功能返回码
     codes.put(1200, "登录成功即将跳转");
@@ -67,10 +62,8 @@ public class Code {
     codes.put(1601, "审核失败原因未知");
     codes.put(1602, "无权执行操作");
 
-
     // 投票功能返回码
-    codes.put(2000, "投票成功");
-    
+    codes.put(2000, "投票成功");    
   }
 
   public Code(int code) {
@@ -104,19 +97,5 @@ public class Code {
    */
   public void setCodeDesc(String codeDesc) {
     this.codeDesc = codeDesc;
-  }
-
-  /**
-   * @return extraStr
-   */
-  public String getExtraStr() {
-    return extraStr;
-  }
-
-  /**
-   * @param extraStr 要设置的 extraStr
-   */
-  public void setExtraStr(String extraStr) {
-    this.extraStr = extraStr;
   }
 }

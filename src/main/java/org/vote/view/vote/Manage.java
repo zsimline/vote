@@ -19,14 +19,18 @@ public class Manage extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String uid = userIdentify(request, response);
-    if (uid == null) {
+    long uid;
+    try {
+      uid = Long.valueOf(userIdentify(request, response));
+    } catch (NumberFormatException e) {
+      e.printStackTrace();
       response.sendRedirect("/user/login");
-    } else {
-      List<Activity> activitys = getActivitysByPublisher(uid);
-      request.setAttribute("activitys", activitys);
-      render(request, response, "/template/vote/manage.jsp");
+      return ;
     }
+
+    List<Activity> activitys = getActivitysByPublisher(uid);
+    request.setAttribute("activitys", activitys);
+    render(request, response, "/template/vote/manage.jsp");
   }
 
   /**
@@ -36,13 +40,8 @@ public class Manage extends BaseView {
    * @return 活动实例列表
    */
   @SuppressWarnings("unchecked")
-  private List<Activity> getActivitysByPublisher(String uid) {
-    String hql = "FROM Activity WHERE publisher = :publisher AND destroyed=0";
-    String[] keys = {"publisher"};
-    long[] values = {Long.valueOf(uid)};
-    
-    List<Activity> activitys = (List<Activity>)getInstanceByHql(hql, keys, values);
-    
-    return activitys;
+  private List<Activity> getActivitysByPublisher(long uid) {
+    List<?>  activitys =  conditionQuery(Activity.class, "publisher", uid);   
+    return (List<Activity>) activitys;
   }
 }

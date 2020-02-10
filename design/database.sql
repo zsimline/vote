@@ -20,8 +20,8 @@ CREATE TABLE `user`
 -- 活动信息表
 CREATE TABLE `activity`
 (
-  `id` CHAR(32) NOT NULL,                       -- 活动ID
-  `title` VARCHAR(40) NOT NULL,                 -- 活动标题
+  `id` CHAR(32) NOT NULL,                                    -- 活动ID
+  `title` VARCHAR(40) NOT NULL,                         -- 活动标题
   `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
   `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
   `quantifier` CHAR(1) NOT NULL,                -- 条目量词
@@ -77,16 +77,16 @@ CREATE TABLE `apply`
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 微信用户表
-CREATE TABLE `wechat` ( 
-  `id` CHAR(28) NOT NULL,                                   -- 微信用户openid
+CREATE TABLE `wechat` (
+  `openid` CHAR(28) NOT NULL,                          -- 微信用户openid
   `nickname` VARCHAR(32) DEFAULT NULL,      -- 微信用户昵称
-  `sex` TINYINT(1) DEFAULT NULL,                      -- 微信用户性别
+  `sex` INT(1) DEFAULT NULL,                               -- 微信用户性别
   `country` VARCHAR(12) DEFAULT NULL,         -- 微信用户所属国家
-  `province` VARCHAR(10) DEFAULT NULL,       -- 微信用户所属省份
-  `city` VARCHAR(8) DEFAULT NULL,                  -- 微信用户所属城市
+  `province` VARCHAR(14) DEFAULT NULL,        -- 微信用户所属省份
+  `city` VARCHAR(16) DEFAULT NULL,                -- 微信用户所属城市
   `headimgurl` VARCHAR(255) DEFAULT NULL, -- 微信用户头像地址
   `token` CHAR(32) DEFAULT NULL,                    -- 微信用户投票令牌
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`openid`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 投票信息表

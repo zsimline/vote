@@ -22,8 +22,7 @@ public class encodeFilter implements Filter {
   }
 
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-      throws IOException, ServletException {
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     // 设置Servlet请求与响应的编码
     request.setCharacterEncoding(filterConfig.getInitParameter("encoding"));
     response.setContentType("application/json;charset=utf-8");

@@ -26,10 +26,14 @@ public class Activation extends BaseApi {
     String password = request.getParameter("code");
 
     User user = getUserByEmail(emailAddress);
+
+    // 用户不存在
     if (user == null) {
       complete(response, 1302);
       return ;
     }
+    
+    // 密码错误
     if (!user.getPassword().equals(password)) {
       complete(response, 1303);
       return ;
@@ -51,11 +55,8 @@ public class Activation extends BaseApi {
    * @param emailAddress 邮件地址
    * @return 用户实例
    */
-  @SuppressWarnings("unchecked")
-  private User getUserByEmail(String emailAddress) {
-    String hql = "FROM User WHERE email = :emailAddress";
-    String[] keys = {"emailAddress"},values = {emailAddress};
-    List<User> results = (List<User>)getInstanceByHql(hql, keys, values);
-    return results.isEmpty() ? null : results.get(0);
+  private User getUserByEmail(String emailAddress) {    
+    List<?> results = conditionQuery(User.class, "emailAddress", emailAddress);
+    return results.isEmpty() ? null : (User) results.get(0);
   }
 }

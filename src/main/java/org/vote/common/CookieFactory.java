@@ -65,7 +65,6 @@ public class CookieFactory {
         cookieMap.put(cookie.getName(), cookie.getValue());
       }
     }
-
     return cookieMap;
   }
 }

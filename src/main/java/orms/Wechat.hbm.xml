@@ -4,14 +4,14 @@
 
 <hibernate-mapping package="org.vote.beans">
   <class name="Wechat" table="wechat" dynamic-update="true">
-    <id name="id" column="id" type="java.lang.String" length="32">
+    <id name="openid" column="openid" type="java.lang.String" length="28">
       <generator class="assigned"/>
     </id>
     <property name="nickname" column="nickname" type="java.lang.String" length="32"/>
-    <property name="sex" column="sex" type="java.lang.Boolean"/>
+    <property name="sex" column="sex" type="java.lang.Integer"/>
     <property name="country" column="country" type="java.lang.String" length="12"/>
-    <property name="province" column="province" type="java.lang.String" length="10"/>
-    <property name="city" column="city" type="java.lang.String" length="8"/>
+    <property name="province" column="province" type="java.lang.String" length="14"/>
+    <property name="city" column="city" type="java.lang.String" length="16"/>
     <property name="headimgurl" column="headimgurl" type="java.lang.String" length="255"/>
     <property name="token" column="token" type="java.lang.String" length="32"/>
   </class>

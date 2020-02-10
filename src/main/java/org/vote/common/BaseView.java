@@ -1,6 +1,7 @@
 package org.vote.common;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,9 +13,7 @@ import javax.servlet.RequestDispatcher;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.vote.beans.User;
@@ -76,84 +75,20 @@ public class BaseView extends HttpServlet {
    * @return
    */
   protected Object getInstanceById(Class<?> clazz, long id) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
     try {
-      transaction.begin();
-      Object instance = session.get(clazz, id);
-      transaction.commit();
-      session.close();
-      return instance;
+      session = HibernateUtil.getSessionFactory().openSession();
+      return session.get(clazz, id);
     } catch (HibernateException e) {
       e.printStackTrace();
       return null;
-    }
-  }
-
-  /**
-   * 根据查询语句获取数据实例列表
-   * 
-   * @param hql 查询语句
-   * @param keys 查询语句参数集合
-   * @param values 查询语句参数值集合
-   * @return 数据实例集合
-   */
-  protected List<?> getInstanceByHql(String hql, String[] keys, String[] values) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      
-      // 创建查询语句并设置查询参数
-      Query query = session.createQuery(hql);
-      for (int i = 0; i < keys.length; i++) {
-        query.setParameter(keys[i], values[i]);
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+      return null;
+    } finally {
+      if (session != null) {
+        session.close();
       }
-  
-      List<?> results = query.list();
-      
-      transaction.commit();
-      session.close();
-
-      return results.isEmpty() ? null : results;
-    } catch (HibernateException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  /**
-   * 根据查询语句获取数据实例列表
-   * 
-   * @param hql 查询语句
-   * @param keys 查询语句参数集合
-   * @param values 查询语句参数值集合
-   * @return 数据实例集合
-   */
-  protected List<?> getInstanceByHql(String hql, String[] keys, long[] values) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
-    try {
-      transaction.begin();
-      
-      // 创建查询语句并设置查询参数
-      Query query = session.createQuery(hql);
-      for (int i = 0; i < keys.length; i++) {
-        query.setParameter(keys[i], values[i]);
-      }
-  
-      List<?> results = query.list();
-      
-      transaction.commit();
-      session.close();
-
-      return results.isEmpty() ? null : results;
-    } catch (HibernateException e) {
-      e.printStackTrace();
-      return null;
     }
   }
 
@@ -174,7 +109,7 @@ public class BaseView extends HttpServlet {
     }
 
     // 根据UID获取用户实例并判断认证令牌是否相等
-    User user = (User)getInstanceById(User.class, Long.valueOf(uid));
+    User user = (User) getInstanceById(User.class, Long.valueOf(uid));
     if (user == null || !user.getToken().equals(token)) {
       return null;
     }
@@ -189,26 +124,53 @@ public class BaseView extends HttpServlet {
    * @return 行数
    */
   protected int countRows(Class<?> clazz) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
-
+    Session session = null;
     try {
-      transaction.begin();
+      session = HibernateUtil.getSessionFactory().openSession();
 
       // 统计行数
       Criteria criteria = session.createCriteria(clazz);
       int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
-    
-      transaction.commit();
-      session.close();
       
       return totalRows;
     } catch (HibernateException e) {
       e.printStackTrace();
       return 0;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
     }
   }
+  
+  /**
+   * 按条件查询
+   * 
+   * @param clazz   实例类
+   * @param conditonName 条件名
+   * @param conditonValue  条件值
+   * @return 查询结果集
+   */
+  protected List<?> conditionQuery(Class<?> clazz, String conditonName, Object conditonValue) {
+    Session session = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
 
+      // 创建条件容器并附加条件
+      Criteria criteria = session.createCriteria(clazz);  
+      criteria.add(Restrictions.eq(conditonName, conditonValue));
+
+      return criteria.list();
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return Collections.emptyList();
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+  }
+  
   /**
    * 按条件统计行数
    * 
@@ -218,12 +180,11 @@ public class BaseView extends HttpServlet {
    * @return 行数
    */
   protected int countRows(Class<?> clazz, String[] keys, Object[] values) {
-    Session session = HibernateUtil.getSessionFactory().openSession();
-    Transaction transaction = session.beginTransaction();
+    Session session = null;
 
     try {
-      transaction.begin();
-      
+      session = HibernateUtil.getSessionFactory().openSession();
+
       // 创建条件容器并添加条件
       Criteria criteria = session.createCriteria(clazz);
       for (int i = 0; i < keys.length; i++) {
@@ -231,15 +192,16 @@ public class BaseView extends HttpServlet {
       }
 
       // 统计行数
-      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
-    
-      transaction.commit();
-      session.close();
+      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();      
       
       return totalRows;
     } catch (HibernateException e) {
       e.printStackTrace();
       return 0;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
     }
   }
 }
