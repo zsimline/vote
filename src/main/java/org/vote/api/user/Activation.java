@@ -56,7 +56,7 @@ public class Activation extends BaseApi {
    * @return 用户实例
    */
   private User getUserByEmail(String emailAddress) {    
-    List<?> results = conditionQuery(User.class, "emailAddress", emailAddress);
+    List<?> results = conditionQuery(User.class, "email", emailAddress);
     return results.isEmpty() ? null : (User) results.get(0);
   }
 }

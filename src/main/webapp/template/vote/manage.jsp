@@ -11,6 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
+  <link rel="stylesheet" href="/css/manage.css">
   <script src="/js/manage.js"></script>
   <title>管理投票</title>
 </head>

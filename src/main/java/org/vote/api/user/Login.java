@@ -38,7 +38,7 @@ public class Login extends BaseApi {
       }
 
       // 验证账户是否是已激活的
-      if (user.getIsActive()) {
+      if (!user.getIsActive()) {
         complete(response, 1204);
         return;
       }
@@ -73,8 +73,8 @@ public class Login extends BaseApi {
    * @param emailAddress 邮件地址
    * @return 用户实例
    */
-  private User getUserByEmail(String emailAddress) {    
-    List<?> results = conditionQuery(User.class, "emailAddress", emailAddress);
+  private User getUserByEmail(String emailAddress) {
+    List<?> results = conditionQuery(User.class, "email", emailAddress);
     return results.isEmpty() ? null : (User) results.get(0);
   }
 }
