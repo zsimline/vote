@@ -202,25 +202,31 @@ function readyToAppend() {
  * 校验、封装新的报名数据
  */
 function handleApplyInfoChanged() {
-  if (!checkTitle()) return ;
-
-  const formData = new FormData();
+  if ($('#title').val() === '') {
+    openModal('error', '标题不能为空'); return ;
+  }
 
   Object.keys(applyOptions).forEach(key => {
     const value = $(applyOptions[key].selector).val();
     if (value !== undefined) {
-      formData.append(key, value);
+      validateFactory.postData[key] = value;
     }
   });
 
-  if ($('#img-entry').val() !== '') {
-    formData.append('imgEntry', $('#img-entry').prop('files')[0]);
-  }
-  if (tableData[tbOpts.activeTr].introduction) {
-    formData.append('introduction', tinyMCE.activeEditor.getContent());
-  }
+  validateFactory.postData.introduction = window.tinyMCE ? tinyMCE.activeEditor.getContent() : null;
 
-  uploadUpadteData(formData, tableData[tbOpts.activeTr].id);
+  if ($('#img-entry').val() !== '') {
+    uploadFile($('#img-entry').prop('files')[0])
+      .then(fileUrl => {
+        validateFactory.postData.imgEntry = fileUrl;
+        uploadUpadteData(validateFactory.postData, tableData[tbOpts.activeTr].id);
+      })
+      .catch(msg => {
+        openModal('error', msg)
+      });
+  } else {
+    uploadUpadteData(validateFactory.postData, tableData[tbOpts.activeTr].id);
+  }  
 }
 
 /**
@@ -233,12 +239,11 @@ function handleApplyInfoAdded() {
   Object.keys(applyOptions).forEach(key => {
     const value = $(applyOptions[key].selector).val();
     if (value !== undefined) {
-      formData.append(key, value);
+      validateFactory.postData[key] = value;
     }
   });
 
-  if (checkTitle(formData) && checkImgEntry(formData) 
-      && checkIntroduction(formData)) {
+  if (validateFactory.validate()) {
     uploadAppendData(formData);
   }
 }
@@ -249,8 +254,8 @@ function handleApplyInfoAdded() {
  * @param {FormData} formData
  * @param {string} id
  */
-function uploadUpadteData(formData, id) {
-  post(`/api/vote/apply_update?aid=${$('#aid').text()}&id=${id}`, formData)
+function uploadUpadteData(postData, id) {
+  postJSON(`/api/vote/apply_update?aid=${$('#aid').text()}&id=${id}`, postData)
     .then(data => {
       if (!data.code) {
         flushTable(data);
@@ -284,26 +289,28 @@ function uploadAppendData(formData) {
 
 /**
  * 校验标题是否为空 
+ * 校验通过后将数据追加到容器中
  * 
- * @return true/false 校验成功/失败
+ * @return 校验成功/失败
  */
-function checkTitle() {
+function validateTitle() {
   const title = $('#title').val();
   if (title === '') {
     openModal('error', '标题不能为空');
     return false;
+  } else {
+    this.postData.title = title;
+    return true;
   }
-
-  return true;
 }
 
 /**
  * 校验详细介绍是否为空
  * 校验通过后将数据追加到容器中
  *
- * @return true/flase 校验成功/失败
+ * @return 校验成功/失败
  */
-function checkIntroduction(formData) {
+function validateIntroduction() {
   if (window.tinyMCE === undefined) return true;
 
   const introduction = tinyMCE.activeEditor.getContent();
@@ -311,7 +318,7 @@ function checkIntroduction(formData) {
     openModal('error', '详细介绍不能为空');
     return false;
   } else {
-    formData.append('introduction', introduction);
+    this.postData.introduction = introduction;
     return true;
   }
 }
@@ -320,18 +327,15 @@ function checkIntroduction(formData) {
  * 校验参赛图片是否为空
  * 校验通过后将数据追加到容器中
  *
- * @return true/false 校验成功/失败
+ * @return 校验成功/失败
  */
-function checkImgEntry(formData) {
+function validateImgEntry() {
   const imgEntry = $('#img-entry').val();
-  if (imgEntry === undefined) {
+  if (imgEntry === undefined || imgEntry !== '') {
     return true;
-  } else if (imgEntry === '') {
+  } else  {
     openModal('error', '参赛图片不能为空');
     return false;
-  } else {
-    formData.append('imgEntry', $('#img-entry').prop('files')[0]);
-    return true;
   }
 }
 
@@ -429,3 +433,62 @@ function review(which, status) {
 }
 
 fetchTableData();
+
+// 创建校验工厂
+const validateFactory = {
+  postData: {
+    title: null,
+    imgEntry: null,
+    introduction: null,
+    name: null,
+    sex: null,
+    age: null,
+    telephone: null,
+    email: null,
+    school: null,
+    company: null,
+    address: null,
+  },
+  validate: function() {
+    for (let i = 0; i < this.functions.length; i++) {
+      if (!this.functions[i]()) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+// 绑定校验函数
+// 使校验函数的this指针指向validateFactory
+validateFactory.functions = [
+  validateImgEntry.bind(validateFactory),
+  validateIntroduction.bind(validateFactory),
+];
+  //validateApplyOptions.bind(validateFactory),
+
+/**
+ * 上传文件
+ * 
+ * @param {File} file 文件
+ * @return Promise
+ */
+function uploadFile(file) {
+  const formData = new FormData();
+  formData.append('file.jpg', file);
+
+  return new Promise((resolve, reject) => {
+    post('/api/vote/file_upload', formData)
+      .then(data => {
+        // 上传成功后返回其URL
+        if (!(data.code % 100)) {
+          resolve(data.codeDesc);
+        } else {
+          reject(data.codeDesc);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    });
+}

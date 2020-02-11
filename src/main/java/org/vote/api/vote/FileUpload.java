@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Iterator;
-
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -30,7 +27,7 @@ public class FileUpload extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   // 文件上传基目录
-  private static final String basePath = "/opt/vote/uploads/";
+  private static final String basePath = "/opt/uploads/";
 
   // 磁盘文件工厂
   private DiskFileItemFactory factory;

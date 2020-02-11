@@ -38,8 +38,15 @@ public class DataApply extends BaseApi {
    */
   private List<?> fetchApplys(HttpServletRequest request) {
     String aid = request.getParameter("aid");
-    char status = request.getParameter("status").charAt(0);
-    int page = Integer.valueOf(request.getParameter("page"));
+
+    char status = 'w';
+    int page = 1;
+    try {
+      status = request.getParameter("status").charAt(0);
+      page = Integer.valueOf(request.getParameter("page"));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   
     String[] keys = { "aid", "status" };
     Object[] values = { aid, status };

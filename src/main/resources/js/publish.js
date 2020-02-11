@@ -26,7 +26,7 @@ function handleSubmit() {
 
   // 校验各个表单成功后
   // 上传表单中的数据
-  if (verifyBaseConfig() && verifyImage() && verifyTime()) {
+  if (validateBaseConfig() && validateImage() && validateTime()) {
     uploadFile($('#img-main').prop('files')[0])
       .then(fileUrl => {
         postData.imgMain = fileUrl;
@@ -42,7 +42,7 @@ function handleSubmit() {
  * 校验基本配置
  * 确保基本配置非空
  */
-function verifyBaseConfig() {
+function validateBaseConfig() {
   // 获取基本配置数据
   const title = $('#title').val();
   const suffix = $('#suffix').val();
@@ -96,7 +96,7 @@ function verifyBaseConfig() {
  * 校验图片
  * 确保图片非空且格式正确
  */
-function verifyImage() {
+function validateImage() {
   const imgMain = $('#img-main').val();
   if (imgMain === '') {
     openModal('error', '请上传宣传图片');
@@ -124,7 +124,7 @@ function verifyImage() {
  * 校验投票/报名的开始与结束时间
  * 确保时间非空且顺序正确
  */
-function verifyTime() {
+function validateTime() {
   // 获取投票/报名的开始与结束时间
   const voteTimeStart = $('#vote-time-start').val();
   const voteTimeEnd = $('#vote-time-end').val();
@@ -183,9 +183,9 @@ function verifyTime() {
 }
 
 /**
- * 上传报名数据
+ * 上传活动数据
  * 
- * @param {Object} postData 报名数据
+ * @param {Object} postData 活动数据
  */
 function uploadPostData(postData) {
   postJSON('/api/vote/publish', postData)

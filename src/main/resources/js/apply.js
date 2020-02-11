@@ -50,9 +50,15 @@ function handleSubmit() {
   }
 
   // 校验表单并追加数据
-  checkFactory.formData = new FormData();  
-  if (checkFactory.check()) {
-    uploadData(checkFactory.formData);
+  if (validateFactory.validate()) {
+    uploadFile($('#img-entry').prop('files')[0])
+      .then(fileUrl => {
+        validateFactory.postData.imgEntry = fileUrl;
+        uploadPostData(validateFactory.postData);
+      })
+      .catch(msg => {
+        openModal('error', msg)
+      }) 
   }
 }
 
@@ -60,19 +66,17 @@ function handleSubmit() {
  * 校验详细介绍是否为空
  * 校验通过后将数据追加到容器中
  *
- * @return true/flase 校验成功/失败
+ * @return 校验成功/失败
  */
-function checkIntroduction() {
-  if (window.tinyMCE === undefined) {
-    return true;
-  }
+function validateIntroduction() {
+  if (window.tinyMCE === undefined) return true;
 
   const introduction = tinyMCE.activeEditor.getContent();
   if (introduction === '') {
     openModal('error', '详细介绍不能为空');
     return false;
   } else {
-    this.formData.append('introduction', introduction);
+    this.postData.introduction = introduction;
     return true;
   }
 }
@@ -81,18 +85,15 @@ function checkIntroduction() {
  * 校验参赛图片是否为空
  * 校验通过后将数据追加到容器中
  *
- * @return true/false 校验成功/失败
+ * @return 校验成功/失败
  */
-function checkImgEntry() {
+function validateImgEntry() {
   const imgEntry = $('#img-entry').val();
-  if (imgEntry === undefined) {
+  if (imgEntry === undefined || imgEntry !== '') {
     return true;
-  } else if (imgEntry === '') {
+  } else {
     openModal('error', '参赛图片不能为空');
     return false;
-  } else {
-    this.formData.append('imgEntry', $('#img-entry').prop('files')[0]);
-    return true;
   }
 }
 
@@ -100,9 +101,9 @@ function checkImgEntry() {
  * 校验其它可选项是否为空
  * 校验通过后将数据追加到容器中
  *
- * @return true/false 校验成功/失败
+ * @return 校验成功/失败
  */
-function checkApplyOptions() {
+function validateApplyOptions() {
   const keys =  Object.keys(applyOptions);
   for (let i = 0; i < keys.length; i++) {
     const value = $(applyOptions[keys[i]].selector).val();
@@ -112,7 +113,7 @@ function checkApplyOptions() {
       openModal('error', applyOptions[keys[i]].errTip);
       return false;
     } else {
-      this.formData.append(keys[i], value);
+      this.postData[keys[i]] = value;
     }
   }
 
@@ -120,9 +121,21 @@ function checkApplyOptions() {
 }
 
 // 创建校验工厂
-const checkFactory = {
-  formData: null,
-  check: function() {
+const validateFactory = {
+  postData: {
+    title: null,
+    imgEntry: null,
+    introduction: null,
+    name: null,
+    sex: null,
+    age: null,
+    telephone: null,
+    email: null,
+    school: null,
+    company: null,
+    address: null,
+  },
+  validate: function() {
     for (let i = 0; i < this.functions.length; i++) {
       if (!this.functions[i]()) {
         return false;
@@ -131,29 +144,56 @@ const checkFactory = {
     return true;
   }
 }
+
 // 绑定校验函数
-// 使校验函数的this指针指向checkFactory
-checkFactory.functions = [
-  checkImgEntry.bind(checkFactory),
-  checkIntroduction.bind(checkFactory),
-  checkApplyOptions.bind(checkFactory),
+// 使校验函数的this指针指向validateFactory
+validateFactory.functions = [
+  validateImgEntry.bind(validateFactory),
+  validateIntroduction.bind(validateFactory),
+  validateApplyOptions.bind(validateFactory),
 ];
 
 /**
  * 上传报名数据
  * 
- * @param {FormData} formData
+ * @param {Object} postData 报名数据
  */
-function uploadData(formData) {
-  post(`/api/vote/apply?aid=${$('#aid').text()}`, formData)
-    .then(data => {
-      if (!data.code) {
-        console.log(data);
-      } else {
-        openModal('error', data.codeDesc);
-      }
-    })
-    .catch(err => {
-      console.error(err);
+function uploadPostData(postData) {
+  postJSON(`/api/vote/apply?aid=${$('#aid').text()}`, postData)
+  .then(data => {
+    if (!data.code) {
+      console.log(data);
+    } else {
+      openModal('error', data.codeDesc);
+    }
+  })
+  .catch(err => {
+    console.error(err);
+  });
+}
+
+/**
+ * 上传文件
+ * 
+ * @param {File} file 文件
+ * @return Promise
+ */
+function uploadFile(file) {
+  const formData = new FormData();
+  formData.append('file.jpg', file);
+
+  return new Promise((resolve, reject) => {
+    post('/api/vote/file_upload', formData)
+      .then(data => {
+        // 上传成功后返回其URL
+        if (!(data.code % 100)) {
+          resolve(data.codeDesc);
+        } else {
+          reject(data.codeDesc);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
     });
 }

@@ -27,8 +27,7 @@ public class Remove extends BaseApi {
     
     // 验证是否可删除
     if (!canDelete(uid, activity)) {
-      complete(response, 1902);
-      return ;
+      complete(response, 1902); return ;
     }
 
     // 设置活动为销毁

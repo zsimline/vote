@@ -51,7 +51,6 @@ public class Apply implements Serializable {
   private String address;
 
   public Apply() {
-    this.status = 'w';
   }
 
   /**
