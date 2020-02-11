@@ -30,6 +30,9 @@ import org.vote.common.Code;
 public class BaseApi extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  // json处理器
+  private static final Gson gson = new Gson();
+
   /**
    * 向用户返回操作执行的结果
    * 
@@ -40,7 +43,23 @@ public class BaseApi extends HttpServlet {
    */
   protected void complete(HttpServletResponse response, int status) throws ServletException, IOException {
     Code code = new Code(status);
-    Gson gson = new Gson();
+    String jsonStr = gson.toJson(code);
+    response.getWriter().write(jsonStr);
+    response.setStatus(200);
+  }
+
+  /**
+   * 向用户返回操作执行的结果
+   * 
+   * @param response 响应对象
+   * @param status   自定义的返回码
+   * @param extraStr 额外的说明
+   * @throws ServletException
+   * @throws IOException
+   */
+  protected void complete(HttpServletResponse response, int status, String extraStr) throws ServletException, IOException {
+    Code code = new Code(status);
+    code.setCodeDesc(extraStr);
     String jsonStr = gson.toJson(code);
     response.getWriter().write(jsonStr);
     response.setStatus(200);
@@ -224,24 +243,29 @@ public class BaseApi extends HttpServlet {
   }
 
   /**
-   * 识别用户身份并认证
+   * 识别并认证用户身份
    * 
    * @param request 请求对象
+   * @param response 响应对象
    * @return 用户身份识别并认证成功返回其ID, 否则返回null
    */
   protected String userIdentify(HttpServletRequest request, HttpServletResponse response) {
     CookieFactory cookieFactory = new CookieFactory(request, response);
     HashMap<String, String> cookieMap = cookieFactory.cookiesToHashMap();
 
+    // 判断用户是否携带认证信息
     String uid = cookieMap.get("uid");
     String token = cookieMap.get("token");
     if (uid == null || token == null) {
       return null;
     }
 
-    // 根据UID获取用户实例并判断认证令牌是否相等
-    User user = (User)getInstanceById(User.class, Long.valueOf(uid));
-    if (user == null || !user.getToken().equals(token)) {
+    try {
+      // 根据UID获取用户实例并判断认证令牌是否相等
+      User user = (User)getInstanceById(User.class, Long.valueOf(uid));
+      if (user == null || !user.getToken().equals(token)) return null;
+    } catch (NumberFormatException e) {
+      e.printStackTrace();
       return null;
     }
 

@@ -108,7 +108,7 @@ public class ApplyUpdate extends BaseApi {
 
             // 定义上传文件路径
             String basePath = request.getSession().getServletContext().getRealPath("/") + "uploads/";
-            String fullPath = Utils.mkdirByDate(basePath);
+            String fullPath = "";//Utils.mkdirByDate(basePath);
 
             // 定义本机存储的文件名
             String localFileName = UUIDTool.getUUID() + "." + ext;

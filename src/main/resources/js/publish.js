@@ -27,14 +27,14 @@ function handleSubmit() {
   // 校验各个表单成功后
   // 上传表单中的数据
   if (verifyBaseConfig() && verifyImage() && verifyTime()) {
-    imgToBase64($('#img-main').prop('files')[0])
-      .then(data => {
-        postData.imgData = data;
+    uploadFile($('#img-main').prop('files')[0])
+      .then(fileUrl => {
+        postData.imgMain = fileUrl;
         uploadPostData(postData);
       })
-      .catch(err => {
-        console.error(err);
-    })
+      .catch(msg => {
+        openModal('error', msg)
+      }) 
   }
 }
 
@@ -112,11 +112,7 @@ function verifyImage() {
 
   // 校验图片文件格式
   // 当前的限制是只能为jpg或png格式
-  if (imgMain.endsWith('.jpg')) {
-    postData.imgMain = '.jpg'
-  } else if (imgMain.endsWith('.png')) {
-    postData.imgMain = '.png'
-  } else {
+  if (!imgMain.endsWith('.jpg') && !imgMain.endsWith('.png')) {
     openModal('error', '图片只能为jpg或png格式');
     return false;
   }
@@ -203,22 +199,32 @@ function uploadPostData(postData) {
       }
     })
     .catch(err => {
-      openModal('error', '发布投票失败')
+      console.error(err);
     });
 }
 
 /**
- * 将图片转换为base64
+ * 上传文件
  * 
- * @param {File} file 图片文件
+ * @param {File} file 文件
  * @return Promise
  */
-function imgToBase64(file) {
-  const fileReader = new FileReader() ;
-  return new Promise(resolve => {
-    fileReader.onloadend = (evnet) => {
-      resolve(evnet.target.result);
-    }
-    fileReader.readAsDataURL(file);
-  });
+function uploadFile(file) {
+  const formData = new FormData();
+  formData.append('file.jpg', file);
+
+  return new Promise((resolve, reject) => {
+    post('/api/vote/file_upload', formData)
+      .then(data => {
+        // 上传成功后返回其URL
+        if (!(data.code % 100)) {
+          resolve(data.codeDesc);
+        } else {
+          reject(data.codeDesc);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    });
 }
