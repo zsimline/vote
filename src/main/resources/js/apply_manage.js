@@ -202,6 +202,7 @@ function readyToAppend() {
  * 校验、封装新的报名数据
  */
 function handleApplyInfoChanged() {
+  validateFactory.clear();
   if ($('#title').val() === '') {
     openModal('error', '标题不能为空'); return ;
   }
@@ -219,14 +220,14 @@ function handleApplyInfoChanged() {
     uploadFile($('#img-entry').prop('files')[0])
       .then(fileUrl => {
         validateFactory.postData.imgEntry = fileUrl;
-        uploadUpadteData(validateFactory.postData, tableData[tbOpts.activeTr].id);
+        uploadUpadteData(tableData[tbOpts.activeTr].id);
       })
       .catch(msg => {
         openModal('error', msg)
       });
   } else {
-    uploadUpadteData(validateFactory.postData, tableData[tbOpts.activeTr].id);
-  }  
+    uploadUpadteData(tableData[tbOpts.activeTr].id);
+  }
 }
 
 /**
@@ -234,28 +235,40 @@ function handleApplyInfoChanged() {
  * 校验、封装新的报名数据
  */
 function handleApplyInfoAdded() {
-  const formData = new FormData();
+  validateFactory.clear();
+  if (validateFactory.validate()) {
+    uploadFile($('#img-entry').prop('files')[0])
+      .then(fileUrl => {
+        validateFactory.postData.imgEntry = fileUrl;
+        uploadAppendData();
+      })
+      .catch(msg => {
+        openModal('error', msg)
+      }); 
+  }
+}
 
+/**
+ * 校验报名选项
+ * 校验成功后将数据封装进容器中
+ */
+function validateApplyOptions() {
   Object.keys(applyOptions).forEach(key => {
     const value = $(applyOptions[key].selector).val();
     if (value !== undefined) {
-      validateFactory.postData[key] = value;
+      this.postData[key] = value;
     }
   });
-
-  if (validateFactory.validate()) {
-    uploadAppendData(formData);
-  }
+  return true;
 }
 
 /**
  * 上传报名更新数据
  * 
- * @param {FormData} formData
  * @param {string} id
  */
-function uploadUpadteData(postData, id) {
-  postJSON(`/api/vote/apply_update?aid=${$('#aid').text()}&id=${id}`, postData)
+function uploadUpadteData(id) {
+  postJSON(`/api/vote/apply_update?aid=${$('#aid').text()}&id=${id}`, validateFactory.postData)
     .then(data => {
       if (!data.code) {
         flushTable(data);
@@ -270,11 +283,9 @@ function uploadUpadteData(postData, id) {
 
 /**
  * 上传新增报名数据
- * 
- * @param {FormData} formData
  */
-function uploadAppendData(formData) {
-  post(`/api/vote/apply?aid=${$('#aid').text()}`, formData)
+function uploadAppendData() {
+  postJSON(`/api/vote/apply?aid=${$('#aid').text()}`, validateFactory.postData)
     .then(data => {
       if (!data.code) {
         flushTable(data, true);
@@ -284,7 +295,7 @@ function uploadAppendData(formData) {
     })
     .catch(err => {
       console.log(err);
-    });
+    })
 }
 
 /**
@@ -331,12 +342,30 @@ function validateIntroduction() {
  */
 function validateImgEntry() {
   const imgEntry = $('#img-entry').val();
-  if (imgEntry === undefined || imgEntry !== '') {
+  if (imgEntry === undefined) {
     return true;
-  } else  {
+  }
+
+  if (imgEntry === '') {
     openModal('error', '参赛图片不能为空');
     return false;
   }
+
+  // 检验图片文件大小
+  // 当前的限制是最大为1M
+  if ($('#img-entry').prop('files')[0].size > 1048576) {
+    openModal('error', '请上传小于1M的图片');
+    return false;
+  }
+
+  // 校验图片文件格式
+  // 当前的限制是只能为jpg或png格式
+  if (!imgEntry.endsWith('.jpg') && !imgEntry.endsWith('.png')) {
+    openModal('error', '图片只能为jpg或png格式');
+    return false;
+  }
+
+  return true;
 }
 
 /**
@@ -456,6 +485,11 @@ const validateFactory = {
       }
     }
     return true;
+  },
+  clear: function() {
+    Object.keys(this.postData).forEach(key => {
+      this.postData[key] = null;
+    })
   }
 }
 
@@ -464,8 +498,8 @@ const validateFactory = {
 validateFactory.functions = [
   validateImgEntry.bind(validateFactory),
   validateIntroduction.bind(validateFactory),
+  validateApplyOptions.bind(validateFactory),
 ];
-  //validateApplyOptions.bind(validateFactory),
 
 /**
  * 上传文件

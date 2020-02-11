@@ -75,15 +75,11 @@
   </div>
 
   <span class="hidden" id="aid">${aid}</span>
+  <span class="hidden" id="aid">${activity.maximum}</span>
 
   <script src="/js/action.js"></script>
 
-
-
-  <div class="footer">
-
-  </div>
-
+  <div class="footer"></div>
   <%@ include file="../components/modal.jsp" %>
 </body>
 
