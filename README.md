@@ -107,6 +107,8 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 10. 投票功能
 
+11. 条目解冻结功能
+
 ### 待弥补的不足
 
 

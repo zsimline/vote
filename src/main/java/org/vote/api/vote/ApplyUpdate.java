@@ -57,6 +57,15 @@ public class ApplyUpdate extends BaseApi {
     }
   }
 
+  /**
+   * 获取存储在数据库中的报名数据
+   * 
+   * @param request 请求对象
+   * @param response 响应对象
+   * @return 报名数据实例
+   * @throws ServletException
+   * @throws IOException
+   */
   private Apply getApplyInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Apply apply = null;
     try {
