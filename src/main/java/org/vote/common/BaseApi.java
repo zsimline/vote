@@ -59,7 +59,7 @@ public class BaseApi extends HttpServlet {
     Transaction transaction = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
-
+      
       // 创建查询语句并设置查询参数
       Query query = session.createSQLQuery(hql);
       query.setParameter(name, val);
