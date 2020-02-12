@@ -71,13 +71,13 @@
   <div id="tool-box">
     <span>已选择 <em>0</em> / ${activity.maximum}</span>
     <button class="btn btn-success" onclick="handleSubmit()">提交投票</button>
-    <a href="https://baidu.com">查看排名</a>
+    <a href="/vote/ranking?aid=${activity.id}">查看排名</a>
   </div>
 
   <span class="hidden" id="aid">${aid}</span>
-  <span class="hidden" id="aid">${activity.maximum}</span>
+  <span class="hidden" id="maximum">${activity.maximum}</span>
 
-  <script src="/js/action.js?v=0.0.7"></script>
+  <script src="/js/action.js?v=0.0.8"></script>
 
   <div class="footer"></div>
   <%@ include file="../components/modal.jsp" %>

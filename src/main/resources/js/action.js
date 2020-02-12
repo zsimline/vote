@@ -2,7 +2,7 @@
 const glStatus = {
   ids: new Set(),
   entrys: [],
-  maximum: 3,
+  maximum: parseInt($('#maximum').text()),
   nextPage: 1,
   lock: false,
 }
