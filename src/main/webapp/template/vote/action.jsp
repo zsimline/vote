@@ -77,7 +77,7 @@
   <span class="hidden" id="aid">${aid}</span>
   <span class="hidden" id="aid">${activity.maximum}</span>
 
-  <script src="/js/action.js"></script>
+  <script src="/js/action.js?v=0.0.7"></script>
 
   <div class="footer"></div>
   <%@ include file="../components/modal.jsp" %>

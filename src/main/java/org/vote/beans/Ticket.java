@@ -1,7 +1,7 @@
 package org.vote.beans;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * 投票信息表模型

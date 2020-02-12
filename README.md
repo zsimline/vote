@@ -111,6 +111,7 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待弥补的不足
 
+1. 并发访问问题
 
 ### 待修复的Bug
 

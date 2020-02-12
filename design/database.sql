@@ -95,7 +95,7 @@ CREATE TABLE `wechat` (
 --  `id` INT UNSIGNED AUTO_INCREMENT,   -- 投票ID
 --  `openid` CHAR(28) NOT NULL,                    -- 投票者OpenID
 --  `whom` INT UNSIGNED NOT NULL,           -- 投向条目的ID
---  `timestamp` DATETIME NOT NULL,            -- 投票时间
+--  `timestamp` DATE NOT NULL,                     -- 投票时间
 --  `ip` CHAR(15) NOT NULL,                             -- IP地址
 --  PRIMARY KEY (`id`)
 --)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
@@ -110,7 +110,7 @@ SET @sql_create_table = concat(
   `id` INT UNSIGNED AUTO_INCREMENT,
   `openid` CHAR(28) NOT NULL,
   `whom` INT UNSIGNED NOT NULL,
-  `timestamp` DATETIME NOT NULL,
+  `timestamp` DATE NOT NULL,
   `ip` CHAR(15) NOT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;");

@@ -65,7 +65,7 @@ function handleSelect(id, which) {
     $(which).html('<i class="fa fa-check""></i> 选择');
     $('#tool-box span em').text(`${glStatus.ids.size}`)
   } else if (glStatus.ids.size + 1 > glStatus.maximum) {
-    openModal('error', '超出最多选择的数量');
+    alert('超出最多选择的数量')
   } else {
     glStatus.ids.add(id);
     switchCssClass(which, 'btn-inverse', 'btn-default');
@@ -141,7 +141,12 @@ function handleSubmit() {
 
   postJSON('/api/vote/action',  postData)
     .then(data => {
-      console.log(data);
+      if (!(data.code % 100)) {
+        alert(data.codeDesc)
+        window.location.reload();
+      } else {
+        alert(data.codeDesc);
+      }
     });
 }
 

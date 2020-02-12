@@ -79,4 +79,15 @@ public class Utils {
       return null;
     }
   }
+
+  /**
+   * 获取用户真实IP
+   * 
+   * @param request 请求对象
+   * @return IP地址
+   */
+  public static String getRealIp(HttpServletRequest request) {
+    String[] ips = request.getHeader("x-forwarded-for").split(", ");
+    return ips.length > 0 ?  ips[0]  : "127.0.0.1";
+  }
 }
