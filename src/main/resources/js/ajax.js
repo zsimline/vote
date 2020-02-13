@@ -80,8 +80,9 @@ function postJSON(url, data) {
  * @param {string} type 消息类型
  * @param {string} message 消息内容
  * @param {function} cb 处理关闭模态框
+ * @param {string} title 模态框标题
  */
-function openModal(type, message, cb=()=>{}) {
+function openModal(type, message, cb=()=>{}, title='消息提示') {
   let messageTyped = null;
 
   if (type === 'success') {
@@ -94,5 +95,6 @@ function openModal(type, message, cb=()=>{}) {
   
   $('#commonModalButton').bind('click', cb);
   $('#commonModalBody').html(messageTyped);
+  $('#commonModalLabel').html(title);
   $('#commonModal').modal();
 }

@@ -3,6 +3,7 @@ const glStatus = {
   entrys: [],
   nextPage: 1,
   lock: false,
+  aid: $('#aid').text()
 }
 
 /**
@@ -10,8 +11,12 @@ const glStatus = {
  * 并将获取到条目数据添加到页面中
  */
 function loadMoreEntry() {
-  get(`/api/vote/data_ranking?aid=${$('#aid').text()}&page=${glStatus.nextPage}`)
+  if (glStatus.nextPage === -1) {
+    openModal('success', '已经到底了'); return ;
+  }
+  get(`/api/vote/data_ranking?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
     .then(data => {
+      console.log(data);
       flushEntrys(data);
       appendEntry(data);
       glStatus.nextPage = data.length === 50 ? ++glStatus.nextPage : -1;
@@ -19,6 +24,11 @@ function loadMoreEntry() {
     });
 }
 
+/**
+ * 利用innerHTML的方式添加排名数据到页面中
+ * 
+ * @param {Array} data 条目数组
+ */
 function appendEntry(data) {
   data.forEach(element=> {
     if (element.introduction) {
@@ -38,6 +48,12 @@ function appendEntry(data) {
   });
 }
 
+/**
+ * 将最新获得的条目建立索引
+ * 并将这些数据添加进条目数组总
+ * 
+ * @param {Array} data 请求到的条目数组
+ */
 function flushEntrys(data) {
   let index = glStatus.entrys.length;
   data.forEach(element => {
@@ -55,5 +71,6 @@ function showIntroduction(index) {
   openModal('userdef', glStatus.entrys[index].introduction);
 }
 
-
+// 页面初始化
+glStatus.lock  = true;
 loadMoreEntry();

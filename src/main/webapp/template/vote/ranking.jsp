@@ -17,9 +17,10 @@
 
 <body>
   <div id="container-ranking"></div>
-  <button class="btn btn-success">
-    加载更多
-  </button>
+  <div class="text-center">
+    <button class="btn btn-success" onclick="loadMoreEntry()">加载更多</button>
+  </div>
+
   <span id="aid" class="hidden">${activity.id}</span>
 
   <%@ include file="../components/modal.jsp" %>

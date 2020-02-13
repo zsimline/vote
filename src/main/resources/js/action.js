@@ -113,6 +113,12 @@ function loadMoreEntry() {
     });
 }
 
+/**
+ * 将最新获得的条目建立索引
+ * 并将这些数据添加进条目数组总
+ * 
+ * @param {Array} data 请求到的条目数组
+ */
 function flushEntrys(data) {
   let index = glStatus.entrys.length;
   data.forEach(element => {
