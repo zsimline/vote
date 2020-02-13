@@ -11,7 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <link rel="stylesheet" href="/css/action.css?v=0.0.2">
+  <link rel="stylesheet" href="/css/action.css?v=0.0.3">
   <title>鹿鸣投票-${activity.title}</title>
 </head>
 
@@ -57,11 +57,11 @@
     </div>
 
     <div id="search-box">
-      <input type="text" class="form-control" placeholder="输入标题或编号">
-      <button class="btn btn-success">搜索</button>
+      <input type="text" id="search-content" class="form-control" placeholder="输入标题或编号">
+      <button class="btn btn-success" onclick="searchEntry()">搜索</button>
     </div>
 
-    <div id="container-entry"></div>
+    <div id="entry-container"></div>
 
     <%@ include file="../components/tip.jsp" %>
 
@@ -79,8 +79,9 @@
   <span class="hidden" id="aid">${aid}</span>
   <span class="hidden" id="maximum">${activity.maximum}</span>
 
-  <script src="/js/action.js?v=0.1.0"></script>
+  <script src="/js/action.js?v=0.2.1"></script>
 
+  <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/modal.jsp" %>
 </body>
 

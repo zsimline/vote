@@ -16,6 +16,7 @@ import org.hibernate.Interceptor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
 import org.vote.beans.Activity;
 import org.vote.beans.Entry;
 import org.vote.beans.PostAction;

@@ -49,7 +49,7 @@ function appendEntry(data) {
         <span class="entry-acquisition">${element.acquisition}票</span>
       </div>
     `
-    $('#container-entry').append(template);
+    $('#entry-container').append(template);
   });
 }
 
@@ -105,6 +105,7 @@ $(window).on('scroll', () => {
   }
 });
 
+
 /**
  * 从服务器请求更多的条目数据
  * 并将获取到条目数据添加到页面中
@@ -120,16 +121,27 @@ function loadMoreEntry() {
     });
 }
 
+/**
+ * 
+ */
 function searchEntry() {
-  const number
-  get(`/api/vote/data/entry?aid=${glStatus.aid}&page=1&number=${number}`)
-  .then(data => {
-    flushEntrys(data);
-    appendEntry(data);
-    glStatus.nextPage = data.length === 20 ? ++glStatus.nextPage : -1;
-    glStatus.lock = false;
-    hideTip();
-  });
+  const  searchContent = $('#search-content').val();
+  if (searchContent === '')  {
+    showMsg('error', '搜索内容不能为空', 1500); return ;
+  }
+
+  const searchType = parseInt(searchContent) ? 'number' : 'title';
+  get(`/api/vote/entry/search?aid=${glStatus.aid}&type=${searchType}&content=${searchContent}`)
+    .then(data => {
+      if (data.length == 0) {
+        showMsg('info', '没有查找到相关内容', 1500);
+      } else {
+        glStatus.lock = true;
+        $('#entry-container').empty();
+        flushEntrys(data);
+        appendEntry(data);
+      }
+    });
 }
 
 /**

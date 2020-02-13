@@ -1,6 +1,5 @@
 <div id="message">
   <span id="msg-content"></span>
-  <i class="fa fa-times"></i>
 </div>
 
 <style>
@@ -10,7 +9,7 @@
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
-  min-width: 380px;
+  min-width: 80%;
   font-size: 12px;
   padding: 10px;
   border-radius: 3px;
@@ -43,22 +42,21 @@
   color: #f56c6c;
   background-color: #fef0f0;
 }
-
-.fa-times {
-  color: #CCC;
-  cursor: pointer;
-  float: right;
-}
 </style>
 
 <script>
-  function showMsg(type, content) {
-    $('#message').removeClass().addClass(type)
-    $('#msg-content').html(content);
-    $('#message').addClass('msg-show');
+function showMsg(type, content, delay) {
+  $('#message').removeClass().addClass(type)
+  $('#msg-content').html(content);
+  $('#message').addClass('msg-show');
+  if (delay) {
+    setTimeout(() => {
+      hideMsg();
+    }, delay)
   }
+}
 
-  function hideMsg() {
-    $('#message').removeClass('msg-show');
-  }
+function hideMsg() {
+  $('#message').removeClass('msg-show');
+}
 </script>
