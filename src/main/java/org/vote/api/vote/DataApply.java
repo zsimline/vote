@@ -15,7 +15,7 @@ import org.vote.common.BaseApi;
 /**
  * 获取报名数据
  */
-@WebServlet("/api/vote/data_apply")
+@WebServlet("/api/vote/data/apply")
 public class DataApply extends BaseApi {
   private static final long serialVersionUID = 1L;
 

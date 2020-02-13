@@ -5,6 +5,7 @@ const glStatus = {
   maximum: parseInt($('#maximum').text()),
   nextPage: 1,
   lock: false,
+  aid: $('#aid').text()
 }
 
 /**
@@ -96,6 +97,11 @@ $(window).on('scroll', () => {
   if (offsetTop < 1200 && glStatus.nextPage != -1 && !glStatus.lock) {
     glStatus.lock = true;
     loadMoreEntry();
+    showTip('数据加载中...');
+  } else {
+    if (!glStatus.lock) {
+      showTip('已经到底了～');
+    }
   }
 });
 
@@ -104,13 +110,26 @@ $(window).on('scroll', () => {
  * 并将获取到条目数据添加到页面中
  */
 function loadMoreEntry() {
-  get(`/api/vote/data_entry?aid=${$('#aid').text()}&page=${glStatus.nextPage}`)
+  get(`/api/vote/data/entry?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
     .then(data => {
       flushEntrys(data);
       appendEntry(data);
       glStatus.nextPage = data.length === 20 ? ++glStatus.nextPage : -1;
       glStatus.lock = false;
+      hideTip();
     });
+}
+
+function searchEntry() {
+  const number
+  get(`/api/vote/data/entry?aid=${glStatus.aid}&page=1&number=${number}`)
+  .then(data => {
+    flushEntrys(data);
+    appendEntry(data);
+    glStatus.nextPage = data.length === 20 ? ++glStatus.nextPage : -1;
+    glStatus.lock = false;
+    hideTip();
+  });
 }
 
 /**
@@ -141,7 +160,7 @@ function showIntroduction(index) {
  */
 function handleSubmit() {
   const postData = {
-    aid: $('#aid').text(),
+    aid: glStatus.aid,
     ids: Array.from(glStatus.ids)
   }
 

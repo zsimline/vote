@@ -64,7 +64,7 @@ const tbOpts = {
 }
 
 function fetchTableData() {
-  get(`/api/vote/data_entry?aid=${$('#aid').text()}&page=${$('#page').text()}`)
+  get(`/api/vote/data/entry?aid=${$('#aid').text()}&page=${$('#page').text()}`)
     .then(data => {
       initTableData(data);
       initTable(tableData);
@@ -170,7 +170,7 @@ function freeze(which) {
   const rowData = tableData[index];
   tbOpts.activeTr = index;
 
-  get(`/api/vote/freeze?aid=${$('#aid').text()}&id=${rowData.id}`)
+  get(`/api/vote/entry/freeze?aid=${$('#aid').text()}&id=${rowData.id}`)
     .then(data => {
       if (!data.code) {
         flushTable(data);

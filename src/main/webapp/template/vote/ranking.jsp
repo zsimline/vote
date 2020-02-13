@@ -11,14 +11,15 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <link rel="stylesheet" href="/css/ranking.css">
+  <link rel="stylesheet" href="/css/action.css?v=0.0.2">
   <title>${activity.title}-排名</title>
 </head>
 
 <body>
   <div id="container-ranking"></div>
+  <%@ include file="../components/tip.jsp" %>
   <div class="text-center">
-    <button class="btn btn-success" onclick="loadMoreEntry()">加载更多</button>
+    <button class="btn btn-success btn-load" onclick="loadMoreEntry()">加载更多</button>
   </div>
 
   <span id="aid" class="hidden">${activity.id}</span>

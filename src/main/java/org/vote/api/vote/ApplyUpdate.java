@@ -16,7 +16,7 @@ import java.lang.NumberFormatException;
 /**
  * 处理更新报名信息
  */
-@WebServlet("/api/vote/apply_update")
+@WebServlet("/api/vote/apply/update")
 public class ApplyUpdate extends BaseApi {
   private static final long serialVersionUID = 1L;
 

@@ -18,7 +18,7 @@ import org.vote.beans.Entry;
 import org.vote.common.BaseApi;
 import org.vote.common.HibernateUtil;
 
-@WebServlet("/api/vote/data_ranking")
+@WebServlet("/api/vote/data/ranking")
 public class DataRanking extends BaseApi {
   private static final long serialVersionUID = 1L;
 

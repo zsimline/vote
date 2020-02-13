@@ -15,11 +15,11 @@ import org.vote.common.BaseApi;
 /**
  * 处理审核报名
  */
-@WebServlet("/api/vote/review")
-public class Review extends BaseApi {
+@WebServlet("/api/vote/apply/review")
+public class ApplyReview extends BaseApi {
   private static final long serialVersionUID = 1L;
 
-  public Review() {
+  public ApplyReview() {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

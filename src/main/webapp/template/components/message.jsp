@@ -1,25 +1,27 @@
-<div v-show="show" class="message" v-bind:class="type">
-  <span></span>
-  <i class="fa fa-times" v-on:click="close"></i>
+<div id="message">
+  <span id="msg-content"></span>
+  <i class="fa fa-times"></i>
 </div>
 
 <style>
-.message {
+#message {
   position: fixed;
-  top: 1rem;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
+  opacity: 0;
   min-width: 380px;
-  font-size: 0.7rem;
-  padding: 0.6rem;
+  font-size: 12px;
+  padding: 10px;
   border-radius: 3px;
   border: solid 1px #ebccd1;
   transition: all .3s;
-  z-index: 1001;
+  z-index: 1000;
 }
 
-.message span {
-  margin-left: 5px;
+.msg-show {
+  top: 50px !important;
+  opacity: 1 !important;
 }
 
 .success {
@@ -29,7 +31,7 @@
 
 .info {
   color: #31708f;
-  background-color:#d9edf7;
+  background-color: #d9edf7;
 }
 
 .warning {
@@ -47,10 +49,16 @@
   cursor: pointer;
   float: right;
 }
-
-.message-fade-enter,
-.message-fade-leave-to {
-  opacity: 0;
-  top: 0px;
-}
 </style>
+
+<script>
+  function showMsg(type, content) {
+    $('#message').removeClass().addClass(type)
+    $('#msg-content').html(content);
+    $('#message').addClass('msg-show');
+  }
+
+  function hideMsg() {
+    $('#message').removeClass('msg-show');
+  }
+</script>

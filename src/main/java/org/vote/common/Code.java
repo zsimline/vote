@@ -74,7 +74,6 @@ public class Code {
     codes.put(2007, "超过最多选择的数量"); 
     codes.put(2008, "条目信息异常"); 
 
-
     // 文件上传功能返回码
     codes.put(3000, "文件上传成功");
     codes.put(3001, "文件上传失败原因未知");

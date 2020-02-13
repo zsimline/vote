@@ -14,7 +14,7 @@ import org.vote.common.Utils;
 /**
  * 处理活动报名
  */
-@WebServlet("/api/vote/apply")
+@WebServlet("/api/vote/apply/single")
 public class ApplySingle extends BaseApi {
   private static final long serialVersionUID = 1L;
 

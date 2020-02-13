@@ -56,7 +56,7 @@ const tbOpts = {
 }
 
 function fetchTableData() {
-  get(`/api/vote/data_apply?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${$('#page').text()}`)
+  get(`/api/vote/data/apply?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${$('#page').text()}`)
     .then(data => {
       initTableData(data);
       initTable(tableData);
@@ -268,7 +268,7 @@ function validateApplyOptions() {
  * @param {string} id
  */
 function uploadUpadteData(id) {
-  postJSON(`/api/vote/apply_update?aid=${$('#aid').text()}&id=${id}`, validateFactory.postData)
+  postJSON(`/api/vote/apply/update?aid=${$('#aid').text()}&id=${id}`, validateFactory.postData)
     .then(data => {
       if (!data.code) {
         flushTable(data);
@@ -285,7 +285,7 @@ function uploadUpadteData(id) {
  * 上传新增报名数据
  */
 function uploadAppendData() {
-  postJSON(`/api/vote/apply?aid=${$('#aid').text()}`, validateFactory.postData)
+  postJSON(`/api/vote/apply/single?aid=${$('#aid').text()}`, validateFactory.postData)
     .then(data => {
       if (!data.code) {
         flushTable(data, true);
@@ -446,7 +446,7 @@ function review(which, status) {
   const index = tr.children().first().text();
   const rowData = tableData[index];
 
-  get(`/api/vote/review?aid=${$('#aid').text()}&id=${rowData.id}&status=${status}`)
+  get(`/api/vote/apply/review?aid=${$('#aid').text()}&id=${rowData.id}&status=${status}`)
     .then(data => {
       if (!(data.code % 100)) {
         tableData.splice(index, 1);

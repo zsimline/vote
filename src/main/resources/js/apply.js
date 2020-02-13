@@ -159,7 +159,7 @@ validateFactory.functions = [
  * @param {Object} postData 报名数据
  */
 function uploadPostData(postData) {
-  postJSON(`/api/vote/apply?aid=${$('#aid').text()}`, postData)
+  postJSON(`/api/vote/apply/single?aid=${$('#aid').text()}`, postData)
   .then(data => {
     if (!data.code) {
       console.log(data);

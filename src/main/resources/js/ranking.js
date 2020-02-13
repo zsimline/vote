@@ -12,15 +12,22 @@ const glStatus = {
  */
 function loadMoreEntry() {
   if (glStatus.nextPage === -1) {
-    openModal('success', '已经到底了'); return ;
+    alert('没有更多数据了'); return ; 
   }
-  get(`/api/vote/data_ranking?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
+  showTip('数据加载中...');
+
+  get(`/api/vote/data/ranking?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
     .then(data => {
-      console.log(data);
       flushEntrys(data);
       appendEntry(data);
-      glStatus.nextPage = data.length === 50 ? ++glStatus.nextPage : -1;
       glStatus.lock = false;
+      if (data.length === 50) {
+        ++glStatus.nextPage;
+        hideTip();
+      } else {
+        glStatus.nextPage = -1;
+        showTip('已经到底了～');
+      }
     });
 }
 
@@ -32,15 +39,15 @@ function loadMoreEntry() {
 function appendEntry(data) {
   data.forEach(element=> {
     if (element.introduction) {
-      var htmlTitle = `<span class="entry-title" onclick="showIntroduction(${element.index})">${element.number}. ${element.title}</span>`
+      var htmlTitle = `<span class="ranking-title" onclick="showIntroduction(${element.index})">${element.number}. ${element.title}</span>`
     } else {
-      var htmlTitle = `<span class="entry-title">${element.number}. ${element.title}</span>`
+      var htmlTitle = `<span class="ranking-title">${element.number}. ${element.title}</span>`
     }
 
     const template = `<div class="ranking">
       <span class="rid rid-color-${element.index % 7}">${element.index + 1}</span>
       ${htmlTitle}
-      <span class="entry-acquisition">取得 ${element.acquisition} 票</span>
+      <span class="ranking-acquisition">取得 ${element.acquisition} 票</span>
       </div>
     `
 

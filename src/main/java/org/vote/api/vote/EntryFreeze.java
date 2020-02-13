@@ -13,11 +13,11 @@ import org.vote.common.BaseApi;
 /**
  * 处理审核报名
  */
-@WebServlet("/api/vote/freeze")
-public class Freeze extends BaseApi {
+@WebServlet("/api/vote/entry/freeze")
+public class EntryFreeze extends BaseApi {
   private static final long serialVersionUID = 1L;
 
-  public Freeze() {
+  public EntryFreeze() {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

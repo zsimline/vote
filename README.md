@@ -105,8 +105,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待开发
 
-11. 排名功能完善
-
 12. 投票页搜索功能
 
 13. 禁止已冻结条目显示
@@ -130,6 +128,8 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 20. 管理员功能
  - 冻结用户
  - 删除活动
+
+21. 链接与二维码页增加报名页面二维码
 
 ### 待弥补的不足
 

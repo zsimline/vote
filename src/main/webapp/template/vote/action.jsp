@@ -11,7 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <link rel="stylesheet" href="/css/action.css">
+  <link rel="stylesheet" href="/css/action.css?v=0.0.2">
   <title>鹿鸣投票-${activity.title}</title>
 </head>
 
@@ -63,6 +63,8 @@
 
     <div id="container-entry"></div>
 
+    <%@ include file="../components/tip.jsp" %>
+
     <footer>
       由<a href="http://vote.zizaixian.top">鹿鸣投票</a>提供技术支持
     </footer>
@@ -77,9 +79,8 @@
   <span class="hidden" id="aid">${aid}</span>
   <span class="hidden" id="maximum">${activity.maximum}</span>
 
-  <script src="/js/action.js?v=0.0.8"></script>
+  <script src="/js/action.js?v=0.1.0"></script>
 
-  <div class="footer"></div>
   <%@ include file="../components/modal.jsp" %>
 </body>
 

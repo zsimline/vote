@@ -13,11 +13,11 @@ import org.vote.beans.Activity;
 /**
  * 处理删除活动
  */
-@WebServlet("/api/vote/remove")
-public class Remove extends BaseApi {
+@WebServlet("/api/vote/activity/remove")
+public class ActivityRemove extends BaseApi {
   private static final long serialVersionUID = 1L;
 
-  public Remove() {
+  public ActivityRemove() {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

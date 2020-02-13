@@ -14,7 +14,7 @@ import org.vote.common.BaseApi;
 /**
  * 获取报名数据
  */
-@WebServlet("/api/vote/data_entry")
+@WebServlet("/api/vote/data/entry")
 public class DataEntry extends BaseApi {
   private static final long serialVersionUID = 1L;
 
@@ -33,15 +33,15 @@ public class DataEntry extends BaseApi {
    */
   private List<?> fetchEntrys(HttpServletRequest request) {
     String aid = request.getParameter("aid");
-    int page = Integer.valueOf(request.getParameter("page"));
-    
-  
-  //  return  Collections.emptyList();
+    int page = 1;
+    try {
+      page = Integer.valueOf(request.getParameter("page"));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-    String[] keys = { "aid" };
+    String[] keys = {"aid"};
     Object[] values = { aid };
-
     return paginationQuery(Entry.class, keys, values, page, 20);
   }
 }
-// 

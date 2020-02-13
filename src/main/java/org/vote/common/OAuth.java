@@ -6,6 +6,9 @@ import com.google.gson.JsonSyntaxException;
 import org.vote.beans.AuthInfo;
 import org.vote.beans.Wechat;
 
+/**
+ * 微信认证工具
+ */
 public class OAuth {
   // 微信公众号AppId
   private static final String appid = "wx009793a980bbfa74";
