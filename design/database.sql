@@ -36,8 +36,8 @@ CREATE TABLE `activity`
   `sum_visited` INT UNSIGNED DEFAULT 0,         -- 访问总数
   `img_main` CHAR(56) DEFAULT NULL,             -- 宣传图片名
   `options` VARCHAR(300) NOT NULL,              -- 其它必填项
-  `can_apply` TINYINT(1) DEFAULT 0,             -- 能否报名
-  `destroyed` TINYINT(1) DEFAULT 0,             -- 是否销毁
+  `external_apply` TINYINT(1) DEFAULT 0,         -- 能否报名
+  `destroyed` TINYINT(1) DEFAULT 0,                 -- 是否销毁
   PRIMARY KEY(`id`),
   CHECK(`maxium` < 101)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

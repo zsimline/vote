@@ -79,7 +79,7 @@
   <span class="hidden" id="aid">${aid}</span>
   <span class="hidden" id="maximum">${activity.maximum}</span>
 
-  <script src="/js/action.js?v=0.2.1"></script>
+  <script src="/js/action.js?v=0.2.5"></script>
 
   <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/modal.jsp" %>

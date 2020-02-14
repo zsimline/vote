@@ -60,6 +60,9 @@ public class Activity implements Serializable {
   // 是否销毁
   private boolean destroyed;
 
+  // 是够允许外部报名
+  private boolean externalApply;
+
   public Activity() {
     this.sumEntry = 0;
     this.sumVoted = 0;
@@ -290,6 +293,20 @@ public class Activity implements Serializable {
    */
   public void setOptions(String options) {
     this.options = options;
+  }
+
+  /**
+   * @return externalApply
+   */
+  public boolean getExternalApply() {
+    return externalApply;
+  }
+
+  /**
+   * @param externalApply 要设置的 externalApply
+   */
+  public void setExternalApply(boolean externalApply) {
+    this.externalApply = externalApply;
   }
 
   /**

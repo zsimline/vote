@@ -74,12 +74,12 @@
     <hr>
     <%@ include file="../components/tinymce.jsp" %>
 
-    <h5>报名设置</h5>
+    <h5>高级设置</h5>
     <hr>
     <div class="apply-options">
-      <label for="name">禁止外部人员报名</label>
+      <label for="name">允许外部人员报名</label>
       <div class="switch">
-        <input id="c" type="checkbox">
+        <input id="external-apply" type="checkbox" checked>
       </div>
     </div>
 
@@ -102,9 +102,10 @@
       $('#apply-time-end').datetimepicker(options);
     });
   </script>
-
+  
   <script src="/js/publish.js"></script>
-  <%@ include file="../components/modal.jsp" %>
+
+  <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>
 

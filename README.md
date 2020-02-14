@@ -105,8 +105,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待开发
 
-13. 禁止已冻结条目显示与报名
-
 14. 结果与日志功能
 
 15. 编辑功能
@@ -133,13 +131,13 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 1. 并发访问问题
 
-3. 搜索页面显示单个条目时错位
-
-3. 搜索页面不能回退
+2. 搜索页面不能回退
 
 ### 待修复的Bug
 
 1. 报名信息存在被非法修改的可能
+
+2. 搜索页面显示单个条目时错位
 
 
 ## 平台规则与系统限制

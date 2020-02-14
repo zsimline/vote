@@ -69,8 +69,8 @@ public class BaseApi extends HttpServlet {
    * 执行数据库操作
    * 
    * @param hql 操作语句
-   * @param name 
-   * @param val
+   * @param name 查询参数
+   * @param val 参数值
    * @return  操作执行成功/失败
    */
   protected boolean dbExcute(String hql, String name, String val) {

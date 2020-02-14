@@ -41,7 +41,9 @@ public class Manage extends BaseView {
    */
   @SuppressWarnings("unchecked")
   private List<Activity> getActivitysByPublisher(long uid) {
-    List<?>  activitys =  conditionQuery(Activity.class, "publisher", uid);   
+    String[] keys = {"publisher", "destroyed"};
+    Object[] values = {uid, false};
+    List<?>  activitys =  conditionQuery(Activity.class, keys, values);
     return (List<Activity>) activitys;
   }
 }

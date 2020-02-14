@@ -73,8 +73,8 @@ public class Action extends BaseApi {
   
     for(long id : ids)  {
       Entry entry = (Entry) getInstanceById(Entry.class, id);
-      if (entry == null || !entry.getAid().equals(aid)) {
-        complete(response, 2008);
+      if (entry == null || !entry.getAid().equals(aid) || entry.getIsFreeze()) {
+        complete(response, 2008); return ;
       } else {
         entry.setAcquisition(entry.getAcquisition() + 1);
         activity.setSumVoted(++sumVoted);

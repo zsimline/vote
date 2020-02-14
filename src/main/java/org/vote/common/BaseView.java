@@ -170,6 +170,36 @@ public class BaseView extends HttpServlet {
       }
     }
   }
+
+  /**
+   * 按条件查询
+   * 
+   * @param clazz   实例类
+   * @param keys    条件名集合
+   * @param values 条件值集合
+   * @return 查询结果集
+   */
+  protected List<?> conditionQuery(Class<?> clazz, String[] keys, Object[] values) {
+    Session session = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+
+      // 创建条件容器并附加条件
+      Criteria criteria = session.createCriteria(clazz);  
+      for (int i = 0; i < keys.length; i++) {
+        criteria.add(Restrictions.eq(keys[i], values[i]));
+      }
+
+      return criteria.list();
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return Collections.emptyList();
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+  }
   
   /**
    * 按条件统计行数

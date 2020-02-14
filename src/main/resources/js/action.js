@@ -31,6 +31,7 @@ function switchSummaryShow(which) {
  */
 function appendEntry(data) {
   data.forEach(element=> {
+    if (element.isFreeze) return ;
     if (element.introduction) {
       var htmlTitle = `<h3 class="entry-title" onclick="showIntroduction(${element.index})">${element.number}. ${element.title}</h3>`;
       var htmlImgEntry = element.imgEntry ? `<img src="${element.imgEntry}" onclick="showIntroduction(${element.index})">`  : `<img src="${element.imgEntry}">`;
@@ -122,7 +123,7 @@ function loadMoreEntry() {
 }
 
 /**
- * 
+ * 搜索条目
  */
 function searchEntry() {
   const  searchContent = $('#search-content').val();
