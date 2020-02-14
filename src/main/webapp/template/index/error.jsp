@@ -39,7 +39,7 @@
     <div class="error-box">
       <h1>抱歉，找不到此页面~</h1>
       <h5>Sorry, the site now can not be accessed.</h5>
-      <p>你请求访问的页面，暂时找不到，我们建议你返回首页官网进行浏览，谢谢！</p>
+      <p>你请求访问的页面，暂时找不到，我们建议你返回官网首页进行浏览，谢谢！</p>
     </div>
   </div>
   <%@ include file="../components/footer.jsp" %>

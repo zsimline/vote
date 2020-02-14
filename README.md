@@ -115,8 +115,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
  - 用户注销功能
  - 身份过期检验
 
-17. 禁止外部报名功能
-
 18. 阐述理由功能
 
 19. 礼物功能
@@ -126,6 +124,10 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
  - 删除活动
 
 21. 链接与二维码页增加报名页面二维码
+
+22. 记录投票页访问总数
+
+23. 报名时间与投票时间控制
 
 ### 待弥补的不足
 
@@ -138,6 +140,8 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 1. 报名信息存在被非法修改的可能
 
 2. 搜索页面显示单个条目时错位
+
+3. 各个页面存在重复提交的漏洞
 
 
 ## 平台规则与系统限制

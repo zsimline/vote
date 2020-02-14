@@ -11,7 +11,7 @@ import org.vote.common.BaseView;
 import org.vote.beans.Activity;
 
 /**
- * 显示创建投票页面
+ * 显示报名页面
  */
 @WebServlet("/vote/apply")
 public class Apply extends BaseView {
@@ -20,8 +20,12 @@ public class Apply extends BaseView {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
-    request.setAttribute("aid", aid);
-    request.setAttribute("options", activity.getOptions().split(","));
-    render(request, response, "/template/vote/apply.jsp");
+    if (activity != null && activity.getExternalApply()) {
+      request.setAttribute("aid", aid);
+      request.setAttribute("options", activity.getOptions().split(","));
+      render(request, response, "/template/vote/apply.jsp");
+    } else {
+      response.sendRedirect("/index/error");
+    }
   }
 }

@@ -23,7 +23,7 @@
     <c:forEach items="${activitys}" var="activity">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">测试投票</h3>
+          <h3 class="panel-title">${activity.title}</h3>
         </div>
         <div class="panel-body">
           <a class="btn btn-primary" href="/vote/edit?aid=${activity.id}">编辑</a>
@@ -46,6 +46,6 @@
       </div>
     </c:forEach>
   </div>
-  <%@ include file="../components/modal.jsp" %>
+  <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>

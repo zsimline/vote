@@ -6,18 +6,20 @@ function deleteActivity(aid) {
   const status = confirm("您确定删除此投票吗？此操作不可逆！！！");
 
   if (status) {
+    showMsg('info', '正在删除此投票...', -1);
     get(`/api/vote/activity/remove?aid=${aid}`)
       .then(data => {
         if (!(data.code % 100)) {
-          openModal('success', '删除投票成功', () => {
+          showMsg('success', data.codeDesc);
+          setTimeout(() => {
             window.location.reload();
-          });
+          },0)
         } else {
-          openModal('error', data.codeDesc);
+          showMsg('error', data.codeDesc);
         }
       })
       .catch(err => {
-        openModal('error', '删除投票失败')
+        console.error(err);
       });
   }
 }

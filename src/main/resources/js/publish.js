@@ -1,8 +1,15 @@
+// 全局状态量
+const glStatus = {
+  lock: false
+}
+
 /**
  * 处理创建投票
  * 获取表单数据并校验
  */
 function handleSubmit() {
+  if (glStatus.lock) return ;
+
   // 判断用户是够勾选同意协议
   if (!$('#lisence').is(':checked')) {
     showMsg('error', '请勾选[我同意投票服务条款]');
@@ -12,6 +19,7 @@ function handleSubmit() {
   // 校验各个表单成功后
   // 上传表单中的数据
   if (validateFactory.validate()) {
+    glStatus.lock = true;
     uploadFile($('#img-main').prop('files')[0])
       .then(fileUrl => {
         validateFactory.postData.imgMain = fileUrl;
@@ -189,6 +197,7 @@ function uploadPostData(postData) {
           window.location.href = '/vote/manage';
         },800)
       } else {
+        glStatus.lock = false;
         showMsg('error', data.codeDesc);
       }
     })
@@ -248,6 +257,7 @@ function uploadFile(file) {
         if (!(data.code % 100)) {
           resolve(data.codeDesc);
         } else {
+          glStatus.lock = false;
           reject(data.codeDesc);
         }
       })

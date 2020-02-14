@@ -67,6 +67,7 @@ public class Activity implements Serializable {
     this.sumEntry = 0;
     this.sumVoted = 0;
     this.sumVisited = 0;
+    this.externalApply = false;
     this.destroyed = false;
   }
 
