@@ -12,6 +12,8 @@
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
   <link rel="stylesheet" href="/css/manage.css">
+  <link rel="stylesheet" href="/css/action.css">
+  <script src="/js/echarts-4.6.0.min.js"></script>
   <title>结果汇总</title>
 </head>
 
@@ -37,7 +39,20 @@
     </ul>
 
     <br>
-    
+
+    <div id="container-ranking"></div>
+    <%@ include file="../components/tip.jsp" %>
+    <div class="text-center">
+      <button class="btn btn-success btn-load" onclick="loadMoreEntry()">加载更多</button>
+    </div>
+
+    <span id="aid" class="hidden">${aid}</span>
+
+    <div id="main" style="width: 600px;height:400px;"></div>
+
+    <%@ include file="../components/modal.jsp" %>
+    <script src="/js/ranking.js"></script>
+    <script src="/js/gather.js"></script>
   </div>
   <%@ include file="../components/footer.jsp" %>
 </body>

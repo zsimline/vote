@@ -75,7 +75,7 @@ function flushEntrys(data) {
  * @param {id} index 条目索引
  */
 function showIntroduction(index) {
-  openModal('userdef', glStatus.entrys[index].introduction);
+  openModal('userdef', glStatus.entrys[index].introduction, glStatus.entrys[index].title);
 }
 
 // 页面初始化

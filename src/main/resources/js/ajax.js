@@ -79,10 +79,10 @@ function postJSON(url, data) {
  *
  * @param {string} type 消息类型
  * @param {string} message 消息内容
- * @param {function} cb 处理关闭模态框
  * @param {string} title 模态框标题
+ * @param {function} cb 处理关闭模态框
  */
-function openModal(type, message, cb=()=>{}, title='消息提示') {
+function openModal(type, message,  title='消息提示', cb=()=>{}) {
   let messageTyped = null;
 
   if (type === 'success') {

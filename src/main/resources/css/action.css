@@ -109,7 +109,8 @@
   align-items: center;
 }
 
-#tool-box span,a {
+#tool-box span,
+#tool-box a {
   flex: 0 0 25%;
   font-size: 14px;
 }
@@ -169,6 +170,7 @@ footer {
 .ranking-title {
   flex: 0 0 60%;
   padding: 0px 15px;
+  cursor: pointer;
 }
 
 .btn-load {

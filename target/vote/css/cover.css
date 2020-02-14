@@ -57,7 +57,7 @@ h4 {
 }
 
 .modal-header .close {
-  margin-top: -26px;
+  margin-top: -40px;
   font-size: 24px;
   outline: none;
 }
@@ -104,4 +104,8 @@ input[type="file"] {
 /*! 报名页样式 */
 .radio {
   display: inline-block;
+}
+
+.modal-title {
+  margin-top: 0px !important;
 }
