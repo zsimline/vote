@@ -105,8 +105,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待开发
 
-15. 编辑功能
-
 16. 用户功能完善
  - 注册/登录页框线颜色
  - 主页登录状态切换

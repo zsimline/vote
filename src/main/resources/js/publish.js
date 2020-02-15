@@ -131,10 +131,10 @@ function validateBaseConfig() {
 /**
  * 校验高级设置
  */
-function validateExtendConfig() {
-  // 获取高级配置数据
-  const externalApply = $('#external-apply').is(':checked');
-  this.postData.externalApply = externalApply;
+function validateAdvancedConfig() {
+  this.postData.externalApply = $('#external-apply').is(':checked');
+  this.postData.explainReason = $('#explain-reason').is(':checked');
+  this.postData.havePrize = $('#have-prize').is(':checked');
   return true;
 }
 
@@ -292,6 +292,8 @@ const validateFactory = {
     applyTimeEnd: null,
     summary: null,
     externalApply: null,
+    explainReason: null,
+    havePrize: null,
     options: null,
   },
   validate: function() {
@@ -307,7 +309,7 @@ const validateFactory = {
 validateFactory.functions = [
   validateBaseConfig.bind(validateFactory),
   validateTime.bind(validateFactory),
-  validateExtendConfig.bind(validateFactory),
+  validateAdvancedConfig.bind(validateFactory),
   validateImgMain.bind(validateFactory),
 ];
 

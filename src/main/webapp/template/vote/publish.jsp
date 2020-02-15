@@ -76,16 +76,28 @@
 
     <h5>高级设置</h5>
     <hr>
-    <div class="apply-options">
-      <label for="name">允许外部人员报名</label>
+    <div class="advanced-config">
+      <label for="external-apply">允许外部人员报名</label>
       <div class="switch">
         <input id="external-apply" type="checkbox" checked>
+      </div>
+    </div>
+    <div class="advanced-config">
+      <label for="explain-reason">投票时需阐述理由</label>
+      <div class="switch">
+        <input id="explain-reason" type="checkbox">
+      </div>
+    </div>
+    <div class="advanced-config">
+      <label for="have-prize">是否是有奖投票</label>
+      <div class="switch">
+        <input id="have-prize" type="checkbox">
       </div>
     </div>
 
     <h5>报名选项</h5>
     <hr>
-    <div class="apply-options">
+    <div id="options-container">
       <label for="img-entry">参赛图片</label>
       <div class="switch switch-square">
         <input id="img-entry" type="checkbox" data-index="0" checked>
@@ -100,7 +112,7 @@
     <%@ include file="../components/lisence.jsp" %>
     <button class="btn btn-primary" onclick="handlePublish()">　发布投票　</button>
   </div>
-  
+
   <script src="/js/publish.js"></script>
 
   <%@ include file="../components/message.jsp" %>

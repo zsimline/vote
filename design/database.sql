@@ -1,4 +1,4 @@
--- Luming Vote System
+-- Luming Remote Voting System
 
 CREATE DATABASE `vote`;
 USE vote;
@@ -37,6 +37,8 @@ CREATE TABLE `activity`
   `img_main` CHAR(56) DEFAULT NULL,             -- 宣传图片名
   `options` VARCHAR(300) NOT NULL,              -- 其它必填项
   `external_apply` TINYINT(1) DEFAULT 0,         -- 是否允许外部报名
+  `explain_reason` TINYINT(1) DEFAULT 0,         -- 投票时需阐述理由
+  `have_prize` TINYINT(1) DEFAULT 0,                -- 是否添加礼物
   `destroyed` TINYINT(1) DEFAULT 0,                 -- 是否销毁
   PRIMARY KEY(`id`),
   CHECK(`maxium` < 101)

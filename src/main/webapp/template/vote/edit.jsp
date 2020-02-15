@@ -108,8 +108,7 @@
 
     <h5>高级设置</h5>
     <hr>
-
-    <div class="apply-options">
+    <div class="advanced-config">
       <label for="name">允许外部人员报名</label>
       <div class="switch">
         <c:choose>
@@ -122,10 +121,36 @@
         </c:choose>
       </div>
     </div>
+    <div class="advanced-config">
+      <label for="name">投票时需阐述理由</label>
+      <div class="switch">
+        <c:choose>
+          <c:when test="${activity.explainReason}">
+              <input id="explain_reason" type="checkbox" checked>
+            </c:when>
+            <c:otherwise>
+              <input id="explain_reason" type="checkbox">
+            </c:otherwise>
+        </c:choose>
+      </div>
+    </div>
+    <div class="advanced-config">
+      <label for="name">是否是有奖投票</label>
+      <div class="switch">
+        <c:choose>
+          <c:when test="${activity.havePrize}">
+              <input id="have_prize" type="checkbox" checked>
+            </c:when>
+            <c:otherwise>
+              <input id="have_prize" type="checkbox">
+            </c:otherwise>
+        </c:choose>
+      </div>
+    </div>
 
     <h5>报名选项</h5>
     <hr>
-    <div class="apply-options">
+    <div id="options-container">
       <label for="img-entry">参赛图片</label>
       <div class="switch switch-square">
         <input id="img-entry" type="checkbox" data-index="0">
