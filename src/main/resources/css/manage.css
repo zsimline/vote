@@ -134,3 +134,14 @@
 #status-filter .radio {
   margin-right: 20px;
 }
+
+#charts {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+#charts > div {
+  flex: 0 0 50%;
+  height: 400px;
+}

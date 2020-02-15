@@ -13,13 +13,13 @@ import org.vote.common.TableNameMappingInterceptor;
 /**
  * 获取与性别相关的统计数据
  */
-@WebServlet("/api/gather/by_timestamp")
-public class ByTimestamp extends BaseGather {
+@WebServlet("/api/gather/by_date")
+public class ByDate extends BaseGather {
   private static final long serialVersionUID = 1L;
 
   private String sql;
 
-  public ByTimestamp() {
+  public ByDate() {
     this.sql = "select `timestamp`,count(`timestamp`) from `ticket` group by `timestamp`";
   }
 

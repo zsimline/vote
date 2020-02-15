@@ -1,12 +1,23 @@
+// 名称映射
+const nameMap = {
+  sex: {
+    1: '男',
+    2: '女',
+    0: '未知'
+  },
+  province: {
+    'Zhejiang': '浙江',
+    'Hebei': '河北'
+  }
+}
 
-
+/**
+ * 画投票者性别比例图
+ */
 function gatherSex() {
-  var data = genData(50);
-
-  option = {
+  const chartOpts = {
     title: {
-      text: '同名数量统计',
-      subtext: '纯属虚构',
+      text: '投票者性别统计',
       left: 'center'
     },
     tooltip: {
@@ -16,20 +27,18 @@ function gatherSex() {
     legend: {
       type: 'scroll',
       orient: 'vertical',
-      right: 10,
+      right: 30,
       top: 20,
       bottom: 20,
-      data: data.legendData,
-
-      selected: data.selected
+      data: [],
     },
     series: [
       {
-        name: '姓名',
+        name: '性别',
         type: 'pie',
         radius: '55%',
         center: ['40%', '50%'],
-        data: data.seriesData,
+        data: [],
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
@@ -41,44 +50,145 @@ function gatherSex() {
     ]
   };
 
-  
-  var myChart = echarts.init(document.getElementById('main'));
-  myChart.setOption(option);
+  get(`/api/gather/by_sex?aid=${glStatus.aid}`)
+    .then(data => {
+      data.forEach(element => {
+        let sex = {
+          name: nameMap.sex[element[0]],
+          value: element[1]
+        };
+        chartOpts.legend.data.push(sex.name);
+        chartOpts.series[0].data.push(sex);
+        const chart = echarts.init($('#gather-sex')[0]);
+        chart.setOption(chartOpts);
+      });
+    })
 }
 
-function genData(count) {
-  var nameList = [
-      '赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '褚', '卫', '蒋', '沈', '韩', '杨', '朱', '秦', '尤', '许', '何', '吕', '施', '张', '孔', '曹', '严', '华', '金', '魏', '陶', '姜', '戚', '谢', '邹', '喻', '柏', '水', '窦', '章', '云', '苏', '潘', '葛', '奚', '范', '彭', '郎', '鲁', '韦', '昌', '马', '苗', '凤', '花', '方', '俞', '任', '袁', '柳', '酆', '鲍', '史', '唐', '费', '廉', '岑', '薛', '雷', '贺', '倪', '汤', '滕', '殷', '罗', '毕', '郝', '邬', '安', '常', '乐', '于', '时', '傅', '皮', '卞', '齐', '康', '伍', '余', '元', '卜', '顾', '孟', '平', '黄', '和', '穆', '萧', '尹', '姚', '邵', '湛', '汪', '祁', '毛', '禹', '狄', '米', '贝', '明', '臧', '计', '伏', '成', '戴', '谈', '宋', '茅', '庞', '熊', '纪', '舒', '屈', '项', '祝', '董', '梁', '杜', '阮', '蓝', '闵', '席', '季', '麻', '强', '贾', '路', '娄', '危'
-  ];
-  var legendData = [];
-  var seriesData = [];
-  var selected = {};
-  for (var i = 0; i < count; i++) {
-      name = Math.random() > 0.65
-          ? makeWord(4, 1) + '·' + makeWord(3, 0)
-          : makeWord(2, 1);
-      legendData.push(name);
-      seriesData.push({
-          name: name,
-          value: Math.round(Math.random() * 100000)
-      });
-      selected[name] = i < 6;
-  }
-
-  return {
-      legendData: legendData,
-      seriesData: seriesData,
-      selected: selected
+/**
+ * 画投票者省份分布图
+ */
+function gatherProvince() {
+  const chartOpts = {
+    title: {
+      text: '投票者省份统计',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: '{a} <br/>{b} : {c} ({d}%)'
+    },
+    legend: {
+      type: 'scroll',
+      orient: 'vertical',
+      right: 30,
+      top: 20,
+      bottom: 20,
+      data: [],
+    },
+    series: [
+      {
+        name: '性别',
+        type: 'pie',
+        radius: ['50%', '70%'],
+        avoidLabelOverlap: false,
+        label: {
+          normal: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            show: true,
+            textStyle: {
+              fontSize: '30',
+              fontWeight: 'bold'
+            }
+          }
+        },
+        labelLine: {
+          normal: {
+            show: false
+          }
+        },
+        data: [],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
   };
 
-  function makeWord(max, min) {
-      var nameLen = Math.ceil(Math.random() * max + min);
-      var name = [];
-      for (var i = 0; i < nameLen; i++) {
-          name.push(nameList[Math.round(Math.random() * nameList.length - 1)]);
+  get(`/api/gather/by_province?aid=${glStatus.aid}`)
+    .then(data => {
+      data.forEach(element => {
+        let province = {
+          name: nameMap.province[element[0]],
+          value: element[1]
+        };
+        chartOpts.legend.data.push(province.name);
+        chartOpts.series[0].data.push(province);
+        window.chartOpts = chartOpts;
+        const chart = echarts.init($('#gather-province')[0]);
+        chart.setOption(chartOpts);
+      });
+    })
+}
+
+/**
+ * 画关于投票数量的日历图
+ */
+function gatherDate() {
+  const chartOpts = {
+    title: {
+      top: 30,
+      left: 'center',
+      text: '投票日历图'
+    },
+    tooltip: {},
+    visualMap: {
+      min: 0,
+      max: 10000,
+      type: 'piecewise',
+      orient: 'horizontal',
+      left: 'center',
+      top: 65,
+      textStyle: {
+        color: '#000'
       }
-      return name.join('');
-  }
+    },
+    calendar: {
+      top: 120,
+      left: 30,
+      right: 30,
+      cellSize: ['auto', 13],
+      range: '2020',
+      itemStyle: {
+        borderWidth: 0.5
+      },
+      yearLabel: { show: false }
+    },
+    series: {
+      type: 'heatmap',
+      coordinateSystem: 'calendar',
+      data: []
+    }
+  };
+
+  get(`/api/gather/by_date?aid=${glStatus.aid}`)
+    .then(data => {
+      data.forEach(element => {
+        element[0] = echarts.format.formatTime('yyyy-MM-dd', new Date(element[0]));
+        chartOpts.series.data.push(element);
+        const chart = echarts.init($('#gather-date')[0]);
+        chart.setOption(chartOpts);
+      })
+    })
 }
 
 gatherSex();
+gatherProvince();
+gatherDate();

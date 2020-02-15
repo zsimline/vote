@@ -45,14 +45,20 @@
     <div class="text-center">
       <button class="btn btn-success btn-load" onclick="loadMoreEntry()">加载更多</button>
     </div>
+    
+    <hr>
+    
+    <div id="charts">
+      <div id="gather-sex"></div>
+      <div id="gather-province"></div>
+    </div>
+    <div id="gather-date" style="width: 100%; height: 400px;"></div>
 
     <span id="aid" class="hidden">${aid}</span>
 
-    <div id="main" style="width: 600px;height:400px;"></div>
-
-    <%@ include file="../components/modal.jsp" %>
     <script src="/js/ranking.js"></script>
     <script src="/js/gather.js"></script>
   </div>
+  <%@ include file="../components/modal.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>
