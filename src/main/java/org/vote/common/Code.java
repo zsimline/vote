@@ -66,6 +66,13 @@ public class Code {
     codes.put(1601, "审核失败原因未知");
     codes.put(1602, "无权执行操作");
 
+    // 更新活动信息功能状态码
+    codes.put(1700, "更新成功");
+    codes.put(1701, "更新失败原因未知");
+    codes.put(1702, "无权执行操作");
+    codes.put(1703, "解析更新数据失败");
+    codes.put(1704, "活动不存在");
+
     // 投票功能返回码
     codes.put(2000, "投票成功"); 
     codes.put(2001, "投票失败原因未知"); 

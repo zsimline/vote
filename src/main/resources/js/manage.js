@@ -1,5 +1,6 @@
 /**
  * 删除投票
+ * 
  * @param {String} aid 活动ID
  */
 function deleteActivity(aid) {
@@ -23,3 +24,15 @@ function deleteActivity(aid) {
       });
   }
 }
+
+/**
+ * 同步报名数据包编辑页面
+ */
+function syncApplyInfo() {
+  const options = $('#options').text().split(',');
+  options.forEach(index => {
+    $(`input[data-index=${index}]`).click();
+  });
+}
+
+syncApplyInfo()

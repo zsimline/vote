@@ -25,7 +25,7 @@ public class Apply extends BaseView {
       request.setAttribute("options", activity.getOptions().split(","));
       render(request, response, "/template/vote/apply.jsp");
     } else {
-      response.sendRedirect("/index/error");
+      render404(response);
     }
   }
 }

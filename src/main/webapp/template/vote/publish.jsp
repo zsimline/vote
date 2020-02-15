@@ -85,23 +85,21 @@
 
     <h5>报名选项</h5>
     <hr>
-    <%@ include file="../components/options/apply_options.jsp" %>
+    <div class="apply-options">
+      <label for="img-entry">参赛图片</label>
+      <div class="switch switch-square">
+        <input id="img-entry" type="checkbox" data-index="0" checked>
+      </div><br>
+      <label for="introduction">详细介绍</label>
+      <div class="switch switch-square">
+        <input id="introduction" type="checkbox" data-index="1" checked>
+      </div><br>
+      <%@ include file="../components/options/apply_options.jsp" %>
+    </div>
 
     <%@ include file="../components/lisence.jsp" %>
-
-    <button class="btn btn-primary" onclick="handleSubmit()">　发布投票　</button>
+    <button class="btn btn-primary" onclick="handlePublish()">　发布投票　</button>
   </div>
-
-  <!-- 时间拾取器配置 -->
-  <script type="text/javascript">
-    $(function () {
-      const options = { locale: 'zh-cn', format: "YYYY-MM-DD hh:mm" };
-      $('#vote-time-start').datetimepicker(options);
-      $('#vote-time-end').datetimepicker(options);
-      $('#apply-time-start').datetimepicker(options);
-      $('#apply-time-end').datetimepicker(options);
-    });
-  </script>
   
   <script src="/js/publish.js"></script>
 

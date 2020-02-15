@@ -15,7 +15,7 @@ import org.vote.common.Utils;
 /**
  * 处理创建活动
  */
-@WebServlet("/api/vote/publish")
+@WebServlet("/api/vote/activity/publish")
 public class ActivityPublish extends BaseApi {
   private static final long serialVersionUID = 1L;
 

@@ -78,7 +78,7 @@
 
   <span id="aid" class="hidden"><%= request.getAttribute("aid") %></span>
 
-  <%@ include file="../components/modal.jsp" %>
+  <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>
 

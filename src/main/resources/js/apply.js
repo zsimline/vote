@@ -45,7 +45,7 @@ const applyOptions = {
 function handleSubmit() {
   // 判断用户是够勾选同意协议
   if (!$('#lisence').is(':checked')) {
-    openModal('error', '请勾选 [我同意投票服务条款]');
+    showMsg('error', '请勾选 [我同意投票服务条款]');
     return ;
   }
 
@@ -57,7 +57,7 @@ function handleSubmit() {
         uploadPostData(validateFactory.postData);
       })
       .catch(msg => {
-        openModal('error', msg)
+        showMsg('error', msg)
       }) 
   }
 }
@@ -73,7 +73,7 @@ function validateIntroduction() {
 
   const introduction = tinyMCE.activeEditor.getContent();
   if (introduction === '') {
-    openModal('error', '详细介绍不能为空');
+    showMsg('error', '详细介绍不能为空');
     return false;
   } else {
     this.postData.introduction = introduction;
@@ -92,7 +92,7 @@ function validateImgEntry() {
   if (imgEntry === undefined || imgEntry !== '') {
     return true;
   } else {
-    openModal('error', '参赛图片不能为空');
+    showMsg('error', '参赛图片不能为空');
     return false;
   }
 }
@@ -110,7 +110,7 @@ function validateApplyOptions() {
     if (value === undefined) {
       continue;
     } else if (value === '') {
-      openModal('error', applyOptions[keys[i]].errTip);
+      showMsg('error', applyOptions[keys[i]].errTip);
       return false;
     } else {
       this.postData[keys[i]] = value;
@@ -164,7 +164,7 @@ function uploadPostData(postData) {
     if (!data.code) {
       console.log(data);
     } else {
-      openModal('error', data.codeDesc);
+      showMsg('error', data.codeDesc);
     }
   })
   .catch(err => {

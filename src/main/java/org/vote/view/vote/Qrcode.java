@@ -23,7 +23,7 @@ public class Qrcode extends BaseView {
       request.setAttribute("activity", activity);
       render(request, response, "/template/vote/qrcode.jsp");
     } else {
-      response.sendRedirect("/index/error");
+     render404(response);
     }
   }
 }

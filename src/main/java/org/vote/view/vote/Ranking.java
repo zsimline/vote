@@ -11,20 +11,19 @@ import org.vote.beans.Activity;
 import org.vote.common.BaseView;
 
 /**
- * 显示创建投票页面
+ * 显示排名页面
  */
 @WebServlet("/vote/ranking")
 public class Ranking extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String aid = request.getParameter("aid");
-    Activity activity = (Activity) getInstanceById(Activity.class, aid);
-    if (activity == null) {
-      response.sendRedirect("/index/error");
-    } else {
+    Activity activity = (Activity) getInstanceById(Activity.class, request.getParameter("aid"));
+    if (activity != null) {
       request.setAttribute("activity", activity);
       render(request, response, "/template/vote/ranking.jsp");
+    } else {
+      render404(response);
     }
   }
 }

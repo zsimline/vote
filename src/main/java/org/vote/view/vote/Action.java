@@ -26,7 +26,7 @@ public class Action extends BaseView {
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
 
     if (activity == null) {
-      response.sendRedirect("/index/error");
+     render404(response);
     } else if (!hasAuth(request, response)) {
       response.sendRedirect(OAuth.getAuthCodeApiAddress(aid));
     } else {

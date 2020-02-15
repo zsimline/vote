@@ -7,7 +7,7 @@ const glStatus = {
  * 处理创建投票
  * 获取表单数据并校验
  */
-function handleSubmit() {
+function handlePublish() {
   if (glStatus.lock) return ;
 
   // 判断用户是够勾选同意协议
@@ -23,13 +23,57 @@ function handleSubmit() {
     uploadFile($('#img-main').prop('files')[0])
       .then(fileUrl => {
         validateFactory.postData.imgMain = fileUrl;
-        uploadPostData(validateFactory.postData);
+        uploadPublishPostData(validateFactory.postData);
       })
       .catch(msg => {
         showMsg('error', msg)
-      }) 
+      })
   }
 }
+
+/**
+ * 处理更新投票信息
+ * 获取表单数据并校验
+ */
+function handleUpdate() {
+  if (glStatus.lock) return ;
+
+  // 不更新图片时禁止校验
+  if ($('#img-main').val() === '') {
+    validateFactory.functions[3] = () => true;
+  } else {
+    validateFactory.functions[3] = validateImgMain.bind(validateFactory);
+  }
+
+  // 校验各个表单成功后
+  // 上传表单中的数据
+  if (validateFactory.validate()) {
+    glStatus.lock = true;
+    if ($('#img-main').val() !== '') {
+      uploadFile($('#img-main').prop('files')[0])
+        .then(fileUrl => {
+          validateFactory.postData.imgMain = fileUrl;
+          uploadUpdatePostData(validateFactory.postData);
+        })
+        .catch(msg => {
+          showMsg('error', msg)
+        }) 
+    } else {
+      uploadUpdatePostData(validateFactory.postData);
+    }
+  }
+}
+
+/**
+ * 初始化日期时间拾取器
+ */
+function initDatetimePicker() {
+  const options = { locale: 'zh-cn', format: "YYYY-MM-DD hh:mm" };
+  $('#vote-time-start').datetimepicker(options);
+  $('#vote-time-end').datetimepicker(options);
+  $('#apply-time-start').datetimepicker(options);
+  $('#apply-time-end').datetimepicker(options);
+};
 
 /**
  * 校验基本配置
@@ -84,7 +128,9 @@ function validateBaseConfig() {
   return true;
 }
 
-
+/**
+ * 校验高级设置
+ */
 function validateExtendConfig() {
   // 获取高级配置数据
   const externalApply = $('#external-apply').is(':checked');
@@ -96,7 +142,8 @@ function validateExtendConfig() {
  * 校验图片
  * 确保图片非空且格式正确
  */
-function validateImgMain() {
+function validateImgMain(update=false) {
+  if (update) return true;
   const imgMain = $('#img-main').val();
   if (imgMain === '') {
     showMsg('error', '请上传宣传图片');
@@ -187,14 +234,38 @@ function validateTime() {
  * 
  * @param {Object} postData 活动数据
  */
-function uploadPostData(postData) {
+function uploadPublishPostData(postData) {
   showMsg('info', '上传投票信息中...', -1);
-  postJSON('/api/vote/publish', postData)
+  postJSON('/api/vote/activity/publish', postData)
     .then(data => {
       if (!(data.code % 100)) {
         showMsg('success', data.codeDesc);
         setTimeout(() => {
           window.location.href = '/vote/manage';
+        },800)
+      } else {
+        glStatus.lock = false;
+        showMsg('error', data.codeDesc);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+/**
+ * 上传活动的更新数据
+ * 
+ * @param {Object} postData 活动数据
+ */
+function uploadUpdatePostData(postData) {
+  showMsg('info', '更新投票信息中...', -1);
+  postJSON(`/api/vote/activity/update?aid=${$('#aid').text()}`, postData)
+    .then(data => {
+      if (!(data.code % 100)) {
+        showMsg('success', data.codeDesc);
+        setTimeout(() => {
+          window.location.reload();
         },800)
       } else {
         glStatus.lock = false;
@@ -237,7 +308,7 @@ validateFactory.functions = [
   validateBaseConfig.bind(validateFactory),
   validateTime.bind(validateFactory),
   validateExtendConfig.bind(validateFactory),
-  validateImgMain .bind(validateFactory),
+  validateImgMain.bind(validateFactory),
 ];
 
 /**
@@ -266,3 +337,6 @@ function uploadFile(file) {
       });
     });
 }
+
+// 页面初始化
+initDatetimePicker()
