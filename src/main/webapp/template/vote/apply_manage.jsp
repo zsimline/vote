@@ -240,6 +240,7 @@
     
     <script src="/js/apply_manage.js"></script>
   </div>
+  <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/modal.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>

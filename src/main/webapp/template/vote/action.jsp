@@ -76,7 +76,7 @@
     <a href="/vote/ranking?aid=${activity.id}">查看排名</a>
   </div>
 
-  <span class="hidden" id="aid">${aid}</span>
+  <span class="hidden" id="aid">${activity.id}</span>
   <span class="hidden" id="maximum">${activity.maximum}</span>
 
   <script src="/js/action.js?v=0.2.5"></script>

@@ -30,12 +30,24 @@ public class Action extends BaseView {
     } else if (!hasAuth(request, response)) {
       response.sendRedirect(OAuth.getAuthCodeApiAddress(aid));
     } else {
-      request.setAttribute("aid", aid);
+      // 记录访问数量
+      activity.setSumVisited(activity.getSumVisited() + 1);
+      updateInstance(activity);
+      
       request.setAttribute("activity", activity);
       render(request, response, "/template/vote/action.jsp");
     }
   }
 
+  /**
+   * 判断投票者是否认证
+   * 
+   * @param request 请求对象
+   * @param response 响应对象
+   * @return 已认证返回true, 否则返回false
+   * @throws ServletException
+   * @throws IOException
+   */
   private boolean hasAuth(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     CookieFactory cookieFactory = new CookieFactory(request, response);
     HashMap<String, String> cookieMap = cookieFactory.cookiesToHashMap();
@@ -45,15 +57,11 @@ public class Action extends BaseView {
     String token = cookieMap.get("token");
 
     // 未携带认证信息
-    if (openid == null || token == null) {
-      return false;
-    }
+    if (openid == null || token == null) return false;
 
     // 已携带认证信息但认证失败
     Wechat wechat = (Wechat) getInstanceById(Wechat.class, openid);
-    if (wechat == null || !wechat.getToken().equals(token)) {
-      return false;
-    }
+    if (wechat == null || !wechat.getToken().equals(token)) return false;
 
     return true;
   }

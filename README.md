@@ -105,8 +105,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待开发
 
-14. 结果与日志功能
-
 15. 编辑功能
 
 16. 用户功能完善
@@ -117,17 +115,11 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 18. 阐述理由功能
 
-19. 礼物功能
+19. 礼物功能（Demo）
 
 20. 管理员功能
  - 冻结用户
  - 删除活动
-
-21. 链接与二维码页增加报名页面二维码
-
-22. 记录投票页访问总数
-
-23. 报名时间与投票时间控制
 
 ### 待弥补的不足
 
@@ -158,8 +150,9 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 6. 外部人员报名后，其审核状态为待审核，而发布者批量添加报名后，其审核状态为已通过审核。
 
-7. 
+7. 外部人员需在报名时间段内完成报名，发布者需在投票截止时间之前完成批量添加报名。
 
+8. 
 
 
 ## 总结
@@ -169,4 +162,3 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 2. 如果引入了第三方库/框架，则要充分利用它们。
 
 3. 开发阶段不要担心运行效率问题。
-

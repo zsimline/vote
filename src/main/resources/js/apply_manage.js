@@ -204,7 +204,7 @@ function readyToAppend() {
 function handleApplyInfoChanged() {
   validateFactory.clear();
   if ($('#title').val() === '') {
-    openModal('error', '标题不能为空'); return ;
+    showMsg('error', '标题不能为空'); return ;
   }
 
   Object.keys(applyOptions).forEach(key => {
@@ -223,7 +223,7 @@ function handleApplyInfoChanged() {
         uploadUpadteData(tableData[tbOpts.activeTr].id);
       })
       .catch(msg => {
-        openModal('error', msg)
+        showMsg('error', msg)
       });
   } else {
     uploadUpadteData(tableData[tbOpts.activeTr].id);
@@ -243,7 +243,7 @@ function handleApplyInfoAdded() {
         uploadAppendData();
       })
       .catch(msg => {
-        openModal('error', msg)
+        showMsg('error', msg)
       }); 
   }
 }
@@ -273,7 +273,7 @@ function uploadUpadteData(id) {
       if (!data.code) {
         flushTable(data);
       } else {
-        openModal('error', data.codeDesc);
+        showMsg('error', data.codeDesc);
       }
     })
     .catch(err => {
@@ -285,12 +285,12 @@ function uploadUpadteData(id) {
  * 上传新增报名数据
  */
 function uploadAppendData() {
-  postJSON(`/api/vote/apply/single?aid=${$('#aid').text()}`, validateFactory.postData)
+  postJSON(`/api/vote/apply/publisher?aid=${$('#aid').text()}`, validateFactory.postData)
     .then(data => {
       if (!data.code) {
         flushTable(data, true);
       } else {
-        openModal('error', data.codeDesc);
+        showMsg('error', data.codeDesc);
       }
     })
     .catch(err => {
@@ -307,7 +307,7 @@ function uploadAppendData() {
 function validateTitle() {
   const title = $('#title').val();
   if (title === '') {
-    openModal('error', '标题不能为空');
+    showMsg('error', '标题不能为空');
     return false;
   } else {
     this.postData.title = title;
@@ -326,7 +326,7 @@ function validateIntroduction() {
 
   const introduction = tinyMCE.activeEditor.getContent();
   if (introduction === '') {
-    openModal('error', '详细介绍不能为空');
+    showMsg('error', '详细介绍不能为空');
     return false;
   } else {
     this.postData.introduction = introduction;
@@ -347,21 +347,21 @@ function validateImgEntry() {
   }
 
   if (imgEntry === '') {
-    openModal('error', '参赛图片不能为空');
+    showMsg('error', '参赛图片不能为空');
     return false;
   }
 
   // 检验图片文件大小
   // 当前的限制是最大为1M
   if ($('#img-entry').prop('files')[0].size > 1048576) {
-    openModal('error', '请上传小于1M的图片');
+    showMsg('error', '请上传小于1M的图片');
     return false;
   }
 
   // 校验图片文件格式
   // 当前的限制是只能为jpg或png格式
   if (!imgEntry.endsWith('.jpg') && !imgEntry.endsWith('.png')) {
-    openModal('error', '图片只能为jpg或png格式');
+    showMsg('error', '图片只能为jpg或png格式');
     return false;
   }
 
@@ -419,7 +419,7 @@ function clearEditModal() {
 function jumpByPage() {
   const to = $('#page-jump').val();
   if (to === '') {
-    openModal('error', '请输入要跳转到的页码数');
+    showMsg('error', '请输入要跳转到的页码数');
   } else {
     window.location.href = `/vote/apply_manage?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${to}`;
   }
@@ -453,7 +453,7 @@ function review(which, status) {
         initTableData(tableData);
         initTable(tableData);
       } else {
-        openModal('error', data.codeDesc);
+        showMsg('error', data.codeDesc);
       }
     })
     .catch(err => {
