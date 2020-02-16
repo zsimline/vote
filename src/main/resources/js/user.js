@@ -32,9 +32,6 @@ function handleRegister() {
     return;
   }
 
-  // TODO - 密码强度校验
-  // TODO - 电子邮件合法性校验
-
   const postData = {
     'nickname': nickname,
     'password': password,

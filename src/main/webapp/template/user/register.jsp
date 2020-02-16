@@ -19,16 +19,16 @@
   <div class="lg-box">
     <h1 class="lg-title">鹿鸣投票</h1>
     <div class="input-group">
-      <i class="fa fa-user" aria-hidden="true"></i>
-      <input type="text" id="nickname" placeholder="设置个昵称"" maxlength="15">
+      <i class="fa fa-envelope" aria-hidden="true"></i>
+      <input type="email" id="email" placeholder="请输入您常用的电子邮件" maxlength="255">
     </div>
     <div class="input-group">
       <i class="fa fa-lock" aria-hidden="true"></i>
       <input type="password" id="password" placeholder="设置一个密码吧" regex="^\w+" maxlength="32">
     </div>
     <div class="input-group">
-      <i class="fa fa-envelope" aria-hidden="true"></i>
-      <input type="email" id="email" placeholder="请输入您常用的电子邮件" maxlength="255">
+      <i class="fa fa-user" aria-hidden="true"></i>
+      <input type="text" id="nickname" placeholder="设置个昵称"" maxlength="15">
     </div>
     <div class="input-group">
       <i class="fa fa-users" aria-hidden="true"></i>

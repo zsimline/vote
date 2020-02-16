@@ -11,7 +11,6 @@
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
   <link href="/css/user.css" rel="stylesheet" type="text/css">
-  <script src="/js/user.js"></script>
   <title>用户登录</title>
 </head>
 
@@ -20,11 +19,11 @@
     <h1 class="lg-title">鹿鸣投票</h1>
     <div class="input-group">
       <i class="fa fa-user" aria-hidden="true"></i>
-      <input type="email" id="email" placeholder="电子邮件">
+      <input type="email" id="email"   autocomplete="username" value="username"  placeholder="电子邮件">
     </div>
     <div class="input-group">
       <i class="fa fa-lock" aria-hidden="true"></i>
-      <input type="password" id="password" placeholder="密码" regex="^\w+">
+      <input type="password" id="password" autocomplete="current-password" placeholder="密码" regex="^\w+">
     </div>
     <a class="btn-submit" onclick="handleLogin()">
       &nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i>
@@ -36,6 +35,8 @@
       <a href="">忘记密码</a>
     </div>
   </div>
+  <script src="/js/user.js"></script>
+
   <%@ include file="../components/message.jsp" %>
 </body>
 
