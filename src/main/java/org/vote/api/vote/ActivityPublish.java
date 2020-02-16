@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 import org.vote.common.BaseApi;
 import org.vote.common.UUIDTool;
@@ -23,11 +24,11 @@ public class ActivityPublish extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String uid = userIdentify(request, response);
+    long uid = Identify.userIdentify(request, response);
     Activity activity = (Activity) Utils.postDataToObj(request, Activity.class);
 
     // 验证权限与数据完整性
-    if (uid == null) {
+    if (uid == -1L) {
       complete(response, 1002); return ;
     } else if (activity == null) {
       complete(response, 1003); return ;
@@ -36,7 +37,7 @@ public class ActivityPublish extends BaseApi {
       activity.setId(UUIDTool.getUUID());
       
       // 设置发布者ID
-      activity.setPublisher(Long.valueOf(uid));
+      activity.setPublisher(uid);
     }
 
     // 执行数据存储

@@ -19,15 +19,7 @@ public class Manage extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    long uid;
-    try {
-      uid = Long.valueOf(userIdentify(request, response));
-    } catch (NumberFormatException e) {
-      e.printStackTrace();
-      response.sendRedirect("/user/login");
-      return ;
-    }
-
+    long uid = (Long)request.getAttribute("uid");
     List<Activity> activitys = getActivitysByPublisher(uid);
     request.setAttribute("activitys", activitys);
     render(request, response, "/template/vote/manage.jsp");

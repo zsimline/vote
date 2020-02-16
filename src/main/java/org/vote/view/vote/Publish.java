@@ -17,11 +17,6 @@ public class Publish extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String uid = userIdentify(request, response);
-    if (uid == null) {
-      response.sendRedirect("/user/login");
-    } else {
-      render(request, response, "/template/vote/publish.jsp");
-    }
+    render(request, response, "/template/vote/publish.jsp");
   }
 }

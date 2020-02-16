@@ -19,6 +19,7 @@ import org.hibernate.criterion.Restrictions;
 import org.vote.common.HibernateUtil;
 import org.vote.beans.Activity;
 import org.vote.common.Code;
+import org.vote.api.user.Identify;
 
 /**
  * 基础API类
@@ -189,6 +190,8 @@ public class BaseApi extends BaseServlet {
     response.setStatus(200);
   }
 
+
+
   /**
    * 验证该用户是否有具有对某个活动的操作权限
    * 这些权限包括更新活动信息、更新报名信息、新增报名信息、
@@ -204,10 +207,10 @@ public class BaseApi extends BaseServlet {
    */
   protected boolean isMyActivity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
-    String uid = userIdentify(request, response);
-    if (aid == null || uid == null) return false;
+    long uid  = Identify.userIdentify(request, response);
+    if (aid == null || uid == -1L) return false;
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
-    return activity != null && activity.getPublisher() == Long.valueOf(uid);
+    return activity != null && activity.getPublisher() == uid;
   }
 
   /**

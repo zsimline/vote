@@ -34,9 +34,9 @@
     <!-- 右侧导航条 -->
     <ul class="nav navbar-nav navbar-right">
       <li class="user">
-        <a href="#">
+        <a href="/user/login"">
           <i class="fa fa-user"></i>
-          <span>已登录</span> 
+          <span id="lg-status">已登录</span> 
           <i class="fa fa-caret-down"></i>
         </a>
         <ul>
@@ -57,3 +57,19 @@
     </ul>
   </div>
 </div>
+
+<script>
+  function checkLoginStatus() {
+    const cookies  = {};
+    document.cookie.split('; ').forEach(element => {
+      const cookie = element.split('=')
+      cookies[cookie[0]] = cookie[1];
+    })
+    if (cookies.uid && cookies.token) {
+      $('#lg-status').text('已登录');
+    } else {
+      $('#lg-status').text('登录/注册');
+    }
+  }
+  checkLoginStatus();
+</script>

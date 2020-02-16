@@ -26,7 +26,6 @@ public class encodeFilter implements Filter {
     // 设置Servlet请求与响应的编码
     request.setCharacterEncoding(filterConfig.getInitParameter("encoding"));
     response.setContentType("application/json;charset=utf-8");
-
     chain.doFilter(request, response);
   }
 

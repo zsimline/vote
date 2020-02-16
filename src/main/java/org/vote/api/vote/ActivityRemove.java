@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.vote.common.BaseApi;
+import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 
 /**
@@ -23,7 +24,7 @@ public class ActivityRemove extends BaseApi {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
-    String uid = userIdentify(request, response);
+    long uid = Identify.userIdentify(request, response);
     
     // 验证是否可删除
     if (!canDelete(uid, activity)) {
@@ -51,9 +52,8 @@ public class ActivityRemove extends BaseApi {
    * @param activity 活动实例
    * @return true/false 投票可/不可被删除
    */
-  private boolean canDelete(String uid, Activity activity) {
-    return uid != null && activity != null &&
-           activity.getPublisher() == Long.valueOf(uid);
+  private boolean canDelete(long uid, Activity activity) {
+    return uid != -1L && activity != null && activity.getPublisher() == uid;
   }
 
   /**

@@ -1,19 +1,15 @@
 package org.vote.common;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.vote.beans.User;
 
 /**
  * 基础API类
@@ -159,35 +155,5 @@ public class BaseServlet extends HttpServlet {
         session.close();
       }
     }
-  }
-
-  /**
-   * 识别并认证用户身份
-   * 
-   * @param request 请求对象
-   * @param response 响应对象
-   * @return 用户身份识别并认证成功返回其ID, 否则返回null
-   */
-  protected String userIdentify(HttpServletRequest request, HttpServletResponse response) {
-    CookieFactory cookieFactory = new CookieFactory(request, response);
-    HashMap<String, String> cookieMap = cookieFactory.cookiesToHashMap();
-
-    // 获取Cookie认证信息
-    String uid = cookieMap.get("uid");
-    String token = cookieMap.get("token");
-    
-    // 未携带认证信息
-    if (uid == null || token == null) return null;
-
-    try {
-      // 根据UID获取用户实例并判断认证令牌是否相等
-      User user = (User)getInstanceById(User.class, Long.valueOf(uid));
-      if (user == null || !user.getToken().equals(token)) return null;
-    } catch (NumberFormatException e) {
-      e.printStackTrace();
-      return null;
-    }
-
-    return uid;
   }
 }

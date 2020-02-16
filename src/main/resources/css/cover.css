@@ -34,6 +34,13 @@
   margin-right: 35px !important;
 }
 
+#lg-status a {
+  color: #fff;
+}
+#lg-status a:hover {
+  color: #16a085;
+}
+
 /*！ 底部栏样式 */
 .footer {
   color: #869fb2;
