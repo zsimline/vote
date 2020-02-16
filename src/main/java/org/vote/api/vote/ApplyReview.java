@@ -24,8 +24,7 @@ public class ApplyReview extends BaseApi {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     if (!isMyActivity(request, response)) {
-      complete(response, 1602);
-      return ;
+      complete(response, 1602); return ;
     }
     
     char status = request.getParameter("status").charAt(0);

@@ -22,8 +22,7 @@ public class EntryFreeze extends BaseApi {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     if (!isMyActivity(request, response)) {
-      complete(response, 1602);
-      return ;
+      complete(response, 1602); return ;
     }
 
     String id = request.getParameter("id");

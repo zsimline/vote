@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.api.user.Identify;
 
 /**
- * 编码过滤器
+ * 用户身份拦截器
+ * 匹配部分URL并拦截未登录用户
  */
 public class IdentityInterceptor implements Filter {
   @Override

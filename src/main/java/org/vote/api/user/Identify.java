@@ -11,6 +11,9 @@ import org.vote.beans.User;
 import org.vote.common.CookieFactory;
 import org.vote.common.HibernateUtil;
 
+/**
+ * 用户身份处理器
+ */
 public class Identify {
   /**
    * 识别并认证用户身份
