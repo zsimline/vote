@@ -12,7 +12,7 @@
   <%@ include file="../components/link.jsp" %>
   <style>
     body {
-      background-image: url(/images/bg-index-1.jpg);
+      background-image: url(/images/bg-index-2.jpg);
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }
