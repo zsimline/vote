@@ -5,7 +5,9 @@ const glStatus = {
   maximum: parseInt($('#maximum').text()),
   nextPage: 1,
   lock: false,
-  aid: $('#aid').text()
+  aid: $('#aid').text(),
+  explainReason: $('#explain-reason').text(),
+  havePrize: $('#have-prize').text()
 }
 
 /**
@@ -165,7 +167,20 @@ function flushEntrys(data) {
  * @param {id} index 条目索引
  */
 function showIntroduction(index) {
-  openModal('userdef', glStatus.entrys[index].introduction);
+  openModal('userdef', glStatus.entrys[index].introduction, glStatus.entrys[index].title);
+}
+
+function handleExplainReason() {
+  openModal('userdef', '<textarea id="reason">', '请阐述投票理由', () => {
+    const reason = $('#reason').val();
+    if (reason === '') {
+      showMsg('error', '理由不能为空'); return false;
+    } else if (reason.length < 10) {
+      showMsg('error', '理由不能少于10个字符'); return false;
+    } else {
+      return true;
+    }
+  })
 }
 
 /**
@@ -174,7 +189,14 @@ function showIntroduction(index) {
 function handleSubmit() {
   const postData = {
     aid: glStatus.aid,
-    ids: Array.from(glStatus.ids)
+    ids: Array.from(glStatus.ids),
+  }
+
+  // 发布者设置了阐述理由
+  if (glStatus.explainReason === 'true') {
+    alert('xxxx');
+    if (!handleExplainReason()) return ;
+    postData.reason = $('#reason').val();
   }
 
   postJSON('/api/vote/action',  postData)

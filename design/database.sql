@@ -37,11 +37,12 @@ CREATE TABLE `activity`
   `img_main` CHAR(56) DEFAULT NULL,             -- 宣传图片名
   `options` VARCHAR(300) NOT NULL,              -- 其它必填项
   `external_apply` TINYINT(1) DEFAULT 0,         -- 是否允许外部报名
-  `explain_reason` TINYINT(1) DEFAULT 0,         -- 投票时需阐述理由
+  `reason_length` TINYINT DEFAULT 0,              --  理由最少字数
   `have_prize` TINYINT(1) DEFAULT 0,                -- 是否添加礼物
   `destroyed` TINYINT(1) DEFAULT 0,                 -- 是否销毁
   PRIMARY KEY(`id`),
   CHECK(`maxium` < 101)
+  CHECK(`reason_length` < 127)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 条目信息表
@@ -99,6 +100,7 @@ CREATE TABLE `wechat` (
 --  `whom` INT UNSIGNED NOT NULL,           -- 投向条目的ID
 --  `timestamp` DATE NOT NULL,                     -- 投票时间
 --  `ip` CHAR(15) NOT NULL,                             -- IP地址
+-- `reason` VARCHAR(127) DEFAULT NULL,   -- 投票理由
 --  PRIMARY KEY (`id`)
 --)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
@@ -114,6 +116,7 @@ SET @sql_create_table = concat(
   `whom` INT UNSIGNED NOT NULL,
   `timestamp` DATE NOT NULL,
   `ip` CHAR(15) NOT NULL,
+  `reason` VARCHAR(127) DEFAULT NULL,
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;");
 PREPARE sql_create_table FROM @sql_create_table;

@@ -11,7 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <link rel="stylesheet" href="/css/action.css?v=0.0.3">
+  <link rel="stylesheet" href="/css/action.css?v=0.0.6">
   <title>鹿鸣投票-${activity.title}</title>
 </head>
 
@@ -78,8 +78,10 @@
 
   <span class="hidden" id="aid">${activity.id}</span>
   <span class="hidden" id="maximum">${activity.maximum}</span>
+  <span class="hidden" id="explain-reason">${activity.explainReason}</span>
+  <span class="hidden" id="have-prize">${activity.havePrize}</span>
 
-  <script src="/js/action.js?v=0.2.5"></script>
+  <script src="/js/action.js?v=0.3.7"></script>
 
   <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/modal.jsp" %>

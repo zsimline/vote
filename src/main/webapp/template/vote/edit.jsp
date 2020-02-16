@@ -126,10 +126,10 @@
       <div class="switch">
         <c:choose>
           <c:when test="${activity.explainReason}">
-              <input id="explain_reason" type="checkbox" checked>
+              <input id="explain-reason" type="checkbox" checked>
             </c:when>
             <c:otherwise>
-              <input id="explain_reason" type="checkbox">
+              <input id="explain-reason" type="checkbox">
             </c:otherwise>
         </c:choose>
       </div>
@@ -139,10 +139,10 @@
       <div class="switch">
         <c:choose>
           <c:when test="${activity.havePrize}">
-              <input id="have_prize" type="checkbox" checked>
+              <input id="have-prize" type="checkbox" checked>
             </c:when>
             <c:otherwise>
-              <input id="have_prize" type="checkbox">
+              <input id="have-prize" type="checkbox">
             </c:otherwise>
         </c:choose>
       </div>

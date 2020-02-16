@@ -16,7 +16,7 @@
   padding: 10px;
   border-radius: 3px;
   transition: all .3s;
-  z-index: 1000;
+  z-index: 1100;
 }
 @media (min-width: 768px) {
   #message {

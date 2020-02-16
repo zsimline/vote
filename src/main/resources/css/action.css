@@ -178,3 +178,8 @@ footer {
   font-size: 14px;
   width: 55%;
 }
+
+#reason {
+  width: 100%;
+  height: 180px;
+}

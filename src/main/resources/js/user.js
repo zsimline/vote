@@ -16,19 +16,19 @@ function handleRegister() {
 
   // 校验表单是否为空
   if (nickname === '') {
-    openModal('error', '昵称不能为空');
+    showMsg('error', '昵称不能为空');
     return;
   }
   if (password === '') {
-    openModal('error', '密码不能为空');
+    showMsg('error', '密码不能为空');
     return;
   }
   if (email === '') {
-    openModal('error', '电子邮件不能为空');
+    showMsg('error', '电子邮件不能为空');
     return;
   }
   if (organization === '') {
-    openModal('error', '所属组织不能为空');
+    showMsg('error', '所属组织不能为空');
     return;
   }
 
@@ -46,15 +46,16 @@ function handleRegister() {
   postJSON('/api/user/register', postData)
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.codeDesc, () => {
+        showMsg('success', data.codeDesc);
+        setTimeout(() => {
           window.location.href="/user/login";
-        });
+        }, 1000)
       } else {
-        openModal('error', data.codeDesc);
+        showMsg('error', data.codeDesc);
       }
     })
     .catch(err => {
-      openModal('error', '注册账户失败')
+      console.error(err);
     });
 }
 
@@ -67,11 +68,11 @@ function handleLogin() {
   const password = $('#password').val();
   
   if (email === '') {
-    openModal('error', '电子邮件不能为空');
+    showMsg('error', '电子邮件不能为空');
     return;
   }
   if (password === '') {
-    openModal('error', '密码不能为空');
+    showMsg('error', '密码不能为空');
     return;
   }
 
@@ -84,14 +85,15 @@ function handleLogin() {
   postJSON('/api/user/login', postData)
     .then(data => {
       if (!(data.code % 100)) {
-        openModal('success', data.codeDesc, () => {
+        showMsg('success', data.codeDesc);
+        setTimeout(() => {
           window.location.href = "/";
-        });
+        }, 400);
       } else {
-        openModal('error', data.codeDesc);
+        showMsg('error', data.codeDesc);
       }
     })
     .catch(err => {
-      openModal('error', '登录账户失败')
+      console.error(err);
     });
 }

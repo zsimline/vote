@@ -44,7 +44,7 @@
       <a href="">忘记密码</a>
     </div>
   </div>
-  <%@ include file="../components/modal.jsp" %>
+  <%@ include file="../components/message.jsp" %>
 </body>
 
 </html>

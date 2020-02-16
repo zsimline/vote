@@ -15,6 +15,9 @@ public class PostAction implements Serializable {
   // 条目ID数组
   private List<Integer> ids;
 
+  // 投票理由
+  private String reason;
+
   public PostAction() {
   }
 
@@ -44,5 +47,19 @@ public class PostAction implements Serializable {
    */
   public void setIds(List<Integer> ids) {
     this.ids = ids;
+  }
+
+  /**
+   * @return reason
+   */
+  public String getReason() {
+    return reason;
+  }
+
+  /**
+   * @param reason 要设置的 reason
+   */
+  public void setReason(String reason) {
+    this.reason = reason;
   }
 }
