@@ -33,14 +33,12 @@ public class Login extends BaseApi {
 
       // 验证账户是够存在
       if (user == null) {
-        complete(response, 1202);
-        return;
+        complete(response, 1202); return;
       }
 
       // 验证账户是否是已激活的
       if (!user.getIsActive()) {
-        complete(response, 1204);
-        return;
+        complete(response, 1204); return;
       }
 
       try {

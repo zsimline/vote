@@ -138,7 +138,7 @@ function exportExcel() {
  * @param {number} index 表格行索引
  */
 function showDescription(index) {
-  openModal('userdef', tableData[index].introduction);
+  openModal('userdef', tableData[index].introduction, tableData[index].title);
 }
 
 /**
@@ -148,7 +148,7 @@ function showDescription(index) {
  */
 function showBigImage(index) {
   const img = `<img src="${tableData[index].imgEntry}">`
-  openModal('userdef', img);
+  openModal('userdef', img, tableData[index].title);
 }
 
 /**
@@ -158,7 +158,7 @@ function showBigImage(index) {
 function jumpByPage() {
   const to = $('#page-jump').val();
   if (to === '') {
-    openModal('error', '请输入要跳转到的页码数');
+    showMsg('error', '请输入要跳转到的页码数');
   } else {
     window.location.href = `/vote/entry_manage?aid=${$('#aid').text()}&page=${to}`;
   }
@@ -175,7 +175,7 @@ function freeze(which) {
       if (!data.code) {
         flushTable(data);
       } else {
-        openModal('error', data.codeDesc);
+        showMsg('error', data.codeDesc);
       }
     })
     .catch(err => {

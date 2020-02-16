@@ -143,7 +143,7 @@ public class BaseApi extends BaseServlet {
       session = HibernateUtil.getSessionFactory().openSession();
       transaction = session.beginTransaction();
       transaction.begin();
-      session.save(instance);
+      session.saveOrUpdate(instance);
       transaction.commit();
     } catch (HibernateException e) {
       if (transaction != null) {

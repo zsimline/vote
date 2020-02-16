@@ -382,7 +382,7 @@ function exportExcel() {
  * @param {number} index 表格行索引
  */
 function showDescription(index) {
-  openModal('userdef', tableData[index].introduction);
+  openModal('userdef', tableData[index].introduction, tableData[index].title);
 }
 
 /**
@@ -392,7 +392,7 @@ function showDescription(index) {
  */
 function showBigImage(index) {
   const img = `<img src="${tableData[index].imgEntry}">`
-  openModal('userdef', img);
+  openModal('userdef', img, tableData[index].title);
 }
 
 /**
