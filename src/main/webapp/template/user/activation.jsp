@@ -10,36 +10,31 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-
-  <span id="email" class="hidden"><%= request.getAttribute("email") %></span>
-  <span id="code" class="hidden"><%= request.getAttribute("code") %></span>
-
-  <script>
-    window.onload = function() {
-    const activationAddress = "http://vote.zizaixian.top/api/user/activation?email=" + $('#email').text() + "&code=" + $('#code').text();
-    get(activationAddress)
-      .then(data => {
-        if (!(data.code % 100)) {
-          openModal('success', data.codeDesc);
-        } else {
-          openModal('error', `${data.code} ${data.codeDesc}`);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        openModal('error', '验证账户失败')
-      });
-    }
-    </script>
+  <link rel="stylesheet" href="/css/user.css">
   <title>激活账户</title>
 </head>
 
 <body>
   <%@ include file="../components/header.jsp" %>
 
-  <div class="container"></div>
+  <div class="container">
+    <div class="hidden activation">
+      <i class="fa fa-check"></i>
+      <span>认证成功</span>
+    </div>
+    <div class="hidden activation">
+      <i class="fa fa-check"></i>
+      <span>认证失败</span>
+    </div>
+  </div>
 
-  <%@ include file="../components/modal.jsp" %>
+  <span id="email" class="hidden"><%= request.getAttribute("email") %></span>
+  <span id="code" class="hidden"><%= request.getAttribute("code") %></span>
+
+  <script src="/js/user.js"></script>
+
+  <%@ include file="../components/message.jsp" %>
+  <script>window.onload = handleActivation();</script>
   <%@ include file="../components/footer.jsp" %>
 </body>
 

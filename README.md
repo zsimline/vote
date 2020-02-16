@@ -105,13 +105,13 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待开发
 
-16. 用户功能完善
- - 用户注销功能
- - 身份过期检验
-
 20. 管理员功能
  - 冻结用户
  - 删除活动
+
+21. 个人中心功能
+  - 忘记密码
+  - 修改个人信息
 
 ### 待弥补的不足
 
@@ -143,8 +143,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 6. 外部人员报名后，其审核状态为待审核，而发布者批量添加报名后，其审核状态为已通过审核。
 
 7. 外部人员需在报名时间段内完成报名，发布者需在投票截止时间之前完成批量添加报名。
-
-8. 
 
 
 ## 总结

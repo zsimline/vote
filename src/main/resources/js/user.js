@@ -39,11 +39,12 @@ function handleRegister() {
     'organization': organization
   };
 
+  showMsg('info', '注册中请等待...')
   // 向服务器提交数据
   postJSON('/api/user/register', postData)
     .then(data => {
       if (!(data.code % 100)) {
-        showMsg('success', data.codeDesc);
+        showMsg('success', data.codeDesc, -1);
         setTimeout(() => {
           window.location.href="/user/login";
         }, 1000)
@@ -77,8 +78,9 @@ function handleLogin() {
     'email': email,
     'password': password
   };
-
+  
   // 向服务器提交数据
+  showMsg('info', '正在登录..')
   postJSON('/api/user/login', postData)
     .then(data => {
       if (!(data.code % 100)) {
@@ -92,5 +94,25 @@ function handleLogin() {
     })
     .catch(err => {
       console.error(err);
+    });
+}
+
+/**
+ * 处理账户激活
+ */
+function handleActivation() {
+  const activationAddress = `/api/user/activation?email=${$('#email').text()}&code=${$('#code').text()}`;
+  showMsg('info', '认证中请稍等...')
+  get(activationAddress)
+    .then(data => {
+      if (!(data.code % 100)) {
+        $('.activation:first').removeClass('hidden');
+      } else {
+        $('.activation:last').removeClass('hidden');
+      }
+      hideMsg();
+    })
+    .catch(err => {
+      console.log(err);
     });
 }

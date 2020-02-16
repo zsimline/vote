@@ -31,6 +31,10 @@
   </filter>
   <filter-mapping>
     <filter-name>IdentityInterceptor</filter-name>
+    <url-pattern>/vote/publish</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>IdentityInterceptor</filter-name>
     <url-pattern>/vote/manage</url-pattern>
   </filter-mapping>
   <filter-mapping>

@@ -27,7 +27,7 @@
         <a href="/vote/manage">管理中心</a>
       </li>
       <li>
-        <a href="/about">关于我们</a>
+        <a href="https://mxsyx.site">关于我们</a>
       </li>
     </ul>
 

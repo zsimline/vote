@@ -102,3 +102,24 @@
 	font-size: 14px;
 	text-align: center;
 }
+
+.activation {
+	line-height: 300px; 
+	text-align: center;
+	margin-top: 50px;
+	transform: translateX(-50px);
+}
+.activation:nth-child(1) {
+	color: green;	
+}
+.activation:nth-child(2) {
+	color: red;	
+}
+
+.activation i {
+	font-size: 150px;
+}
+
+.activation span {
+	font-size: 120px;
+}
