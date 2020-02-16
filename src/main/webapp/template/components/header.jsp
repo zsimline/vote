@@ -47,7 +47,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="javascript:handleLogout()">
               <i class="fa fa-power-off"></i>
               <span>退出</span>            
             </a>
@@ -59,6 +59,7 @@
 </div>
 
 <script>
+  // 处理登录状态切换
   function checkLoginStatus() {
     const cookies  = {};
     document.cookie.split('; ').forEach(element => {
@@ -72,4 +73,16 @@
     }
   }
   checkLoginStatus();
+
+  // 处理账户注销
+  function handleLogout() {
+    get('/api/user/logout')
+      .then(data => {
+        if (!(data%100)) {
+          window.location.reload();
+        } else {
+          alert(data.codeDesc);
+        }
+      })
+  }
 </script>

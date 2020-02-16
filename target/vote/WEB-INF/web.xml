@@ -53,6 +53,10 @@
     <filter-name>IdentityInterceptor</filter-name>
     <url-pattern>/vote/qrcode</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>IdentityInterceptor</filter-name>
+    <url-pattern>/api/user/logout</url-pattern>
+  </filter-mapping>
 
   <jsp-config>
     <taglib> 

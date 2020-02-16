@@ -73,6 +73,10 @@ public class Code {
     codes.put(1703, "解析更新数据失败");
     codes.put(1704, "活动不存在");
 
+    // 用户注销功能状态码
+    codes.put(1800, "注销成功");
+    codes.put(1801, "注销失败原因未知");
+
     // 投票功能返回码
     codes.put(2000, "投票成功"); 
     codes.put(2001, "投票失败原因未知"); 
