@@ -83,9 +83,10 @@ public class Action extends BaseApi {
       // 创建投票实例
       Ticket ticket = new Ticket();
       ticket.setOpenid(openid);
-      ticket.setIp(Utils.getRealIp(request));
-      ticket.setTimestamp(new java.sql.Date(new Date().getTime()));
       ticket.setWhom(id);
+      ticket.setTimestamp(new java.sql.Date(new Date().getTime()));
+      ticket.setIp(Utils.getRealIp(request));
+      ticket.setReason(postAction.getReason());
 
       if (!updateInstance(entry)  || !saveTicket(ticket, interceptor)) {
         complete(response, 2001); return ;

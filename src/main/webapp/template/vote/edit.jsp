@@ -68,6 +68,11 @@
       <span class="extra-tip">每个用户最多可同时向几个条目投票，最小值为1，最大值为100</span>
     </div>
     <div class="inputcon">
+      <label for="reason-length">理由最少字数</label>
+      <input type="number" id="reason-length" class="form-control input-sm" value="${activity.reasonLength}" min="0" max="127">
+      <span class="extra-tip">投票时阐述理由的最小字数，0代表不需要阐述理由</span>
+    </div>
+    <div class="inputcon">
       <label for="vote-time-start">投票开始时间</label>
       <input type="text" class="form-control input-sm" id="vote-time-start" value="${activity.voteTimeStart}">
       <span class="extra-tip">开始时间后才能投票</span>
@@ -117,19 +122,6 @@
             </c:when>
             <c:otherwise>
               <input id="external-apply" type="checkbox">
-            </c:otherwise>
-        </c:choose>
-      </div>
-    </div>
-    <div class="advanced-config">
-      <label for="name">投票时需阐述理由</label>
-      <div class="switch">
-        <c:choose>
-          <c:when test="${activity.explainReason}">
-              <input id="explain-reason" type="checkbox" checked>
-            </c:when>
-            <c:otherwise>
-              <input id="explain-reason" type="checkbox">
             </c:otherwise>
         </c:choose>
       </div>

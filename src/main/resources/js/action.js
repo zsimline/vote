@@ -6,8 +6,11 @@ const glStatus = {
   nextPage: 1,
   lock: false,
   aid: $('#aid').text(),
-  explainReason: $('#explain-reason').text(),
-  havePrize: $('#have-prize').text()
+  reasonLength: parseInt($('#reason-length').text()),
+  havePrize: $('#have-prize').text(),
+  voteTimeStart: Date.parse($('#vote-time-start').text()),
+  voteTimeEnd: Date.parse($('#vote-time-end').text()),
+  reason: null,
 }
 
 /**
@@ -170,40 +173,72 @@ function showIntroduction(index) {
   openModal('userdef', glStatus.entrys[index].introduction, glStatus.entrys[index].title);
 }
 
+/**
+ * 处理阐述理由
+ * 弹出阐述理由的模态框
+ * 并做响应的校验
+ */
 function handleExplainReason() {
   openModal('userdef', '<textarea id="reason">', '请阐述投票理由', () => {
     const reason = $('#reason').val();
     if (reason === '') {
       showMsg('error', '理由不能为空'); return false;
-    } else if (reason.length < 10) {
-      showMsg('error', '理由不能少于10个字符'); return false;
+    } else if (reason.length < glStatus.reasonLength) {
+      showMsg('error', `理由不能少于${glStatus.reasonLength}个字符`); return false;
+    } else if (reason.length > 127) {
+      showMsg('error', `理由不能大于127个字符`); return false;
     } else {
-      return true;
-    }
-  })
+      glStatus.reason = $('#reason').val();
+      handleSubmit();
+    };
+  });
+}
+
+
+/**
+ * 检查当前时间是否在投票时间段内
+ */
+function checkTime() {
+  const currentDate = new Date();
+  if (glStatus.voteTimeStart - currentDate > 0) {
+    alert('投票还未开始'); return false;
+  } else if (glStatus.voteTimeEnd - currentDate < 0) {
+    alert('投票已经结束'); return false;
+  } else {
+    return true;
+  }
 }
 
 /**
  * 处理提交投票
  */
-function handleSubmit() {
+function handleSubmit() {  
+  // 检查是否能够投票
+  if (!checkTime()) return ;
+  if (glStatus.ids.size === 0) {
+    showMsg('error', '最少选择一个'); return ;
+  }
+  if (glStatus.reasonLength && !glStatus.reason)  {
+    handleExplainReason(); return ;
+  }
+
   const postData = {
     aid: glStatus.aid,
     ids: Array.from(glStatus.ids),
+    reason: glStatus.reason,
   }
 
-  // 发布者设置了阐述理由
-  if (glStatus.explainReason === 'true') {
-    alert('xxxx');
-    if (!handleExplainReason()) return ;
-    postData.reason = $('#reason').val();
-  }
-
+  showMsg('info', '提交中...');
   postJSON('/api/vote/action',  postData)
     .then(data => {
+      hideMsg();
       if (!(data.code % 100)) {
-        alert(data.codeDesc)
-        window.location.reload();
+        alert(data.codeDesc);
+        if (glStatus.havePrize === 'true') {
+          $('#gift').addClass('gift-rotate');
+        } else {
+          window.location.reload();
+        }
       } else {
         alert(data.codeDesc);
       }

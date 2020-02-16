@@ -50,6 +50,11 @@
       <span class="extra-tip">每个用户最多可同时向几个条目投票，最小值为1，最大值为100</span>
     </div>
     <div class="inputcon">
+      <label for="reason-length">理由最少字数</label>
+      <input type="number" id="reason-length" class="form-control input-sm" value="0" min="0" max="127">
+      <span class="extra-tip">投票时阐述理由的最小字数，0代表不需要阐述理由</span>
+    </div>
+    <div class="inputcon">
       <label for="vote-time-start">投票开始时间</label>
       <input type="text" class="form-control input-sm" id="vote-time-start">
       <span class="extra-tip">开始时间后才能投票</span>
@@ -80,12 +85,6 @@
       <label for="external-apply">允许外部人员报名</label>
       <div class="switch">
         <input id="external-apply" type="checkbox" checked>
-      </div>
-    </div>
-    <div class="advanced-config">
-      <label for="explain-reason">投票时需阐述理由</label>
-      <div class="switch">
-        <input id="explain-reason" type="checkbox">
       </div>
     </div>
     <div class="advanced-config">

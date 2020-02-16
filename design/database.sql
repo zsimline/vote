@@ -20,62 +20,61 @@ CREATE TABLE `user`
 -- 活动信息表
 CREATE TABLE `activity`
 (
-  `id` CHAR(32) NOT NULL,                                    -- 活动ID
-  `title` VARCHAR(40) NOT NULL,                         -- 活动标题
-  `publisher` INT UNSIGNED NOT NULL,            -- 发布者ID
-  `suffix` CHAR(3) NOT NULL,                    -- 条目称谓
-  `quantifier` CHAR(1) NOT NULL,                -- 条目量词
-  `summary` TEXT NOT NULL,                      -- 活动简介（富文本）
-  `vote_time_start` DATETIME NOT NULL,          -- 投票开始时间
-  `vote_time_end` DATETIME NOT NULL,            -- 投票截止时间
-  `apply_time_start` DATETIME NOT NULL,         -- 报名开始时间
-  `apply_time_end` DATETIME NOT NULL,           -- 报名截止时间
-  `maximum` TINYINT UNSIGNED NOT NULL,          -- 单次最多选择
-  `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,     -- 条目总数
-  `sum_voted` INT UNSIGNED DEFAULT 0,           -- 投票总数
-  `sum_visited` INT UNSIGNED DEFAULT 0,         -- 访问总数
-  `img_main` CHAR(56) DEFAULT NULL,             -- 宣传图片名
-  `options` VARCHAR(300) NOT NULL,              -- 其它必填项
-  `external_apply` TINYINT(1) DEFAULT 0,         -- 是否允许外部报名
-  `reason_length` TINYINT DEFAULT 0,              --  理由最少字数
-  `have_prize` TINYINT(1) DEFAULT 0,                -- 是否添加礼物
-  `destroyed` TINYINT(1) DEFAULT 0,                 -- 是否销毁
+  `id` CHAR(32) NOT NULL,     -- 活动ID
+  `title` VARCHAR(40) NOT NULL,   -- 活动标题
+  `publisher` INT UNSIGNED NOT NULL,    -- 发布者ID
+  `suffix` CHAR(3) NOT NULL,    -- 条目称谓
+  `quantifier` CHAR(1) NOT NULL,    -- 条目量词
+  `summary` TEXT NOT NULL,    -- 活动简介（富文本）
+  `vote_time_start` DATETIME NOT NULL,    -- 投票开始时间
+  `vote_time_end` DATETIME NOT NULL,    -- 投票截止时间
+  `apply_time_start` DATETIME NOT NULL,   -- 报名开始时间
+  `apply_time_end` DATETIME NOT NULL,   -- 报名截止时间
+  `maximum` TINYINT UNSIGNED NOT NULL,    -- 单次最多选择
+  `sum_entry` SMALLINT	UNSIGNED DEFAULT 0,   -- 条目总数
+  `sum_voted` INT UNSIGNED DEFAULT 0,   -- 投票总数
+  `sum_visited` INT UNSIGNED DEFAULT 0,   -- 访问总数
+  `img_main` CHAR(56) NOT NULL,   -- 宣传图片地址
+  `options` VARCHAR(300) NOT NULL,    -- 报名选项
+  `external_apply` TINYINT(1) NOT NULL,   -- 是否允许外部报名
+  `reason_length` TINYINT UNSIGNED NOT NULL,    --  理由最少字数
+  `have_prize` TINYINT(1) NOT NULL,   -- 是否添加礼物
+  `destroyed` TINYINT(1) DEFAULT 0,   -- 是否销毁
   PRIMARY KEY(`id`),
-  CHECK(`maxium` < 101)
-  CHECK(`reason_length` < 127)
+  CHECK(`maxium` < 101),
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 条目信息表
 CREATE TABLE `entry`
 (
-  `id` INT UNSIGNED AUTO_INCREMENT,     -- 条目ID
-  `aid` CHAR(32) NOT NULL,              -- 活动ID
-  `number` SMALLINT UNSIGNED NOT NULL,  -- 参赛编号
-  `title` VARCHAR(25) NOT NULL,         -- 条目标题
-  `introduction` TEXT DEFAULT NULL,     -- 详细介绍
-  `acquisition` INT UNSIGNED DEFAULT 0, -- 取得投票数
+  `id` INT UNSIGNED AUTO_INCREMENT,   -- 条目ID
+  `aid` CHAR(32) NOT NULL,    -- 活动ID
+  `number` SMALLINT UNSIGNED NOT NULL,    -- 参赛编号
+  `title` VARCHAR(25) NOT NULL,   -- 条目标题
+  `introduction` TEXT DEFAULT NULL,   -- 详细介绍
+  `acquisition` INT UNSIGNED DEFAULT 0,   -- 取得投票数
   `img_entry` CHAR(56) DEFAULT NULL,    -- 参赛图片地址
-  `is_freeze` TINYINT(1) DEFAULT 0,     -- 条目是否冻结
+  `is_freeze` TINYINT(1) DEFAULT 0,   -- 条目是否冻结
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- 报名信息表
 CREATE TABLE `apply`
 (
-  `id` INT UNSIGNED AUTO_INCREMENT,      -- 报名ID
-  `aid` CHAR(32) NOT NULL,               -- 活动ID
-  `status` CHAR(1) NOT NULL,             -- 审核状态
-  `title` VARCHAR(15) NOT NULL,          -- 条目标题
-  `introduction` TEXT DEFAULT NULL,      -- 详细介绍（富文本）
-  `img_entry` CHAR(56) DEFAULT NULL,     -- 参赛图片地址
-  `name` VARCHAR(15) DEFAULT NULL,       -- 真实姓名
-  `sex` CHAR(1) DEFAULT NULL,            -- 真实性别
-  `age` TINYINT(3) DEFAULT NULL,         -- 真实年龄
-  `telephone` CHAR(11) DEFAULT NULL,     -- 手机号码
-  `email` VARCHAR(191) DEFAULT NULL,     -- 电子邮件
-  `school` VARCHAR(16) DEFAULT NULL,     -- 学校名称
-  `company` VARCHAR(26) DEFAULT NULL,    -- 公司名称
-  `address` VARCHAR(40) DEFAULT NULL,    -- 收货地址
+  `id` INT UNSIGNED AUTO_INCREMENT,   -- 报名ID
+  `aid` CHAR(32) NOT NULL,    -- 活动ID
+  `status` CHAR(1) DEFAULT 'w',    -- 审核状态
+  `title` VARCHAR(15) NOT NULL,   -- 条目标题
+  `introduction` TEXT DEFAULT NULL,   -- 详细介绍（富文本）
+  `img_entry` CHAR(56) DEFAULT NULL,    -- 参赛图片地址
+  `name` VARCHAR(15) DEFAULT NULL,    -- 真实姓名
+  `sex` CHAR(1) DEFAULT NULL,   -- 真实性别
+  `age` TINYINT(3) DEFAULT NULL,    -- 真实年龄
+  `telephone` CHAR(11) DEFAULT NULL,    -- 手机号码
+  `email` VARCHAR(191) DEFAULT NULL,  -- 电子邮件
+  `school` VARCHAR(16) DEFAULT NULL,    -- 学校名称
+  `company` VARCHAR(26) DEFAULT NULL,   -- 公司名称
+  `address` VARCHAR(40) DEFAULT NULL,   -- 收货地址
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 

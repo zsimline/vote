@@ -8,7 +8,7 @@
       <generator class="native"/>
     </id>
     <property name="aid" column="aid" type="java.lang.String" length="32" not-null="true"/>
-    <property name="status" column="status" type="java.lang.Character" not-null="true"/>
+    <property name="status" column="status" type="java.lang.Character"/>
     <property name="title" column="title" type="java.lang.String" length="25" not-null="true"/>
     <property name="introduction" column="introduction" type="java.lang.String"/>
     <property name="imgEntry" column="img_entry" type="java.lang.String" length="56"/>

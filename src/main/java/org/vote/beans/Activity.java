@@ -63,8 +63,8 @@ public class Activity implements Serializable {
   // 是够允许外部报名
   private boolean externalApply;
 
-  // 投票时需阐述理由
-  private boolean explainReason;
+  // 理由长度
+  private int reasonLength;
 
   // 是否添加礼物
   private boolean  havePrize;
@@ -73,9 +73,6 @@ public class Activity implements Serializable {
     this.sumEntry = 0;
     this.sumVoted = 0;
     this.sumVisited = 0;
-    this.externalApply = true;
-    this.explainReason = false;
-    this.havePrize = false;
     this.destroyed = false;
   }
 
@@ -319,17 +316,17 @@ public class Activity implements Serializable {
   }
 
   /**
-   * @return explainReason
+   * @return reasonLength
    */
-  public boolean getExplainReason() {
-    return explainReason;
+  public int getReasonLength() {
+    return reasonLength;
   }
 
   /**
-    * @param explainReason 要设置的 explainReason
+    * @param reasonLength 要设置的 reasonLength
    */
-  public void setExplainReason(boolean explainReason) {
-    this.explainReason = explainReason;
+  public void setReasonLength(int reasonLength) {
+    this.reasonLength = reasonLength;
   }
 
   /**

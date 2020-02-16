@@ -183,3 +183,30 @@ footer {
   width: 100%;
   height: 180px;
 }
+
+#gift {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  transition: all 1.2s;
+  transform: rotateY(90deg) scale(0);
+}
+
+.gift-rotate {
+  transform: rotateY(0deg) scale(1) !important;
+}
+
+#gift img {
+  width: 90%;
+  height: 85%;
+  display: block;
+  margin: auto;
+}
+
+#gift h4 {
+  text-align: center;
+  color: #27ae60;
+  font-size: 20px;
+}

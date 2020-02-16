@@ -24,6 +24,9 @@ public class Ticket implements Serializable {
   // IP地址
   private String ip;
 
+  // 投票理由
+  private String reason;
+
   /**
    * @return id
    */
@@ -92,5 +95,19 @@ public class Ticket implements Serializable {
    */
   public void setIp(String ip) {
     this.ip = ip;
+  }
+
+  /**
+   * @return reason
+   */
+  public String getReason() {
+    return reason;
+  }
+
+  /**
+   * @param reason 要设置的 reason
+   */
+  public void setReason(String reason) {
+    this.reason = reason;
   }
 }

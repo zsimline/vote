@@ -17,14 +17,14 @@
     <property name="applyTimeStart" column="apply_time_start" type="java.util.Date" not-null="true"/>
     <property name="applyTimeEnd" column="apply_time_end" type="java.util.Date" not-null="true"/>
     <property name="maximum" column="maximum" type="java.lang.Integer" not-null="true"/>
-    <property name="sumEntry" column="sum_entry" type="java.lang.Integer" />
-    <property name="sumVoted" column="sum_voted" type="java.lang.Long" />
-    <property name="sumVisited" column="sum_visited" type="java.lang.Long" />
-    <property name="imgMain" column="img_main" type="java.lang.String" length="56"/>
+    <property name="sumEntry" column="sum_entry" type="java.lang.Integer"/>
+    <property name="sumVoted" column="sum_voted" type="java.lang.Long"/>
+    <property name="sumVisited" column="sum_visited" type="java.lang.Long"/>
+    <property name="imgMain" column="img_main" type="java.lang.String" length="56" not-null="true"/>
     <property name="options" column="options" type="java.lang.String" length="300" not-null="true"/>
-    <property name="externalApply" column="external_apply" type="java.lang.Boolean"/>
-    <property name="explainReason" column="explain_reason" type="java.lang.Boolean"/>
-    <property name="havePrize" column="have_prize" type="java.lang.Boolean"/>
+    <property name="externalApply" column="external_apply" type="java.lang.Boolean" not-null="true"/>
+    <property name="reasonLength" column="reason_length" type="java.lang.Integer" not-null="true"/>
+    <property name="havePrize" column="have_prize" type="java.lang.Boolean" not-null="true"/>
     <property name="destroyed" column="destroyed" type="java.lang.Boolean" />
   </class>
 </hibernate-mapping>

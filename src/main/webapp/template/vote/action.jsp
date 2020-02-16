@@ -11,7 +11,7 @@
 <head>
   <%@ include file="../components/meta.jsp" %>
   <%@ include file="../components/link.jsp" %>
-  <link rel="stylesheet" href="/css/action.css?v=0.0.6">
+  <link rel="stylesheet" href="/css/action.css?v=0.2.7">
   <title>鹿鸣投票-${activity.title}</title>
 </head>
 
@@ -76,12 +76,21 @@
     <a href="/vote/ranking?aid=${activity.id}">查看排名</a>
   </div>
 
+  <c:if test="${activity.havePrize}">
+    <div id="gift">
+      <img src="/images/gift.png" onclick="window.location.reload()">
+      <h4>点击『開』领取现金红包</h4>
+    </div>
+  </c:if>
+
   <span class="hidden" id="aid">${activity.id}</span>
   <span class="hidden" id="maximum">${activity.maximum}</span>
-  <span class="hidden" id="explain-reason">${activity.explainReason}</span>
+  <span class="hidden" id="vote-time-start">${activity.voteTimeStart}</span>
+  <span class="hidden" id="vote-time-end">${activity.voteTimeEnd}</span>
+  <span class="hidden" id="reason-length">${activity.reasonLength}</span>
   <span class="hidden" id="have-prize">${activity.havePrize}</span>
 
-  <script src="/js/action.js?v=0.3.7"></script>
+  <script src="/js/action.js?v=0.5.4"></script>
 
   <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/modal.jsp" %>

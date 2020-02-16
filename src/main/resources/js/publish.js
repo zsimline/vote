@@ -1,5 +1,6 @@
 // 全局状态量
 const glStatus = {
+  aid: $('#aid').text(),
   lock: false
 }
 
@@ -85,6 +86,7 @@ function validateBaseConfig() {
   const suffix = $('#suffix').val();
   const quantifier = $('#quantifier').val();
   const maximum = $('#maxium').val();
+  const reasonLength = $('#reason-length').val();
   const summary = tinyMCE.activeEditor.getContent();
 
   // 获取已经选中的单选按钮
@@ -113,6 +115,10 @@ function validateBaseConfig() {
     showMsg('error', '一次最多选择不能为空');
     return false;
   }
+  if (reasonLength === '') {
+    showMsg('error', '理由最少字数不能为空');
+    return false;
+  }
   if (summary === '') {
     showMsg('error', '活动描述不能为空');
     return false;
@@ -122,6 +128,7 @@ function validateBaseConfig() {
   this.postData.suffix = suffix;
   this.postData.quantifier = quantifier;
   this.postData.maximum = maximum;
+  this.postData.reasonLength = reasonLength;
   this.postData.summary = summary;
   this.postData.options = options;
 
@@ -133,7 +140,6 @@ function validateBaseConfig() {
  */
 function validateAdvancedConfig() {
   this.postData.externalApply = $('#external-apply').is(':checked');
-  this.postData.explainReason = $('#explain-reason').is(':checked');
   this.postData.havePrize = $('#have-prize').is(':checked');
   return true;
 }
@@ -260,7 +266,7 @@ function uploadPublishPostData(postData) {
  */
 function uploadUpdatePostData(postData) {
   showMsg('info', '更新投票信息中...', -1);
-  postJSON(`/api/vote/activity/update?aid=${$('#aid').text()}`, postData)
+  postJSON(`/api/vote/activity/update?aid=${glStatus.aid}`, postData)
     .then(data => {
       if (!(data.code % 100)) {
         showMsg('success', data.codeDesc);
@@ -292,7 +298,7 @@ const validateFactory = {
     applyTimeEnd: null,
     summary: null,
     externalApply: null,
-    explainReason: null,
+    reasonLength: null,
     havePrize: null,
     options: null,
   },

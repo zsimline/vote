@@ -111,10 +111,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
  - 用户注销功能
  - 身份过期检验
 
-18. 阐述理由功能
-
-19. 礼物功能（Demo）
-
 20. 管理员功能
  - 冻结用户
  - 删除活动
