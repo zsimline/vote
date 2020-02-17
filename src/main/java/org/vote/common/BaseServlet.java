@@ -25,7 +25,7 @@ public class BaseServlet extends HttpServlet {
    * @param id 实例ID
    * @return 实例
    */
-  protected Object getInstanceById(Class<?> clazz, String id) {
+  public Object getInstanceById(Class<?> clazz, String id) {
     Session session = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
@@ -50,7 +50,7 @@ public class BaseServlet extends HttpServlet {
    * @param id 实例ID
    * @return
    */
-  protected Object getInstanceById(Class<?> clazz, long id) {
+  public Object getInstanceById(Class<?> clazz, long id) {
     Session session = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();

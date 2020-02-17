@@ -17,9 +17,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.vote.common.HibernateUtil;
+import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 import org.vote.common.Code;
-import org.vote.api.user.Identify;
 
 /**
  * 基础API类
@@ -190,29 +190,6 @@ public class BaseApi extends BaseServlet {
     response.setStatus(200);
   }
 
-
-
-  /**
-   * 验证该用户是否有具有对某个活动的操作权限
-   * 这些权限包括更新活动信息、更新报名信息、新增报名信息、
-   * 审核报名信息、管理条目信息、结果与日志的查询
-   * 当出现以下情况时该用户不可操作活动：
-   * 用户未登录、活动不存在、活动不属于该用户
-   * 
-   * @param request 请求对象
-   * @param response 响应对象
-   * @return  有/无权限
-   * @throws ServletException
-   * @throws IOException
-   */
-  protected boolean isMyActivity(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String aid = request.getParameter("aid");
-    long uid  = Identify.userIdentify(request, response);
-    if (aid == null || uid == -1L) return false;
-    Activity activity = (Activity)getInstanceById(Activity.class, aid);
-    return activity != null && activity.getPublisher() == uid;
-  }
-
   /**
    * 按条件分页查询
    * 
@@ -247,5 +224,23 @@ public class BaseApi extends BaseServlet {
         session.close();
       }
     }
+  }
+
+  /**
+   * 验证该用户是否有具有对某个活动的操作权限
+   * 这些权限包括更新活动信息、更新报名信息、新增报名信息、
+   * 审核报名信息、管理条目信息、结果与日志的查询
+   * 当出现以下情况时该用户不可操作活动：
+   * 用户未登录、活动不存在、活动不属于该用户
+   * 
+   * @param request 请求对象
+   * @param response 响应对象
+   * @return  有/无权限
+   */
+  protected boolean isMyActivity(HttpServletRequest request, HttpServletResponse response) {
+    String aid = request.getParameter("aid");
+    long uid  = Identify.userIdentify(request, response);
+    Activity activity = (Activity) getInstanceById(Activity.class, aid);
+    return activity != null && activity.getPublisher() == uid;
   }
 }

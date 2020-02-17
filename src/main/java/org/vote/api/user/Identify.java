@@ -36,12 +36,7 @@ public class Identify {
     try {
       // 根据UID获取用户实例并判断认证令牌是否相等
       Long userId = Long.valueOf(uid);
-      User user = getInstanceById(User.class, userId);
-      if (!user.getToken().equals(token)) {
-        User user2 = getInstanceById(User.class, userId);
-        System.out.println(user2.getToken());
-      }
-
+      User user = getUserById(userId);
       return user != null && user.getToken().equals(token) ? userId : -1L;
     } catch (NumberFormatException e) {
       e.printStackTrace();
@@ -50,17 +45,16 @@ public class Identify {
   }
 
   /**
-   * 根据ID获取实例
+   * 获取用户数据
    * 
-   * @param clazz 实例类
-   * @param id 实例ID
-   * @return
+   * @param id UID
+   * @return 用户实例
    */
-  public static User getInstanceById(Class<?> clazz, long id) {
+  public static User getUserById(long id) {
     Session session = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
-      return (User) session.get(clazz, id);
+      return (User) session.get(User.class, id);
     } catch (HibernateException e) {
       e.printStackTrace();
       return null;
