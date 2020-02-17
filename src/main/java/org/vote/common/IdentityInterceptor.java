@@ -27,7 +27,7 @@ public class IdentityInterceptor implements Filter {
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response =  (HttpServletResponse) servletResponse;
-    long uid = Identify.userIdentify(request, response);
+    long uid = Identify.userIdentify(request);
     if (uid != -1L) {
       request.setAttribute("uid", uid);
       chain.doFilter(request, response);

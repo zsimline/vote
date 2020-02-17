@@ -24,7 +24,7 @@ public class ActivityPublish extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    long uid = Identify.userIdentify(request, response);
+    long uid = Identify.userIdentify(request);
     Activity activity = (Activity) Utils.postDataToObj(request, Activity.class);
 
     // 验证权限与数据完整性

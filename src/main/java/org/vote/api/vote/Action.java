@@ -178,8 +178,7 @@ public class Action extends BaseApi {
    * @throws IOException
    */
   private String getOpenid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    CookieFactory cookieFactory = new CookieFactory(request, response);
-    HashMap<String, String> cookieMap = cookieFactory.cookiesToHashMap();
+    HashMap<String, String> cookieMap = CookieFactory.cookiesToHashMap(request);
     
     // 获取微信用户 openid 与访问令牌
     String openid = cookieMap.get("openid");

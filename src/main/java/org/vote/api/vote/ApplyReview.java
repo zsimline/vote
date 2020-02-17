@@ -23,15 +23,15 @@ public class ApplyReview extends BaseApi {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    if (!isMyActivity(request, response)) {
+    Activity activity = getActivityVerified(request, response);
+    if (activity == null) {
       complete(response, 1602); return ;
     }
     
     char status = request.getParameter("status").charAt(0);
-
     switch (status) {
       case 'y': {
-        if (handleApprove(request)) {
+        if (handleApprove(request, activity)) {
           complete(response, 1600);
         } else {
           complete(response, 1601);
@@ -58,7 +58,7 @@ public class ApplyReview extends BaseApi {
    * @param request 请求对象
    * @return 操作成功/失败
    */
-  private boolean handleApprove(HttpServletRequest request) {
+  private boolean handleApprove(HttpServletRequest request, Activity activity) {
     try {
       int id = Integer.valueOf(request.getParameter("id"));
       Apply apply = (Apply)getInstanceById(Apply.class, id);
@@ -71,7 +71,6 @@ public class ApplyReview extends BaseApi {
       Entry entry = createEntry(request, apply);
 
       // 设置条目的编号
-      Activity activity = (Activity)getInstanceById(Activity.class, request.getParameter("aid"));
       int sumEntry = activity.getSumEntry();
       entry.setNumber(sumEntry + 1);
       activity.setSumEntry(sumEntry + 1);
@@ -107,6 +106,13 @@ public class ApplyReview extends BaseApi {
     }
   }
 
+  /**
+   * 创建条目
+   * 
+   * @param request 请求对象
+   * @param apply 报名实例
+   * @return 条目实例
+   */
   private Entry createEntry(HttpServletRequest request, Apply apply) {
     Entry entry = new Entry();
     entry.setAid(request.getParameter("aid"));

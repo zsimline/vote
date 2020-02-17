@@ -24,7 +24,7 @@ public class ActivityRemove extends BaseApi {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
     Activity activity = (Activity)getInstanceById(Activity.class, aid);
-    long uid = Identify.userIdentify(request, response);
+    long uid = Identify.userIdentify(request);
     
     // 验证是否可删除
     if (!canDelete(uid, activity)) {

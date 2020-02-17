@@ -22,10 +22,14 @@ public class Logout extends BaseApi {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
-    // 置空登录令牌
-    long uid = Identify.userIdentify(request, response);
-    User user = (User) getInstanceById(User.class, uid);
-    user.setToken(null);
+    long uid = Identify.userIdentify(request);
+    User user = null;
+    if (uid == -1L) {   // 用户未登录
+      complete(response, 1802); return ;
+    } else {  // 置空登录令牌
+      user = (User) getInstanceById(User.class, uid);
+      user.setToken(null);
+    }
 
     if (updateInstance(user)) {
       CookieFactory cookieFactory = new CookieFactory(request, response);

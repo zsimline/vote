@@ -46,11 +46,12 @@ public class DataApply extends BaseApi {
       page = Integer.valueOf(request.getParameter("page"));
     } catch (Exception e) {
       e.printStackTrace();
+      return Collections.emptyList();
     }
   
     String[] keys = { "aid", "status" };
     Object[] values = { aid, status };
-
+    
     return paginationQuery(Apply.class, keys, values, page, 15);
   }
 }

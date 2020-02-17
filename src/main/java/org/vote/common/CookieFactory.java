@@ -30,7 +30,7 @@ public class CookieFactory {
    */
   public void setCookie(String name, String value) {
     Cookie cookie = new Cookie(name, value);
-    cookie.setMaxAge(604800);
+    cookie.setMaxAge(2592000);
     cookie.setPath("/");
     response.addCookie(cookie);
   }
@@ -56,7 +56,7 @@ public class CookieFactory {
    * 
    * @return 转换后的哈希表
    */
-  public HashMap<String, String> cookiesToHashMap() {
+  public static HashMap<String, String> cookiesToHashMap(HttpServletRequest request) {
     HashMap<String, String> cookieMap = new HashMap<String, String>();
     Cookie[] cookies = request.getCookies();
     

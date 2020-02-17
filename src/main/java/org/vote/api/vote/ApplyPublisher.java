@@ -30,7 +30,7 @@ public class ApplyPublisher extends BaseApi {
 
     if (activity == null || apply == null) {
       complete(response, 1401); return;
-    } else if (!isMyActivity(request, response)) {
+    } else if (!isMyActivity(request, activity)) {
       complete(response, 1404); return;
     } else if (!checkTime(activity)) {
       complete(response, 1405); return;

@@ -25,9 +25,16 @@ public class EntryFreeze extends BaseApi {
       complete(response, 1602); return ;
     }
 
+    Entry entry = null;
     String id = request.getParameter("id");
-    Entry entry = (Entry)getInstanceById(Entry.class, Long.valueOf(id));
-    entry.setIsFreeze(true);
+    try {
+      entry = (Entry)getInstanceById(Entry.class, Long.valueOf(id));
+      entry.setIsFreeze(true);
+    } catch (NumberFormatException e) {
+      e.printStackTrace();
+      complete(response, 1601); return ;
+    }
+
     if (updateInstance(entry)) {
       sendJSON(response, entry);
     } else {

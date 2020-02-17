@@ -26,12 +26,12 @@ public class ActivityUpdate extends BaseApi {
     Activity activityNew = (Activity) Utils.postDataToObj(request, Activity.class);
 
     // 验证权限与数据完整性
-    if (!isMyActivity(request, response)) {
-      complete(response, 1702); return ;
+    if (activityOld == null) {
+      complete(response, 1704); return ;
     } else if (activityNew == null) {
       complete(response, 1703); return ;
-    } else if (activityOld == null) {
-      complete(response, 1704); return ;
+    } else if (!isMyActivity(request, activityOld)) {
+      complete(response, 1702); return ;
     } else {
       syncActivityData(activityOld, activityNew);
     }

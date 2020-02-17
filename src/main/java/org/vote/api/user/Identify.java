@@ -3,7 +3,6 @@ package org.vote.api.user;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -19,12 +18,10 @@ public class Identify {
    * 识别并认证用户身份
    * 
    * @param request 请求对象
-   * @param response 响应对象
    * @return 用户身份识别并认证成功返回其ID, 否则返回-1L
    */
-  public static Long userIdentify(HttpServletRequest request, HttpServletResponse response) {
-    CookieFactory cookieFactory = new CookieFactory(request, response);
-    HashMap<String, String> cookieMap = cookieFactory.cookiesToHashMap();
+  public static Long userIdentify(HttpServletRequest request) {
+    HashMap<String, String> cookieMap = CookieFactory.cookiesToHashMap(request);
 
     // 获取Cookie认证信息
     String uid = cookieMap.get("uid");
