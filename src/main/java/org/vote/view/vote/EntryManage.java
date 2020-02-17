@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.beans.Activity;
 import org.vote.beans.Entry;
 import org.vote.common.BaseView;
 
@@ -18,7 +19,8 @@ public class EntryManage extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    request.setAttribute("aid", request.getParameter("aid"));
+    Activity activity = (Activity) request.getAttribute("activity");
+    request.setAttribute("activity", activity);
     request.setAttribute("page", request.getParameter("page"));
     int sumPages = getSumPages(request);
     request.setAttribute("sumPages", sumPages > 0 ? sumPages : 1);    
@@ -26,9 +28,8 @@ public class EntryManage extends BaseView {
   }
 
   private int getSumPages(HttpServletRequest request) {
-    String aid = request.getParameter("aid");
     String[] keys = { "aid" };
-    Object[] values = { aid };
+    Object[] values = { request.getParameter("aid") };
     return (countRows(Entry.class, keys, values) + 14) / 15;
   }
 }

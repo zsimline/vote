@@ -29,7 +29,7 @@ public class BaseServlet extends HttpServlet {
    * @param id 实例ID
    * @return 实例
    */
-  public Object getInstanceById(Class<?> clazz, String id) {
+  public static Object getInstanceById(Class<?> clazz, String id) {
     Session session = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
@@ -54,7 +54,7 @@ public class BaseServlet extends HttpServlet {
    * @param id 实例ID
    * @return
    */
-  public Object getInstanceById(Class<?> clazz, long id) {
+  public static Object getInstanceById(Class<?> clazz, long id) {
     Session session = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
@@ -171,27 +171,20 @@ public class BaseServlet extends HttpServlet {
    * @return  活动属于该用户返回true，否则返回false
    */
   protected boolean isMyActivity(HttpServletRequest request, HttpServletResponse response) {
-    return  getActivityVerified(request, response) != null;
-  }
-
-  protected boolean isMyActivity(HttpServletRequest request, Activity activity) {
+    String aid = request.getParameter("aid");
     long uid  = Identify.userIdentify(request);
+    Activity activity = (Activity) getInstanceById(Activity.class, aid);
     return activity != null && activity.getPublisher() == uid ? true : false;
   }
 
   /**
-   * 通过URL参数中的aid获取活动实例
-   * 当活动不存在或者用户没有对该活动的
-   * 操作权限时返回null
    * 
-   * @param request 请求对象
-   * @param response 响应对象
-   * @return 活动实例
+   * @param request
+   * @param activity
+   * @return
    */
-  protected Activity getActivityVerified(HttpServletRequest request, HttpServletResponse response) {
-    String aid = request.getParameter("aid");
+  public static boolean isMyActivity(HttpServletRequest request, Activity activity) {
     long uid  = Identify.userIdentify(request);
-    Activity activity = (Activity) getInstanceById(Activity.class, aid);
-    return activity != null && activity.getPublisher() == uid ? activity : null; 
+    return activity != null && activity.getPublisher() == uid ? true : false;
   }
 }

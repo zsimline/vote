@@ -47,6 +47,16 @@ public class BaseView extends BaseServlet {
   }
 
   /**
+    *  渲染404页面
+    *
+    * @param response 响应对象
+    * @throws IOException
+   */
+  protected void renderIndex(HttpServletResponse response) throws IOException {
+    response.sendRedirect("/index");
+  }
+
+  /**
    * 统计行数
    * 
    * @param clazz 实例类

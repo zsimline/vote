@@ -19,10 +19,9 @@ public class ApplyManage extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String aid = request.getParameter("aid");
-    Activity activity = (Activity)getInstanceById(Activity.class, aid);
+    Activity activity = (Activity) request.getAttribute("activity");
     int sumPages = getSumPages(request);
-    request.setAttribute("aid", aid);
+    request.setAttribute("activity", activity);
     request.setAttribute("status", request.getParameter("status"));
     request.setAttribute("page", request.getParameter("page"));
     request.setAttribute("sumPages", sumPages > 0 ? sumPages : 1);

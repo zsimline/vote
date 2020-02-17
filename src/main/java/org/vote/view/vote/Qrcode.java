@@ -18,12 +18,7 @@ public class Qrcode extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Activity activity = (Activity) getInstanceById(Activity.class, request.getParameter("aid"));
-    if (activity != null) {
-      request.setAttribute("activity", activity);
-      render(request, response, "/template/vote/qrcode.jsp");
-    } else {
-     render404(response);
-    }
+    request.setAttribute("activity",  (Activity) request.getAttribute("activity"));
+    render(request, response, "/template/vote/qrcode.jsp");
   }
 }

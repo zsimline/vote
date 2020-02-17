@@ -23,8 +23,8 @@ public class ApplyReview extends BaseApi {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Activity activity = getActivityVerified(request, response);
-    if (activity == null) {
+    Activity activity = (Activity) getInstanceById(Activity.class, request.getParameter("aid"));
+    if (isMyActivity(request, activity)) {
       complete(response, 1602); return ;
     }
     

@@ -105,7 +105,7 @@
       </div>
     </div>
 
-    <span id="aid" class="hidden">${aid}</span>
+    <span id="aid" class="hidden">${activity.id}</span>
     <span id="page" class="hidden">${page}</span>
     
     <script src="/js/entry_manage.js"></script>

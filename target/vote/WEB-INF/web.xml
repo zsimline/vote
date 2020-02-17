@@ -58,6 +58,31 @@
     <url-pattern>/vote/qrcode</url-pattern>
   </filter-mapping>
 
+  <filter>
+    <filter-name>PermissionInterceptor</filter-name>
+    <filter-class>org.vote.common.PermissionInterceptor</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PermissionInterceptor</filter-name>
+    <url-pattern>/vote/edit</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>PermissionInterceptor</filter-name>
+    <url-pattern>/vote/apply_manage</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>PermissionInterceptor</filter-name>
+    <url-pattern>/vote/entry_manage</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>PermissionInterceptor</filter-name>
+    <url-pattern>/vote/gather</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>PermissionInterceptor</filter-name>
+    <url-pattern>/vote/qrcode</url-pattern>
+  </filter-mapping>
+
   <jsp-config>
     <taglib> 
       <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>  

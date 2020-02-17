@@ -22,19 +22,19 @@
   <div class="container">
     <ul class="nav nav-tabs">
       <li role="presentation">
-        <a href="/vote/edit?aid=${aid}">编辑</a>
+        <a href="/vote/edit?activity.id=${activity.id}">编辑</a>
       </li>
       <li role="presentation">
-        <a href="/vote/apply_manage?aid=${aid}&status=w&page=1">报名管理</a>
+        <a href="/vote/apply_manage?activity.id=${activity.id}&status=w&page=1">报名管理</a>
       </li>
       <li role="presentation">
-        <a href="/vote/entry_manage?aid=${aid}&page=1">条目管理</a>
+        <a href="/vote/entry_manage?activity.id=${activity.id}&page=1">条目管理</a>
       </li>
       <li role="presentation" class="active">
-        <a href="/vote/gather?aid=${aid}">结果与日志</a>
+        <a href="/vote/gather?activity.id=${activity.id}">结果与日志</a>
       </li>
       <li role="presentation">
-        <a href="/vote/qrcode?aid=${aid}">链接与二维码</a>
+        <a href="/vote/qrcode?activity.id=${activity.id}">链接与二维码</a>
       </li>
     </ul>
 
@@ -54,7 +54,7 @@
     </div>
     <div id="gather-date" style="width: 100%; height: 400px;"></div>
 
-    <span id="aid" class="hidden">${aid}</span>
+    <span id="aid" class="hidden">${activity.id}</span>
 
     <script src="/js/ranking.js"></script>
     <script src="/js/gather.js"></script>

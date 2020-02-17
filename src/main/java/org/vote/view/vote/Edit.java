@@ -18,14 +18,9 @@ public class Edit extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Activity activity = (Activity) getInstanceById(Activity.class, request.getParameter("aid"));
-    if (activity != null) {
-      request.setAttribute("activity", activity);
-      String[] options = activity.getOptions().split(",");
-      request.setAttribute("options", options);
-      render(request, response, "/template/vote/edit.jsp");
-    } else {
-      render404(response);
-    }
+    Activity activity = (Activity) request.getAttribute("activity");
+    request.setAttribute("activity", activity);
+    request.setAttribute("options", activity.getOptions().split(","));
+    render(request, response, "/template/vote/edit.jsp");
   }
 }

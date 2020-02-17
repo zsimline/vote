@@ -7,17 +7,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.beans.Activity;
 import org.vote.common.BaseView;
 
 /**
- * 显示创建投票页面
+ * 显示汇总页面
  */
 @WebServlet("/vote/gather")
 public class Gather extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    request.setAttribute("aid", request.getParameter("aid"));
+    request.setAttribute("activity",  (Activity) request.getAttribute("activity"));
     render(request, response, "/template/vote/gather.jsp");
   }
 }
