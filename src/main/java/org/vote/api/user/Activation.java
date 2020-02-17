@@ -24,24 +24,17 @@ public class Activation extends BaseApi {
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String emailAddress = request.getParameter("email");
     String password = request.getParameter("code");
-
     User user = getUserByEmail(emailAddress);
 
-    // 用户不存在
-    if (user == null) {
-      complete(response, 1302);
-      return ;
-    }
-    
-    // 密码错误
-    if (!user.getPassword().equals(password)) {
-      complete(response, 1303);
-      return ;
+    if (user == null) {  // 用户不存在
+      complete(response, 1302); return ;
+    } else if  (!user.getPassword().equals(password)) { // 密码错误
+      complete(response, 1303); return ;
+    } else {  // 设置账户为激活
+      user.setIsActive(true);
     }
 
-    // 设置账户为激活的
     // 更新用户实例
-    user.setIsActive(true);
     if (updateInstance(user)) {
       complete(response, 1300);
     } else {

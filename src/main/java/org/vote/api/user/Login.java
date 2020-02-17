@@ -27,41 +27,33 @@ public class Login extends BaseApi {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     User userVerify = (User) Utils.postDataToObj(request, User.class);
-
+    User user = null;
     if (userVerify != null) {
-      User user = getUserByEmail(userVerify.getEmail());
+      user = getUserByEmail(userVerify.getEmail());
+    } else {
+      complete(response, 1201); return ;
+    }
 
-      // 验证账户是够存在
-      if (user == null) {
-        complete(response, 1202); return;
-      }
+    if (user == null) { // 账户不存在
+      complete(response, 1202); return;
+    } else if (!user.getIsActive()) { // 账户未激活
+      complete(response, 1204); return;
+    } else if (!MD5.verify(userVerify.getPassword(), user.getPassword())) { // 密码错误
+      complete(response, 1203); return ;
+    }
 
-      // 验证账户是否是已激活的
-      if (!user.getIsActive()) {
-        complete(response, 1204); return;
-      }
+    // 生成并设置登录令牌
+    String token = UUIDTool.getUUID();
+    user.setToken(token);
 
-      try {
-        if (MD5.verify(userVerify.getPassword(), user.getPassword())) {
-          // 生成登录令牌
-          String token = UUIDTool.getUUID();
-          user.setToken(token);
-
-          if (updateInstance(user)) {
-            CookieFactory cookieFactory = new CookieFactory(request, response);
-            cookieFactory.setCookie("uid", String.valueOf(user.getId()));
-            cookieFactory.setCookie("token", token);
-            complete(response, 1200);
-          } else {
-            complete(response, 1205);
-          }
-        } else {
-          complete(response, 1203);
-        }
-      } catch (Exception e) {
-        e.printStackTrace();
-        complete(response, 1201);
-      }
+    // 更新用户数据并设置cookie
+    if (updateInstance(user)) {
+      CookieFactory cookieFactory = new CookieFactory(request, response);
+      cookieFactory.setCookie("uid", String.valueOf(user.getId()));
+      cookieFactory.setCookie("token", token);
+      complete(response, 1200);
+    } else {
+      complete(response, 1201);
     }
   }
 

@@ -12,8 +12,8 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
- * 基础API类
- * 所有API类继承自此类
+ * 基础Servlet类
+ * 所有Servlet类继承自此类
  */
 public class BaseServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -71,7 +71,7 @@ public class BaseServlet extends HttpServlet {
   /**
    * 更新数据库实例
    * 
-   * @param instance
+   * @param instance 数据实例
    * @return 更新数据实例成功/失败
    */
   protected boolean updateInstance(Object instance) {
@@ -92,7 +92,7 @@ public class BaseServlet extends HttpServlet {
     } finally {
       if (session != null) {
         session.close();
-      }   
+      }
     }
 
     return true;

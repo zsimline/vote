@@ -21,9 +21,9 @@ public class HibernateUtil {
       configuration.configure();
 
       // 创建Session工厂对象
-      SessionFactory factory = configuration.buildSessionFactory();
+      SessionFactory sessionFactory = configuration.buildSessionFactory();
       
-      return factory;
+      return sessionFactory;
     } catch (Throwable e) {
       e.printStackTrace();
       throw new ExceptionInInitializerError(e);

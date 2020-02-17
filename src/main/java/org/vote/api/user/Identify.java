@@ -36,7 +36,12 @@ public class Identify {
     try {
       // 根据UID获取用户实例并判断认证令牌是否相等
       Long userId = Long.valueOf(uid);
-      User user = (User)getInstanceById(User.class, userId);
+      User user = getInstanceById(User.class, userId);
+      if (!user.getToken().equals(token)) {
+        User user2 = getInstanceById(User.class, userId);
+        System.out.println(user2.getToken());
+      }
+
       return user != null && user.getToken().equals(token) ? userId : -1L;
     } catch (NumberFormatException e) {
       e.printStackTrace();
@@ -51,11 +56,11 @@ public class Identify {
    * @param id 实例ID
    * @return
    */
-  public static Object getInstanceById(Class<?> clazz, long id) {
+  public static User getInstanceById(Class<?> clazz, long id) {
     Session session = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
-      return session.get(clazz, id);
+      return (User) session.get(clazz, id);
     } catch (HibernateException e) {
       e.printStackTrace();
       return null;

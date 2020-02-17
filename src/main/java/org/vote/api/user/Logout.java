@@ -23,10 +23,10 @@ public class Logout extends BaseApi {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
     // 置空登录令牌
-    User user = (User) getInstanceById(User.class, (Long)request.getAttribute("uid"));
+    long uid = Identify.userIdentify(request, response);
+    User user = (User) getInstanceById(User.class, uid);
     user.setToken(null);
 
-    // 更新
     if (updateInstance(user)) {
       CookieFactory cookieFactory = new CookieFactory(request, response);
       cookieFactory.setCookie("uid", null, 0, "/");
