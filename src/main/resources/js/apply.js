@@ -162,7 +162,10 @@ function uploadPostData(postData) {
   postJSON(`/api/vote/apply/external?aid=${$('#aid').text()}`, postData)
   .then(data => {
     if (!data.code) {
-      console.log(data);
+      showMsg('success', '报名成功');
+      setTimeout(() => {
+        window.location.href = "/index";
+      }, 800)
     } else {
       showMsg('error', data.codeDesc);
     }

@@ -3,6 +3,7 @@
   contentType="text/html;charset=UTF-8"
   pageEncoding="UTF-8"
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML>
 <html lang="zh">
@@ -18,8 +19,18 @@
   <%@ include file="../components/header.jsp" %>
 
   <div class="container">
+    <c:choose>
+      <c:when test="${applyTimeStatus == -1}">
+        <h3 style="color: red;">报名还未开始！请勿提交报名数据。</h3>
+      </c:when>
+      <c:when test="${applyTimeStatus == 1}">
+        <h3 style="color: red;">报名已经截止！请勿提交报名数据。</h3>
+      </c:when>
+    </c:choose>
+
+    <h5>${activity.title}</h5>
     <%@ include file="../components/options/title.jsp" %>
-    
+
     <%
       String[] options = (String[])request.getAttribute("options");
       for (int i = 0; i < options.length; i++) {
@@ -76,7 +87,7 @@
     <button class="btn btn-primary" onclick="handleSubmit()">　　报名　　</button>
   </div>
 
-  <span id="aid" class="hidden"><%= request.getAttribute("aid") %></span>
+  <span id="aid" class="hidden">${activity.id}</span>
 
   <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/footer.jsp" %>

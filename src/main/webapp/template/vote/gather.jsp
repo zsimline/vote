@@ -22,19 +22,19 @@
   <div class="container">
     <ul class="nav nav-tabs">
       <li role="presentation">
-        <a href="/vote/edit?activity.id=${activity.id}">编辑</a>
+        <a href="/vote/edit?aid=${activity.id}">编辑</a>
       </li>
       <li role="presentation">
-        <a href="/vote/apply_manage?activity.id=${activity.id}&status=w&page=1">报名管理</a>
+        <a href="/vote/apply_manage?aid=${activity.id}&status=w&page=1">报名管理</a>
       </li>
       <li role="presentation">
-        <a href="/vote/entry_manage?activity.id=${activity.id}&page=1">条目管理</a>
+        <a href="/vote/entry_manage?aid=${activity.id}&page=1">条目管理</a>
       </li>
       <li role="presentation" class="active">
-        <a href="/vote/gather?activity.id=${activity.id}">结果与日志</a>
+        <a href="/vote/gather?aid=${activity.id}">结果与日志</a>
       </li>
       <li role="presentation">
-        <a href="/vote/qrcode?activity.id=${activity.id}">链接与二维码</a>
+        <a href="/vote/qrcode?aid=${activity.id}">链接与二维码</a>
       </li>
     </ul>
 
