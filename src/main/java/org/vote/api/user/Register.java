@@ -22,8 +22,14 @@ import org.vote.common.Email;
 public class Register extends BaseApi {
   private static final long serialVersionUID = 1L;
 
-  private final String emailVerifyContent = "<a href=\"http://vote.zizaixian.top/user/activation?email=%s&code=%s>点击链接激活账户</a>";
-
+  private final String emailVerifyContent = 
+            "<div style=\"text-align: center;\">"
+              + "<h2 style=\"color:#00bcd4\">用户电子邮件验证</h2>"
+              + "<p><a style=\"font-size: 18px\" href=\"http://vote.zizaixian.top/user/activation?email=zsimline@163.com&code=f6248ca3dca775cce67edee9d9baaad5\">点击链接激活账户</a><p>"
+              + "<img src=\"http://vote.zizaixian.top/images/emailauth.jpg\">"
+              + "<h4 style=\"color:#1d262d\">鹿鸣投票</h5>"
+          + "<div>";
+  
   public Register() {
   }
 
