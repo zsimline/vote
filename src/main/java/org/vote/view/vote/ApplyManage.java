@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.beans.Activity;
 import org.vote.beans.Apply;
 import org.vote.common.BaseView;
+import org.vote.common.DBUtil;
 
 /**
  * 显示报名管理页面
@@ -34,6 +35,6 @@ public class ApplyManage extends BaseView {
     char status = request.getParameter("status").charAt(0);
     String[] keys = { "aid", "status" };
     Object[] values = { aid, status };
-    return (countRows(Apply.class, keys, values) + 14) / 15;
+    return (DBUtil.countRows(Apply.class, keys, values) + 14) / 15;
   }
 }

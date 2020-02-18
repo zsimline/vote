@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.vote.api.user.Identify;
+import org.vote.common.Identify;
 
 /**
  * 用户身份拦截器

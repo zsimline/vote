@@ -11,6 +11,7 @@ import org.vote.beans.User;
 import org.vote.common.BaseApi;
 import org.vote.common.CookieFactory;
 import org.vote.common.DBUtil;
+import org.vote.common.Identify;
 
 /**
  * 处理账户注销

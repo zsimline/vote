@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.vote.api.user.Identify;
+import org.vote.common.Identify;
 import org.vote.beans.Apply;
 import org.vote.common.BaseApi;
 import org.vote.common.DBUtil;

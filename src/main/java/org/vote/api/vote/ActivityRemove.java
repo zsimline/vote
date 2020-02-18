@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.vote.common.BaseApi;
 import org.vote.common.DBUtil;
-import org.vote.api.user.Identify;
+import org.vote.common.Identify;
 import org.vote.beans.Activity;
 
 /**

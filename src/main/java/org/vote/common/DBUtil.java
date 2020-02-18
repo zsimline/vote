@@ -8,15 +8,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+
+import org.vote.common.HibernateUtil;
 
 /**
  * 基础数据库工具类 包含常用的操作数据库的方法
  */
 public class DBUtil {
-  public DBUtil() {
-  }
-
   /**
    * 根据ID获取实例
    * 
@@ -68,6 +68,66 @@ public class DBUtil {
   }
 
   /**
+   * 保存数据实例
+   * 
+   * @param instance 数据实例
+   * @return 操作执行成功/失败
+   */
+  public static boolean saveInstance(Object instance) {
+    Session session = null;
+    Transaction transaction = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+      transaction = session.beginTransaction();
+      transaction.begin();
+      session.save(instance);
+      transaction.commit();
+    } catch (HibernateException e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+      return false;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * 保存数据实例
+   * 
+   * @param instance 数据实例
+   * @return 操作执行成功/失败
+   */
+  public static boolean deleteInstance(Object instance) {
+    Session session = null;
+    Transaction transaction = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+      transaction = session.beginTransaction();
+      transaction.begin();
+      session.delete(instance);
+      transaction.commit();
+    } catch (HibernateException e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+      return false;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+
+    return true;
+  }
+
+  /**
    * 更新数据库实例
    * 
    * @param instance 数据实例
@@ -81,6 +141,36 @@ public class DBUtil {
       transaction = session.beginTransaction();
       transaction.begin();
       session.update(instance);
+      transaction.commit();
+    } catch (HibernateException e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+      return false;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * 保存或更新数据实例
+   * 
+   * @param instance 数据实例
+   * @return 操作执行成功/失败
+   */
+  public static boolean saveOrUpdateInstance(Object instance) {
+    Session session = null;
+    Transaction transaction = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+      transaction = session.beginTransaction();
+      transaction.begin();
+      session.saveOrUpdate(instance);
       transaction.commit();
     } catch (HibernateException e) {
       if (transaction != null) {
@@ -156,66 +246,6 @@ public class DBUtil {
   }
 
   /**
-   * 保存数据实例
-   * 
-   * @param instance 数据实例
-   * @return 操作执行成功/失败
-   */
-  public static boolean saveInstance(Object instance) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = HibernateUtil.getSessionFactory().openSession();
-      transaction = session.beginTransaction();
-      transaction.begin();
-      session.save(instance);
-      transaction.commit();
-    } catch (HibernateException e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-      return false;
-    } finally {
-      if (session != null) {
-        session.close();
-      }
-    }
-
-    return true;
-  }
-
-  /**
-   * 保存或更新数据实例
-   * 
-   * @param instance 数据实例
-   * @return 操作执行成功/失败
-   */
-  public static boolean saveOrUpdateInstance(Object instance) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = HibernateUtil.getSessionFactory().openSession();
-      transaction = session.beginTransaction();
-      transaction.begin();
-      session.saveOrUpdate(instance);
-      transaction.commit();
-    } catch (HibernateException e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-      return false;
-    } finally {
-      if (session != null) {
-        session.close();
-      }
-    }
-
-    return true;
-  }
-
-  /**
    * 按条件分页查询
    * 
    * @param clazz  实例类
@@ -244,6 +274,67 @@ public class DBUtil {
     } catch (HibernateException e) {
       e.printStackTrace();
       return Collections.emptyList();
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+  }
+
+
+  /**
+   * 统计行数
+   * 
+   * @param clazz 实例类
+   * @return 行数
+   */
+  public static int countRows(Class<?> clazz) {
+    Session session = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+
+      // 统计行数
+      Criteria criteria = session.createCriteria(clazz);
+      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();
+      
+      return totalRows;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return 0;
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+  }
+  
+  /**
+   * 按条件统计行数
+   * 
+   * @param clazz  实例类
+   * @param keys   条件名集合
+   * @param values 条件值集合
+   * @return 行数
+   */
+  public static int countRows(Class<?> clazz, String[] keys, Object[] values) {
+    Session session = null;
+
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+
+      // 创建条件容器并添加条件
+      Criteria criteria = session.createCriteria(clazz);
+      for (int i = 0; i < keys.length; i++) {
+        criteria.add(Restrictions.eq(keys[i], values[i]));
+      }
+
+      // 统计行数
+      int totalRows = ((Integer) criteria.setProjection(Projections.rowCount()).uniqueResult()).intValue();      
+      
+      return totalRows;
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return 0;
     } finally {
       if (session != null) {
         session.close();

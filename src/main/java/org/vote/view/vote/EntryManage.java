@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.beans.Activity;
 import org.vote.beans.Entry;
 import org.vote.common.BaseView;
+import org.vote.common.DBUtil;
 
 /**
  * 显示创建投票页面
@@ -30,6 +31,6 @@ public class EntryManage extends BaseView {
   private int getSumPages(HttpServletRequest request) {
     String[] keys = { "aid" };
     Object[] values = { request.getParameter("aid") };
-    return (countRows(Entry.class, keys, values) + 14) / 15;
+    return (DBUtil.countRows(Entry.class, keys, values) + 14) / 15;
   }
 }

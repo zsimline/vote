@@ -16,7 +16,7 @@ import org.vote.common.UUIDTool;
 import org.vote.common.OAuth;
 
 @WebServlet("/api/vote/auth")
-public class Auth extends BaseApi {
+public class WechatAuth extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 

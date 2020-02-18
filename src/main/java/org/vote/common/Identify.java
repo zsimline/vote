@@ -1,4 +1,4 @@
-package org.vote.api.user;
+package org.vote.common;
 
 import java.util.HashMap;
 
