@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 
 /**
@@ -27,11 +28,11 @@ public class PermissionInterceptor implements Filter {
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response =  (HttpServletResponse) servletResponse;
-    Activity activity = (Activity) BaseServlet.getInstanceById(Activity.class, request.getParameter("aid"));
+    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
     
     if (activity == null) {
       response.sendRedirect("/index/error");
-    } else if (!BaseServlet.isMyActivity(request, activity)) {
+    } else if (!Identify.isMyActivity(request, activity)) {
       response.sendRedirect("/index");
     } else {
       request.setAttribute("activity", activity);

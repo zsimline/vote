@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.User;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 
 /**
  * 处理账户激活
@@ -35,7 +36,7 @@ public class Activation extends BaseApi {
     }
 
     // 更新用户实例
-    if (updateInstance(user)) {
+    if (DBUtil.updateInstance(user)) {
       complete(response, 1300);
     } else {
       complete(response, 1301);
@@ -49,7 +50,7 @@ public class Activation extends BaseApi {
    * @return 用户实例
    */
   private User getUserByEmail(String emailAddress) {    
-    List<?> results = conditionQuery(User.class, "email", emailAddress);
+    List<?> results = DBUtil.conditionQuery(User.class, "email", emailAddress);
     return results.isEmpty() ? null : (User) results.get(0);
   }
 }

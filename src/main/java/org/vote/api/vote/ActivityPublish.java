@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 import org.vote.common.UUIDTool;
 import org.vote.common.Utils;
 
@@ -41,7 +42,7 @@ public class ActivityPublish extends BaseApi {
     }
 
     // 执行数据存储
-    if (createTicketTable(activity.getId()) && saveInstance(activity)) {
+    if (createTicketTable(activity.getId()) && DBUtil.saveInstance(activity)) {
       complete(response, 1000);
     } else {
       complete(response, 1001);
@@ -57,6 +58,6 @@ public class ActivityPublish extends BaseApi {
   private boolean createTicketTable(String aid) {
     // 调用创建投票表事务
     String hql = "call create_ticket_table(:uuid)";
-    return dbExcute(hql, "uuid", aid);
+    return DBUtil.dbExcute(hql, "uuid", aid);
   }
 }

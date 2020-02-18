@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.vote.beans.Entry;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 import org.vote.common.HibernateUtil;
 
 /**
@@ -53,7 +54,7 @@ public class EntrySearch extends BaseApi {
     String[] keys = {"aid", "number"};
     Object[] values = {request.getParameter("aid"), number};
 
-    return conditionQuery(Entry.class, keys, values);
+    return DBUtil.conditionQuery(Entry.class, keys, values);
   }
 
   private List<?> searchEntryByTitle(HttpServletRequest request) {

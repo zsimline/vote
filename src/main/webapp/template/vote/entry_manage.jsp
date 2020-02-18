@@ -64,10 +64,10 @@
           int hi = lo + 7 > sumPages ? sumPages : lo + 7;
         %>
         <li title="首页">
-          <a href="/vote/entry_manage?aid=${aid}&page=1"><i class="fa fa-angle-double-left"></i></a>
+          <a href="/vote/entry_manage?aid=${activity.id}&page=1"><i class="fa fa-angle-double-left"></i></a>
         </li>
         <li title="上一页">
-          <a href="/vote/entry_manage?aid=${aid}&page=<%= curPage-1 > 0 ? curPage - 1 : 1 %>" class="fui-arrow-left"></a>
+          <a href="/vote/entry_manage?aid=${activity.id}&page=<%= curPage-1 > 0 ? curPage - 1 : 1 %>" class="fui-arrow-left"></a>
         </li>
         <% 
           while (lo <= hi) {
@@ -76,13 +76,13 @@
             if (lo == curPage) {
           %>
               <li>
-                <a href="/vote/entry_manage?aid=${aid}&page=<%= lo %>" class="active"><%= lo %></a>
+                <a href="/vote/entry_manage?aid=${activity.id}&page=<%= lo %>" class="active"><%= lo %></a>
               </li>
           <%
             } else {
           %>
               <li>
-                <a href="/vote/entry_manage?aid=${aid}&page=<%= lo %>"><%= lo %></a>
+                <a href="/vote/entry_manage?aid=${activity.id}&page=<%= lo %>"><%= lo %></a>
               </li>
           <%
             }
@@ -92,10 +92,10 @@
           }
         %>
         <li title="下一页">
-          <a href="/vote/entry_manage?aid=${aid}&page=<%= curPage+1 > sumPages ? sumPages : curPage+1 %>" class="fui-arrow-right"></a>
+          <a href="/vote/entry_manage?aid=${activity.id}&page=<%= curPage+1 > sumPages ? sumPages : curPage+1 %>" class="fui-arrow-right"></a>
         </li>
         <li title="尾页">
-          <a href="/vote/entry_manage?aid=${aid}&page=<%= sumPages %>"><i class="fa fa-angle-double-right"></i></a>
+          <a href="/vote/entry_manage?aid=${activity.id}&page=<%= sumPages %>"><i class="fa fa-angle-double-right"></i></a>
         </li>
       </ul>
       <div class="pagination-jump">

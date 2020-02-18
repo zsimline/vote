@@ -193,10 +193,10 @@
           int hi = lo + 7 > sumPages ? sumPages : lo + 7;
         %>
         <li title="首页">
-          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=1"><i class="fa fa-angle-double-left"></i></a>
+          <a href="/vote/apply_manage?aid=${activity.id}&status=${status}&page=1"><i class="fa fa-angle-double-left"></i></a>
         </li>
         <li title="上一页">
-          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= curPage-1 > 0 ? curPage - 1 : 1 %>" class="fui-arrow-left"></a>
+          <a href="/vote/apply_manage?aid=${activity.id}&status=${status}&page=<%= curPage-1 > 0 ? curPage - 1 : 1 %>" class="fui-arrow-left"></a>
         </li>
         <% 
           while (lo <= hi) {
@@ -205,13 +205,13 @@
             if (lo == curPage) {
           %>
               <li>
-                <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= lo %>" class="active"><%= lo %></a>
+                <a href="/vote/apply_manage?aid=${activity.id}&status=${status}&page=<%= lo %>" class="active"><%= lo %></a>
               </li>
           <%
             } else {
           %>
               <li>
-                <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= lo %>"><%= lo %></a>
+                <a href="/vote/apply_manage?aid=${activity.id}&status=${status}&page=<%= lo %>"><%= lo %></a>
               </li>
           <%
             }
@@ -221,10 +221,10 @@
           }
         %>
         <li title="下一页">
-          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= curPage+1 > sumPages ? sumPages : curPage+1 %>" class="fui-arrow-right"></a>
+          <a href="/vote/apply_manage?aid=${activity.id}&status=${status}&page=<%= curPage+1 > sumPages ? sumPages : curPage+1 %>" class="fui-arrow-right"></a>
         </li>
         <li title="尾页">
-          <a href="/vote/apply_manage?aid=${aid}&status=${status}&page=<%= sumPages %>"><i class="fa fa-angle-double-right"></i></a>
+          <a href="/vote/apply_manage?aid=${activity.id}&status=${status}&page=<%= sumPages %>"><i class="fa fa-angle-double-right"></i></a>
         </li>
       </ul>
       <div class="pagination-jump">

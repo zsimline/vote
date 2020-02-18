@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.vote.common.BaseView;
+import org.vote.common.DBUtil;
 import org.vote.beans.Activity;
 
 /**
@@ -19,7 +20,7 @@ public class Apply extends BaseView {
   private static final long serialVersionUID = 1L;
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Activity activity = (Activity)getInstanceById(Activity.class, request.getParameter("aid"));
+    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
     if (activity != null && activity.getExternalApply()) {
       request.setAttribute("activity", activity);
       request.setAttribute("applyTimeStatus", checkTime(activity));

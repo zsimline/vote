@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.Activity;
 import org.vote.common.BaseView;
+import org.vote.common.DBUtil;
 
 /**
  * 显示管理投票页面
@@ -35,7 +36,7 @@ public class Manage extends BaseView {
   private List<Activity> getActivitysByPublisher(long uid) {
     String[] keys = {"publisher", "destroyed"};
     Object[] values = {uid, false};
-    List<?>  activitys =  conditionQuery(Activity.class, keys, values);
+    List<?>  activitys =  DBUtil.conditionQuery(Activity.class, keys, values);
     return (List<Activity>) activitys;
   }
 }

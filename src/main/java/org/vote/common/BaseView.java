@@ -3,6 +3,7 @@ package org.vote.common;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +19,7 @@ import org.vote.common.HibernateUtil;
  * 基础视图类
  * 所有视图类继承自此类
  */
-public class BaseView extends BaseServlet {
+public class BaseView extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   /**

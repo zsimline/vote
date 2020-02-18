@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 import org.vote.common.Utils;
 
 /**
@@ -22,7 +24,7 @@ public class ActivityUpdate extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Activity activityOld = (Activity) getInstanceById(Activity.class, request.getParameter("aid"));
+    Activity activityOld = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
     Activity activityNew = (Activity) Utils.postDataToObj(request, Activity.class);
 
     // 验证权限与数据完整性
@@ -30,14 +32,14 @@ public class ActivityUpdate extends BaseApi {
       complete(response, 1704); return ;
     } else if (activityNew == null) {
       complete(response, 1703); return ;
-    } else if (!isMyActivity(request, activityOld)) {
+    } else if (!Identify.isMyActivity(request, activityOld)) {
       complete(response, 1702); return ;
     } else {
       syncActivityData(activityOld, activityNew);
     }
 
     // 执行数据存储
-    if (updateInstance(activityNew)) {
+    if (DBUtil.updateInstance(activityNew)) {
       complete(response, 1700);
     } else {
       complete(response, 1701);

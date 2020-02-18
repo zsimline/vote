@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 
@@ -23,7 +24,7 @@ public class ActivityRemove extends BaseApi {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
-    Activity activity = (Activity)getInstanceById(Activity.class, aid);
+    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, aid);
     long uid = Identify.userIdentify(request);
     
     // 验证是否可删除
@@ -34,7 +35,7 @@ public class ActivityRemove extends BaseApi {
     // 设置活动为销毁
     // 删除投票表并更新活动实例
     activity.setDestroyed(true);
-    if (deleteTicketTable(aid) && updateInstance(activity)) {
+    if (deleteTicketTable(aid) && DBUtil.updateInstance(activity)) {
       complete(response, 1900);
     } else {
       complete(response, 1901);
@@ -65,6 +66,6 @@ public class ActivityRemove extends BaseApi {
   private boolean deleteTicketTable(String aid) {
     // 调用删除投票表事务
     String hql = "call drop_ticket_table(:uuid)";
-    return dbExcute(hql, "uuid", aid);
+    return DBUtil.dbExcute(hql, "uuid", aid);
   }
 }

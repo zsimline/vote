@@ -24,6 +24,7 @@ import org.vote.beans.Ticket;
 import org.vote.beans.Wechat;
 import org.vote.common.BaseApi;
 import org.vote.common.CookieFactory;
+import org.vote.common.DBUtil;
 import org.vote.common.HibernateUtil;
 import org.vote.common.TableNameMappingInterceptor;
 import org.vote.common.Utils;
@@ -51,7 +52,7 @@ public class Action extends BaseApi {
     if (postAction == null) {
       complete(response, 2002); return;
     } else {
-      activity = (Activity) getInstanceById(Activity.class, postAction.getAid());
+      activity = (Activity) DBUtil.getInstanceById(Activity.class, postAction.getAid());
       if (activity == null) {
         complete(response, 2003); return ;
       }
@@ -72,7 +73,7 @@ public class Action extends BaseApi {
     }
   
     for(long id : ids)  {
-      Entry entry = (Entry) getInstanceById(Entry.class, id);
+      Entry entry = (Entry) DBUtil.getInstanceById(Entry.class, id);
       if (entry == null || !entry.getAid().equals(aid) || entry.getIsFreeze()) {
         complete(response, 2008); return ;
       } else {
@@ -88,11 +89,11 @@ public class Action extends BaseApi {
       ticket.setIp(Utils.getRealIp(request));
       ticket.setReason(postAction.getReason());
 
-      if (!updateInstance(entry)  || !saveTicket(ticket, interceptor)) {
+      if (!DBUtil.updateInstance(entry)  || !saveTicket(ticket, interceptor)) {
         complete(response, 2001); return ;
       }
     }
-    updateInstance(activity);
+    DBUtil.updateInstance(activity);
     complete(response, 2000);
   }
 
@@ -190,7 +191,7 @@ public class Action extends BaseApi {
     }
 
     // 已携带认证信息但认证失败
-    Wechat wechat = (Wechat) getInstanceById(Wechat.class, openid);
+    Wechat wechat = (Wechat) DBUtil.getInstanceById(Wechat.class, openid);
     if (wechat == null || !wechat.getToken().equals(token)) {
       return null;
     }

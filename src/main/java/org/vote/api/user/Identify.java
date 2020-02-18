@@ -3,12 +3,12 @@ package org.vote.api.user;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import org.vote.beans.Activity;
 import org.vote.beans.User;
 import org.vote.common.CookieFactory;
-import org.vote.common.HibernateUtil;
+import org.vote.common.DBUtil;
 
 /**
  * 用户身份处理器
@@ -33,7 +33,7 @@ public class Identify {
     try {
       // 根据UID获取用户实例并判断认证令牌是否相等
       Long userId = Long.valueOf(uid);
-      User user = getUserById(userId);
+      User user = (User) DBUtil.getInstanceById(User.class, userId);
       return user != null && user.getToken().equals(token) ? userId : -1L;
     } catch (NumberFormatException e) {
       e.printStackTrace();
@@ -42,26 +42,23 @@ public class Identify {
   }
 
   /**
-   * 获取用户数据
+   * 验证活动是否属于该用户
+   * 当出现以下情况时该用户不可操作活动：
+   * 用户未登录、活动不存在、活动不属于该用户
    * 
-   * @param id UID
-   * @return 用户实例
+   * @param request 请求对象
+   * @param response 响应对象
+   * @return  活动属于该用户返回true，否则返回false
    */
-  public static User getUserById(long id) {
-    Session session = null;
-    try {
-      session = HibernateUtil.getSessionFactory().openSession();
-      return (User) session.get(User.class, id);
-    } catch (HibernateException e) {
-      e.printStackTrace();
-      return null;
-    } catch (IllegalArgumentException e) {
-      e.printStackTrace();
-      return null;
-    } finally {
-      if (session != null) {
-        session.close();
-      }
-    }
+  public static boolean isMyActivity(HttpServletRequest request, HttpServletResponse response) {
+    String aid = request.getParameter("aid");
+    long uid  = userIdentify(request);
+    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, aid);
+    return activity != null && activity.getPublisher() == uid ? true : false;
+  }
+
+  public static boolean isMyActivity(HttpServletRequest request, Activity activity) {
+    long uid  = userIdentify(request);
+    return activity  != null && activity.getPublisher() == uid ? true : false;
   }
 }

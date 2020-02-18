@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.Entry;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 
 /**
  * 获取报名数据
@@ -42,6 +43,6 @@ public class DataEntry extends BaseApi {
 
     String[] keys = {"aid"};
     Object[] values = { aid };
-    return paginationQuery(Entry.class, keys, values, page, 20);
+    return DBUtil.paginationQuery(Entry.class, keys, values, page, 20);
   }
 }

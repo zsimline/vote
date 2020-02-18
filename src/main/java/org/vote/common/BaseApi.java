@@ -2,31 +2,24 @@ package org.vote.common;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Collections;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-import org.vote.common.HibernateUtil;
 import org.vote.common.Code;
 
 /**
  * 基础API类
  * 所有API类继承自此类
  */
-public class BaseApi extends BaseServlet {
+public class BaseApi extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   // json处理器
-  private static final Gson gson = new Gson();
+  private final Gson gson = new Gson();
 
   /**
    * 向用户返回操作执行的结果
@@ -61,103 +54,6 @@ public class BaseApi extends BaseServlet {
   }
 
   /**
-   * 执行数据库操作
-   * 
-   * @param hql 操作语句
-   * @param name 查询参数
-   * @param val 参数值
-   * @return  操作执行成功/失败
-   */
-  protected boolean dbExcute(String hql, String name, String val) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = HibernateUtil.getSessionFactory().openSession();
-      
-      // 创建查询语句并设置查询参数
-      Query query = session.createSQLQuery(hql);
-      query.setParameter(name, val);
-      
-      transaction = session.beginTransaction();
-      transaction.begin();
-      query.executeUpdate();
-      transaction.commit();
-    } catch (HibernateException e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-      return false;
-    } finally {
-      if (session != null) {
-        session.close();
-      }
-    }
-
-    return true;
-  }
-
-  /**
-   * 保存数据实例
-   * 
-   * @param instance 数据实例
-   * @return 操作执行成功/失败
-   */
-  protected boolean saveInstance(Object instance) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = HibernateUtil.getSessionFactory().openSession();
-      transaction = session.beginTransaction();
-      transaction.begin();
-      session.save(instance);
-      transaction.commit();
-    } catch (HibernateException e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-      return false;
-    } finally {
-      if (session != null) {
-        session.close();
-      }
-    }
-
-    return true;
-  }
-
-  /**
-   * 保存或更新数据实例
-   * 
-   * @param instance 数据实例
-   * @return 操作执行成功/失败
-   */
-  protected boolean saveOrUpdateInstance(Object instance) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = HibernateUtil.getSessionFactory().openSession();
-      transaction = session.beginTransaction();
-      transaction.begin();
-      session.saveOrUpdate(instance);
-      transaction.commit();
-    } catch (HibernateException e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-      return false;
-    } finally {
-      if (session != null) {
-        session.close();
-      }
-    }
-
-    return true;
-  }
-
-  /**
    * 向用户发送JSON
    * 将对象转换为JSON字符串并发送
    * 
@@ -185,41 +81,5 @@ public class BaseApi extends BaseServlet {
     String jsonStr = gson.toJson(objs);
     response.getWriter().write(jsonStr);
     response.setStatus(200);
-  }
-
-  /**
-   * 按条件分页查询
-   * 
-   * @param clazz  实例类
-   * @param keys   条件名集合
-   * @param values 条件值集合
-   * @param page   当前页面索引
-   * @param max    单页最大数量
-   * @return 查询结果集
-   */
-  protected List<?> paginationQuery(Class<?> clazz, String[] keys, Object[] values, int page, int max) {
-    Session session = null;
-    try {
-      session = HibernateUtil.getSessionFactory().openSession();
-
-      // 创建条件容器并添加条件
-      Criteria criteria = session.createCriteria(clazz);  
-      for (int i = 0; i < keys.length; i++) {
-        criteria.add(Restrictions.eq(keys[i], values[i]));
-      }
-    
-      // 设置起始页面与单页最大选择数量
-      criteria.setFirstResult((page-1) * max);
-      criteria.setMaxResults(max);
-
-      return criteria.list();
-    } catch (HibernateException e) {
-      e.printStackTrace();
-      return Collections.emptyList();
-    } finally {
-      if (session != null) {
-        session.close();
-      }
-    }
   }
 }

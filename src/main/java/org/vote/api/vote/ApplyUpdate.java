@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.api.user.Identify;
 import org.vote.beans.Apply;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 import org.vote.common.Utils;
 
 import java.lang.NumberFormatException;
@@ -24,7 +26,7 @@ public class ApplyUpdate extends BaseApi {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    if (!isMyActivity(request, response)) {
+    if (!Identify.isMyActivity(request, response)) {
       complete(response, 1503); return ;
     }
     
@@ -50,7 +52,7 @@ public class ApplyUpdate extends BaseApi {
     }
 
     // 执行数据存储
-    if (updateInstance((applyNew))) {
+    if (DBUtil.updateInstance((applyNew))) {
       sendJSON(response, applyNew);
     } else {
       complete(response, 1501);
@@ -70,7 +72,7 @@ public class ApplyUpdate extends BaseApi {
     Apply apply = null;
     try {
       String id = request.getParameter("id");
-      apply = (Apply) getInstanceById(Apply.class, Long.valueOf(id));
+      apply = (Apply) DBUtil.getInstanceById(Apply.class, Long.valueOf(id));
     } catch (NumberFormatException e) {
       e.printStackTrace();
     }

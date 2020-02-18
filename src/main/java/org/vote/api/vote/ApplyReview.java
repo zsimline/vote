@@ -7,10 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.api.user.Identify;
 import org.vote.beans.Activity;
 import org.vote.beans.Apply;
 import org.vote.beans.Entry;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 
 /**
  * 处理审核报名
@@ -23,8 +25,8 @@ public class ApplyReview extends BaseApi {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Activity activity = (Activity) getInstanceById(Activity.class, request.getParameter("aid"));
-    if (isMyActivity(request, activity)) {
+    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
+    if (Identify.isMyActivity(request, activity)) {
       complete(response, 1602); return ;
     }
     
@@ -61,7 +63,7 @@ public class ApplyReview extends BaseApi {
   private boolean handleApprove(HttpServletRequest request, Activity activity) {
     try {
       int id = Integer.valueOf(request.getParameter("id"));
-      Apply apply = (Apply)getInstanceById(Apply.class, id);
+      Apply apply = (Apply)DBUtil.getInstanceById(Apply.class, id);
 
       // 已通过审核，不可重复操作
       if (apply.getStatus() == 'y') return false;
@@ -75,8 +77,8 @@ public class ApplyReview extends BaseApi {
       entry.setNumber(sumEntry + 1);
       activity.setSumEntry(sumEntry + 1);
 
-      return updateInstance(activity) && updateInstance(apply)
-             && saveInstance(entry);
+      return DBUtil.updateInstance(activity) && DBUtil.updateInstance(apply)
+             && DBUtil.saveInstance(entry);
     } catch (Exception e) {
       e.printStackTrace();
       return false;
@@ -92,14 +94,14 @@ public class ApplyReview extends BaseApi {
   private boolean handleReject(HttpServletRequest request) {
     try {
       int id = Integer.valueOf(request.getParameter("id"));
-      Apply apply = (Apply)getInstanceById(Apply.class, id);
+      Apply apply = (Apply) DBUtil.getInstanceById(Apply.class, id);
 
       // 只能由待审核转换为未通过审核
       if (apply.getStatus() != 'w') return false;
       
       // 更新报名信息并同步数据到条目表
       apply.setStatus('n');
-      return updateInstance(apply);
+      return DBUtil.updateInstance(apply);
     } catch (Exception e) {
       e.printStackTrace();
       return false;

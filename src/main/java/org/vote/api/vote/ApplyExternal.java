@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.beans.Activity;
 import org.vote.beans.Apply;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 import org.vote.common.Utils;
 
 /**
@@ -25,7 +26,7 @@ public class ApplyExternal extends BaseApi {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     String aid = request.getParameter("aid");
-    Activity activity = (Activity) getInstanceById(Activity.class, aid);
+    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, aid);
     Apply apply = (Apply) Utils.postDataToObj(request, Apply.class);
 
     if (activity == null || apply == null) {
@@ -40,7 +41,7 @@ public class ApplyExternal extends BaseApi {
     }
 
     // 执行数据存储
-    if (saveInstance(apply)) {
+    if (DBUtil.saveInstance(apply)) {
       sendJSON(response, apply);
     } else {
       complete(response, 1401);

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.User;
 import org.vote.common.MD5;
+import org.vote.common.UUIDTool;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 import org.vote.common.Utils;
 import org.vote.common.Email;
 
@@ -20,19 +22,27 @@ import org.vote.common.Email;
 public class Register extends BaseApi {
   private static final long serialVersionUID = 1L;
 
+  private final String emailVerifyContent = "<a href=\"http://vote.zizaixian.top/user/activation?email=%s&code=%s>点击链接激活账户</a>";
+
   public Register() {
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     User user = (User) Utils.postDataToObj(request, User.class);
-
     if (user != null) {
       user.setPassword(MD5.md5(user.getPassword()));
-    } 
+      user.setToken(UUIDTool.getUUID());
+    } else {
+      complete(response, 1101); return ;
+    }
 
-    if (saveInstance(user)) {
-      verifyEmail(response, user);
-      complete(response, 1100);
+    // 存储用户注册信息
+    if (DBUtil.saveInstance(user)) {
+      if (verifyEmail(response, user)) {
+        complete(response, 1100);
+      } else {
+        complete(response, 1102);
+      }
     } else {
       complete(response, 1101);
     }
@@ -43,17 +53,10 @@ public class Register extends BaseApi {
    * 
    * @param response Servlet 响应对象
    * @param user 用户实例
-   * @throws IOException
-   * @throws ServletException
    */
-  private void verifyEmail(HttpServletResponse response, User user) throws ServletException, IOException {
+  private boolean verifyEmail(HttpServletResponse response, User user) {
     String emailAddress = user.getEmail();
-    String mailContent = "<a href=\"http://vote.zizaixian.top/user/activation?"
-                         + "email=" + emailAddress + "&code=" + user.getPassword()
-                         + "\">点击链接激活账户</a>";
-
-    if (!Email.sendMail(emailAddress, mailContent)) {
-      complete(response, 1102);
-    }
+    String mailContent = String.format(emailVerifyContent, emailAddress, user.getPassword());
+    return Email.sendMail(emailAddress, mailContent);
   }
 }

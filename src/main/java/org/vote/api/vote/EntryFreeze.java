@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.api.user.Identify;
 import org.vote.beans.Entry;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 
 /**
  * 处理审核报名
@@ -21,21 +23,21 @@ public class EntryFreeze extends BaseApi {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    if (!isMyActivity(request, response)) {
+    if (!Identify.isMyActivity(request, response)) {
       complete(response, 1602); return ;
     }
 
     Entry entry = null;
     String id = request.getParameter("id");
     try {
-      entry = (Entry)getInstanceById(Entry.class, Long.valueOf(id));
+      entry = (Entry) DBUtil.getInstanceById(Entry.class, Long.valueOf(id));
       entry.setIsFreeze(true);
     } catch (NumberFormatException e) {
       e.printStackTrace();
       complete(response, 1601); return ;
     }
 
-    if (updateInstance(entry)) {
+    if (DBUtil.updateInstance(entry)) {
       sendJSON(response, entry);
     } else {
       complete(response, 1601);

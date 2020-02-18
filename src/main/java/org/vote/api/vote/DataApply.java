@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.vote.api.user.Identify;
 import org.vote.beans.Apply;
 import org.vote.common.BaseApi;
+import org.vote.common.DBUtil;
 
 /**
  * 获取报名数据
@@ -23,7 +25,7 @@ public class DataApply extends BaseApi {
   }
   
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    if (isMyActivity(request, response)) {
+    if (Identify.isMyActivity(request, response)) {
       sendJSON(response, fetchApplys(request));
     } else {  // 报名数据不可被获取时返回空数据
       sendJSON(response, Collections.emptyList());     
@@ -52,6 +54,6 @@ public class DataApply extends BaseApi {
     String[] keys = { "aid", "status" };
     Object[] values = { aid, status };
     
-    return paginationQuery(Apply.class, keys, values, page, 15);
+    return DBUtil.paginationQuery(Apply.class, keys, values, page, 15);
   }
 }

@@ -10,14 +10,10 @@ import javax.servlet.http.HttpServletResponse;
  * Cookie处理器
  */
 public class CookieFactory {
-  // 请求对象
-  HttpServletRequest request;
-
   // 响应对象
   HttpServletResponse response;
 
-  public CookieFactory(HttpServletRequest request, HttpServletResponse response) {
-    this.request = request;
+  public CookieFactory(HttpServletResponse response) {
     this.response = response;
   }
 

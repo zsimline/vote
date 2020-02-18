@@ -12,6 +12,7 @@ import org.vote.beans.Activity;
 import org.vote.beans.Wechat;
 import org.vote.common.BaseView;
 import org.vote.common.CookieFactory;
+import org.vote.common.DBUtil;
 import org.vote.common.OAuth;
 
 /**
@@ -23,7 +24,7 @@ public class Action extends BaseView {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
     String aid = request.getParameter("aid");
-    Activity activity = (Activity)getInstanceById(Activity.class, aid);
+    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, aid);
 
     if (activity == null) {
      render404(response);
@@ -32,7 +33,7 @@ public class Action extends BaseView {
     } else {
       // 记录访问数量
       activity.setSumVisited(activity.getSumVisited() + 1);
-      updateInstance(activity);
+      DBUtil.updateInstance(activity);
       
       request.setAttribute("activity", activity);
       render(request, response, "/template/vote/action.jsp");
@@ -59,7 +60,7 @@ public class Action extends BaseView {
     if (openid == null || token == null) return false;
 
     // 已携带认证信息但认证失败
-    Wechat wechat = (Wechat) getInstanceById(Wechat.class, openid);
+    Wechat wechat = (Wechat) DBUtil.getInstanceById(Wechat.class, openid);
     if (wechat == null || !wechat.getToken().equals(token)) return false;
 
     return true;

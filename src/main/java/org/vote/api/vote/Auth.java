@@ -11,6 +11,7 @@ import org.vote.beans.AuthInfo;
 import org.vote.beans.Wechat;
 import org.vote.common.BaseApi;
 import org.vote.common.CookieFactory;
+import org.vote.common.DBUtil;
 import org.vote.common.UUIDTool;
 import org.vote.common.OAuth;
 
@@ -35,8 +36,8 @@ public class Auth extends BaseApi {
           response.sendRedirect("/index/error");
         } else {
           wechat.setToken(UUIDTool.getUUID());
-          if (saveOrUpdateInstance(wechat)) {
-            CookieFactory cookieFactory = new CookieFactory(request, response);
+          if (DBUtil.saveOrUpdateInstance(wechat)) {
+            CookieFactory cookieFactory = new CookieFactory(response);
             cookieFactory.setCookie("openid", wechat.getOpenid());
             cookieFactory.setCookie("token", wechat.getToken());
             response.sendRedirect("/vote/action?aid=" + state);

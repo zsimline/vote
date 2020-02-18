@@ -121,11 +121,11 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待修复的Bug
 
-1. 报名信息存在被非法修改的可能
+1. 搜索页面显示单个条目时错位
 
-2. 搜索页面显示单个条目时错位
+2. 各个页面存在重复提交的漏洞
 
-3. 各个页面存在重复提交的漏洞
+3. 用户注销后缓存导致Token重复
 
 
 ## 平台规则与系统限制
