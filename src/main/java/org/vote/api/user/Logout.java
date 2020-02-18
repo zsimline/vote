@@ -30,7 +30,7 @@ public class Logout extends BaseApi {
       complete(response, 1802); return ;
     } else {  // 置空登录令牌
       user = (User) DBUtil.getInstanceById(User.class, uid);
-      user.setToken(null);
+      //user.setToken(null);
     }
 
     if (DBUtil.updateInstance(user)) {

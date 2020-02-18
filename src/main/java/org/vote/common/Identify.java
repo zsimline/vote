@@ -57,6 +57,13 @@ public class Identify {
     return activity != null && activity.getPublisher() == uid ? true : false;
   }
 
+  /**
+   * 验证活动是否属于该用户
+   * 
+   * @param request 请求对象
+   * @param activity 活动实例
+   * @return  活动属于该用户返回true，否则返回false
+   */
   public static boolean isMyActivity(HttpServletRequest request, Activity activity) {
     long uid  = userIdentify(request);
     return activity  != null && activity.getPublisher() == uid ? true : false;

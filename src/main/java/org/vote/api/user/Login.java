@@ -44,8 +44,8 @@ public class Login extends BaseApi {
     }
 
     // 生成并设置登录令牌
-    // FIXM
-    String token = user.getToken();
+    // FIXME
+    String token = user.getToken(); // UUIDTool.getUUID();
     user.setToken(token);
 
     // 更新用户数据并设置cookie

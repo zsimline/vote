@@ -28,11 +28,14 @@ public class PermissionInterceptor implements Filter {
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response =  (HttpServletResponse) servletResponse;
+    long uid = Identify.userIdentify(request);
     Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
-    
-    if (activity == null) {
+
+    if (uid == -1L) {
+      response.sendRedirect("/user/login");      
+    } else if (activity == null) {
       response.sendRedirect("/index/error");
-    } else if (!Identify.isMyActivity(request, activity)) {
+    } else if (uid != activity.getPublisher()) {
       response.sendRedirect("/index");
     } else {
       request.setAttribute("activity", activity);
