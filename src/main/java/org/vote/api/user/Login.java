@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.beans.User;
 import org.vote.common.BaseApi;
 import org.vote.common.MD5;
-//import org.vote.common.UUIDTool;
+import org.vote.common.UUIDTool;
 import org.vote.common.CookieFactory;
 import org.vote.common.DBUtil;
 import org.vote.common.Utils;
@@ -46,7 +46,7 @@ public class Login extends BaseApi {
     // 生成并设置登录令牌
     // FIXME
     String token = user.getToken(); // UUIDTool.getUUID();
-    user.setToken(token);
+    //user.setToken(token);
 
     // 更新用户数据并设置cookie
     if (DBUtil.updateInstance(user)) {

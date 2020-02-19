@@ -10,7 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-
 import org.vote.common.HibernateUtil;
 
 /**
@@ -53,6 +52,7 @@ public class DBUtil {
     Session session = null;
     try {
       session = HibernateUtil.getSessionFactory().openSession();
+      session.clear();
       return session.get(clazz, id);
     } catch (HibernateException e) {
       e.printStackTrace();
@@ -79,7 +79,6 @@ public class DBUtil {
     try {
       session = HibernateUtil.getSessionFactory().openSession();
       transaction = session.beginTransaction();
-      transaction.begin();
       session.save(instance);
       transaction.commit();
     } catch (HibernateException e) {
@@ -109,7 +108,6 @@ public class DBUtil {
     try {
       session = HibernateUtil.getSessionFactory().openSession();
       transaction = session.beginTransaction();
-      transaction.begin();
       session.delete(instance);
       transaction.commit();
     } catch (HibernateException e) {
@@ -119,6 +117,7 @@ public class DBUtil {
       e.printStackTrace();
       return false;
     } finally {
+      session.clear();
       if (session != null) {
         session.close();
       }
@@ -139,7 +138,6 @@ public class DBUtil {
     try {
       session = HibernateUtil.getSessionFactory().openSession();
       transaction = session.beginTransaction();
-      transaction.begin();
       session.update(instance);
       transaction.commit();
     } catch (HibernateException e) {
@@ -169,7 +167,6 @@ public class DBUtil {
     try {
       session = HibernateUtil.getSessionFactory().openSession();
       transaction = session.beginTransaction();
-      transaction.begin();
       session.saveOrUpdate(instance);
       transaction.commit();
     } catch (HibernateException e) {
@@ -361,7 +358,6 @@ public class DBUtil {
       query.setParameter(name, val);
       
       transaction = session.beginTransaction();
-      transaction.begin();
       query.executeUpdate();
       transaction.commit();
     } catch (HibernateException e) {

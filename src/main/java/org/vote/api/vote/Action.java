@@ -110,7 +110,6 @@ public class Action extends BaseApi {
     try {
       session = HibernateUtil.getSessionFactory().openSession(interceptor);
       transaction = session.beginTransaction();
-      transaction.begin();
       session.save(instance);
       transaction.commit();
     } catch (HibernateException e) {
