@@ -125,7 +125,7 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 2. 各个页面存在重复提交的漏洞
 
-3. 用户注销后缓存导致Token重复
+3. **重要！！！（用户登录令牌缓存导致的错误）**
 
 
 ## 平台规则与系统限制
