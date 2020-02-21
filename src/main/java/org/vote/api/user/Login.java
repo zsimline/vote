@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.vote.beans.User;
 import org.vote.common.BaseApi;
 import org.vote.common.MD5;
-//import org.vote.common.UUIDTool;
-import org.vote.common.CookieFactory;
 import org.vote.common.DBUtil;
 import org.vote.common.Utils;
 
@@ -43,20 +41,9 @@ public class Login extends BaseApi {
       complete(response, 1203); return ;
     }
 
-    // 生成并设置登录令牌
-    // FIXME
-    String token = user.getToken(); // UUIDTool.getUUID();
-    //user.setToken(token);
-
-    // 更新用户数据并设置cookie
-    if (DBUtil.updateInstance(user)) {
-      CookieFactory cookieFactory = new CookieFactory(response);
-      cookieFactory.setCookie("uid", String.valueOf(user.getId()));
-      cookieFactory.setCookie("token", token);
-      complete(response, 1200);
-    } else {
-      complete(response, 1201);
-    }
+    // 保存登录状态
+    request.getSession().setAttribute("uid", user.getId());
+    complete(response, 1200);
   }
 
   /**

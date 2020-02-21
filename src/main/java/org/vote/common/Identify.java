@@ -1,13 +1,9 @@
 package org.vote.common;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.Activity;
-import org.vote.beans.User;
-import org.vote.common.CookieFactory;
 import org.vote.common.DBUtil;
 
 /**
@@ -15,30 +11,18 @@ import org.vote.common.DBUtil;
  */
 public class Identify {
   /**
-   * 识别并认证用户身份
+   * 识别用户身份
    * 
    * @param request 请求对象
-   * @return 用户身份识别并认证成功返回其ID, 否则返回-1L
+   * @return 身份识别成功返回其ID, 否则返回-1L
    */
   public static Long userIdentify(HttpServletRequest request) {
-    HashMap<String, String> cookieMap = CookieFactory.cookiesToHashMap(request);
-
-    // 获取Cookie认证信息
-    String uid = cookieMap.get("uid");
-    String token = cookieMap.get("token");
-
-    // 未携带认证信息
-    if (uid == null || token == null) return -1L;
-
-    try {
-      // 根据UID获取用户实例并判断认证令牌是否相等
-      Long userId = Long.valueOf(uid);
-      User user = (User) DBUtil.getInstanceById(User.class, userId);
-      return user != null && user.getToken().equals(token) ? userId : -1L;
-    } catch (NumberFormatException e) {
-      e.printStackTrace();
-      return -1L;
-    }
+    // 从Session中获取用户登录状态
+    Object uid = request.getSession().getAttribute("uid");
+    System.out.println(request.getSession().getMaxInactiveInterval());
+    System.out.println(request.getSession().getId());
+    System.out.println(request.getSession().getLastAccessedTime());
+    return uid == null ? -1L :  (long) uid;
   }
 
   /**

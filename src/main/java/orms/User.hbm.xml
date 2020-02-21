@@ -13,6 +13,5 @@
     <property name="organization" column="organization" type="java.lang.String" length="45" not-null="true"/>
     <property name="isStaff" column="is_staff" type="java.lang.Boolean"/>
     <property name="isActive" column="is_active" type="java.lang.Boolean"/>
-    <property name="token" column="token" type="java.lang.String" length="32"/>
   </class>
 </hibernate-mapping>

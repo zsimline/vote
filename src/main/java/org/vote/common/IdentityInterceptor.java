@@ -11,8 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.vote.common.Identify;
-
 /**
  * 用户身份拦截器
  * 匹配部分URL并拦截未登录用户
@@ -28,11 +26,12 @@ public class IdentityInterceptor implements Filter {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response =  (HttpServletResponse) servletResponse;
     long uid = Identify.userIdentify(request);
-    if (uid != -1L) {
+
+    if (uid == -1L) {  // 用户未登录
+      response.sendRedirect("/user/login");
+    } else {
       request.setAttribute("uid", uid);
       chain.doFilter(request, response);
-    } else {
-      response.sendRedirect("/user/login");      
     }
   }
 

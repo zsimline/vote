@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.User;
 import org.vote.common.MD5;
-import org.vote.common.UUIDTool;
 import org.vote.common.BaseApi;
 import org.vote.common.DBUtil;
 import org.vote.common.Utils;
@@ -37,7 +36,6 @@ public class Register extends BaseApi {
     User user = (User) Utils.postDataToObj(request, User.class);
     if (user != null) {
       user.setPassword(MD5.md5(user.getPassword()));
-      user.setToken(UUIDTool.getUUID());
     } else {
       complete(response, 1101); return ;
     }

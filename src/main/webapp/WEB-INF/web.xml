@@ -64,9 +64,16 @@
   </filter-mapping>
 
   <jsp-config>
-    <taglib> 
+    <taglib>
       <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>  
       <taglib-location>/WEB-INF/dtd/c.tld</taglib-location> 
     </taglib>
   </jsp-config>
+
+  <session-config>
+    <session-timeout>10080</session-timeout> 
+    <cookie-config>
+        <max-age>604800</max-age>
+    </cookie-config>
+  </session-config>
 </web-app>

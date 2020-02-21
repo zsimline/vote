@@ -11,7 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.vote.common.Identify;
 import org.vote.beans.Activity;
 
 /**
@@ -29,17 +28,20 @@ public class PermissionInterceptor implements Filter {
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response =  (HttpServletResponse) servletResponse;
     long uid = Identify.userIdentify(request);
-    Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
 
-    if (uid == -1L) {
-      response.sendRedirect("/user/login");      
-    } else if (activity == null) {
-      response.sendRedirect("/index/error");
-    } else if (uid != activity.getPublisher()) {
-      response.sendRedirect("/index");
+    if (uid == -1L) {  // 用户未登录
+      response.sendRedirect("/user/login");
     } else {
-      request.setAttribute("activity", activity);
-      chain.doFilter(request, response);
+      // 从数据库中获取用户请求的活动信息
+      Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
+      if (activity == null) {  // 活动不存在
+        response.sendRedirect("/index/error");
+      } else if (uid != activity.getPublisher()) {  // 活动不属于该用户
+        response.sendRedirect("/index");
+      } else {  // 继续转发
+        request.setAttribute("activity", activity);
+        chain.doFilter(request, response);
+      }
     }
   }
 
