@@ -15,11 +15,11 @@ import org.vote.common.DBUtil;
 /**
  * 获取报名数据
  */
-@WebServlet("/api/vote/data/entry")
-public class DataEntry extends BaseApi {
+@WebServlet("/api/vote/entry/data")
+public class EntryData extends BaseApi {
   private static final long serialVersionUID = 1L;
 
-  public DataEntry() {
+  public EntryData() {
   }
   
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

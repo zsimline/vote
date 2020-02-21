@@ -1,4 +1,4 @@
-package org.vote.api.vote;
+package org.vote.api.gather;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -18,14 +18,14 @@ import org.vote.beans.Entry;
 import org.vote.common.BaseApi;
 import org.vote.common.HibernateUtil;
 
-@WebServlet("/api/vote/data/ranking")
-public class DataRanking extends BaseApi {
+@WebServlet("/api/vote/gather/ranking")
+public class Ranking extends BaseApi {
   private static final long serialVersionUID = 1L;
 
   // 当次最大获取数量
   private static final int max = 50;
 
-  public DataRanking() {
+  public Ranking() {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

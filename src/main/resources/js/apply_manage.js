@@ -56,7 +56,7 @@ const tbOpts = {
 }
 
 function fetchTableData() {
-  get(`/api/vote/data/apply?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${$('#page').text()}`)
+  get(`/api/vote/apply/data?aid=${$('#aid').text()}&status=${$('#status').text()}&page=${$('#page').text()}`)
     .then(data => {
       initTableData(data);
       initTable(tableData);

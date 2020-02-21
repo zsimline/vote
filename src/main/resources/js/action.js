@@ -117,7 +117,7 @@ $(window).on('scroll', () => {
  * 并将获取到条目数据添加到页面中
  */
 function loadMoreEntry() {
-  get(`/api/vote/data/entry?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
+  get(`/api/vote/entry/data?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
     .then(data => {
       flushEntrys(data);
       appendEntry(data);

@@ -16,7 +16,7 @@ function loadMoreEntry() {
   }
   showTip('数据加载中...');
 
-  get(`/api/vote/data/ranking?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
+  get(`/api/vote/gather/ranking?aid=${glStatus.aid}&page=${glStatus.nextPage}`)
     .then(data => {
       flushEntrys(data);
       appendEntry(data);
