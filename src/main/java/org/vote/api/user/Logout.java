@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.vote.common.BaseApi;
 import org.vote.common.Identify;
-import org.vote.common.Utils;
 
 /**
  * 处理账户注销
@@ -22,13 +21,12 @@ public class Logout extends BaseApi {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
-    long uid = Identify.userIdentify(request);
-    if (uid == -1L) {   // 用户未登录
-      complete(response, 1802); return ;
-    } else {
+    if (Identify.userIdentify(request) != -1L) {
       request.getSession().removeAttribute("uid");
       response.setHeader("Set-Cookie", "JSESSIONID=FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF; Max-Age=0; Expires=Thu, 1-Jan-1970 00:00:00 GMT; Path=/; HttpOnly");
       complete(response, 1800);
+    } else {  // 用户未登录
+      complete(response, 1802);
     }
   }
 }

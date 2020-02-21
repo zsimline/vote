@@ -2,7 +2,6 @@ package org.vote.api.vote;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,9 +20,7 @@ import org.vote.beans.Activity;
 import org.vote.beans.Entry;
 import org.vote.beans.PostAction;
 import org.vote.beans.Ticket;
-import org.vote.beans.Wechat;
 import org.vote.common.BaseApi;
-import org.vote.common.CookieFactory;
 import org.vote.common.DBUtil;
 import org.vote.common.HibernateUtil;
 import org.vote.common.TableNameMappingInterceptor;
@@ -41,7 +38,7 @@ public class Action extends BaseApi {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     // 校验是否有权限投票
-    String openid = getOpenid(request, response);
+    String openid = (String) request.getSession().getAttribute("openid");
     if (openid == null) {
       complete(response, 2005); return;
     }
@@ -74,6 +71,8 @@ public class Action extends BaseApi {
   
     for(long id : ids)  {
       Entry entry = (Entry) DBUtil.getInstanceById(Entry.class, id);
+
+      // 条目不存在、条目不属于该活动、条目已冻结，禁止投票
       if (entry == null || !entry.getAid().equals(aid) || entry.getIsFreeze()) {
         complete(response, 2008); return ;
       } else {
@@ -166,35 +165,5 @@ public class Action extends BaseApi {
         session.close();
       }
     }
-  }
-
-  /**
-   * 获取投票者openid
-   * 
-   * @param request  请求对象
-   * @param response 响应对象
-   * @return 投票者openid
-   * @throws ServletException
-   * @throws IOException
-   */
-  private String getOpenid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    HashMap<String, String> cookieMap = CookieFactory.cookiesToHashMap(request);
-    
-    // 获取微信用户 openid 与访问令牌
-    String openid = cookieMap.get("openid");
-    String token = cookieMap.get("token");
-
-    // 未携带认证信息
-    if (openid == null || token == null) {
-      return null;
-    }
-
-    // 已携带认证信息但认证失败
-    Wechat wechat = (Wechat) DBUtil.getInstanceById(Wechat.class, openid);
-    if (wechat == null || !wechat.getToken().equals(token)) {
-      return null;
-    }
-
-    return openid;
   }
 }

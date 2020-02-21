@@ -1,7 +1,6 @@
 package org.vote.view.vote;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.vote.beans.Activity;
-import org.vote.beans.Wechat;
 import org.vote.common.BaseView;
-import org.vote.common.CookieFactory;
 import org.vote.common.DBUtil;
 import org.vote.common.OAuth;
 
@@ -28,13 +25,12 @@ public class Action extends BaseView {
 
     if (activity == null) {
      render404(response);
-    } else if (!hasAuth(request, response)) {
+    } else if (!hasAuth(request)) {
       response.sendRedirect(OAuth.getAuthCodeApiAddress(aid));
     } else {
       // 记录访问数量
       activity.setSumVisited(activity.getSumVisited() + 1);
       DBUtil.updateInstance(activity);
-      
       request.setAttribute("activity", activity);
       render(request, response, "/template/vote/action.jsp");
     }
@@ -44,25 +40,12 @@ public class Action extends BaseView {
    * 判断投票者是否认证
    * 
    * @param request 请求对象
-   * @param response 响应对象
    * @return 已认证返回true, 否则返回false
    * @throws ServletException
    * @throws IOException
    */
-  private boolean hasAuth(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    HashMap<String, String> cookieMap = CookieFactory.cookiesToHashMap(request);
-    
-    // 获取微信用户 openid 与访问令牌
-    String openid = cookieMap.get("openid");
-    String token = cookieMap.get("token");
-
-    // 未携带认证信息
-    if (openid == null || token == null) return false;
-
-    // 已携带认证信息但认证失败
-    Wechat wechat = (Wechat) DBUtil.getInstanceById(Wechat.class, openid);
-    if (wechat == null || !wechat.getToken().equals(token)) return false;
-
-    return true;
+  private boolean hasAuth(HttpServletRequest request) {
+    Object openid = request.getSession().getAttribute("openid");
+    return openid != null ? true : false;
   }
 }

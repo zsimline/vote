@@ -19,9 +19,6 @@ public class Identify {
   public static Long userIdentify(HttpServletRequest request) {
     // 从Session中获取用户登录状态
     Object uid = request.getSession().getAttribute("uid");
-    System.out.println(request.getSession().getMaxInactiveInterval());
-    System.out.println(request.getSession().getId());
-    System.out.println(request.getSession().getLastAccessedTime());
     return uid == null ? -1L :  (long) uid;
   }
 

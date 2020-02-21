@@ -29,9 +29,6 @@ public class Wechat implements Serializable {
   // 微信用户头像地址
   private String headimgurl;
 
-  // 微信用户投票令牌
-  private String token;
-
   /**
    * @return id
    */
@@ -128,19 +125,5 @@ public class Wechat implements Serializable {
    */
   public void setHeadimgurl(String headimgurl) {
     this.headimgurl = headimgurl;
-  }
-
-  /**
-   * @return token
-   */
-  public String getToken() {
-    return token;
-  }
-
-  /**
-   * @param token 要设置的 token
-   */
-  public void setToken(String token) {
-    this.token = token;
   }
 }

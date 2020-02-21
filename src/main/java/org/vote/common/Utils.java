@@ -8,9 +8,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -91,26 +89,5 @@ public class Utils {
   public static String getRealIp(HttpServletRequest request) {
     String[] ips = request.getHeader("x-forwarded-for").split(", ");
     return ips.length > 0 ?  ips[0]  : "127.0.0.1";
-  }
-
-  /**
-   * 移除指定的cookie
-   * 
-   * @param request 请求对象
-   * @param response 响应对象
-   * @param name cookie名
-   */
-  public static void removeCookie(HttpServletRequest request, HttpServletResponse response, String name) {
-    Cookie[] cookies = request.getCookies();
-    if (cookies == null) return ;
-    for (Cookie cookie : cookies) {
-      if (cookie.getName().equals(name)) {
-        System.out.println(cookie.getName());
-        cookie.setValue(null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        return ;
-      }
-    }
   }
 }
