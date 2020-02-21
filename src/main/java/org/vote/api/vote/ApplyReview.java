@@ -26,7 +26,7 @@ public class ApplyReview extends BaseApi {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));
-    if (Identify.isMyActivity(request, activity)) {
+    if (!Identify.isMyActivity(request, activity)) {  // 无权执行操作
       complete(response, 1602); return ;
     }
     

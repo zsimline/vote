@@ -47,7 +47,6 @@ public class Utils {
       return null;
     } catch (JsonSyntaxException e) {
       e.printStackTrace();
-      System.out.println(jsonStr);
       return null;
     }
   }

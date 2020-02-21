@@ -34,9 +34,13 @@
     <!-- 右侧导航条 -->
     <ul class="nav navbar-nav navbar-right">
       <li class="user">
-        <a href="/user/login"">
+        <a href="/user/login">
           <i class="fa fa-user"></i>
-          <span id="lg-status">已登录</span> 
+            <% if (request.getSession().getAttribute("uid") != null) { %>
+              <span>已登录</span>
+            <% } else { %>
+              <span>登录/注册</span>
+            <% } %>
           <i class="fa fa-caret-down"></i>
         </a>
         <ul>
@@ -59,21 +63,6 @@
 </div>
 
 <script>
-  // 处理登录状态切换
-  function checkLoginStatus() {
-    const cookies  = {};
-    document.cookie.split('; ').forEach(element => {
-      const cookie = element.split('=')
-      cookies[cookie[0]] = cookie[1];
-    })
-    if (cookies.uid && cookies.token) {
-      $('#lg-status').text('已登录');
-    } else {
-      $('#lg-status').text('登录/注册');
-    }
-  }
-  checkLoginStatus();
-
   // 处理账户注销
   function handleLogout() {
     get('/api/user/logout')

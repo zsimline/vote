@@ -127,6 +127,8 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 2. 某些页面存在重复提交的漏洞
 
+3. 年龄未提交时将出现空指针错误
+
 ## 平台规则与系统限制
 
 1. 投票被发布后，默认的外部人员可以报名，发布者也可以批量添加报名，当外部报名通道被关闭后，外部人员不可报名。

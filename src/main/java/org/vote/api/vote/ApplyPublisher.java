@@ -44,9 +44,13 @@ public class ApplyPublisher extends BaseApi {
 
     // 发布者添加报名，直接通过审核
     Entry entry = createEntry(request, apply);
-    
+    int sumEntry = activity.getSumEntry();
+    entry.setNumber(sumEntry + 1);
+    activity.setSumEntry(sumEntry + 1);
+
     // 执行数据存储
-    if (DBUtil.saveInstance(apply) && DBUtil.saveInstance(entry)) {
+    if (DBUtil.saveInstance(apply) && DBUtil.saveInstance(entry) 
+        && DBUtil.updateInstance(activity) ) {
       sendJSON(response, apply);
     } else {
       complete(response, 1401);
