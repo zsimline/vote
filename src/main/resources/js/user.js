@@ -86,7 +86,7 @@ function handleLogin() {
       if (!(data.code % 100)) {
         showMsg('success', data.codeDesc);
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = window.location.href.split('referer=')[1] || '/index';
         }, 400);
       } else {
         showMsg('error', data.codeDesc);

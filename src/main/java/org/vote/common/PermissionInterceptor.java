@@ -30,7 +30,8 @@ public class PermissionInterceptor implements Filter {
     long uid = Identify.userIdentify(request);
 
     if (uid == -1L) {  // 用户未登录
-      response.sendRedirect("/user/login");
+      String redirectUrl = "/user/login?referer=%s?%s";
+      response.sendRedirect(String.format(redirectUrl, request.getRequestURI(), request.getQueryString()));
     } else {
       // 从数据库中获取用户请求的活动信息
       Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, request.getParameter("aid"));

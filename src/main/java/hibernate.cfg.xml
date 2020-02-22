@@ -5,11 +5,21 @@
 
 <hibernate-configuration>
   <session-factory>
+    <!-- MySQL Connection Configuration-->
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vote?useUnicode=true&amp;characterEncoding=UTF-8</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">201920</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!-- C3P0 Database Connection Pool  -->
+    <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.min_size">5</property>
+    <property name="hibernate.c3p0.max_size">20</property>
+    <property name="hibernate.c3p0.acquire_increment">3</property>
+		<property name="hibernate.c3p0.timeout">12000</property>
+		<property name="hibernate.c3p0.max_statements">100</property>
+		<property name="hibernate.c3p0.idle_test_period">120</property>
 
     <!-- List of ORM mappings -->
     <mapping resource="orms/User.hbm.xml"></mapping>

@@ -28,7 +28,8 @@ public class IdentityInterceptor implements Filter {
     long uid = Identify.userIdentify(request);
 
     if (uid == -1L) {  // 用户未登录
-      response.sendRedirect("/user/login");
+      String redirectUrl = "/user/login?referer=%s";
+      response.sendRedirect(String.format(redirectUrl, request.getRequestURI()));
     } else {
       request.setAttribute("uid", uid);
       chain.doFilter(request, response);
