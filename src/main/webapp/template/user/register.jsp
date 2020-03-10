@@ -27,10 +27,6 @@
       <input type="password" id="password" placeholder="设置一个密码吧" regex="^\w+" maxlength="32">
     </div>
     <div class="input-group">
-      <i class="fa fa-user" aria-hidden="true"></i>
-      <input type="text" id="nickname" placeholder="设置个昵称"" maxlength="15">
-    </div>
-    <div class="input-group">
       <i class="fa fa-users" aria-hidden="true"></i>
       <input type="text" id="organization" placeholder="所属组织 (公司、学校、个人等)" regex="^\w+" maxlength="45">
     </div>

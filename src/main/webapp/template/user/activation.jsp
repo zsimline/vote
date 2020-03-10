@@ -20,11 +20,11 @@
   <div class="container">
     <div class="hidden activation">
       <i class="fa fa-check"></i>
-      <span>激活成功</span>
+      <span>恭喜，您的账户激活成功</span>
     </div>
     <div class="hidden activation">
       <i class="fa fa-check"></i>
-      <span>激活失败</span>
+      <span>抱歉，您的账户激活失败</span>
     </div>
   </div>
 

@@ -9,7 +9,6 @@ CREATE TABLE `user`
   `id` INT UNSIGNED AUTO_INCREMENT,     -- 用户ID
   `email` VARCHAR(191) UNIQUE NOT NULL, -- 电子邮件(作账号)
   `password` CHAR(32) NOT NULL,         -- 用户密码
-  `nickname` VARCHAR(15) NOT NULL,      -- 用户昵称
   `organization` varchar(45) NOT NULL,  -- 所属组织
   `is_staff` TINYINT(1)  DEFAULT 0,     -- 是否为管理人员
   `is_active` TINYINT(1) DEFAULT 1,     -- 账号是否可用

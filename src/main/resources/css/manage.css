@@ -19,6 +19,11 @@
   margin: auto 2px;
 }
 
+.panel-footer .label {
+  background-color: transparent;
+  color: #777;
+}
+
 /*！ 链接与二维码页样式 */
 .page-qrcode input {
   width: 55%;

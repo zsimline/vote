@@ -17,9 +17,6 @@ public class User implements Serializable {
   // 用户密码
   private String password;
 
-  // 用户昵称
-  private String nickname;
-
   // 用户所属组织
   private String organization;
 
@@ -75,21 +72,7 @@ public class User implements Serializable {
   public void setPassword(String password) {
     this.password = password;
   }
-
-  /**
-   * @return nickname
-   */
-  public String getNickname() {
-    return nickname;
-  }
-
-  /**
-   * @param nickname 要设置的 nickname
-   */
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
-
+  
   /**
    * @return organization
    */

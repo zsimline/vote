@@ -9,16 +9,10 @@
  */
 function handleRegister() {
   // 获取表单数据
-  const nickname = $('#nickname').val();
   const password = $('#password').val();
   const email = $('#email').val();
   const organization = $('#organization').val();
 
-  // 校验表单是否为空
-  if (nickname === '') {
-    showMsg('error', '昵称不能为空');
-    return;
-  }
   if (password === '') {
     showMsg('error', '密码不能为空');
     return;
@@ -33,13 +27,12 @@ function handleRegister() {
   }
 
   const postData = {
-    'nickname': nickname,
     'password': password,
     'email': email,
     'organization': organization
   };
 
-  showMsg('info', '注册中请等待...')
+  showMsg('info', '注册中请等待...', -1);
   // 向服务器提交数据
   postJSON('/api/user/register', postData)
     .then(data => {
@@ -47,7 +40,7 @@ function handleRegister() {
         showMsg('success', data.codeDesc, -1);
         setTimeout(() => {
           window.location.href="/user/login";
-        }, 1000)
+        }, 1200)
       } else {
         showMsg('error', data.codeDesc);
       }
