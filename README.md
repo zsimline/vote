@@ -9,17 +9,19 @@
 
 ### 用户相关
 
-- 主页  http://vote.zizaixian.top/user/home
-
 - 注册页 http://vote.zizaixian.top/user/register
 
 - 登录页 http://vote.zizaixian.top/user/login
+
+- 主页  http://vote.zizaixian.top/user/profile
 
 ### 投票相关
 
 - 发布投票 http://vote.zizaixian.top/vote/publish
 
 - 管理中心 http://vote.zizaixian.top/vote/manage
+
+-  编辑活动 http://vote.zizaixian.top/vote/edit
 
 - 报名管理 http://vote.zizaixian.top/vote/apply_manage
 
@@ -28,6 +30,12 @@
 - 活动链接 http://vote.zizaixian.top/vote/qrcode
 
 - 结果汇总 http://vote.zizaixian.top/vote/gather
+
+### 管理员相关
+
+- 用户管理 http://vote.zizaixian.top/admin/user_manage
+
+- 活动管理 http://vote.zizaixian.top/admin/activity_manage
 
 ## 系统接口
 
@@ -73,13 +81,13 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 后端服务
 
-**Linux + Nginx + Mysql + Java + Tomcat**
+**Linux + Nginx + MariaDB + Java + Tomcat**
 
 - Linux: Debian v4.9.144-3.1
 
 - Nginx: Http Server 负载均衡、反向代理
 
-- Mysql: MariaDB v15.1 数据存储
+- MariaDB: MariaDB v15.1 数据存储
 
 - Java:  JVM v1.8 应用程序运行平台
 
@@ -98,10 +106,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 ## TODO
 
 ### 待开发
-
-21. 个人中心功能
-  - 忘记密码
-  - 修改个人信息
 
 ### 待弥补的不足
 

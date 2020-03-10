@@ -109,3 +109,50 @@ function handleActivation() {
       console.log(err);
     });
 }
+
+function resetPassword() {
+  const email = $('#pwdforgetMoalBody input').val();
+  if (email === '') {
+    showMsg("请输入正确的电子邮件地址"); return ;
+  }
+
+  get(`/api/user/pwdforget?email=${email}`)
+    .then(data => {
+      if (!(data % 100)) {
+        showMsg('success', data.codeDesc);
+      } else {
+        showMsg('error', data.codeDesc);
+      }
+    })
+    .catch(err  => {
+      console.error(err);
+    })
+}
+
+function updateUserInfo() {
+  const postData = {
+    id: $('#uid').text(),
+    password: $('#password').val(),
+    organization: $('#organization').val(),
+  }
+
+  if (postData.id === '') {
+    showMsg('error', '未知uid'); return ;
+  } else if (postData.organization === '') {
+    showMsg('error', '所属组织不能为空');
+  } else if (postData.password === '') {
+    showMsg('error', '用户密码不能为空');
+  } else {
+    postJSON(`/api/user/info_update`, postData)
+      .then(data => {
+        if (!(data % 100)) {
+          showMsg('success', data.codeDesc);
+          setTimeout(() => {
+            window.location.href = '/user/login'
+          }, 400);
+        } else {
+          showMsg('error', data.codeDesc);
+        }
+      })
+  }
+}

@@ -37,7 +37,7 @@
       <a href="login">登录账户</a>
       &nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="">忘记密码</a>
+      <a href="/user/pwdforget">忘记密码</a>
     </div>
   </div>
   <%@ include file="../components/message.jsp" %>

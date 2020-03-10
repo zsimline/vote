@@ -45,7 +45,7 @@
         </a>
         <ul>
           <li>
-            <a href="#">
+            <a href="/user/profile">
               <i class="fa fa-user"></i>
               <span>个人中心</span>
             </a>

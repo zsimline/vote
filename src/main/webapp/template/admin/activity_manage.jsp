@@ -125,7 +125,7 @@
       </ul>
     </div>
   </div>
-
+  <%@ include file="../components/footer.jsp" %>
 </body>
 
 </html>

@@ -39,6 +39,10 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>IdentityInterceptor</filter-name>
+    <url-pattern>/user/profile</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>IdentityInterceptor</filter-name>
     <url-pattern>/admin/user_manage</url-pattern>
   </filter-mapping>
   <filter-mapping>

@@ -2,9 +2,14 @@
  * 管理员页面样式表
  */
 
+ .container-fluid {
+   min-height: 100vh;
+}
+
  .nav-left-container {
   background-color: #1c2b36;
   height: 100vh;
+  list-style: none;
 }
 
 .nav-left-container li a {
