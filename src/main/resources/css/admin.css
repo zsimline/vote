@@ -57,3 +57,19 @@
 .pagination {
   font-size: 16px;
 }
+
+.card {
+  width: 220px;
+  line-height: 220px;
+  height: 220px;
+  border: solid 1px #cccccc;
+  display: inline-block;
+  text-align: center;
+  border-radius: 20px;
+  margin: 15px;
+}
+
+.card:hover {
+  background-color: #16a085;
+  color: #ffffff;
+}

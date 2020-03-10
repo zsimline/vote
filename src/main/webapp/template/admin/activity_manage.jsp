@@ -22,7 +22,7 @@
     <ul class="nav-left-container col-lg-2">
       <li>
         <a href="/admin/user_manage?page=1">
-          <i class="fa fa-activity" aria-hidden="true"></i>
+          <i class="fa fa-user" aria-hidden="true"></i>
           <span>用户管理</span>
           <i class="fa fa-angle-right pull-right" aria-hidden="true"></i>
         </a>
