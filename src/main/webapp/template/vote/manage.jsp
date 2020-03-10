@@ -41,7 +41,6 @@
           <br>
           <span class="label label-default">投票总数：${activity.sumVoted}</span>
           <span class="label label-default">访问总数：${activity.sumVisited}</span>
-
         </div>
       </div>
     </c:forEach>
@@ -49,3 +48,5 @@
   <%@ include file="../components/message.jsp" %>
   <%@ include file="../components/footer.jsp" %>
 </body>
+
+</html>

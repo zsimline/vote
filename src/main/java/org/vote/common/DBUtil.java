@@ -215,7 +215,7 @@ public class DBUtil {
   }
 
   /**
-   * 按条件查询
+   * 按单条件查询
    * 
    * @param clazz   实例类
    * @param conditonName 条件名
@@ -278,6 +278,34 @@ public class DBUtil {
     }
   }
 
+  /**
+   * 分页查询
+   * 
+   * @param clazz  实例类
+   * @param page   当前页面索引
+   * @param max    单页最大数量
+   * @return 查询结果集
+   */
+  public static List<?> paginationQuery(Class<?> clazz, int page, int max) {
+    Session session = null;
+    try {
+      session = HibernateUtil.getSessionFactory().openSession();
+
+      // 创建条件容器并设置起始页面与单页最大选择数量
+      Criteria criteria = session.createCriteria(clazz);  
+      criteria.setFirstResult((page-1) * max);
+      criteria.setMaxResults(max);
+
+      return criteria.list();
+    } catch (HibernateException e) {
+      e.printStackTrace();
+      return Collections.emptyList();
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+  }
 
   /**
    * 统计行数
