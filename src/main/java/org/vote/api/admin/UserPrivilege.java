@@ -12,30 +12,26 @@ import org.vote.common.BaseApi;
 import org.vote.common.DBUtil;
 
 /**
- * 处理账户登录
+ * 处理用户身份切换
  */
-@WebServlet("/api/admin/user_freeze")
-public class UserFreeze extends BaseApi {
+@WebServlet("/api/admin/user_privilege")
+public class UserPrivilege extends BaseApi {
   private static final long serialVersionUID = 1L;
 
-  public UserFreeze() {
+  public UserPrivilege() {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    if (!(boolean)request.getSession().getAttribute("admin")) complete(response, 5002);
+    
     long uid = Long.valueOf(request.getParameter("uid"));
     User user = (User) DBUtil.getInstanceById(User.class, uid);
-    char status = request.getParameter("status").charAt(0);
-    
-    if (status == 'y' ) {
-      user.setIsActive(true);
-    } else {
-      user.setIsActive(false);
-    }
+    user.setIsStaff(!user.getIsStaff());
 
     if (DBUtil.updateInstance(user)) {
-      complete(response, 5000);
+      complete(response, 5000,  String.valueOf(user.getIsStaff()));
     } else {
-      complete(response, 5001);
+      complete(response, 5001, String.valueOf(user.getIsStaff()));
     }
   }
 }

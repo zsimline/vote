@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.vote.beans.User;
 import org.vote.common.BaseApi;
@@ -42,7 +43,9 @@ public class Login extends BaseApi {
     }
 
     // 保存登录状态
-    request.getSession().setAttribute("uid", user.getId());
+    HttpSession httpSession =  request.getSession();
+    httpSession.setAttribute("uid", user.getId());
+    httpSession.setAttribute("admin", user.getIsStaff());
     complete(response, 1200);
   }
 

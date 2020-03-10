@@ -22,6 +22,8 @@ public class ActivityDelete extends BaseApi {
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    if (!(boolean)request.getSession().getAttribute("admin")) complete(response, 5002);
+    
     String aid = request.getParameter("aid");
     Activity activity = (Activity) DBUtil.getInstanceById(Activity.class, aid);
 

@@ -1,6 +1,8 @@
 package org.vote.common;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,6 +18,11 @@ import javax.servlet.http.HttpServletResponse;
  * 匹配部分URL并拦截未登录用户
  */
 public class IdentityInterceptor implements Filter {
+  private List<String> adminRoutes = Arrays.asList(
+    "/admin/user_manage",
+    "/admin/activity_manage"
+  );
+
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     System.out.println("身份拦截器初始化成功");
@@ -27,12 +34,19 @@ public class IdentityInterceptor implements Filter {
     HttpServletResponse response =  (HttpServletResponse) servletResponse;
     long uid = Identify.userIdentify(request);
 
-    if (uid == -1L) {  // 用户未登录
+    if (uid == -1L) {
       String redirectUrl = "/user/login?referer=%s";
       response.sendRedirect(String.format(redirectUrl, request.getRequestURI()));
     } else {
-      request.setAttribute("uid", uid);
-      chain.doFilter(request, response);
+      boolean isAdminRoute = adminRoutes.contains(request.getRequestURI());
+      boolean noPrivilege = !(boolean)request.getSession().getAttribute("admin");
+      if ( isAdminRoute && noPrivilege) {  // 普通用户无权访问管理员页面
+        String redirectUrl = "/user/login?referer=%s";
+        response.sendRedirect(String.format(redirectUrl, request.getRequestURI()));
+      } else {
+        request.setAttribute("uid", uid);
+        chain.doFilter(request, response);
+      }
     }
   }
 

@@ -21,6 +21,7 @@ public class ActivityManage extends BaseView {
 
   @SuppressWarnings("unchecked")
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
     int page = 1;
     try {
       page = Integer.valueOf(request.getParameter("page"));

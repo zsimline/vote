@@ -99,10 +99,6 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 ### 待开发
 
-20. 管理员功能
- - 冻结用户
- - 删除活动
-
 21. 个人中心功能
   - 忘记密码
   - 修改个人信息

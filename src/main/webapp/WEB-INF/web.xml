@@ -37,6 +37,14 @@
     <filter-name>IdentityInterceptor</filter-name>
     <url-pattern>/vote/manage</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>IdentityInterceptor</filter-name>
+    <url-pattern>/admin/user_manage</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>IdentityInterceptor</filter-name>
+    <url-pattern>/admin/activity_manage</url-pattern>
+  </filter-mapping>
 
   <filter>
     <filter-name>PermissionInterceptor</filter-name>

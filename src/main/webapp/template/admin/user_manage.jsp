@@ -69,8 +69,8 @@
                 </c:choose>
               </td>
               <td>
-                <a class="table-operation" onclick="freezeUser(this, '${user.id}', 'n')" title="冻结用户""><i class="fa fa-times"></i></a>
-                <a class="table-operation" onclick="freezeUser(this, '${user.id}', 'y')" title="解冻结用户"><i class=" fa fa-check"></i></a>
+                <a class="table-operation" onclick="switchUserPrivilege(this, '${user.id}')" title="切换身份"><i class="fa fa-plug"></i></a>
+                <a class="table-operation" onclick="switchUserStatus(this, '${user.id}')" title="切换状态""><i class="fa fa-magnet"></i></a>
               </td>
             </tr>
           </c:forEach>
