@@ -35,6 +35,8 @@
 
 ### 管理员相关
 
+- 管理员主页 http://vote.zizaixian.top/admin
+
 - 用户管理 http://vote.zizaixian.top/admin/user_manage
 
 - 活动管理 http://vote.zizaixian.top/admin/activity_manage
