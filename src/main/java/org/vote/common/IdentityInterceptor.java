@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class IdentityInterceptor implements Filter {
   private List<String> adminRoutes = Arrays.asList(
+    "/admin",
     "/admin/user_manage",
     "/admin/activity_manage"
   );
