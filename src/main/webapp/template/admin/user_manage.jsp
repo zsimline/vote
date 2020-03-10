@@ -21,14 +21,14 @@
   <div class="container-fluid">
     <ul class="nav-left-container col-lg-2">
       <li class="active">
-        <a href="#">
+        <a href="/admin/user_manage?page=1">
           <i class="fa fa-user" aria-hidden="true"></i>
           <span>用户管理</span>
           <i class="fa fa-angle-right pull-right" aria-hidden="true"></i>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/admin/activity_manage?page=1">
           <i class="fa fa-tasks" aria-hidden="true"></i>
           <span>活动管理</span>
           <i class="fa fa-angle-right pull-right" aria-hidden="true"></i>
@@ -69,10 +69,8 @@
                 </c:choose>
               </td>
               <td>
-                <a class="table-operation" onclick="freezeUser(this, 'y')" title="冻结用户""><i class=" fa
-                  fa-check"></i></a>
-                <a class="table-operation" onclick="unFreezeUser(this, 'n')" title="解冻结用户"><i
-                    class="fa fa-times"></i></a>
+                <a class="table-operation" onclick="freezeUser(this, '${user.id}', 'n')" title="冻结用户""><i class="fa fa-times"></i></a>
+                <a class="table-operation" onclick="freezeUser(this, '${user.id}', 'y')" title="解冻结用户"><i class=" fa fa-check"></i></a>
               </td>
             </tr>
           </c:forEach>

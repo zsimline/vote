@@ -92,6 +92,10 @@ public class Code {
     codes.put(3002, "解析文件流失败");
     codes.put(3003, "未发现文件");
     codes.put(3004, "非法的文件名");
+
+    // 管理员功能
+    codes.put(5000, "操作成功");
+    codes.put(5001, "操作失败原因未知");
   }
 
   public Code(int code) {

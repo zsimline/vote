@@ -39,3 +39,12 @@
   display: none;
 }
 
+.reponsetable th, .reponsetable td {
+  line-height: 40px !important;
+}
+
+.table-operation {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0px 5px;
+}
