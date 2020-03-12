@@ -160,6 +160,8 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 
 3. 使账户只能在一个终端下登录（同一时间）
 
+4. 外部人员报名成功后应显示报名结果
+
 ### 待修复的Bug
 
 1. 搜索页面显示单个条目时错位
@@ -183,12 +185,3 @@ https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx009
 6. 外部人员报名后，其审核状态为待审核，而发布者批量添加报名后，其审核状态为已通过审核。
 
 7. 外部人员需在报名时间段内完成报名，发布者需在投票截止时间之前完成批量添加报名。
-
-
-## 总结
-
-1. 面向对象的思考方式。
-
-2. 如果引入了第三方库/框架，则要充分利用它们。
-
-3. 开发阶段不要担心运行效率问题。
