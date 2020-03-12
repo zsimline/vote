@@ -26,13 +26,14 @@ public class Profile extends BaseView {
       request.getSession().setAttribute("code", user.getPassword());
       render(request, response, "/template/user/profile.jsp");
     } else {
-      render404(response);
+      response.sendRedirect("/user/login?referer=/user/profile");
     }
   }
 
   private User checkUserIdentify(HttpServletRequest request) {
-    if (request.getAttribute("uid") != null) {
-      return (User) DBUtil.getInstanceById(User.class, (long)request.getAttribute("uid"));
+    Object uid = request.getSession().getAttribute("uid") ;
+    if (uid != null) {
+      return (User) DBUtil.getInstanceById(User.class, (long)uid);
     } else {
       User user = getUserByEmail(request.getParameter("email"));
       return user != null && user.getPassword().equals(request.getParameter("code")) ? user : null;

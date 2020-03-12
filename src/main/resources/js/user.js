@@ -110,12 +110,16 @@ function handleActivation() {
     });
 }
 
+/**
+ * 处理重置密码
+ */
 function resetPassword() {
   const email = $('#pwdforgetMoalBody input').val();
   if (email === '') {
     showMsg("请输入正确的电子邮件地址"); return ;
   }
 
+  showMsg('info', '重置密码中请稍等...',-1);
   get(`/api/user/pwdforget?email=${email}`)
     .then(data => {
       if (!(data % 100)) {
@@ -129,6 +133,9 @@ function resetPassword() {
     })
 }
 
+/**
+ * 更新用户信息
+ */
 function updateUserInfo() {
   const postData = {
     id: $('#uid').text(),
@@ -143,6 +150,7 @@ function updateUserInfo() {
   } else if (postData.password === '') {
     showMsg('error', '用户密码不能为空');
   } else {
+    showMsg('info', '更新用户信息中请稍等...',-1);
     postJSON(`/api/user/info_update`, postData)
       .then(data => {
         if (!(data % 100)) {
