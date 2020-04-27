@@ -19,7 +19,7 @@
     <h1 class="lg-title">鹿鸣投票</h1>
     <div class="input-group">
       <i class="fa fa-user" aria-hidden="true"></i>
-      <input type="email" id="email" value="username" placeholder="电子邮件">
+      <input type="email" id="email" placeholder="电子邮件">
     </div>
     <div class="input-group">
       <i class="fa fa-lock" aria-hidden="true"></i>

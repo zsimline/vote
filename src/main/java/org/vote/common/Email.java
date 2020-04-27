@@ -25,7 +25,7 @@ public class Email {
   private static final String from = "zsimline@163.com";
 
   // 邮件发送者密码
-  private static final String password = "srlinewyyx01top";
+  private static final String password = "YDWLAWWHDUPNVWZE";
 
   // 邮件会话对象
   private static Session session;
